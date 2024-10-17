@@ -17,4 +17,8 @@
     <system:String x:Key="LabelPassword">Mot de passe :</system:String>
     <system:String x:Key="BtnLogin">Se Connecter</system:String>
 
+    <!--ToolTips-->
+    <system:String x:Key="ToolTipPageParamètres">Paramètres</system:String>
+    <system:String x:Key="ToolTipLogOut">Se déconnecter</system:String>
+    
 </ResourceDictionary>
