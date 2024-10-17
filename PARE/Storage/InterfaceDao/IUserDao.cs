@@ -47,11 +47,5 @@ namespace Storage.InterfaceDAO
         /// <returns>profil type converti</returns>
         public TypicalProfile Reader2TypicalProfile(SqliteDataReader reader);
 
-        /// <summary>
-        /// Converti le reader en role
-        /// </summary>
-        /// <param name="reader">reader utilisé</param>
-        /// <returns> rôle converti</returns>
-        public Role Reader2Role(SqliteDataReader reader);
     }
 }

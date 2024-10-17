@@ -34,7 +34,8 @@ namespace Storage
             user.LastName = reader["lastname"].ToString();
             user.RealHours = (reader["realHours"] != DBNull.Value) ? Convert.ToInt32(reader["realHours"]) : 0;
             user.Profil = Reader2TypicalProfile(reader);
-            Role role = Reader2Role(reader);
+            RoleDaoSqlite roleDao = new RoleDaoSqlite();
+            Role role = roleDao.Reader2Role(reader);
             user.Roles.Add(role);
             return user;
         }
@@ -48,14 +49,7 @@ namespace Storage
             return typicalProfile;
         }
 
-        public Role Reader2Role(SqliteDataReader reader)
-        {
-            Role role = new Role();
-            role.Id = Convert.ToInt32(reader["idRole"]);
-            role.Name = reader["roleName"].ToString();
 
-            return role;
-        }
 
         public User[] ListAll()
         {
@@ -94,7 +88,8 @@ namespace Storage
                     // si encore un rôle ajout du rôle
                     if (reader["idRole"] != DBNull.Value)
                     {
-                        Role role = Reader2Role(reader);
+                        RoleDaoSqlite roleDao = new RoleDaoSqlite();
+                        Role role = roleDao.Reader2Role(reader);
                         if (!user.Roles.Any(r => r.Id == role.Id))
                         {
                             user.Roles.Add(role);

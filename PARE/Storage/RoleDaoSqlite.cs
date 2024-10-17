@@ -1,4 +1,5 @@
-﻿using Model;
+﻿using Microsoft.Data.Sqlite;
+using Model;
 using Storage.InterfaceDAO;
 using System;
 using System.Collections.Generic;
@@ -25,7 +26,32 @@ namespace Storage
         }
         public Role[] ListAll()
         {
-            throw new NotImplementedException();
+            List<Role> roles = new List<Role>();
+            db.Connection.Open();
+            var cmd = db.Connection.CreateCommand();
+            cmd.CommandText = "SELECT" +
+                               " idRole" +
+                               ", roleName" +
+                               " FROM Role;";
+            using (var reader = cmd.ExecuteReader())
+            {
+                while (reader.Read())
+                {
+                    roles.Add(Reader2Role(reader));
+                }
+            }
+            db.Connection.Close();
+
+            return roles.ToArray();
+        }
+
+        public Role Reader2Role(SqliteDataReader reader)
+        {
+            Role role = new Role();
+            role.Id = Convert.ToInt32(reader["idRole"]);
+            role.Name = reader["roleName"].ToString();
+
+            return role;
         }
     }
 }
