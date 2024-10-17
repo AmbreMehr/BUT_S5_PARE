@@ -8,10 +8,12 @@ namespace API.Services
     public class UserService
     {
         private IUserDao userDao;
+        private IRoleDao roleDao;
 
         public UserService()
         {
             this.userDao = new UserDaoSqlite();
+            this.roleDao = new RoleDaoSqlite();
         } 
 
         /// <summary>
@@ -60,6 +62,16 @@ namespace API.Services
         public TypicalProfile[] GetTypicalProfiles()
         {
             throw new NotImplementedException();
+        }
+
+        /// <summary>
+        /// Renvoie la liste de rôles, type d'utilisateur
+        /// </summary>
+        /// <returns>Liste de Role</returns>
+        public Role[] GetAllRoles()
+        {
+            IEnumerable<Role> roles = this.roleDao.ListAll();
+            return roles.ToArray();
         }
     }
 }

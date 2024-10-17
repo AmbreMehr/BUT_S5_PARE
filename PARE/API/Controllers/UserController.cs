@@ -52,5 +52,16 @@ namespace API.Controllers
         {
             throw new NotImplementedException();
         }
+
+        /// <summary>
+        /// Renvoie la liste de rôles, type d'utilisateur
+        /// </summary>
+        /// <returns>Liste de Role</returns>
+        [HttpGet("GetAllRoles", Name = "GetAllRoles")]
+        public Role[] GetAllRoles()
+        {
+            IEnumerable<Role> roles = this.UserService.GetAllRoles();
+            return roles.ToArray();
+        }
     }
 }
