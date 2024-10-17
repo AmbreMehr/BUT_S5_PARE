@@ -5,4 +5,15 @@
     <!--Bienvenue-->
     <system:String x:Key="TitreBienvenue">Welcome !</system:String>
 
+    <!--General-->
+    <system:String x:Key="BtnValider">Submit</system:String>
+    <system:String x:Key="BtnAnnuler">Cancel</system:String>
+    <system:String x:Key="BtnModifier">Modify</system:String>
+
+    <!--Connexion-->
+    <system:String x:Key="TitreFenetreConnexion">Connection</system:String>
+    <system:String x:Key="TitreConnexion">Type your login informations</system:String>
+    <system:String x:Key="LabelLogin">Login :</system:String>
+    <system:String x:Key="LabelPassword">Password :</system:String>
+    <system:String x:Key="BtnLogin">Log in</system:String>
 </ResourceDictionary>
