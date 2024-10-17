@@ -1,32 +1,35 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Model;
 
-namespace API.Controllers
+namespace API.Services
 {
-    /// <summary>
-    /// Contrôleur pour les utilisateurs
-    /// </summary>
-    [ApiController]
-    [Route("api/user")]
-    public class UserController : ControllerBase
+    public class UserService
     {
-        /// <summary>
-        /// Renvoie tous les utilisateurs
-        /// </summary>
-        /// <returns>Liste de User</returns>
-        [HttpGet("GetAll", Name = "GetAllUsers")]
-        public User[] GetAllUsers()
-        {
-            throw new NotImplementedException();
-        }
-
         /// <summary>
         /// Renvoie l'utilisateur lié à un ID
         /// </summary>
         /// <param name="id">int id de l'utilisateur</param>
         /// <returns>User</returns>
-        [HttpGet("GetById", Name = "GetUserById")]
         public User GetUserById(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <summary>
+        /// Renvoie la liste des utilisateurs ayant le role envoyé
+        /// </summary>
+        /// <param name="role">Role</param>
+        /// <returns>User</returns>
+        public User[] GetAllByRole(Role role)
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <summary>
+        /// Renvoie tous les utilisateurs
+        /// </summary>
+        /// <returns>Liste de User</returns>
+        public User[] GetAllUsers()
         {
             throw new NotImplementedException();
         }
@@ -36,7 +39,6 @@ namespace API.Controllers
         /// </summary>
         /// <param name="user">User utilisateur à mettre à jour</param>
         /// <returns>HTTP Code</returns>
-        [HttpPost("update", Name = "UpdateUser")]
         public IActionResult UpdateUser(User user)
         {
             throw new NotImplementedException();
@@ -46,7 +48,6 @@ namespace API.Controllers
         /// Renvoie la liste de profils typiques
         /// </summary>
         /// <returns>Liste de TypicalProfile</returns>
-        [HttpGet("GetAllTypicalProfiles", Name = "GetAllTypicalProfiles")]
         public TypicalProfile[] GetTypicalProfiles()
         {
             throw new NotImplementedException();
