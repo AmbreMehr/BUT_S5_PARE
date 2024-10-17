@@ -1,4 +1,5 @@
-﻿using Model;
+﻿using Microsoft.Data.Sqlite;
+using Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,5 +19,12 @@ namespace Storage.InterfaceDAO
         /// </summary>
         /// <returns>semestres</returns>
         public Semester[] ListAll();
+
+        /// <summary>
+        /// Convertit un reader en semestre
+        /// </summary>
+        /// <param name="reader">reader associé au semestre</param>
+        /// <returns>semestre converti</returns>
+        public Semester Reader2Semester(SqliteDataReader reader);
     }
 }

@@ -26,11 +26,6 @@ namespace Storage
         }
 
 
-        /// <summary>
-        /// Converti le reader en utilisateur
-        /// </summary>
-        /// <param name="reader">reader utilisé</param>
-        /// <returns>utilisateur converti</returns>
         public User Reader2User(SqliteDataReader reader)
         {
             User user = new User();
@@ -57,11 +52,6 @@ namespace Storage
             return user;
         }
 
-        /// <summary>
-        /// Converti le reader en profil type
-        /// </summary>
-        /// <param name="reader">reader utilisé</param>
-        /// <returns>profil type converti</returns>
         public TypicalProfile Reader2TypicalProfile(SqliteDataReader reader)
         {
             TypicalProfile typicalProfile = new TypicalProfile();
@@ -71,11 +61,6 @@ namespace Storage
             return typicalProfile;
         }
 
-        /// <summary>
-        /// Converti le reader en role
-        /// </summary>
-        /// <param name="reader">reader utilisé</param>
-        /// <returns> rôle converti</returns>
         public Role Reader2Role(SqliteDataReader reader)
         {
             // peut retourner plusieurs roles

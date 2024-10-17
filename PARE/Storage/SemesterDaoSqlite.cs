@@ -45,12 +45,8 @@ namespace Storage
             return semesters.ToArray();
         }
 
-        /// <summary>
-        /// Convertit un reader en semestre
-        /// </summary>
-        /// <param name="reader">reader associé au semestre</param>
-        /// <returns>semestre converti</returns>
-        private Semester Reader2Semester(SqliteDataReader reader)
+
+        public Semester Reader2Semester(SqliteDataReader reader)
         {
             Semester semester = new Semester();
             semester.Id = Convert.ToInt32(reader["idSemester"]);
