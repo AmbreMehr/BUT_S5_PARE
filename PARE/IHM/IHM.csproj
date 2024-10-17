@@ -8,4 +8,14 @@
     <UseWPF>true</UseWPF>
   </PropertyGroup>
 
+  <ItemGroup>
+    <None Remove="Ressources\Img\logoIUT.png" />
+    <None Remove="Ressources\Img\Pare.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Ressources\Img\logoIUT.png" />
+    <Resource Include="Ressources\Img\Pare.png" />
+  </ItemGroup>
+
 </Project>
