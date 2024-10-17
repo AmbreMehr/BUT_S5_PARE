@@ -1,4 +1,6 @@
 ﻿using Model;
+using Storage;
+using Storage.InterfaceDAO;
 
 namespace API.Services
 {
@@ -7,23 +9,20 @@ namespace API.Services
     /// </summary>
     public class SemesterService
     {
+        private ISemesterDao semesterDao;
+
+        public SemesterService ()
+        {
+            this.semesterDao = new SemesterDaoSqlite();
+        }
+
         /// <summary>
         /// Renvoie tous les Semestres
         /// </summary>
         /// <returns>Liste de Semester</returns>
         public IEnumerable<Semester> GetAll()
         {
-            throw new NotImplementedException();
-        }
-
-        /// <summary>
-        /// Renvoie les modules contenus dans un semestre
-        /// </summary>
-        /// <param name="semester">Semester semestre qui contient les modules</param>
-        /// <returns>Liste de Module</returns>
-        public Module[] GetModulesForSemester(Semester semester)
-        {
-            throw new NotImplementedException();
+            return this.semesterDao.ListAll();
         }
     }
 }

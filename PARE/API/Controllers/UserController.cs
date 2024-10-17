@@ -8,7 +8,7 @@ namespace API.Controllers
     /// </summary>
     [ApiController]
     [Route("api/user")]
-    public class UserController : ControllerBase
+    public class UserController : MyControllerBase
     {
         /// <summary>
         /// Renvoie tous les utilisateurs
@@ -17,7 +17,8 @@ namespace API.Controllers
         [HttpGet("GetAll", Name = "GetAllUsers")]
         public User[] GetAllUsers()
         {
-            throw new NotImplementedException();
+            IEnumerable<User> users = this.UserService.GetAllUsers();
+            return users.ToArray();
         }
 
         /// <summary>

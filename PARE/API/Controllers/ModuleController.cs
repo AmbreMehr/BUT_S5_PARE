@@ -8,7 +8,7 @@ namespace API.Controllers
     /// </summary>
     [ApiController]
     [Route("api/module")]
-    public class ModuleController : ControllerBase
+    public class ModuleController : MyControllerBase
     {
         /// <summary>
         /// Met à jour l'objet Module reçu
@@ -30,6 +30,18 @@ namespace API.Controllers
         public int GetHoursByWeek (int week)
         {
             throw new NotImplementedException();
+        }
+
+        /// <summary>
+        /// Renvoie les modules contenus dans un semestre
+        /// </summary>
+        /// <param name="semester">Semester</param>
+        /// <returns>Liste de Module du semestre</returns>
+        [HttpGet("GetModulesBySemester", Name = "GetModulesBySemester")]
+        public Module[] GetModuleBySemester(int semester)
+        {
+            IEnumerable<Module> module = this.ModuleService.GetModulesForSemester(semester);
+            return module.ToArray();
         }
     }
 }

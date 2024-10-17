@@ -8,7 +8,7 @@ namespace API.Controllers
     /// </summary>
     [ApiController]
     [Route("api/teacher")]
-    public class TeacherController : ControllerBase
+    public class TeacherController : MyControllerBase
     {
         /// <summary>
         /// Renvoie tous les enseignants qui sont assignés au module

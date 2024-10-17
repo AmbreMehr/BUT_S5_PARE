@@ -1,10 +1,19 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Model;
+using Storage;
+using Storage.InterfaceDAO;
 
 namespace API.Services
 {
     public class UserService
     {
+        private IUserDao userDao;
+
+        public UserService()
+        {
+            this.userDao = new UserDaoSqlite();
+        } 
+
         /// <summary>
         /// Renvoie l'utilisateur lié à un ID
         /// </summary>
@@ -31,7 +40,7 @@ namespace API.Services
         /// <returns>Liste de User</returns>
         public User[] GetAllUsers()
         {
-            throw new NotImplementedException();
+            return this.userDao.ListAll();
         }
 
         /// <summary>

@@ -1,9 +1,18 @@
 ﻿using Model;
+using Storage;
+using Storage.InterfaceDAO;
 
 namespace API.Services
 {
     public class ModuleService
     {
+        private IModuleDao moduleDao;
+
+        public ModuleService()
+        {
+            this.moduleDao = new ModuleDaoSqlite();
+        }
+
         /// <summary>
         /// Renvoie le nombre d'heures suivies par les étudiants pour une semaine donnée
         /// </summary>
@@ -32,6 +41,16 @@ namespace API.Services
         public Module GetModuleById(int id)
         {
             throw new NotImplementedException();
+        }
+
+        /// <summary>
+        /// Renvoie les modules contenus dans un semestre
+        /// </summary>
+        /// <param name="semester">Semester semestre qui contient les modules</param>
+        /// <returns>Liste de Module</returns>
+        public Module[] GetModulesForSemester(int semester)
+        {
+            return this.moduleDao.GetAllBySemester(semester);
         }
     }
 }

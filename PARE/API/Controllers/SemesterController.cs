@@ -6,7 +6,7 @@ namespace API.Controllers
 {
     [Route("api/semester")]
     [ApiController]
-    public class SemesterController : ControllerBase
+    public class SemesterController : MyControllerBase
     {
         /// <summary>
         /// Renvoie tous les semestres
@@ -15,18 +15,8 @@ namespace API.Controllers
         [HttpGet("GetAll", Name = "GetAllSemesters")]
         public Semester[] GetAll()
         {
-            throw new NotImplementedException();
-        }
-        
-        /// <summary>
-        /// Renvoie les modules contenus dans un semestre
-        /// </summary>
-        /// <param name="semester">Semester</param>
-        /// <returns>Liste de Module du semestre</returns>
-        [HttpGet("GetModulesBySemester", Name = "GetModulesBySemester")]
-        public Module[] GetModuleBySemester(Semester semester)
-        {
-            throw new NotImplementedException();
+            IEnumerable<Semester> semesters = this.SemesterService.GetAll();
+            return semesters.ToArray();
         }
     }
 }
