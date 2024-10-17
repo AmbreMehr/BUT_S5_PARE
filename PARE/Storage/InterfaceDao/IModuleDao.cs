@@ -4,6 +4,7 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.Data.Sqlite;
 using Model;
 
 namespace Storage.InterfaceDAO
@@ -25,5 +26,20 @@ namespace Storage.InterfaceDAO
         /// </summary>
         /// <returns>modules</returns>
         public Module[] ListAll();
+
+        /// <summary>
+        /// Recupere tous les modules d'un semestre particulier
+        /// </summary>
+        /// <param name="semesterId">id du semestre voulu</param>
+        /// <returns>modules</returns>
+        public Module[] GetAllBySemester(int semesterId);
+
+        /// <summary>
+        /// Convertit un reader en module
+        /// </summary>
+        /// <param name="reader">reader contenant module</param>
+        /// <returns>moduleconverti</returns>
+        public Module Reader2Module(SqliteDataReader reader);
+
     }
 }
