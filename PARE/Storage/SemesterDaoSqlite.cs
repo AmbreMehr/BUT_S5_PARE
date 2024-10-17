@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Storage.Dao
+namespace Storage
 {
     /// <summary>
     /// Gère les données des semestres
@@ -21,7 +21,7 @@ namespace Storage.Dao
         /// </summary>
         public SemesterDaoSqlite()
         {
-            this.db = new DatabaseSqlite();
+            db = new DatabaseSqlite();
         }
         public Semester[] ListAll()
         {

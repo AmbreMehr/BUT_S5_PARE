@@ -6,24 +6,29 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Storage.Dao
+namespace Storage
 {
     /// <summary>
-    /// Gère les données des rôles d'un module
+    /// Gère les données des enseignants d'un module
     /// </summary>
     /// <author>Clotilde MALO</author>
-    public class RoleDaoSqlite : IRoleDao
+    public class TeacherDaoSqlite : ITeacherDao
     {
         private DatabaseSqlite db;
 
         /// <summary>
         /// Constructeur de base pour initialiser la connexion
         /// </summary>
-        public RoleDaoSqlite()
+        public TeacherDaoSqlite()
         {
-            this.db = new DatabaseSqlite();
+            db = new DatabaseSqlite();
         }
-        public Role[] ListAll()
+        public Teacher[] ListForModule(Module module)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Update(Teacher teacher)
         {
             throw new NotImplementedException();
         }

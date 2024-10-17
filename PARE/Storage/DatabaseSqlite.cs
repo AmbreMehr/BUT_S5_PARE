@@ -15,8 +15,11 @@ namespace Storage
     public class DatabaseSqlite
     {
         private SqliteConnection connection;
-        private string fileName="bdd.db";
+        private string fileName = "bdd.db";
 
+        /// <summary>
+        /// Retourne la connexion à la base de données
+        /// </summary>
         public SqliteConnection Connection
         {
             get => this.connection;
@@ -28,10 +31,9 @@ namespace Storage
         /// <param name="fileName"></param>
         public DatabaseSqlite()
         {
-            this.connection = new SqliteConnection(@"Data Source=" + fileName);
-            this.connection.Open();
+            string currentDirectory = AppDomain.CurrentDomain.BaseDirectory;
+            this.fileName = System.IO.Path.Combine(currentDirectory, "bdd.db");
+            this.connection = new SqliteConnection("Data Source=" + this.fileName);
         }
-
-
     }
 }

@@ -6,24 +6,24 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Storage.Dao
+namespace Storage
 {
     /// <summary>
-    /// Gère les données des profils types
+    /// Gère les données des rôles d'un module
     /// </summary>
     /// <author>Clotilde MALO</author>
-    public class TypicalProfileDaoSqlite : ITypicalProfileDao
+    public class RoleDaoSqlite : IRoleDao
     {
         private DatabaseSqlite db;
 
         /// <summary>
         /// Constructeur de base pour initialiser la connexion
         /// </summary>
-        public TypicalProfileDaoSqlite()
+        public RoleDaoSqlite()
         {
-            this.db = new DatabaseSqlite();
+            db = new DatabaseSqlite();
         }
-        public TypicalProfile[] ListAll()
+        public Role[] ListAll()
         {
             throw new NotImplementedException();
         }

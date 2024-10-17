@@ -1,5 +1,4 @@
-﻿using Microsoft.Data.Sqlite;
-using Model;
+﻿using Model;
 using Storage.InterfaceDAO;
 using System;
 using System.Collections.Generic;
@@ -7,36 +6,30 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Storage.DAO
+namespace Storage
 {
     /// <summary>
-    /// Gère les données des utilisteurs
+    /// Gère les données des modules
     /// </summary>
     /// <author>Clotilde MALO</author>
-    public class UserDaoSqlite : IUserDao
+    public class ModuleDaoSqlite : IModuleDao
     {
         private DatabaseSqlite db;
 
         /// <summary>
         /// Constructeur de base pour initialiser la connexion
         /// </summary>
-        public UserDaoSqlite()
+        public ModuleDaoSqlite()
         {
-            this.db = new DatabaseSqlite();
+            db = new DatabaseSqlite();
         }
 
-        public User[] ListAll()
-        {
-            throw new NotImplementedException();
-
-        }
-
-        public User Read(int id)
+        public Module[] ListAll()
         {
             throw new NotImplementedException();
         }
 
-        public void Update(User user)
+        public void Update(Module module)
         {
             throw new NotImplementedException();
         }
