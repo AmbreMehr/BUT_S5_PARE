@@ -1,4 +1,5 @@
-﻿using Model;
+﻿using Microsoft.Data.Sqlite;
+using Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,5 +19,13 @@ namespace Storage.InterfaceDAO
         /// </summary>
         /// <returns>rôles</returns>
         public Role[] ListAll();
+
+
+        /// <summary>
+        /// Converti le reader en role
+        /// </summary>
+        /// <param name="reader">reader utilisé</param>
+        /// <returns> rôle converti</returns>
+        public Role Reader2Role(SqliteDataReader reader);
     }
 }

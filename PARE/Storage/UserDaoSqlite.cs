@@ -30,25 +30,13 @@ namespace Storage
         {
             User user = new User();
             user.Id = Convert.ToInt32(reader["idUser"]);
-
-
-            //if (user.Id == user.Id - 1) // si l'utilisateur est le même que le précédent on ne fait rien
-            //{
-            //    // on ajoute le rôle à l'utilisateur précédent
-            //    GetUserById(user.Id - 1).Roles.Add(Reader2Role(reader));
-            //    // TODO : recupere le role et l'ajoute à l'utilisateur précédent
-            //    //user.Roles = Reader2Roles(reader);
-            //    // dans ce cas là il faut rester sur l'utilisateur qui avait été créé
-            //}
-           
-                user.FirstName = reader["firstname"].ToString();
-                user.LastName = reader["lastname"].ToString();
-                user.RealHours = (reader["realHours"] != DBNull.Value) ? Convert.ToInt32(reader["realHours"]) : 0;
-                user.Profil = Reader2TypicalProfile(reader);
-                Role role = Reader2Role(reader);
-                user.Roles.Add(role);
-            
-
+            user.FirstName = reader["firstname"].ToString();
+            user.LastName = reader["lastname"].ToString();
+            user.RealHours = (reader["realHours"] != DBNull.Value) ? Convert.ToInt32(reader["realHours"]) : 0;
+            user.Profil = Reader2TypicalProfile(reader);
+            RoleDaoSqlite roleDao = new RoleDaoSqlite();
+            Role role = roleDao.Reader2Role(reader);
+            user.Roles.Add(role);
             return user;
         }
 
@@ -61,15 +49,7 @@ namespace Storage
             return typicalProfile;
         }
 
-        public Role Reader2Role(SqliteDataReader reader)
-        {
-            // peut retourner plusieurs roles
-            Role role = new Role();
-            role.Id = Convert.ToInt32(reader["idRole"]);
-            role.Name = reader["roleName"].ToString();
 
-            return role;
-        }
 
         public User[] ListAll()
         {
@@ -108,7 +88,8 @@ namespace Storage
                     // si encore un rôle ajout du rôle
                     if (reader["idRole"] != DBNull.Value)
                     {
-                        Role role = Reader2Role(reader);
+                        RoleDaoSqlite roleDao = new RoleDaoSqlite();
+                        Role role = roleDao.Reader2Role(reader);
                         if (!user.Roles.Any(r => r.Id == role.Id))
                         {
                             user.Roles.Add(role);
