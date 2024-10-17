@@ -12,8 +12,14 @@ namespace Model
     /// <author>Clotilde MALO</author>
     public class Semester
     {
+        private int id;
         private string name;
         private int nbTpGroups;
+
+        /// <summary>
+        /// Get et set de l'id du semestre
+        /// </summary>
+        public int Id { get => id; set => id = value; }
 
         /// <summary>
         /// Get et set du nom du semestre (équivalent à une promotion)
