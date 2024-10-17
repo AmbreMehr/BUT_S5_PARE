@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Model;
 
 namespace API.Controllers
 {
@@ -15,7 +16,7 @@ namespace API.Controllers
         /// <param name="module">Module enseigné</param>
         /// <returns>Liste de Teacher qui enseignent le module</returns>
         [HttpGet("GetTeachersByModule", Name = "GetTeachersByModule")]
-        public Object[] GetTeachersByModule(Object module)
+        public Teacher[] GetTeachersByModule(Module module)
         {
             throw new NotImplementedException();
         }
@@ -26,7 +27,7 @@ namespace API.Controllers
         /// <param name="teacher">Teacher à mettre à jour</param>
         /// <returns>HTTP Code</returns>
         [HttpPost(Name = "UpdateTeacher")]
-        public IActionResult UpdateTeacher(Object teacher)
+        public IActionResult UpdateTeacher(Teacher teacher)
         {
             throw new NotImplementedException();
         }
@@ -37,7 +38,7 @@ namespace API.Controllers
         /// <param name="teacher">Teacher à supprimer</param>
         /// <returns>HTTP Code</returns>
         [HttpPost("delete", Name = "DeleteTeacher")]
-        public IActionResult DeleteTeacher(Object teacher) 
+        public IActionResult DeleteTeacher(Teacher teacher) 
         { 
             throw new NotImplementedException(); 
         }
@@ -48,7 +49,7 @@ namespace API.Controllers
         /// <param name="teacher">Teacher à créer</param>
         /// <returns>HTTP Code</returns>
         [HttpPost("create", Name = "CreateTeacher")]
-        public IActionResult CreateTeacher(Object teacher)
+        public IActionResult CreateTeacher(Teacher teacher)
         {
             throw new NotImplementedException();
         }

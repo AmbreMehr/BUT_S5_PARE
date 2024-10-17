@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Model;
 
 namespace API.Controllers
 {
@@ -14,7 +15,7 @@ namespace API.Controllers
         /// </summary>
         /// <returns>Liste de User</returns>
         [HttpGet("GetAll", Name = "GetAllUsers")]
-        public Object[] GetAllUsers()
+        public User[] GetAllUsers()
         {
             throw new NotImplementedException();
         }
@@ -25,7 +26,7 @@ namespace API.Controllers
         /// <param name="user">User utilisateur à mettre à jour</param>
         /// <returns>HTTP Code</returns>
         [HttpPost(Name = "UpdateUser")]
-        public IActionResult UpdateUser(Object user)
+        public IActionResult UpdateUser(User user)
         {
             throw new NotImplementedException();
         }

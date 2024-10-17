@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Model;
 
 namespace API.Controllers
 {
@@ -15,7 +16,7 @@ namespace API.Controllers
         /// <param name="semester">Semester</param>
         /// <returns>Liste de Module du semestre</returns>
         [HttpGet("GetModulesBySemester", Name = "GetModulesBySemester")]
-        public Object[] GetModuleBySemester(Object semester)
+        public Module[] GetModuleBySemester(Semester semester)
         {
             throw new NotImplementedException();
         }
@@ -26,7 +27,7 @@ namespace API.Controllers
         /// <param name="module">Module à mettre à jour</param>
         /// <returns>HTTP Code</returns>
         [HttpPost(Name = "UpdateModule")]
-        public IActionResult UpdateModule(Object module)
+        public IActionResult UpdateModule(Module module)
         {
             throw new NotImplementedException();
         }
