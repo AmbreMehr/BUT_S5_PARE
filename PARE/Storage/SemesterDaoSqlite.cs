@@ -42,6 +42,8 @@ namespace Storage
                     semesters.Add(Reader2Semester(reader));
                 }
             }
+            db.Connection.Close();
+
             return semesters.ToArray();
         }
 
