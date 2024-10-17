@@ -64,6 +64,8 @@ namespace Storage
                     modules.Add(Reader2Module(reader));
                 }
             }
+            db.Connection.Close();
+
             return modules.ToArray();
         }
 
