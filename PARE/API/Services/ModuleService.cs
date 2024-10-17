@@ -52,5 +52,15 @@ namespace API.Services
         {
             return this.moduleDao.GetAllBySemester(semester);
         }
+
+        /// <summary>
+        /// Renvoie tous les modules
+        /// </summary>
+        /// <returns>Liste de Module</returns>
+        public Module[] GetAllModules()
+        {
+            IEnumerable<Module> module = this.moduleDao.ListAll();
+            return module.ToArray();
+        }
     }
 }

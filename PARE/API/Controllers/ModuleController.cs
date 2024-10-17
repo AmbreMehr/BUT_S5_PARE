@@ -43,5 +43,16 @@ namespace API.Controllers
             IEnumerable<Module> module = this.ModuleService.GetModulesForSemester(semester);
             return module.ToArray();
         }
+
+        /// <summary>
+        /// Renvoie tous les modules
+        /// </summary>
+        /// <returns>Liste de Module</returns>
+        [HttpGet("GetAllModules", Name = "GetAllModules")]
+        public Module[] GetAllModules()
+        {
+            IEnumerable<Module> module = this.ModuleService.GetAllModules();
+            return module.ToArray();
+        }
     }
 }
