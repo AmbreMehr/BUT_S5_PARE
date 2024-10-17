@@ -31,7 +31,7 @@ namespace Model
 
         /// <summary>
         /// Get et set du nbre heure TD assigné à ce prof
-        /// <exception> Les heures de TD ne peuvent pas être négatives </exception>
+        /// <exception> Les heures de TD ne peuvent pas être négatives ni supérieur aux heures du module </exception>
         /// </summary>
         public int AssignedTdHours { get => assignedTdHours;
             set 
@@ -39,6 +39,10 @@ namespace Model
                 if (value < 0)
                 {
                     throw new ArgumentException("Les heures de TD ne peuvent pas être négatives");
+                }
+                else if (value > module.HoursTd)
+                {
+                    throw new ArgumentException("Les heures de TD assignées ne peuvent pas être supérieures aux heures de TD du module");
                 }
                 else
                 {
@@ -49,7 +53,7 @@ namespace Model
 
         /// <summary>
         /// Get et set du nbre heure TP assigné à ce prof
-        /// <exception> Les heures de TP ne peuvent pas être négatives </exception>
+        /// <exception> Les heures de TP ne peuvent pas être négatives ni supérieur aux heures du module  </exception>
         /// </summary>
         public int AssignedTpHours { get => assignedTpHours;
             set
@@ -57,6 +61,10 @@ namespace Model
                 if (value < 0)
                 {
                     throw new ArgumentException("Les heures de TP ne peuvent pas être négatives");
+                }
+                else if (value > module.HoursTp)
+                {
+                    throw new ArgumentException("Les heures de TP assignées ne peuvent pas être supérieures aux heures de TP du module");
                 }
                 else
                 {
@@ -67,13 +75,17 @@ namespace Model
 
         /// <summary>
         /// Get et set du nbre heure CM assigné à ce prof
-        /// <exception> Les heures de CM ne peuvent pas être négatives </exception>
+        /// <exception> Les heures de CM ne peuvent pas être négatives ni supérieur aux heures du module </exception>
         /// </summary>
         public int AssignedCmHours { get => assignedCmHours; set
             {
                 if (value < 0)
                 {
                     throw new ArgumentException("Les heures de CM ne peuvent pas être négatives");
+                }
+                else if (value > module.HoursCM)
+                {
+                    throw new ArgumentException("Les heures de CM assignées ne peuvent pas être supérieures aux heures de CM du module");
                 }
                 else
                 {
