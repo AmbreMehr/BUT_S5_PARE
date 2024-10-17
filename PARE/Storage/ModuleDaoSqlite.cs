@@ -29,7 +29,32 @@ namespace Storage
 
         public Module[] ListAll()
         {
-            throw new NotImplementedException();
+            List<Module> modules = new List<Module>();
+            db.Connection.Open();
+            var cmd = db.Connection.CreateCommand();
+            cmd.CommandText = "SELECT" +
+                               " idModule" +
+                               ", name" +
+                               ", hourTP" +
+                               ", hourTD" +
+                               ", hourCM" +
+                               ", weekBegin" +
+                               ", weekEnd" +
+                               ", m.idSemester" +
+                               ", nameSemester" +
+                               ", numberGroupTp" +
+                               " FROM Modules AS m" +
+                               " LEFT JOIN Semester AS s ON m.idSemester = s.idSemester;";
+            using (var reader = cmd.ExecuteReader())
+            {
+                while (reader.Read())
+                {
+                    modules.Add(Reader2Module(reader));
+                }
+            }
+            db.Connection.Close();
+
+            return modules.ToArray();
         }
 
         public void Update(Module module)
