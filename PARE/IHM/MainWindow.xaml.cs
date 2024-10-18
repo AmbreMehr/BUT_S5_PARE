@@ -143,6 +143,8 @@ namespace IHM
         private void EditModuleWindow(object sender, RoutedEventArgs e)
         {
 
+        }
+
         /// <summary>
         /// Evenement quand la selection change : appel GetModuleBySemester
         /// </summary>
