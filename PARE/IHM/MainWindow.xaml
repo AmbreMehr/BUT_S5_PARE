@@ -23,22 +23,10 @@
         <!-- Brush pour les couleurs -->
         <SolidColorBrush x:Key="ComboBox.Static.Background" Color="White"/>
         <SolidColorBrush x:Key="ComboBox.Static.Border" Color="Gray"/>
-        
-        <!-- ControlTemplate pour ComboBox -->
-        <ControlTemplate x:Key="ComboBoxTemplate" TargetType="{x:Type ComboBox}">
-            <!-- Contenu du template pour le ComboBox -->
-            <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="1">
-                <TextBlock Text="{TemplateBinding SelectedItem}" />
-            </Border>
-        </ControlTemplate>
-
-        <!-- ControlTemplate pour ComboBoxEditable (lorsqu'il est modifiable) -->
-        <ControlTemplate x:Key="ComboBoxEditableTemplate" TargetType="{x:Type ComboBox}">
-            <!-- Contenu du template pour le ComboBox modifiable -->
-            <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="1">
-                <TextBox Text="{TemplateBinding Text}" />
-            </Border>
-        </ControlTemplate>
+        <SolidColorBrush x:Key="ComboBox.MouseOver.Background" Color="#FF7dbfcf"/>
+        <SolidColorBrush x:Key="ComboBox.MouseOver.Border" Color="#FF3DA79D"/>
+        <SolidColorBrush x:Key="ComboBox.Selected.Background" Color="#FF3DA79D"/>
+        <SolidColorBrush x:Key="ComboBox.Selected.Border" Color="Gray"/>
 
     </Window.Resources>
 
@@ -61,8 +49,6 @@
         <TextBlock Text="{DynamicResource TitreMainWindow}" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="30" FontWeight="Bold" Foreground="#FF2B2B5A" Grid.Column="1" Grid.ColumnSpan="2" FontFamily="Open Sauce One" TextAlignment="Center"/>
 
         <!-- Buttons -->
-
-
         <StackPanel Orientation="Horizontal" Grid.Row="0" Grid.Column="1" Margin="20" HorizontalAlignment="Right">
 
             <Button Foreground="#FFFFFF" Background="#FF3DA79D" ToolTip="{DynamicResource ToolTipPageParamètres}" Click="OpenParametresPage" x:Name="BtnParametres" Height="100" Margin="0,0,20,0">
@@ -125,7 +111,28 @@
                 <!-- pour les boutons-->
             </Grid.RowDefinitions>
 
-            <ComboBox Grid.Row="0" x:Name="semesterBox" Grid.Column="1" Height="50" Width="250" Margin="10,10,10,10" HorizontalAlignment="Left" VerticalAlignment="Top" FontFamily="{StaticResource OpenSauceOne}" FontSize="20"/>
+            <ComboBox
+                  Grid.Row="0" 
+                  x:Name="semesterBox" 
+                  Grid.Column="1" 
+                  Height="50" 
+                  Width="250" 
+                  Margin="10,10,10,10" 
+                  HorizontalAlignment="Left" 
+                  VerticalAlignment="Top" 
+                  FontFamily="{StaticResource OpenSauceOne}" 
+                  FontSize="20">    
+
+                <!-- Éléments factices pour la ComboBox -->
+                <ComboBoxItem Content="Semester 1" />
+                <ComboBoxItem Content="Semester 2" />
+                <ComboBoxItem Content="Semester 3" />
+                <ComboBoxItem Content="Semester 4" />
+                <ComboBoxItem Content="Semester 5" />
+                <ComboBoxItem Content="Semester 6" />
+
+            </ComboBox>
+
 
             <Grid Grid.Row="1" Grid.Column="1">
                 <Grid.ColumnDefinitions>
