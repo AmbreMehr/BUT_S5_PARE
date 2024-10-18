@@ -112,23 +112,12 @@
                 <!-- pour les boutons-->
             </Grid.RowDefinitions>
 
-                  VerticalAlignment="Top" 
-                  FontFamily="{StaticResource OpenSauceOne}" 
-                  FontSize="20">    
 
 
-
-            
-            <ComboBox DataContext="{Binding SemesterVM}" 
-                      Grid.Column="1" 
-                      Height="50" 
-                      Width="250" Margin="10,10,10,10" 
-                      HorizontalAlignment="Left" VerticalAlignment="Top" 
-                      FontFamily="{StaticResource OpenSauceOne}" FontSize="20" 
+            <ComboBox DataContext="{Binding SemesterVM}" Grid.Row="0" x:Name="semesterBox" Grid.Column="1" Height="50" Width="250" Margin="10,10,10,10" HorizontalAlignment="Left" VerticalAlignment="Top" FontFamily="{StaticResource OpenSauceOne}" FontSize="20" 
                       ItemsSource="{Binding Semesters}"
                       SelectedItem="{Binding SelectedSemester}"
                       DisplayMemberPath="Name" SelectionChanged="changedSelection"/>
-
 
 
             <Grid Grid.Row="1" Grid.Column="1" DataContext="{Binding ModulesVM}" x:Name="gridModules">
