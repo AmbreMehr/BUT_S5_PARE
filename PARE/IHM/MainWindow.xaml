@@ -356,7 +356,7 @@
                 </Grid.RowDefinitions>
 
                 <!-- colonnes du calendrier -->
-                <Button Grid.Column="0" Grid.Row="0"  x:Name="BtnLeft" Style="{StaticResource ImageButtonStyle}" Width="auto" Height="50" Margin="20 10 0 0" HorizontalAlignment="Center" VerticalAlignment="Top" Click="OpenParametresPage">
+                <Button Grid.Column="0" Grid.Row="0"  x:Name="BtnLeft" Style="{StaticResource ImageButtonStyle}" Width="auto" Height="50" Margin="20 10 0 0" HorizontalAlignment="Center" VerticalAlignment="Top">
                     <Image Source="Ressources/Picto/left.png" Stretch="Uniform" Margin="10" />
                 </Button>
 
@@ -452,7 +452,7 @@
                 Stroke="Black"
                 StrokeThickness="4" StrokeDashArray="1,2" />
 
-                <Button Grid.Column="14" Grid.Row="0" x:Name="BtnRight" Style="{StaticResource ImageButtonStyle}" Width="auto" Height="50" Margin="0 0 20 10" HorizontalAlignment="Center" VerticalAlignment="Top" Click="OpenParametresPage">
+                <Button Grid.Column="14" Grid.Row="0" x:Name="BtnRight" Style="{StaticResource ImageButtonStyle}" Width="auto" Height="50" Margin="0 0 20 10" HorizontalAlignment="Center" VerticalAlignment="Top">
                     <Image Source="Ressources/Picto/right.png" Stretch="Uniform" Margin="10" />
                 </Button>
 
