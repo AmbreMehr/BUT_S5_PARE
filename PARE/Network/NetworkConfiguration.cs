@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 
 namespace Network
 {
+    /// <author>AmbreMehr</author>
     internal class NetworkConfiguration
     {
         private NetworkParameters parameters;

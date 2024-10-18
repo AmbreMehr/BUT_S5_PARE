@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace Network
 {
+    /// <author>AmbreMehr</author>
     public interface IModuleNetwork
     {
         /// <summary>

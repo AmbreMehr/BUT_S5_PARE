@@ -12,6 +12,7 @@ namespace API.Controllers
         /// Renvoie tous les semestres
         /// </summary>
         /// <returns>Liste de Semester</returns>
+        /// <author>AmbreMehr</author>
         [HttpGet("GetAll", Name = "GetAllSemesters")]
         public Semester[] GetAll()
         {
