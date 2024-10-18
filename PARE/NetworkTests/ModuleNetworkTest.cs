@@ -17,5 +17,12 @@ namespace NetworkTests
             IEnumerable<Module> modules = await network.GetAllModules();
             Assert.NotEmpty(modules);
         }
+        [Fact]
+        public async void GetModulesBySemester()
+        {
+            IModuleNetwork network = new ModuleNetwork();
+            IEnumerable<Module> modules = await network.GetModuleBySemester(1);
+            Assert.NotEmpty(modules);
+        }
     }
 }
