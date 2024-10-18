@@ -17,6 +17,7 @@ namespace Network
 
         private NetworkConfiguration() 
         {
+            // Déserialisation de la configuration pour récupérer l'URL de l'API
             string currentDirectory = AppDomain.CurrentDomain.BaseDirectory;
             string fileName = System.IO.Path.Combine(currentDirectory, "networkConfig.json");
             DataContractJsonSerializer ser = new DataContractJsonSerializer(typeof(NetworkParameters));
@@ -25,7 +26,7 @@ namespace Network
                 FileStream flux = new FileStream(fileName, FileMode.Open, FileAccess.Read);
                 this.parameters = ser.ReadObject(flux) as NetworkParameters;
                 flux.Close();
-            } 
+            }
             else
             {
                 FileStream flux = new FileStream(fileName, FileMode.Create);
@@ -35,6 +36,20 @@ namespace Network
             }
         }
 
+        private HttpClient CreateHttpClient()
+        {
+            HttpClientHandler handler = new HttpClientHandler();
+            handler.ServerCertificateCustomValidationCallback = (message, cert, chain, sslPolicyErrors) =>
+            {
+                if (cert.GetCertHashString() == "624804188CE4942B29E188C68F97CD0C89D5C104")
+                {
+                    return true;
+                }
+                return false;
+            };
+            return new HttpClient(handler);
+        }
+
         public static NetworkConfiguration Instance
         {
             get
@@ -42,6 +57,14 @@ namespace Network
                 if (instance == null) instance = new NetworkConfiguration();
                 return instance;
             }
+        }
+        
+        public HttpClient HttpClient 
+        {  
+            get 
+            { 
+                return CreateHttpClient(); 
+            } 
         }
 
         public string ApiUrl { get => this.parameters.ApiUrl; }

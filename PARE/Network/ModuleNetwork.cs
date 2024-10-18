@@ -14,7 +14,7 @@ namespace Network
         public async Task<Module[]> GetAllModules()
         {
             IEnumerable<Module> modules = new List<Module>();
-            using (var client = new HttpClient())
+            using (var client = NetworkConfiguration.Instance.HttpClient)
             {
                 string query = NetworkConfiguration.Instance.ApiUrl + "api/module/GetAllModules";
                 HttpResponseMessage response = await client.GetAsync(query);
@@ -35,7 +35,7 @@ namespace Network
         public async Task<Module[]> GetModuleBySemester(int semester)
         {
             IEnumerable<Module> modules = new List<Module>();
-            using (var client = new HttpClient())
+            using (var client = NetworkConfiguration.Instance.HttpClient)
             {
                 string query = NetworkConfiguration.Instance.ApiUrl + "api/module/GetModulesBySemester?semester=" + semester;
                 HttpResponseMessage response = await client.GetAsync(query);
