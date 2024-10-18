@@ -19,9 +19,11 @@ namespace IHM
     /// </summary>
     public partial class SettingsWindows : Window
     {
+        private LANGUE langueinitiale;
         public SettingsWindows()
         {
             InitializeComponent();
+            langueinitiale = Parametre.Instance.Langue;
         }
 
         private void ValiderParam(object sender, RoutedEventArgs e)
@@ -34,9 +36,10 @@ namespace IHM
             mainWindow.Show();
             this.Close();
         }
-
-        private void CloseWindow(object sender, RoutedEventArgs e)
+        private void Cancel(object sender, RoutedEventArgs e)
         {
+            Parametre.Instance.Langue = langueinitiale;
+
             MainWindow mainWindow = new MainWindow();
             mainWindow.Show();
             this.Close();

@@ -126,7 +126,7 @@
         </Grid.ColumnDefinitions>
 
         <!-- Titre -->
-        <TextBlock Text="{DynamicResource TitreConnexion}" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="30" FontWeight="Bold" Foreground="#FF2B2B5A" Grid.Column="1" Grid.ColumnSpan="2" FontFamily="Open Sauce One" />
+        <TextBlock Text="{DynamicResource TitreConnexion}" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="30" FontWeight="Bold" Foreground="#FF2B2B5A" Grid.Column="1" Grid.ColumnSpan="2" FontFamily="Open Sauce One" TextAlignment="Center"/>
 
         <!-- Combobox gérant le login -->
         <Rectangle Grid.Column="1" HorizontalAlignment="Left" Height="54" Margin="215,0,0,0" Stroke="#3DA79D" Fill="#FF3DA79D" VerticalAlignment="Center" Width="171" RadiusX="10" RadiusY="10" Grid.Row="1"/>
