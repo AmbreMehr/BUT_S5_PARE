@@ -54,57 +54,52 @@ namespace IHM
                 // Recupere le semestre sélectionné
                 Semester semesterSelect = (Semester)semesterBox.SelectedItem;
 
-                if (semesterSelect != null)
+            if (semesterSelect != null)
+            {
+                // suppresssion des éléments qui ne sont pas ceux de base
+                gridModules.Children.OfType<Border>().ToList().ForEach(child => gridModules.Children.Remove(child));
+
+
+                await this.modulesVM.LoadModulesBySemester(semesterSelect.Id);
+                this.modules = this.modulesVM.Modules;
+
+                foreach (var module in this.modules)
                 {
-                    // suppresssion des éléments qui ne sont pas ceux de base
-                    gridModules.Children.OfType<Border>().ToList().ForEach(child => gridModules.Children.Remove(child));
+                    // prend en compte n° de colonnes pour les semaines
+                    int gridColumnBegin = module.WeekBegin - 35;
+                    int gridColumnEnd = module.WeekEnd - 35;
 
+                    // Créé un rectangle et texte pour le module
+                    Border moduleRectangle = new Border
+                    {
+                        Background = new SolidColorBrush(Colors.LightBlue),
+                        BorderBrush = new SolidColorBrush(Colors.Black),
+                        BorderThickness = new Thickness(1),
+                        CornerRadius = new CornerRadius(5),
+                        Height = 40,
+                        Margin = new Thickness(35)
+                    };
 
-                    await this.modulesVM.LoadModulesBySemester(semesterSelect.Id);
-                    this.modules = this.modulesVM.Modules;
+                    TextBlock textBlock = new TextBlock
+                    {
+                        Text = module.Name,
+                        HorizontalAlignment = HorizontalAlignment.Center,
+                        VerticalAlignment = VerticalAlignment.Center,
+                        FontSize = 16,
+                        FontFamily = new FontFamily("OpenSauceOne")
+                    };
 
-                    foreach (var module in this.modules)
-                        {
-                            // prend en compte n° de colonnes pour les semaines
-                            int gridColumnBegin = module.WeekBegin - 35; 
-                            int gridColumnEnd = module.WeekEnd - 35;
+                    moduleRectangle.Child = textBlock;
 
-                            // Créé un rectangle et texte pour le module
-                            Border moduleRectangle = new Border
-                            {
-                                Background = new SolidColorBrush(Colors.LightBlue),
-                                BorderBrush = new SolidColorBrush(Colors.Black),
-                                BorderThickness = new Thickness(1),
-                                CornerRadius = new CornerRadius(5),
-                                Height = 40,
-                                Margin = new Thickness(35)
-                            };
+                    Grid.SetColumn(moduleRectangle, gridColumnBegin);
+                    Grid.SetColumnSpan(moduleRectangle, gridColumnEnd - gridColumnBegin + 1);
+                    Grid.SetRow(moduleRectangle, 1);
 
-                            TextBlock textBlock = new TextBlock
-                            {
-                                Text = module.Name,
-                                HorizontalAlignment = HorizontalAlignment.Center,
-                                VerticalAlignment = VerticalAlignment.Center,
-                                FontSize = 16,
-                                FontFamily = new FontFamily("OpenSauceOne")
-                            };
-
-                            moduleRectangle.Child = textBlock;
-
-                            Grid.SetColumn(moduleRectangle, gridColumnBegin);
-                            Grid.SetColumnSpan(moduleRectangle, gridColumnEnd - gridColumnBegin + 1);
-                            Grid.SetRow(moduleRectangle, 1); 
-
-                            gridModules.Children.Add(moduleRectangle);
-                    
+                    gridModules.Children.Add(moduleRectangle);
                 }
             }
-
-
+                    
         }
-
-
-
 
         private void OpenParametresPage(object sender, RoutedEventArgs e)
         {
