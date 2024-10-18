@@ -91,9 +91,11 @@ namespace IHM_Model
         /// </summary>
         /// <param name="idSemester">id du semestre</param>
         /// <author>Clotilde MALO</author>
-        public async void LoadModulesBySemester(int idSemester)
+        public async Task LoadModulesBySemester(int idSemester)
         {
-            Modules = await GetModuleBySemester(idSemester);
+            var modules = await GetModuleBySemester(idSemester);
+            Modules = new ObservableCollection<Module>(modules);
+
         }
 
 
