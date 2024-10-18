@@ -26,8 +26,8 @@ namespace IHM
             Loaded += MainWindow_Loaded;
 
             //Deserialiser les parametres s'ils existent
-            //JsonSerializerParametre jsonParam = new JsonSerializerParametre();
-            //jsonParam.Load();
+            JsonSerializerParametre jsonParam = new JsonSerializerParametre();
+            jsonParam.Load();
         }
 
         /// <summary>

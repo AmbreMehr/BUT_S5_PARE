@@ -15,7 +15,7 @@
     </Window.Background>
 
     <Window.Resources>
-        <FontFamily x:Key="OpenSauceOneBlack">/IHM/Ressources/Fonts/#Open Sauce One Black</FontFamily>
+        <FontFamily x:Key="OpenSauceOneBlack">/Ressources/Fonts/#Open Sauce One Black</FontFamily>
     </Window.Resources>
 
     <Grid>

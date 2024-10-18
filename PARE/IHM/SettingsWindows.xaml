@@ -28,6 +28,8 @@
                 </Setter.Value>
             </Setter>
         </Style>
+        <FontFamily x:Key="OpenSauceOne">/Ressources/Fonts/#Open Sauce One</FontFamily>
+        <FontFamily x:Key="OpenSauceOneLight">/Ressources/Fonts/#Open Sauce One Light</FontFamily>
         <Style x:Key="FocusVisual">
             <Setter Property="Control.Template">
                 <Setter.Value>
@@ -213,16 +215,16 @@
         <TextBlock Text="{DynamicResource TitreParam}" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="30"  FontWeight="Bold" Foreground="#FF2B2B5A" Grid.Column="1" Grid.ColumnSpan="2" FontFamily="Open Sauce One" />
 
         <Button x:Name="ChoixFrançais" Style="{StaticResource ImageButtonStyle}" Click="SelectionnerLangueFR" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,50,0,0">
-            <Image Source="Ressources/Picto/France.png" Stretch="Uniform" Margin="10" />
+            <Image Source="/Ressources/Picto/France.png" Stretch="Uniform" Margin="10" />
         </Button>
 
         <Button x:Name="ChoixAnglais" Style="{StaticResource ImageButtonStyle}" Click="SelectionnerLangueEN" Grid.Column="1" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,50,0,0" >
-            <Image Source="Ressources/Picto/Anglais.png" Stretch="Uniform" Margin="10" />
+            <Image Source="/Ressources/Picto/Anglais.png" Stretch="Uniform" Margin="10" />
         </Button>
 
 
         <!--Bouton de Validation (Nordine)-->
-        <Button Foreground="#FFFFFF" Background="#FF3DA79D" FontFamily="{StaticResource OpenSauceOneBlack}" Content="{DynamicResource BtnValider}"  FontSize="40" Click="ValiderParam" Grid.Column="2" Grid.Row="2" Margin="70,20,70,20">
+        <Button Foreground="#FFFFFF" Background="#FF3DA79D" FontFamily="{StaticResource OpenSauceOne}" Content="{DynamicResource BtnValider}"  FontSize="40" Click="ValiderParam" Grid.Column="2" Grid.Row="2" Margin="70,20,70,20">
             <Button.Style>
                 <Style TargetType="Button">
                     <Setter Property="Template">

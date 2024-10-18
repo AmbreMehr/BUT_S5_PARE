@@ -25,8 +25,10 @@
     <None Remove="Ressources\Fonts\OpenSauceOne-SemiBoldItalic.ttf" />
     <None Remove="Ressources\Img\logoIUT.png" />
     <None Remove="Ressources\Img\Pare.png" />
+    <None Remove="Ressources\Picto\Anglais.png" />
     <None Remove="Ressources\Picto\checkmark.png" />
     <None Remove="Ressources\Picto\error.png" />
+    <None Remove="Ressources\Picto\France.png" />
     <None Remove="Ressources\Picto\information.png" />
     <None Remove="Ressources\Picto\logout.png" />
     <None Remove="Ressources\Picto\settings.png" />
@@ -49,8 +51,10 @@
     <Resource Include="Ressources\Fonts\OpenSauceOne-SemiBoldItalic.ttf" />
     <Resource Include="Ressources\Img\logoIUT.png" />
     <Resource Include="Ressources\Img\Pare.png" />
+    <Resource Include="Ressources\Picto\Anglais.png" />
     <Resource Include="Ressources\Picto\checkmark.png" />
     <Resource Include="Ressources\Picto\error.png" />
+    <Resource Include="Ressources\Picto\France.png" />
     <Resource Include="Ressources\Picto\information.png" />
     <Resource Include="Ressources\Picto\logout.png" />
     <Resource Include="Ressources\Picto\settings.png" />

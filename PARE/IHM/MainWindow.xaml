@@ -60,8 +60,8 @@
                 </MultiTrigger>
             </Style.Triggers>
         </Style>
-        <FontFamily x:Key="OpenSauceOne">/Vue/Ressources/Fonts/#Open Sauce One</FontFamily>
-        <FontFamily x:Key="OpenSauceOneLight">/Vue/Ressources/Fonts/#Open Sauce One Light</FontFamily>
+        <FontFamily x:Key="OpenSauceOne">/Ressources/Fonts/#Open Sauce One</FontFamily>
+        <FontFamily x:Key="OpenSauceOneLight">/Ressources/Fonts/#Open Sauce One Light</FontFamily>
         <SolidColorBrush x:Key="TextBox.Static.Border1" Color="#FFABAdB3"/>
         <SolidColorBrush x:Key="TextBox.MouseOver.Border1" Color="#FF7EB4EA"/>
         <SolidColorBrush x:Key="TextBox.Focus.Border1" Color="#FF569DE5"/>
