@@ -34,7 +34,7 @@ namespace IHM_Model
         /// Constructeur de la classe ModulesVM, initialisant le nom du module et les enseignants.
         /// </summary>
         /// <param name="moduleName">Nom du module</param>
-        /// <param name="totalHours">Nombre total d'heures (CM, TD, TP)</param>
+        /// <param name="teacher">Nom du teacher</param>
         public ModuleVM(string moduleName, string teacher)
         {
             _moduleName = moduleName;
