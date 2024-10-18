@@ -14,7 +14,7 @@
 
     <Window.Background>
         <SolidColorBrush Color="#bfd7eb" />
-    </Window.Background>
+    </Window.Background> 
 
     <Window.Resources>
         <FontFamily x:Key="OpenSauceOne">/Ressources/Fonts/#Open Sauce One</FontFamily>
@@ -96,8 +96,10 @@
             </Button>
 
         </StackPanel>
-
-        <Button Content="{DynamicResource BtnAttributionModule}" Grid.Row="2" Grid.Column="1" Foreground="#FFFFFF" Background="#FF3DA79D" Height="50" Width="225" HorizontalAlignment="Right" Margin="0,0,1100,0">
+        
+        <!-- Boutons en bas de l'écran -->
+        
+        <Button Content="{DynamicResource BtnAttributionModule}" FontFamily="{StaticResource OpenSauceOne}" Grid.Row="2" Grid.Column="1" Foreground="#FFFFFF" Background="#FF3DA79D" Height="50" Width="225" HorizontalAlignment="Right" Margin="0,0,1100,0" Padding="10" FontSize="20" Click="AttributionModuleWindow">
             <Button.Style>
                 <Style TargetType="{x:Type Button}">
                     <Setter Property="Template">
@@ -119,7 +121,7 @@
             </Button.Style>
         </Button>
 
-        <Button Grid.Row="2" Grid.Column="1" Foreground="#FFFFFF" Background="#FF3DA79D" Height="50" Width="225" HorizontalAlignment="Right" Margin="0,0,830,0">
+        <Button Content="{DynamicResource BtnAttributionProfilType}" Grid.Row="2" Grid.Column="1" Foreground="#FFFFFF" FontFamily="{StaticResource OpenSauceOne}" Background="#FF3DA79D" Height="50" Width="225" HorizontalAlignment="Right" Margin="0,0,830,0" Click="AttributionProfilTypeWindow" Padding="10" FontSize="15">
             <Button.Style>
                 <Style TargetType="{x:Type Button}">
                     <Setter Property="Template">
@@ -141,7 +143,7 @@
             </Button.Style>
         </Button>
 
-        <Button Grid.Row="2" Grid.Column="1" Foreground="#FFFFFF" Background="#FF3DA79D" Height="50" Width="225" HorizontalAlignment="Right" Margin="0,0,290,0">
+        <Button Content="{DynamicResource BtnBilanAlertes}" Grid.Row="2" Grid.Column="1" Foreground="#FFFFFF" FontFamily="{StaticResource OpenSauceOne}" Background="#FF3DA79D" Height="50" Width="225" HorizontalAlignment="Right" Margin="0,0,290,0" Padding="10" FontSize="20" Click="BilanAlertWindow">
             <Button.Style>
                 <Style TargetType="{x:Type Button}">
                     <Setter Property="Template">
@@ -163,7 +165,7 @@
             </Button.Style>
         </Button>
 
-        <Button Grid.Row="2" Grid.Column="1" Foreground="#FFFFFF" Background="#FF3DA79D" Height="50" Width="225" HorizontalAlignment="Right" Margin="0,0,20,0">
+        <Button Content="{DynamicResource BtnPlacerModules}" Grid.Row="2" Grid.Column="1" Foreground="#FFFFFF" FontFamily="{StaticResource OpenSauceOne}" Background="#FF3DA79D" Height="50" Width="225" HorizontalAlignment="Right" Margin="0,0,20,0" Padding="10" FontSize="20" Click="PlacerModuleWindow">
             <Button.Style>
                 <Style TargetType="{x:Type Button}">
                     <Setter Property="Template">
@@ -185,7 +187,7 @@
             </Button.Style>
         </Button>
 
-        <Button Grid.Row="2" Grid.Column="1" Foreground="#FFFFFF" Background="#FF3DA79D" Height="50" Width="225" HorizontalAlignment="Right" Margin="0,0,560,0">
+        <Button Content="{DynamicResource BtnEditerModules}" Grid.Row="2" Grid.Column="1" Foreground="#FFFFFF" FontFamily="{StaticResource OpenSauceOne}" Background="#FF3DA79D" Height="50" Width="225" HorizontalAlignment="Right" Margin="0,0,560,0" Padding="10" FontSize="20" Click="EditModuleWindow">
             <Button.Style>
                 <Style TargetType="{x:Type Button}">
                     <Setter Property="Template">

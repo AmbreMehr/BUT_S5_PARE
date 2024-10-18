@@ -40,5 +40,30 @@ namespace IHM
             loginWindow.Show();
             this.Close();
         }
+
+        private void AttributionModuleWindow(object sender, RoutedEventArgs e)
+        {
+            
+        }
+
+        private void AttributionProfilTypeWindow(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void BilanAlertWindow(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void PlacerModuleWindow(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void EditModuleWindow(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
