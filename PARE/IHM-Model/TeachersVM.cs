@@ -16,6 +16,26 @@ namespace IHM_Model
     {
         private Teacher[]_model;
         private Module _module;
+        
+        public Teacher[] Teachers
+        {
+            get { return _model; }
+            set
+            {
+                _model = value;
+                NotifyChange("Teachers");
+            }
+        }
+        public Module Module
+        {
+            get { return _module; }
+            set
+            {
+                _module = value;
+                NotifyChange("Module");
+            }
+        }
+
 
 
         /// <summary>

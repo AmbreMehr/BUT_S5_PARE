@@ -15,6 +15,16 @@ namespace IHM_Model
     public class RolesVM : BaseVM
     {
         private Role[]_models;
+        public Role[] Role
+        {     
+            get { return _models; } 
+            set { 
+                _models = value;
+                NotifyChange("Role");
+            }
+
+        }
+
 
         /// <summary>
         /// Récupère les modules.
