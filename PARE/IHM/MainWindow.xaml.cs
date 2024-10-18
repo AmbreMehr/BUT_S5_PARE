@@ -1,6 +1,7 @@
 ﻿using IHM_Model;
 using Model;
 using Network;
+using System.Collections.ObjectModel;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
@@ -17,15 +18,93 @@ namespace IHM
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
+    /// <author>Clotilde MALO</author>
     public partial class MainWindow : Window
     {
         private Module module;
         private SemesterVM semesterVM;
         private ISemesterNetwork semesterNetwork;
+        private IModuleNetwork moduleNetwork;
+        private ModulesVM modulesVM;
+        private ObservableCollection<Module> modules;
+
+        /// <summary>
+        /// Constructeur de la classe MainWindow : initialise les composants de la fenêtre principale
+        /// </summary>
         public MainWindow()
         {
             InitializeComponent();
+
+            this.module = new Module();
+            this.semesterNetwork = new SemesterNetwork();
+            this.semesterVM = new SemesterVM(semesterNetwork);
+            this.moduleNetwork = new ModuleNetwork();
+            this.modulesVM = new ModulesVM(moduleNetwork);
+            MainViewModel mainViewModel = new MainViewModel(this.modulesVM, this.semesterVM);
+
+            DataContext = mainViewModel;
+
         }
+
+        /// <summary>
+        /// Récupération des modules par semestre sélectionné
+        /// </summary>
+        public async void GetModuleBySemester()
+        {
+                // Recupere le semestre sélectionné
+                Semester semesterSelect = (Semester)semesterBox.SelectedItem;
+
+                if (semesterSelect != null)
+                {
+                    // suppresssion des éléments qui ne sont pas ceux de base
+                    gridModules.Children.OfType<Border>().ToList().ForEach(child => gridModules.Children.Remove(child));
+
+
+                    await this.modulesVM.LoadModulesBySemester(semesterSelect.Id);
+                    this.modules = this.modulesVM.Modules;
+
+                    foreach (var module in this.modules)
+                        {
+                            // prend en compte n° de colonnes pour les semaines
+                            int gridColumnBegin = module.WeekBegin - 35; 
+                            int gridColumnEnd = module.WeekEnd - 35;
+
+                            // Créé un rectangle et texte pour le module
+                            Border moduleRectangle = new Border
+                            {
+                                Background = new SolidColorBrush(Colors.LightBlue),
+                                BorderBrush = new SolidColorBrush(Colors.Black),
+                                BorderThickness = new Thickness(1),
+                                CornerRadius = new CornerRadius(5),
+                                Height = 40,
+                                Margin = new Thickness(35)
+                            };
+
+                            TextBlock textBlock = new TextBlock
+                            {
+                                Text = module.Name,
+                                HorizontalAlignment = HorizontalAlignment.Center,
+                                VerticalAlignment = VerticalAlignment.Center,
+                                FontSize = 16,
+                                FontFamily = new FontFamily("OpenSauceOne")
+                            };
+
+                            moduleRectangle.Child = textBlock;
+
+                            Grid.SetColumn(moduleRectangle, gridColumnBegin);
+                            Grid.SetColumnSpan(moduleRectangle, gridColumnEnd - gridColumnBegin + 1);
+                            Grid.SetRow(moduleRectangle, 1); 
+
+                            gridModules.Children.Add(moduleRectangle);
+                    
+                }
+            }
+
+
+        }
+
+
+
 
         private void OpenParametresPage(object sender, RoutedEventArgs e)
         {
@@ -64,6 +143,15 @@ namespace IHM
         private void EditModuleWindow(object sender, RoutedEventArgs e)
         {
 
+        /// <summary>
+        /// Evenement quand la selection change : appel GetModuleBySemester
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void changedSelection(object sender, SelectionChangedEventArgs e)
+        {
+
+            GetModuleBySemester();
         }
     }
 }

@@ -14,7 +14,7 @@ namespace Network
         public async Task<Semester[]> GetAllSemesters()
         {
             IEnumerable<Semester> semesters = new List<Semester>();
-            using (var client = new HttpClient())
+            using (var client = NetworkConfiguration.Instance.HttpClient)
             {
                 string query = NetworkConfiguration.Instance.ApiUrl + "api/semester/GetAll";
                 HttpResponseMessage response = await client.GetAsync(query);

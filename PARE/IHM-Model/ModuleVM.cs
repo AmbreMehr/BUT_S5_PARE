@@ -29,6 +29,15 @@ namespace IHM_Model
                 }
             }
         }
+        public Teacher[] Teacher
+        {
+            get { return _teacher; }
+            set
+            {
+                _teacher = value;
+                NotifyChange("Teacher");
+            }
+        }
 
         /// <summary>
         /// Constructeur de la classe ModulesVM, initialisant le nom du module et les enseignants.
