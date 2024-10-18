@@ -10,6 +10,19 @@
 
   <ItemGroup>
     <None Remove="Ressources\Fonts\OpenSauceOne-Black.ttf" />
+    <None Remove="Ressources\Fonts\OpenSauceOne-BlackItalic.ttf" />
+    <None Remove="Ressources\Fonts\OpenSauceOne-Bold.ttf" />
+    <None Remove="Ressources\Fonts\OpenSauceOne-BoldItalic.ttf" />
+    <None Remove="Ressources\Fonts\OpenSauceOne-ExtraBold.ttf" />
+    <None Remove="Ressources\Fonts\OpenSauceOne-ExtraBoldItalic.ttf" />
+    <None Remove="Ressources\Fonts\OpenSauceOne-Italic.ttf" />
+    <None Remove="Ressources\Fonts\OpenSauceOne-Light.ttf" />
+    <None Remove="Ressources\Fonts\OpenSauceOne-LightItalic.ttf" />
+    <None Remove="Ressources\Fonts\OpenSauceOne-Medium.ttf" />
+    <None Remove="Ressources\Fonts\OpenSauceOne-MediumItalic.ttf" />
+    <None Remove="Ressources\Fonts\OpenSauceOne-Regular.ttf" />
+    <None Remove="Ressources\Fonts\OpenSauceOne-SemiBold.ttf" />
+    <None Remove="Ressources\Fonts\OpenSauceOne-SemiBoldItalic.ttf" />
     <None Remove="Ressources\Img\logoIUT.png" />
     <None Remove="Ressources\Img\Pare.png" />
     <None Remove="Ressources\Picto\checkmark.png" />
@@ -21,6 +34,19 @@
 
   <ItemGroup>
     <Resource Include="Ressources\Fonts\OpenSauceOne-Black.ttf" />
+    <Resource Include="Ressources\Fonts\OpenSauceOne-BlackItalic.ttf" />
+    <Resource Include="Ressources\Fonts\OpenSauceOne-Bold.ttf" />
+    <Resource Include="Ressources\Fonts\OpenSauceOne-BoldItalic.ttf" />
+    <Resource Include="Ressources\Fonts\OpenSauceOne-ExtraBold.ttf" />
+    <Resource Include="Ressources\Fonts\OpenSauceOne-ExtraBoldItalic.ttf" />
+    <Resource Include="Ressources\Fonts\OpenSauceOne-Italic.ttf" />
+    <Resource Include="Ressources\Fonts\OpenSauceOne-Light.ttf" />
+    <Resource Include="Ressources\Fonts\OpenSauceOne-LightItalic.ttf" />
+    <Resource Include="Ressources\Fonts\OpenSauceOne-Medium.ttf" />
+    <Resource Include="Ressources\Fonts\OpenSauceOne-MediumItalic.ttf" />
+    <Resource Include="Ressources\Fonts\OpenSauceOne-Regular.ttf" />
+    <Resource Include="Ressources\Fonts\OpenSauceOne-SemiBold.ttf" />
+    <Resource Include="Ressources\Fonts\OpenSauceOne-SemiBoldItalic.ttf" />
     <Resource Include="Ressources\Img\logoIUT.png" />
     <Resource Include="Ressources\Img\Pare.png" />
     <Resource Include="Ressources\Picto\checkmark.png" />

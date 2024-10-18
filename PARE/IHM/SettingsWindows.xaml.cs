@@ -26,7 +26,13 @@ namespace IHM
 
         private void ValiderParam(object sender, RoutedEventArgs e)
         {
+            //on sauvegarde les paramètres
+            JsonSerializerParametre jsonSave = new JsonSerializerParametre();
+            jsonSave.Save();
 
+            MainWindow mainWindow = new MainWindow();
+            mainWindow.Show();
+            this.Close();
         }
 
         private void CloseWindow(object sender, RoutedEventArgs e)
@@ -38,12 +44,12 @@ namespace IHM
 
         private void SelectionnerLangueFR(object sender, RoutedEventArgs e)
         {
-
+            Parametre.Instance.Langue = LANGUE.FRANCAIS;
         }
 
         private void SelectionnerLangueEN(object sender, RoutedEventArgs e)
         {
-
+            Parametre.Instance.Langue = LANGUE.ANGLAIS;
         }
     }
 }

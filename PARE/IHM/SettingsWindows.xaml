@@ -222,7 +222,7 @@
 
 
         <!--Bouton de Validation (Nordine)-->
-        <Button Foreground="#FFFFFF" Background="#FF3DA79D" FontFamily="{StaticResource OpenSauceOne}" Content="{DynamicResource BtnValider}"  FontSize="40" Click="ValiderParam" Grid.Column="2" Grid.Row="2" Margin="70,20,70,20">
+        <Button Foreground="#FFFFFF" Background="#FF3DA79D" FontFamily="{StaticResource OpenSauceOneBlack}" Content="{DynamicResource BtnValider}"  FontSize="40" Click="ValiderParam" Grid.Column="2" Grid.Row="2" Margin="70,20,70,20">
             <Button.Style>
                 <Style TargetType="Button">
                     <Setter Property="Template">
