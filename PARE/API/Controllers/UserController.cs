@@ -14,6 +14,7 @@ namespace API.Controllers
         /// Renvoie tous les utilisateurs
         /// </summary>
         /// <returns>Liste de User</returns>
+        /// <author>AmbreMehr</author>
         [HttpGet("GetAll", Name = "GetAllUsers")]
         public User[] GetAllUsers()
         {
@@ -57,6 +58,7 @@ namespace API.Controllers
         /// Renvoie la liste de rôles, type d'utilisateur
         /// </summary>
         /// <returns>Liste de Role</returns>
+        /// <author>AmbreMehr</author>
         [HttpGet("GetAllRoles", Name = "GetAllRoles")]
         public Role[] GetAllRoles()
         {

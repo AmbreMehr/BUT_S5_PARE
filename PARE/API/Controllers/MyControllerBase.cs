@@ -7,6 +7,7 @@ namespace API.Controllers
     /// Classe de base pour les contrôleurs de l'API
     /// Contient les différents services
     /// </summary>
+    /// <author>AmbreMehr</author>
     public class MyControllerBase : ControllerBase
     {
         private ModuleService moduleService;
