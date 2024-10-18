@@ -214,12 +214,50 @@
 
         <TextBlock Text="{DynamicResource TitreParam}" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="30"  FontWeight="Bold" Foreground="#FF2B2B5A" Grid.Column="0" Grid.ColumnSpan="2" FontFamily="Open Sauce One" />
 
-        <Button x:Name="ChoixFrançais" Style="{StaticResource ImageButtonStyle}" Click="SelectionnerLangueFR" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,50,0,0">
+        <Button x:Name="ChoixFrançais" Foreground="#FFFFFF" Background="#FF3DA79D"  Click="SelectionnerLangueFR" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" Height="250" >
             <Image Source="/Ressources/Picto/France.png" Stretch="Uniform" Margin="10" />
+            <Button.Style>
+                <Style TargetType="Button">
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="Button">
+                                <Border x:Name="border" CornerRadius="10" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="1" >
+                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                </Border>
+                                <ControlTemplate.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter TargetName="border" Property="Background" Value="#FF7dbfcf"/>
+                                        <Setter Property="Foreground" Value="#000000"/>
+                                    </Trigger>
+                                </ControlTemplate.Triggers>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </Button.Style>
         </Button>
 
-        <Button x:Name="ChoixAnglais" Style="{StaticResource ImageButtonStyle}" Click="SelectionnerLangueEN" Grid.Column="1" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,50,0,0" >
+        <Button x:Name="ChoixAnglais" Foreground="#FFFFFF" Background="#FF3DA79D"  Click="SelectionnerLangueEN" Grid.Column="1" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" Height="250">
             <Image Source="/Ressources/Picto/Anglais.png" Stretch="Uniform" Margin="10" />
+            <Button.Style>
+                <Style TargetType="Button">
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="Button">
+                                <Border x:Name="border" CornerRadius="10" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="1" >
+                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                </Border>
+                                <ControlTemplate.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter TargetName="border" Property="Background" Value="#FF7dbfcf"/>
+                                        <Setter Property="Foreground" Value="#000000"/>
+                                    </Trigger>
+                                </ControlTemplate.Triggers>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </Button.Style>
         </Button>
 
 
