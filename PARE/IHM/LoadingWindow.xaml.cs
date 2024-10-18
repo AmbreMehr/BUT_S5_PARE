@@ -24,6 +24,10 @@ namespace IHM
         {
             InitializeComponent();
             Loaded += MainWindow_Loaded;
+
+            //Deserialiser les parametres s'ils existent
+            //JsonSerializerParametre jsonParam = new JsonSerializerParametre();
+            //jsonParam.Load();
         }
 
         /// <summary>
@@ -31,7 +35,7 @@ namespace IHM
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        /// <author>Nordine</author>
+        /// <author>Lucas</author>
         private async void MainWindow_Loaded(object sender, RoutedEventArgs e)
         {
             Activate();

@@ -23,5 +23,27 @@ namespace IHM
         {
             InitializeComponent();
         }
+
+        private void ValiderParam(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void CloseWindow(object sender, RoutedEventArgs e)
+        {
+            MainWindow mainWindow = new MainWindow();
+            mainWindow.Show();
+            this.Close();
+        }
+
+        private void SelectionnerLangueFR(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void SelectionnerLangueEN(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
