@@ -14,8 +14,8 @@ namespace IHM_Model
     public class TeacherVM : BaseVM
     {
         private Teacher _model;
-        public Teacher Model
-            { 
+        public Teacher Teacher
+        { 
             get { return _model;}
             set { 
                 _model = value;
