@@ -25,10 +25,6 @@ namespace IHM
         public MainWindow()
         {
             InitializeComponent();
-            this.module = new Module();
-            this.semesterNetwork = new SemesterNetwork();
-            this.semesterVM = new SemesterVM(semesterNetwork);
-            DataContext = this.semesterVM;
         }
 
         private void OpenParametresPage(object sender, RoutedEventArgs e)
