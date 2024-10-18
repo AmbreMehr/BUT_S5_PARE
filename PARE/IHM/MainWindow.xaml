@@ -15,6 +15,7 @@
     <Window.Background>
         <SolidColorBrush Color="#bfd7eb" />
     </Window.Background>
+    
 
     <Window.Resources>
         <FontFamily x:Key="OpenSauceOne">/Ressources/Fonts/#Open Sauce One</FontFamily>
@@ -111,30 +112,26 @@
                 <!-- pour les boutons-->
             </Grid.RowDefinitions>
 
-            <ComboBox
-                  Grid.Row="0" 
-                  x:Name="semesterBox" 
-                  Grid.Column="1" 
-                  Height="50" 
-                  Width="250" 
-                  Margin="10,10,10,10" 
-                  HorizontalAlignment="Left" 
                   VerticalAlignment="Top" 
                   FontFamily="{StaticResource OpenSauceOne}" 
                   FontSize="20">    
 
-                <!-- Éléments factices pour la ComboBox -->
-                <ComboBoxItem Content="Semester 1" />
-                <ComboBoxItem Content="Semester 2" />
-                <ComboBoxItem Content="Semester 3" />
-                <ComboBoxItem Content="Semester 4" />
-                <ComboBoxItem Content="Semester 5" />
-                <ComboBoxItem Content="Semester 6" />
-
-            </ComboBox>
 
 
-            <Grid Grid.Row="1" Grid.Column="1">
+            
+            <ComboBox DataContext="{Binding SemesterVM}" 
+                      Grid.Column="1" 
+                      Height="50" 
+                      Width="250" Margin="10,10,10,10" 
+                      HorizontalAlignment="Left" VerticalAlignment="Top" 
+                      FontFamily="{StaticResource OpenSauceOne}" FontSize="20" 
+                      ItemsSource="{Binding Semesters}"
+                      SelectedItem="{Binding SelectedSemester}"
+                      DisplayMemberPath="Name" SelectionChanged="changedSelection"/>
+
+
+
+            <Grid Grid.Row="1" Grid.Column="1" DataContext="{Binding ModulesVM}" x:Name="gridModules">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
@@ -303,6 +300,7 @@
                 <!-- TODO : mettre des grids.row dynamiquement à chaque fois que l'on recupere un module et les placer au milieu des grid columns correspondant au centre -->
 
                 <!-- Boutons vers autre fenêtre dans la grid row 2 -->
+
 
             </Grid>
 
