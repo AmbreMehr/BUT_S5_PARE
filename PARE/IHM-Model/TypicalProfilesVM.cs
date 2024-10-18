@@ -20,7 +20,7 @@ namespace IHM_Model
         /// <summary>
         /// Propriété pour obtenir ou définir le tableau de profils typiques.
         /// </summary>
-        public TypicalProfile[] Model
+        public TypicalProfile[] ProfilType
         {
             get { return _model; }
             set
