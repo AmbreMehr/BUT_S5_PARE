@@ -40,6 +40,7 @@ namespace API.Services
         /// Renvoie tous les utilisateurs
         /// </summary>
         /// <returns>Liste de User</returns>
+        /// <author>AmbreMehr</author>
         public User[] GetAllUsers()
         {
             return this.userDao.ListAll();
@@ -68,6 +69,7 @@ namespace API.Services
         /// Renvoie la liste de rôles, type d'utilisateur
         /// </summary>
         /// <returns>Liste de Role</returns>
+        /// <author>AmbreMehr</author>
         public Role[] GetAllRoles()
         {
             IEnumerable<Role> roles = this.roleDao.ListAll();

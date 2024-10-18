@@ -37,6 +37,7 @@ namespace API.Controllers
         /// </summary>
         /// <param name="semester">Semester</param>
         /// <returns>Liste de Module du semestre</returns>
+        /// <author>AmbreMehr</author>
         [HttpGet("GetModulesBySemester", Name = "GetModulesBySemester")]
         public Module[] GetModuleBySemester(int semester)
         {
@@ -48,6 +49,7 @@ namespace API.Controllers
         /// Renvoie tous les modules
         /// </summary>
         /// <returns>Liste de Module</returns>
+        /// <author>AmbreMehr</author>
         [HttpGet("GetAllModules", Name = "GetAllModules")]
         public Module[] GetAllModules()
         {

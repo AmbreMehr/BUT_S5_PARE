@@ -48,6 +48,7 @@ namespace API.Services
         /// </summary>
         /// <param name="semester">Semester semestre qui contient les modules</param>
         /// <returns>Liste de Module</returns>
+        /// <author>AmbreMehr</author>
         public Module[] GetModulesForSemester(int semester)
         {
             return this.moduleDao.GetAllBySemester(semester);
@@ -57,6 +58,7 @@ namespace API.Services
         /// Renvoie tous les modules
         /// </summary>
         /// <returns>Liste de Module</returns>
+        /// <author>AmbreMehr</author>
         public Module[] GetAllModules()
         {
             IEnumerable<Module> module = this.moduleDao.ListAll();
