@@ -51,60 +51,63 @@ namespace IHM
         /// </summary>
         public async void GetModuleBySemester()
         {
-                // Recupere le semestre sélectionné
-                Semester semesterSelect = (Semester)semesterBox.SelectedItem;
+            // Recupere le semestre sélectionné
+            Semester semesterSelect = (Semester)semesterBox.SelectedItem;
 
-                if (semesterSelect != null)
+
+            if (semesterSelect != null)
+            {
+                // suppresssion des éléments qui ne sont pas ceux de base
+                gridModules.Children.OfType<Border>().ToList().ForEach(child => gridModules.Children.Remove(child));
+
+
+                await this.modulesVM.LoadModulesBySemester(semesterSelect.Id);
+                this.modules = this.modulesVM.Modules;
+
+                int decalage = 5;
+
+                foreach (var module in this.modules)
                 {
-                    // suppresssion des éléments qui ne sont pas ceux de base
-                    gridModules.Children.OfType<Border>().ToList().ForEach(child => gridModules.Children.Remove(child));
 
 
-                    await this.modulesVM.LoadModulesBySemester(semesterSelect.Id);
-                    this.modules = this.modulesVM.Modules;
+                    // prend en compte n° de colonnes pour les semaines
+                    int gridColumnBegin = module.WeekBegin - 35;
+                    int gridColumnEnd = module.WeekEnd - 35;
 
-                    foreach (var module in this.modules)
-                        {
-                            // prend en compte n° de colonnes pour les semaines
-                            int gridColumnBegin = module.WeekBegin - 35; 
-                            int gridColumnEnd = module.WeekEnd - 35;
+                    // Créé un rectangle et texte pour le module
+                    Border moduleRectangle = new Border
+                    {
+                        Background = new SolidColorBrush(Colors.LightBlue),
+                        BorderBrush = new SolidColorBrush(Colors.Black),
+                        BorderThickness = new Thickness(1),
+                        CornerRadius = new CornerRadius(5),
+                        Height = 40,
+                        Margin = new Thickness(35, decalage, 35, 0),
+                        VerticalAlignment = VerticalAlignment.Top
 
-                            // Créé un rectangle et texte pour le module
-                            Border moduleRectangle = new Border
-                            {
-                                Background = new SolidColorBrush(Colors.LightBlue),
-                                BorderBrush = new SolidColorBrush(Colors.Black),
-                                BorderThickness = new Thickness(1),
-                                CornerRadius = new CornerRadius(5),
-                                Height = 40,
-                                Margin = new Thickness(35)
-                            };
+                    };
 
-                            TextBlock textBlock = new TextBlock
-                            {
-                                Text = module.Name,
-                                HorizontalAlignment = HorizontalAlignment.Center,
-                                VerticalAlignment = VerticalAlignment.Center,
-                                FontSize = 16,
-                                FontFamily = new FontFamily("OpenSauceOne")
-                            };
+                    TextBlock textBlock = new TextBlock
+                    {
+                        Text = module.Name,
+                        HorizontalAlignment = HorizontalAlignment.Center,
+                        VerticalAlignment = VerticalAlignment.Center,
+                        FontSize = 16,
+                        FontFamily = new FontFamily("OpenSauceOne")
+                    };
 
-                            moduleRectangle.Child = textBlock;
+                    moduleRectangle.Child = textBlock;
 
-                            Grid.SetColumn(moduleRectangle, gridColumnBegin);
-                            Grid.SetColumnSpan(moduleRectangle, gridColumnEnd - gridColumnBegin + 1);
-                            Grid.SetRow(moduleRectangle, 1); 
+                    Grid.SetColumn(moduleRectangle, gridColumnBegin);
+                    Grid.SetColumnSpan(moduleRectangle, gridColumnEnd - gridColumnBegin + 1);
+                    Grid.SetRow(moduleRectangle, 1);
 
-                            gridModules.Children.Add(moduleRectangle);
-                    
+                    gridModules.Children.Add(moduleRectangle);
+                    decalage += 60;
                 }
             }
-
-
+                    
         }
-
-
-
 
         private void OpenParametresPage(object sender, RoutedEventArgs e)
         {
@@ -118,6 +121,31 @@ namespace IHM
             LoginWindow loginWindow = new LoginWindow();
             loginWindow.Show();
             this.Close();
+        }
+
+        private void AttributionModuleWindow(object sender, RoutedEventArgs e)
+        {
+            
+        }
+
+        private void AttributionProfilTypeWindow(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void BilanAlertWindow(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void PlacerModuleWindow(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void EditModuleWindow(object sender, RoutedEventArgs e)
+        {
+
         }
 
         /// <summary>

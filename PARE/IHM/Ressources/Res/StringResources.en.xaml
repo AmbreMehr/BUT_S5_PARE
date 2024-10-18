@@ -12,6 +12,11 @@
 
     <!--MainWindow-->
     <system:String x:Key="TitreMainWindow">Distribution of modules</system:String>
+    <system:String x:Key="BtnAttributionModule">Module assignment</system:String>
+    <system:String x:Key="BtnAttributionProfilType">Attribution of typical profile</system:String>
+    <system:String x:Key="BtnBilanAlertes">Alerts report</system:String>
+    <system:String x:Key="BtnPlacerModules">Place the modules</system:String>
+    <system:String x:Key="BtnEditerModules">Edit modules</system:String>
 
     <!--Connexion-->
     <system:String x:Key="TitreFenetreConnexion">Connection</system:String>
