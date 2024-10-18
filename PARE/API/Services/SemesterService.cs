@@ -20,6 +20,7 @@ namespace API.Services
         /// Renvoie tous les Semestres
         /// </summary>
         /// <returns>Liste de Semester</returns>
+        /// <author>AmbreMehr</author>
         public IEnumerable<Semester> GetAll()
         {
             return this.semesterDao.ListAll();

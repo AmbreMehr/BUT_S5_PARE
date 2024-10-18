@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace Network
 {
+    /// <author>AmbreMehr</author>
     public class NetworkParameters
     {
         private string apiUrl;

@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace Network
 {
+    /// <author>AmbreMehr</author>
     public class NoConfigurationException : Exception
     {
         public NoConfigurationException(string configFileName) : base("There is no configuration in " + configFileName + ".\nPlease complete the configuration file.") { }

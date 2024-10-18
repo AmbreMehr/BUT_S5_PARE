@@ -10,6 +10,7 @@ namespace Network
 {
     public class ModuleNetwork : IModuleNetwork
     {
+        /// <author>AmbreMehr</author>
         public async Task<Module[]> GetAllModules()
         {
             IEnumerable<Module> modules = new List<Module>();
@@ -30,6 +31,7 @@ namespace Network
             throw new NotImplementedException();
         }
 
+        /// <author>AmbreMehr</author>
         public async Task<Module[]> GetModuleBySemester(int semester)
         {
             IEnumerable<Module> modules = new List<Module>();
