@@ -15,6 +15,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Storage", "Storage\Storage.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Network", "Network\Network.csproj", "{43DE9EC1-8F6B-47ED-95AF-76DAB2A365AB}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NetworkTests", "NetworkTests\NetworkTests.csproj", "{5D795F15-1F2A-41FA-B828-23FEE5EAF3A9}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -45,6 +47,10 @@ Global
 		{43DE9EC1-8F6B-47ED-95AF-76DAB2A365AB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{43DE9EC1-8F6B-47ED-95AF-76DAB2A365AB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{43DE9EC1-8F6B-47ED-95AF-76DAB2A365AB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5D795F15-1F2A-41FA-B828-23FEE5EAF3A9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5D795F15-1F2A-41FA-B828-23FEE5EAF3A9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5D795F15-1F2A-41FA-B828-23FEE5EAF3A9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5D795F15-1F2A-41FA-B828-23FEE5EAF3A9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -13,6 +13,6 @@ namespace Network
         /// Async, renvoie tous les semestres
         /// </summary>
         /// <returns>Liste de Semester</returns>
-        Task<Semester[]> GetAll();
+        Task<Semester[]> GetAllSemesters();
     }
 }
