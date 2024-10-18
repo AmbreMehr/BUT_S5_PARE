@@ -12,13 +12,19 @@
     
     <!--MainWindow-->
     <system:String x:Key="TitreMainWindow">Répartition des modules</system:String>
+    <system:String x:Key="BtnAttributionModule">Attribution module</system:String>
+    <system:String x:Key="BtnAttributionProfilType">Attribution profil type</system:String>
+    <system:String x:Key="BtnBilanAlertes">Bilan des alertes</system:String>
+    <system:String x:Key="BtnPlacerModules">Placer les modules</system:String>
+    <system:String x:Key="BtnEditerModules">Editer les modules</system:String>
+
 
     <!--Connexion-->
     <system:String x:Key="TitreFenetreConnexion">Connexion</system:String>
     <system:String x:Key="TitreConnexion">Entrez vos informations de connexion</system:String>
     <system:String x:Key="LabelLogin">Nom d'utilisateur :</system:String>
     <system:String x:Key="LabelPassword">Mot de passe :</system:String>
-    <system:String x:Key="BtnLogin">Se Connecter</system:String>
+    <system:String x:Key="BtnLogin">Se connecter</system:String>
 
     <!--Parametre-->
     <system:String x:Key="TitreParam">Paramètres</system:String>
