@@ -20,5 +20,19 @@ namespace IHM
         {
             InitializeComponent();
         }
+
+        private void OpenParametresPage(object sender, RoutedEventArgs e)
+        {
+            SettingsWindows settingsWindows = new SettingsWindows();
+            settingsWindows.Show();
+            this.Close();
+        }
+
+        private void LogOut(object sender, RoutedEventArgs e)
+        {
+            LoginWindow loginWindow = new LoginWindow();
+            loginWindow.Show();
+            this.Close();
+        }
     }
 }

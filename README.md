@@ -19,3 +19,7 @@ PARE : Programme d'Aide à la Répartition des Enseignements
 Le client est fait en C# et WPF. 
 Le serveur est une API Rest faite en C# avec ASP.NET CORE.
 La base de données est en SQLite.
+Un SDK 8.0 est utilisé.
+Les packages installés sont :
+- Microsoft.Data.Sqlite
+- Microsoft.EntityFrameworkCore.Sqlite
