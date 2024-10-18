@@ -1,4 +1,7 @@
-﻿using System.Text;
+﻿using IHM_Model;
+using Model;
+using Network;
+using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -16,9 +19,16 @@ namespace IHM
     /// </summary>
     public partial class MainWindow : Window
     {
+        private Module module;
+        private SemesterVM semesterVM;
+        private ISemesterNetwork semesterNetwork;
         public MainWindow()
         {
             InitializeComponent();
+            this.module = new Module();
+            this.semesterNetwork = new SemesterNetwork();
+            this.semesterVM = new SemesterVM(semesterNetwork);
+            DataContext = this.semesterVM;
         }
 
         private void OpenParametresPage(object sender, RoutedEventArgs e)

@@ -37,6 +37,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\IHM-Model\IHM-Model.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Resource Include="Ressources\Fonts\OpenSauceOne-Black.ttf" />
     <Resource Include="Ressources\Fonts\OpenSauceOne-BlackItalic.ttf" />
     <Resource Include="Ressources\Fonts\OpenSauceOne-Bold.ttf" />
