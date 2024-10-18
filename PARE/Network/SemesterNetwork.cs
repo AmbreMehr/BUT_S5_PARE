@@ -10,6 +10,7 @@ namespace Network
 {
     public class SemesterNetwork : ISemesterNetwork
     {
+        /// <author>AmbreMehr</author>
         public async Task<Semester[]> GetAllSemesters()
         {
             IEnumerable<Semester> semesters = new List<Semester>();
