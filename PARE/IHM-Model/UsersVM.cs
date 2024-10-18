@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace IHM_Model
 {
-    internal class UsersVM
+    public class UsersVM : BaseVM
     {
     }
 }
