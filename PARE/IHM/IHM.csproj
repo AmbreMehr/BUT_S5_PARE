@@ -30,7 +30,9 @@
     <None Remove="Ressources\Picto\error.png" />
     <None Remove="Ressources\Picto\France.png" />
     <None Remove="Ressources\Picto\information.png" />
+    <None Remove="Ressources\Picto\left.png" />
     <None Remove="Ressources\Picto\logout.png" />
+    <None Remove="Ressources\Picto\right.png" />
     <None Remove="Ressources\Picto\settings.png" />
   </ItemGroup>
 
@@ -56,7 +58,9 @@
     <Resource Include="Ressources\Picto\error.png" />
     <Resource Include="Ressources\Picto\France.png" />
     <Resource Include="Ressources\Picto\information.png" />
+    <Resource Include="Ressources\Picto\left.png" />
     <Resource Include="Ressources\Picto\logout.png" />
+    <Resource Include="Ressources\Picto\right.png" />
     <Resource Include="Ressources\Picto\settings.png" />
   </ItemGroup>
 
