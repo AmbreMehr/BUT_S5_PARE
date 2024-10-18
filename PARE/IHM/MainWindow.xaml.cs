@@ -51,8 +51,9 @@ namespace IHM
         /// </summary>
         public async void GetModuleBySemester()
         {
-                // Recupere le semestre sélectionné
-                Semester semesterSelect = (Semester)semesterBox.SelectedItem;
+            // Recupere le semestre sélectionné
+            Semester semesterSelect = (Semester)semesterBox.SelectedItem;
+
 
             if (semesterSelect != null)
             {
@@ -63,8 +64,12 @@ namespace IHM
                 await this.modulesVM.LoadModulesBySemester(semesterSelect.Id);
                 this.modules = this.modulesVM.Modules;
 
+                int decalage = 5;
+
                 foreach (var module in this.modules)
                 {
+
+
                     // prend en compte n° de colonnes pour les semaines
                     int gridColumnBegin = module.WeekBegin - 35;
                     int gridColumnEnd = module.WeekEnd - 35;
@@ -77,7 +82,9 @@ namespace IHM
                         BorderThickness = new Thickness(1),
                         CornerRadius = new CornerRadius(5),
                         Height = 40,
-                        Margin = new Thickness(35)
+                        Margin = new Thickness(35, decalage, 35, 0),
+                        VerticalAlignment = VerticalAlignment.Top
+
                     };
 
                     TextBlock textBlock = new TextBlock
@@ -96,6 +103,7 @@ namespace IHM
                     Grid.SetRow(moduleRectangle, 1);
 
                     gridModules.Children.Add(moduleRectangle);
+                    decalage += 60;
                 }
             }
                     
