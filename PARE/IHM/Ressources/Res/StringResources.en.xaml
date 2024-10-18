@@ -10,6 +10,9 @@
     <system:String x:Key="BtnAnnuler">Cancel</system:String>
     <system:String x:Key="BtnModifier">Modify</system:String>
 
+    <!--MainWindow-->
+    <system:String x:Key="TitreMainWindow">Distribution of modules</system:String>
+
     <!--Connexion-->
     <system:String x:Key="TitreFenetreConnexion">Connection</system:String>
     <system:String x:Key="TitreConnexion">Type your login informations</system:String>
