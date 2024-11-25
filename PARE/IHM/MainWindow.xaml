@@ -34,7 +34,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="10*" />
-            <RowDefinition Height="200" />
+            <RowDefinition Height="300" />
         </Grid.RowDefinitions>
 
         <!-- Logo avec effet d'ombre -->
@@ -204,9 +204,7 @@
                 </Style>
             </Button.Style>
         </Button>
-
-        <local:PlaceModuleWindow x:Name="PlaceModuleWindowControl" Visibility="Collapsed" Grid.Row="2" />
-
+        
         <!-- Contenu de la page -->
         <Grid Grid.Column="1" Grid.Row="1">
             <Grid.RowDefinitions>
