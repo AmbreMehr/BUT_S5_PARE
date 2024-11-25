@@ -176,5 +176,14 @@ namespace Model
         {
             this.semester = semester;
         }
+
+        /// <summary>
+        /// Constructeur vide de module
+        /// </summary>
+        public Module()
+        {
+
+        }
+
     }
 }

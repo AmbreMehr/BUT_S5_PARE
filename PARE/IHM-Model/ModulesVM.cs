@@ -50,9 +50,9 @@ namespace IHM_Model
         /// Constructeur initialisant le tableau de modules.
         /// </summary>
         /// <author>Stéphane BASSET</author>
-        public ModulesVM(IModuleNetwork moduleNetwork) 
+        public ModulesVM() 
         {
-            this._moduleNetwork = moduleNetwork;
+            this._moduleNetwork = new ModuleNetwork();
             this._models = new ObservableCollection<Module>();
 
         }
@@ -96,6 +96,18 @@ namespace IHM_Model
             var modules = await GetModuleBySemester(idSemester);
             Modules = new ObservableCollection<Module>(modules);
 
+        }
+
+        /// <summary>
+        /// Récupère tout les modules
+        /// </summary>
+        /// <returns>tout les modules</returns>
+        /// <author>Lucas PRUNIER</author>
+        public async Task<ObservableCollection<Module>> GetAllModules()
+        {
+            var modules = await _moduleNetwork.GetAllModules();
+            Modules = new ObservableCollection<Module>(modules);
+            return Modules;
         }
 
 

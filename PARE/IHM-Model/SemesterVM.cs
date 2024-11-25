@@ -48,9 +48,9 @@ namespace IHM_Model
         /// <summary>
         /// Constructeur initialisant le tableau de semestres.
         /// </summary>
-        public SemesterVM(ISemesterNetwork semesterNetwork)
+        public SemesterVM()
         {
-            _semesterNetwork = semesterNetwork;
+            _semesterNetwork = new SemesterNetwork();
             _models = new Semester[0];
             LoadSemesters();
         }

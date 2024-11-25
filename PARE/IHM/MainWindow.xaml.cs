@@ -21,10 +21,7 @@ namespace IHM
     /// <author>Clotilde MALO</author>
     public partial class MainWindow : Window
     {
-        private Module module;
         private SemesterVM semesterVM;
-        private ISemesterNetwork semesterNetwork;
-        private IModuleNetwork moduleNetwork;
         private ModulesVM modulesVM;
         private ObservableCollection<Module> modules;
 
@@ -35,15 +32,11 @@ namespace IHM
         {
             InitializeComponent();
 
-            this.module = new Module();
-            this.semesterNetwork = new SemesterNetwork();
-            this.semesterVM = new SemesterVM(semesterNetwork);
-            this.moduleNetwork = new ModuleNetwork();
-            this.modulesVM = new ModulesVM(moduleNetwork);
+            this.semesterVM = new SemesterVM();
+            this.modulesVM = new ModulesVM();
             MainViewModel mainViewModel = new MainViewModel(this.modulesVM, this.semesterVM);
 
             DataContext = mainViewModel;
-
         }
 
         /// <summary>
@@ -62,11 +55,11 @@ namespace IHM
 
 
                 await this.modulesVM.LoadModulesBySemester(semesterSelect.Id);
-                this.modules = this.modulesVM.Modules;
+                
 
                 int decalage = 5;
 
-                foreach (var module in this.modules)
+                foreach (var module in this.modulesVM.Modules)
                 {
 
 
@@ -140,7 +133,7 @@ namespace IHM
 
         private void PlacerModuleWindow(object sender, RoutedEventArgs e)
         {
-
+            PlaceModuleWindowControl.Visibility = Visibility.Visible;
         }
 
         private void EditModuleWindow(object sender, RoutedEventArgs e)
