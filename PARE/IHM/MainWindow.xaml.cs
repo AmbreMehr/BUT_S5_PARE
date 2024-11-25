@@ -23,7 +23,6 @@ namespace IHM
     {
         private SemesterVM semesterVM;
         private ModulesVM modulesVM;
-        private ObservableCollection<Module> modules;
 
         /// <summary>
         /// Constructeur de la classe MainWindow : initialise les composants de la fenêtre principale
@@ -133,7 +132,8 @@ namespace IHM
 
         private void PlacerModuleWindow(object sender, RoutedEventArgs e)
         {
-            PlaceModuleWindowControl.Visibility = Visibility.Visible;
+            PlaceModuleWindow placeModuleWindow = new PlaceModuleWindow(this.semesterVM, this.modulesVM);
+            placeModuleWindow.Visibility = Visibility.Visible;
         }
 
         private void EditModuleWindow(object sender, RoutedEventArgs e)
@@ -148,7 +148,6 @@ namespace IHM
         /// <param name="e"></param>
         private void changedSelection(object sender, SelectionChangedEventArgs e)
         {
-
             GetModuleBySemester();
         }
     }
