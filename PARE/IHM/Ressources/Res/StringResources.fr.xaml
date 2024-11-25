@@ -9,6 +9,8 @@
     <system:String x:Key="BtnValider">Valider</system:String>
     <system:String x:Key="BtnAnnuler">Annuler</system:String>
     <system:String x:Key="BtnModifier">Modifier</system:String>
+    <system:String x:Key="MessageModif">Les modifications ont bien été enregistrées</system:String>
+    <system:String x:Key="Confirmation">Confirmation</system:String>
     
     <!--MainWindow-->
     <system:String x:Key="TitreMainWindow">Répartition des modules</system:String>
@@ -32,5 +34,14 @@
     <!--ToolTips-->
     <system:String x:Key="ToolTipPageParamètres">Paramètres</system:String>
     <system:String x:Key="ToolTipLogOut">Se déconnecter</system:String>
+    
+    <!--Edition des Modules-->
+    <system:String x:Key="TitreEditionModules">Edition des modules</system:String>
+    <system:String x:Key="ProgramModule">Au programme</system:String>
+    <system:String x:Key="AjoutEnseignant">Ajouter un enseignant</system:String>
+    <system:String x:Key="SupprimerEnseignant">Supprimer un enseignant</system:String>
+    <system:String x:Key="TD">TD</system:String>
+    <system:String x:Key="TP">TP</system:String>
+    <system:String x:Key="CM">CM</system:String>
     
 </ResourceDictionary>

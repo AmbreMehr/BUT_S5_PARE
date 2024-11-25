@@ -9,6 +9,8 @@
     <system:String x:Key="BtnValider">Submit</system:String>
     <system:String x:Key="BtnAnnuler">Cancel</system:String>
     <system:String x:Key="BtnModifier">Modify</system:String>
+    <system:String x:Key="MessageModif">The changes have been saved</system:String>
+    <system:String x:Key="Confirmation">Confirmation</system:String>
 
     <!--MainWindow-->
     <system:String x:Key="TitreMainWindow">Distribution of modules</system:String>
@@ -31,5 +33,14 @@
     <!--ToolTips-->
     <system:String x:Key="ToolTipPageParamètres">Parameters</system:String>
     <system:String x:Key="ToolTipLogOut">Log Out</system:String>
+
+    <!--Edition des Modules-->
+    <system:String x:Key="TitreEditionModules">Module Edition</system:String>
+    <system:String x:Key="ProgramModule">Program</system:String>
+    <system:String x:Key="AjoutEnseignant">Add a teacher</system:String>
+    <system:String x:Key="SupprimerEnseignant">Delete a teacher</system:String>
+    <system:String x:Key="TD">TD</system:String>
+    <system:String x:Key="TP">TP</system:String>
+    <system:String x:Key="CM">CM</system:String>
 
 </ResourceDictionary>
