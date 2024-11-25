@@ -1,12 +1,60 @@
-﻿<Window x:Class="IHM.PlaceModuleWindow"
+﻿<UserControl x:Class="IHM.PlaceModuleWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:IHM"
         mc:Ignorable="d"
-        Title="PlaceModuleWindow" Height="450" Width="800">
-    <Grid>
-        
+        Height="200" Width="800">
+
+    <UserControl.Background>
+        <SolidColorBrush Color="White" />
+    </UserControl.Background>
+
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <!-- Liste des modules -->
+        <ScrollViewer Grid.Row="0" VerticalScrollBarVisibility="Auto">
+            <ItemsControl x:Name="ModulesList">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Border BorderBrush="Gray" BorderThickness="1" Margin="5" Padding="10">
+                            <StackPanel>
+                                <!-- Nom du module -->
+                                <TextBlock Text="{Binding Nom}" FontSize="16" FontWeight="Bold" HorizontalAlignment="Center" Margin="5" />
+
+                                <!-- Informations des cours -->
+                                <Grid Margin="10">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="2*" />
+                                        <ColumnDefinition Width="2*" />
+                                        <ColumnDefinition Width="2*" />
+                                    </Grid.ColumnDefinitions>
+                                    <TextBlock Text="TD" Grid.Column="0" HorizontalAlignment="Center" />
+                                    <TextBlock Text="TP" Grid.Column="1" HorizontalAlignment="Center" />
+                                    <TextBlock Text="CM" Grid.Column="2" HorizontalAlignment="Center" />
+                                </Grid>
+
+                                <!-- Champs pour les semaines -->
+                                <TextBlock Text="Semaine de dÃ©but" FontWeight="Bold" />
+                                <TextBox Height="25" Text="{Binding SemaineDebut}" />
+                                <TextBlock Text="Semaine de fin" FontWeight="Bold" />
+                                <TextBox Height="25" Text="{Binding SemaineFin}" />
+                            </StackPanel>
+                        </Border>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </ScrollViewer>
+
+        <!-- Boutons -->
+        <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center" Margin="10">
+            <Button Content="Annuler" Width="100" Margin="5" />
+            <Button Content="Confirmer" Width="100" Margin="5" />
+        </StackPanel>
     </Grid>
-</Window>
+</UserControl>
