@@ -11,7 +11,7 @@
         Title="LoadingWindow" Height="500" Width="700">
 
     <Window.Background>
-        <SolidColorBrush Color="#bfd7eb" />
+        <SolidColorBrush Color="White" />
     </Window.Background>
 
     <Window.Resources>

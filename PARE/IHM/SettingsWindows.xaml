@@ -197,7 +197,7 @@
 
 
     <Window.Background>
-        <SolidColorBrush Color="#bfd7eb" />
+        <SolidColorBrush Color="White" />
     </Window.Background>
 
     <Grid>

@@ -13,7 +13,7 @@
         WindowState="Maximized">
 
     <Window.Background>
-        <SolidColorBrush Color="#bfd7eb" />
+        <SolidColorBrush Color="White" />
     </Window.Background> 
 
     <Window.Resources>
