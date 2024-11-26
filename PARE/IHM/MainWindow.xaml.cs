@@ -1,4 +1,5 @@
 ﻿using IHM_Model;
+using Model;
 using Network;
 using System.Collections.ObjectModel;
 using System.Text;
@@ -120,7 +121,9 @@ namespace IHM
 
         private void PlacerModuleWindow(object sender, RoutedEventArgs e)
         {
-
+            PlaceModuleWindow placeModuleWindow = new PlaceModuleWindow(semestersVM, modulesVM);
+            Grid.SetRow(placeModuleWindow, 2);
+            grid.Children.Add(placeModuleWindow);
         }
 
         private void EditModuleWindow(object sender, RoutedEventArgs e)

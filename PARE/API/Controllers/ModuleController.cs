@@ -15,7 +15,7 @@ namespace API.Controllers
         /// </summary>
         /// <param name="module">Module à mettre à jour</param>
         /// <returns>HTTP Code</returns>
-        [HttpPost("update", Name = "UpdateModule")]
+        [HttpPut("UpdateModule", Name = "UpdateModule")]
         public IActionResult UpdateModule(Module module)
         {
             // Appeler le service pour mettre à jour le module

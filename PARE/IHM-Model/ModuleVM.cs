@@ -1,4 +1,5 @@
 ﻿using Model;
+using Network;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -15,6 +16,7 @@ namespace IHM_Model
     public class ModuleVM : BaseVM
     {
         private Module model;
+        private IModuleNetwork moduleNetwork;
 
         public string Name
         {
@@ -54,7 +56,7 @@ namespace IHM_Model
 
         public async Task UpdateModule()
         {
-
+            await moduleNetwork.UpdateModule(model);
         }
 
         /// <summary>
@@ -64,6 +66,7 @@ namespace IHM_Model
         public ModuleVM(Module module)
         {
             this.model = module;
+            this.moduleNetwork = new ModuleNetwork();
         }
 
         /// <summary>
@@ -72,6 +75,7 @@ namespace IHM_Model
         public ModuleVM()
         {
             model = new Module();
+            moduleNetwork = new ModuleNetwork();
         }
     }
 }
