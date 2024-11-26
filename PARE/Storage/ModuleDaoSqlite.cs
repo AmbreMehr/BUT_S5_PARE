@@ -43,6 +43,7 @@ namespace Storage
                                ", m.idSemester" +
                                ", nameSemester" +
                                ", numberGroupTp" +
+                               ", m.supervisor" +
                                " FROM Modules AS m" +
                                " LEFT JOIN Semester AS s ON m.idSemester = s.idSemester;";
             using (var reader = cmd.ExecuteReader())
@@ -104,6 +105,7 @@ namespace Storage
                                ", m.idSemester" +
                                ", nameSemester" +
                                ", numberGroupTp" +
+                               ", m.supervisor" +
                                " FROM Modules AS m" +
                                " LEFT JOIN Semester AS s ON m.idSemester = s.idSemester" +
                                " WHERE m.idSemester = @semesterId;";
@@ -132,6 +134,10 @@ namespace Storage
             module.WeekEnd = Convert.ToInt32(reader["weekEnd"]);
             ISemesterDao semesterDao = new SemesterDaoSqlite();
             module.Semester = semesterDao.Reader2Semester(reader);
+            IUserDao userDao = new UserDaoSqlite();
+            if (reader["supervisor"] != DBNull.Value)
+                module.Supervisor = userDao.Read(Convert.ToInt32(reader["supervisor"]));
+
             return module;
 
         }
