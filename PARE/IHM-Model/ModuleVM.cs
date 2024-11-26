@@ -43,6 +43,22 @@ namespace IHM_Model
             set => model.WeekEnd = value;
         }
 
+        public int HoursTd
+        {
+            get => model.HoursTd;
+            set => model.HoursTd = value;
+        }
+        public int HoursTp
+        {
+            get => model.HoursTp;
+            set => model.HoursTp = value;
+        }
+        public int HoursCM
+        {
+            get => model.HoursCM;
+            set => model.HoursCM = value;
+        }
+
         public UserVM Supervisor
         {
             get => new UserVM(model.Supervisor);
