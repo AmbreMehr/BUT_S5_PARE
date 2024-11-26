@@ -21,7 +21,7 @@ namespace IHM
     /// <summary>
     /// Logique d'interaction pour PlaceModuleWindow.xaml
     /// </summary>
-    public partial class PlaceModuleWindow : Window
+    public partial class PlaceModuleWindow : UserControl
     {
         private SemesterVM semesterVM;
         private ModulesVM modulesVM;
@@ -75,3 +75,4 @@ namespace IHM
         }
     }
 }
+  

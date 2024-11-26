@@ -52,16 +52,12 @@ namespace IHM
                 // suppresssion des éléments qui ne sont pas ceux de base
                 gridModules.Children.OfType<Border>().ToList().ForEach(child => gridModules.Children.Remove(child));
 
-
                 await this.modulesVM.LoadModulesBySemester(semesterSelect.Id);
-                
 
                 int decalage = 5;
 
                 foreach (var module in this.modulesVM.Modules)
                 {
-
-
                     // prend en compte n° de colonnes pour les semaines
                     int gridColumnBegin = module.WeekBegin - 35;
                     int gridColumnEnd = module.WeekEnd - 35;
@@ -132,8 +128,9 @@ namespace IHM
 
         private void PlacerModuleWindow(object sender, RoutedEventArgs e)
         {
-            PlaceModuleWindow placeModuleWindow = new PlaceModuleWindow(this.semesterVM, this.modulesVM);
-            placeModuleWindow.Visibility = Visibility.Visible;
+            PlaceModuleWindow placeModuleWindow = new PlaceModuleWindow(semesterVM,modulesVM);
+            Grid.SetRow(placeModuleWindow, 2);
+            grid.Children.Add(placeModuleWindow);
         }
 
         private void EditModuleWindow(object sender, RoutedEventArgs e)

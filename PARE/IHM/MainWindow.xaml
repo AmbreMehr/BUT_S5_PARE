@@ -30,11 +30,11 @@
 
     </Window.Resources>
 
-    <Grid>
+    <Grid x:Name="grid">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="10*" />
-            <RowDefinition Height="300" />
+            <RowDefinition Height="260" />
         </Grid.RowDefinitions>
 
         <!-- Logo avec effet d'ombre -->
@@ -204,7 +204,7 @@
                 </Style>
             </Button.Style>
         </Button>
-        
+
         <!-- Contenu de la page -->
         <Grid Grid.Column="1" Grid.Row="1">
             <Grid.RowDefinitions>
@@ -221,139 +221,128 @@
                       SelectedItem="{Binding SelectedSemester}"
                       DisplayMemberPath="Name" SelectionChanged="changedSelection"/>
 
+            <ScrollViewer Grid.Row="1" Grid.Column="1" VerticalScrollBarVisibility="Auto">
+                <Grid Grid.Row="1" Grid.Column="1" DataContext="{Binding ModulesVM}" x:Name="gridModules">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
 
-            <Grid Grid.Row="1" Grid.Column="1" DataContext="{Binding ModulesVM}" x:Name="gridModules">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="70"/>
+                        <!-- Entête du calendrier -->
+                        <RowDefinition Height="*"/>
+                        <!-- Lignes du calendrier -->
+                    </Grid.RowDefinitions>
 
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="70"/>
-                    <!-- Entête du calendrier -->
-                    <RowDefinition Height="*"/>
-                    <!-- Lignes du calendrier -->
-                </Grid.RowDefinitions>
-
-                <!-- colonnes du calendrier -->
-
-
-                <Label Grid.Column="1" Grid.Row="0" Content="36" HorizontalAlignment="Center" VerticalAlignment="Top" FontFamily="{StaticResource OpenSauceOne}" FontSize="30"/>
-                <Line Grid.Column="1" Grid.Row="1" HorizontalAlignment="Center"
+                    <!-- colonnes du calendrier -->
+                    <Label Grid.Column="1" Grid.Row="0" Content="36" HorizontalAlignment="Center" VerticalAlignment="Top" FontFamily="{StaticResource OpenSauceOne}" FontSize="30"/>
+                    <Line Grid.Column="1" Grid.Row="1" HorizontalAlignment="Center"
                 X1="7" Y1="10"
                 X2="7" Y2="600"
                 Stroke="Black"
                 StrokeThickness="4" StrokeDashArray="1,2" />
 
-                <Label Grid.Column="2" Grid.Row="0" Content="37" HorizontalAlignment="Center" VerticalAlignment="Top" FontFamily="{StaticResource OpenSauceOne}" FontSize="30"/>
-                <Line Grid.Column="2" Grid.Row="1" HorizontalAlignment="Center"
+                    <Label Grid.Column="2" Grid.Row="0" Content="37" HorizontalAlignment="Center" VerticalAlignment="Top" FontFamily="{StaticResource OpenSauceOne}" FontSize="30"/>
+                    <Line Grid.Column="2" Grid.Row="1" HorizontalAlignment="Center"
                 X1="7" Y1="10"
                 X2="7" Y2="600"
                 Stroke="Black"
                 StrokeThickness="4" StrokeDashArray="1,2" />
 
-                <Label Grid.Column="3" Grid.Row="0" Content="38" HorizontalAlignment="Center" VerticalAlignment="Top" FontFamily="{StaticResource OpenSauceOne}" FontSize="30"/>
-                <Line Grid.Column="3" Grid.Row="1" HorizontalAlignment="Center"
+                    <Label Grid.Column="3" Grid.Row="0" Content="38" HorizontalAlignment="Center" VerticalAlignment="Top" FontFamily="{StaticResource OpenSauceOne}" FontSize="30"/>
+                    <Line Grid.Column="3" Grid.Row="1" HorizontalAlignment="Center"
                 X1="7" Y1="10"
                 X2="7" Y2="600"
                 Stroke="Black"
                 StrokeThickness="4" StrokeDashArray="1,2" />
 
-                <Label Grid.Column="4" Grid.Row="0" Content="39" HorizontalAlignment="Center" VerticalAlignment="Top" FontFamily="{StaticResource OpenSauceOne}" FontSize="30"/>
-                <Line Grid.Column="4" Grid.Row="1" HorizontalAlignment="Center"
+                    <Label Grid.Column="4" Grid.Row="0" Content="39" HorizontalAlignment="Center" VerticalAlignment="Top" FontFamily="{StaticResource OpenSauceOne}" FontSize="30"/>
+                    <Line Grid.Column="4" Grid.Row="1" HorizontalAlignment="Center"
                 X1="7" Y1="10"
                 X2="7" Y2="600"
                 Stroke="Black"
                 StrokeThickness="4" StrokeDashArray="1,2" />
 
-                <Label Grid.Column="5" Grid.Row="0" Content="40" HorizontalAlignment="Center" VerticalAlignment="Top" FontFamily="{StaticResource OpenSauceOne}" FontSize="30"/>
-                <Line Grid.Column="5" Grid.Row="1" HorizontalAlignment="Center"
+                    <Label Grid.Column="5" Grid.Row="0" Content="40" HorizontalAlignment="Center" VerticalAlignment="Top" FontFamily="{StaticResource OpenSauceOne}" FontSize="30"/>
+                    <Line Grid.Column="5" Grid.Row="1" HorizontalAlignment="Center"
                 X1="7" Y1="10"
                 X2="7" Y2="600"
                 Stroke="Black"
                 StrokeThickness="4" StrokeDashArray="1,2" />
 
-                <Label Grid.Column="6" Grid.Row="0" Content="41" HorizontalAlignment="Center" VerticalAlignment="Top" FontFamily="{StaticResource OpenSauceOne}" FontSize="30"/>
-                <Line Grid.Column="6" Grid.Row="1" HorizontalAlignment="Center"
+                    <Label Grid.Column="6" Grid.Row="0" Content="41" HorizontalAlignment="Center" VerticalAlignment="Top" FontFamily="{StaticResource OpenSauceOne}" FontSize="30"/>
+                    <Line Grid.Column="6" Grid.Row="1" HorizontalAlignment="Center"
                 X1="7" Y1="10"
                 X2="7" Y2="600"
                 Stroke="Black"
                 StrokeThickness="4" StrokeDashArray="1,2" />
 
-                <Label Grid.Column="7" Grid.Row="0" Content="42" HorizontalAlignment="Center" VerticalAlignment="Top" FontFamily="{StaticResource OpenSauceOne}" FontSize="30"/>
-                <Line Grid.Column="7" Grid.Row="1" HorizontalAlignment="Center"
+                    <Label Grid.Column="7" Grid.Row="0" Content="42" HorizontalAlignment="Center" VerticalAlignment="Top" FontFamily="{StaticResource OpenSauceOne}" FontSize="30"/>
+                    <Line Grid.Column="7" Grid.Row="1" HorizontalAlignment="Center"
                 X1="7" Y1="10"
                 X2="7" Y2="600"
                 Stroke="Black"
                 StrokeThickness="4" StrokeDashArray="1,2" />
 
-                <Label Grid.Column="8" Grid.Row="0" Content="43" HorizontalAlignment="Center" VerticalAlignment="Top" FontFamily="{StaticResource OpenSauceOne}" FontSize="30"/>
-                <Line Grid.Column="8" Grid.Row="1" HorizontalAlignment="Center"
+                    <Label Grid.Column="8" Grid.Row="0" Content="43" HorizontalAlignment="Center" VerticalAlignment="Top" FontFamily="{StaticResource OpenSauceOne}" FontSize="30"/>
+                    <Line Grid.Column="8" Grid.Row="1" HorizontalAlignment="Center"
                 X1="7" Y1="10"
                 X2="7" Y2="600"
                 Stroke="Black"
                 StrokeThickness="4" StrokeDashArray="1,2" />
 
-                <Label Grid.Column="9" Grid.Row="0" Content="44" HorizontalAlignment="Center" VerticalAlignment="Top" FontFamily="{StaticResource OpenSauceOne}" FontSize="30"/>
-                <Line Grid.Column="9" Grid.Row="1" HorizontalAlignment="Center"
+                    <Label Grid.Column="9" Grid.Row="0" Content="44" HorizontalAlignment="Center" VerticalAlignment="Top" FontFamily="{StaticResource OpenSauceOne}" FontSize="30"/>
+                    <Line Grid.Column="9" Grid.Row="1" HorizontalAlignment="Center"
                 X1="7" Y1="10"
                 X2="7" Y2="600"
                 Stroke="Black"
                 StrokeThickness="4" StrokeDashArray="1,2" />
 
-                <Label Grid.Column="10" Grid.Row="0" Content="45" HorizontalAlignment="Center" VerticalAlignment="Top" FontFamily="{StaticResource OpenSauceOne}" FontSize="30"/>
-                <Line Grid.Column="10" Grid.Row="1" HorizontalAlignment="Center"
+                    <Label Grid.Column="10" Grid.Row="0" Content="45" HorizontalAlignment="Center" VerticalAlignment="Top" FontFamily="{StaticResource OpenSauceOne}" FontSize="30"/>
+                    <Line Grid.Column="10" Grid.Row="1" HorizontalAlignment="Center"
                 X1="7" Y1="10"
                 X2="7" Y2="600"
                 Stroke="Black"
                 StrokeThickness="4" StrokeDashArray="1,2" />
 
-                <Label Grid.Column="11" Grid.Row="0" Content="46" HorizontalAlignment="Center" VerticalAlignment="Top" FontFamily="{StaticResource OpenSauceOne}" FontSize="30"/>
-                <Line Grid.Column="11" Grid.Row="1" HorizontalAlignment="Center"
+                    <Label Grid.Column="11" Grid.Row="0" Content="46" HorizontalAlignment="Center" VerticalAlignment="Top" FontFamily="{StaticResource OpenSauceOne}" FontSize="30"/>
+                    <Line Grid.Column="11" Grid.Row="1" HorizontalAlignment="Center"
                 X1="7" Y1="10"
                 X2="7" Y2="600"
                 Stroke="Black"
                 StrokeThickness="4" StrokeDashArray="1,2" />
 
-                <Label Grid.Column="12" Grid.Row="0" Content="47" HorizontalAlignment="Center" VerticalAlignment="Top" FontFamily="{StaticResource OpenSauceOne}" FontSize="30"/>
-                <Line Grid.Column="12" Grid.Row="1" HorizontalAlignment="Center"
+                    <Label Grid.Column="12" Grid.Row="0" Content="47" HorizontalAlignment="Center" VerticalAlignment="Top" FontFamily="{StaticResource OpenSauceOne}" FontSize="30"/>
+                    <Line Grid.Column="12" Grid.Row="1" HorizontalAlignment="Center"
                 X1="7" Y1="10"
                 X2="7" Y2="600"
                 Stroke="Black"
                 StrokeThickness="4" StrokeDashArray="1,2" />
 
-                <Label Grid.Column="13" Grid.Row="0" Content="48" HorizontalAlignment="Center" VerticalAlignment="Top" FontFamily="{StaticResource OpenSauceOne}" FontSize="30"/>
-                <Line Grid.Column="13" Grid.Row="1" HorizontalAlignment="Center"
+                    <Label Grid.Column="13" Grid.Row="0" Content="48" HorizontalAlignment="Center" VerticalAlignment="Top" FontFamily="{StaticResource OpenSauceOne}" FontSize="30"/>
+                    <Line Grid.Column="13" Grid.Row="1" HorizontalAlignment="Center"
                 X1="7" Y1="10"
                 X2="7" Y2="600"
                 Stroke="Black"
                 StrokeThickness="4" StrokeDashArray="1,2" />
-
-
-                <!-- TODO : mettre des grids.row dynamiquement à chaque fois que l'on recupere un module et les placer au milieu des grid columns correspondant au centre -->
-
-                <!-- Boutons vers autre fenêtre dans la grid row 2 -->
-
-
-            </Grid>
-
+                    <!-- TODO : mettre des grids.row dynamiquement à chaque fois que l'on recupere un module et les placer au milieu des grid columns correspondant au centre -->
+                    <!-- Boutons vers autre fenêtre dans la grid row 2 -->
+                </Grid>
+            </ScrollViewer>
         </Grid>
-
     </Grid>
-
-
-
 </Window>
