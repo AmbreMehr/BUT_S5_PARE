@@ -59,7 +59,33 @@ namespace Storage
 
         public void Update(Module module)
         {
-            throw new NotImplementedException();
+            List<Module> modules = new List<Module>();
+
+            Console.WriteLine($"Updating Module: {module.Id}, {module.WeekBegin}, {module.WeekEnd}");
+
+
+            db.Connection.Open();
+            var cmd = db.Connection.CreateCommand();
+            cmd.CommandText = "UPDATE Modules " +
+                  "SET weekBegin = @weekBegin, " +
+                  "weekEnd = @weekEnd " +
+                  "WHERE idModule = @idModule;";
+
+            // Ajout des paramètres avec leurs valeurs
+            cmd.Parameters.AddWithValue("@weekBegin", module.WeekBegin);
+            cmd.Parameters.AddWithValue("@weekEnd", module.WeekEnd);
+            cmd.Parameters.AddWithValue("@idModule", module.Id);
+
+            // Exécuter la commande
+            int rowsAffected = cmd.ExecuteNonQuery();
+            db.Connection.Close();
+
+            // Vérification si aucune ligne n'a été mise à jour
+            if (rowsAffected == 0)
+            {
+                throw new InvalidOperationException($"No module found with id {module.Id}");
+            }
+
         }
 
         public Module[] GetAllBySemester(int semesterId)
