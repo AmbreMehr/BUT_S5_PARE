@@ -55,7 +55,7 @@ namespace IHM
 
             if (selectedSemester != null)
             {
-                await this.modulesVM.LoadModulesBySemester(selectedSemester.Id);
+                await this.modulesVM.GetModuleBySemester(selectedSemester.Id);
                 ModulesList.ItemsSource = this.modulesVM.Modules;
             }
             else
@@ -64,9 +64,27 @@ namespace IHM
             }
         }
 
-        private void ClickBtnValider(object sender, RoutedEventArgs e)
+        private async void ClickBtnValider(object sender, RoutedEventArgs e)
         {
-            this.Visibility = Visibility.Collapsed;
+            if (modulesVM.SelectedModule == null)
+            {
+                MessageBox.Show("Aucun module sélectionné.", "Erreur", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
+            }
+            try
+            {
+                // Envoyer les modifications au serveur via ModulesVM
+                await modulesVM.UpdateModule();
+
+                // Cacher la fenêtre après la validation
+                this.Visibility = Visibility.Collapsed;
+
+                MessageBox.Show("Les modifications ont été appliquées avec succès.", "Succès", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Erreur lors de la mise à jour : {ex.Message}", "Erreur", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
 
         private void ClickBtnAnnuler(object sender, RoutedEventArgs e)

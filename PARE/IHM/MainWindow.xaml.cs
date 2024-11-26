@@ -52,7 +52,7 @@ namespace IHM
                 // suppresssion des éléments qui ne sont pas ceux de base
                 gridModules.Children.OfType<Border>().ToList().ForEach(child => gridModules.Children.Remove(child));
 
-                await this.modulesVM.LoadModulesBySemester(semesterSelect.Id);
+                await this.modulesVM.GetModuleBySemester(semesterSelect.Id);
 
                 int decalage = 5;
 

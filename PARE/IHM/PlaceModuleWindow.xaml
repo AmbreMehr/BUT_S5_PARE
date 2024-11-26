@@ -46,10 +46,10 @@
 
                                 <!-- Champs pour les semaines -->
                                 <TextBlock Text="Semaine de début" FontWeight="Bold" />
-                                <TextBox Height="25" Text="{Binding WeekBegin, UpdateSourceTrigger=PropertyChanged}" />
+                                <TextBox Height="25" Text="{Binding WeekBegin, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
 
                                 <TextBlock Text="Semaine de fin" FontWeight="Bold" />
-                                <TextBox Height="25" Text="{Binding WeekEnd, UpdateSourceTrigger=PropertyChanged}" />
+                                <TextBox Height="25" Text="{Binding WeekEnd, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                             </StackPanel>
                         </Border>
                     </DataTemplate>
