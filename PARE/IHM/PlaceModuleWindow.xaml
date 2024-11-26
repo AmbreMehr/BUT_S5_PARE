@@ -19,7 +19,7 @@
 
         <!-- Liste des modules -->
         <ScrollViewer Grid.Row="0" VerticalScrollBarVisibility="Auto">
-            <ItemsControl x:Name="ModulesList">
+            <ListBox x:Name="ModulesList" ItemsSource="{Binding Modules}" SelectedItem="{Binding SelectedModule, Mode=TwoWay}">
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
                         <Border BorderBrush="Gray" BorderThickness="1" Margin="5" Padding="10">
@@ -54,7 +54,7 @@
                         </Border>
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
-            </ItemsControl>
+            </ListBox>
         </ScrollViewer>
 
         <!-- Boutons -->
