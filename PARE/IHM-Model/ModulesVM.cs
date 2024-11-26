@@ -50,13 +50,11 @@ namespace IHM_Model
         /// Constructeur initialisant le tableau de modules.
         /// </summary>
         /// <author>Stéphane BASSET</author>
-        public ModulesVM(IModuleNetwork moduleNetwork) 
+        public ModulesVM() 
         {
-            this._moduleNetwork = moduleNetwork;
+            this._moduleNetwork = new ModuleNetwork();
             this._models = new ObservableCollection<Module>();
-
         }
-
 
         /// <summary>
         /// Récupère le nombre d'heures pour une semaine donnée.
@@ -80,25 +78,45 @@ namespace IHM_Model
         /// <author>Stéphane BASSET</author>
         public async Task<ObservableCollection<Module>> GetModuleBySemester(int idSemester)
         {
-            var modules = await _moduleNetwork.GetModuleBySemester(idSemester);
-            Modules = new ObservableCollection<Module>(modules);
+            Modules = new ObservableCollection<Module>(await _moduleNetwork.GetModuleBySemester(idSemester));
             return Modules; 
-
         }
 
         /// <summary>
-        /// Fait l'appel pour récupérer les modules pour un semestre donné.
+        /// Récupère tout les modules
         /// </summary>
-        /// <param name="idSemester">id du semestre</param>
-        /// <author>Clotilde MALO</author>
-        public async Task LoadModulesBySemester(int idSemester)
+        /// <returns>tout les modules</returns>
+        /// <author>Lucas PRUNIER</author>
+        public async Task<ObservableCollection<Module>> GetAllModules()
         {
-            var modules = await GetModuleBySemester(idSemester);
-            Modules = new ObservableCollection<Module>(modules);
-
+            Modules = new ObservableCollection<Module>(await _moduleNetwork.GetAllModules());
+            return Modules;
         }
 
+        /// <summary>
+        /// Met à jour le module sélectionné via le réseau.
+        /// </summary>
+        /// <returns>Une tâche asynchrone.</returns>
+        /// <author>Lucas PRUNIER</author>
+        public async Task UpdateModule()
+        {
+            if (SelectedModule == null)
+            {
+                throw new InvalidOperationException("Aucun module sélectionné pour la mise à jour.");
+            }
 
-
+            try
+            {
+                // Appeler l'API pour mettre à jour le module
+                await _moduleNetwork.UpdateModule(SelectedModule);
+                Modules = new ObservableCollection<Module>(await _moduleNetwork.GetAllModules());
+                NotifyChange("SelectedModule");
+            }
+            catch (Exception ex)
+            {
+                // Gérer les erreurs
+                throw new ApplicationException("Erreur lors de la mise à jour du module.", ex);
+            }
+        }
     }
 }

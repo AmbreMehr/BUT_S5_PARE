@@ -21,12 +21,8 @@ namespace IHM
     /// <author>Clotilde MALO</author>
     public partial class MainWindow : Window
     {
-        private Module module;
         private SemesterVM semesterVM;
-        private ISemesterNetwork semesterNetwork;
-        private IModuleNetwork moduleNetwork;
         private ModulesVM modulesVM;
-        private ObservableCollection<Module> modules;
 
         /// <summary>
         /// Constructeur de la classe MainWindow : initialise les composants de la fenêtre principale
@@ -35,15 +31,11 @@ namespace IHM
         {
             InitializeComponent();
 
-            this.module = new Module();
-            this.semesterNetwork = new SemesterNetwork();
-            this.semesterVM = new SemesterVM(semesterNetwork);
-            this.moduleNetwork = new ModuleNetwork();
-            this.modulesVM = new ModulesVM(moduleNetwork);
+            this.semesterVM = new SemesterVM();
+            this.modulesVM = new ModulesVM();
             MainViewModel mainViewModel = new MainViewModel(this.modulesVM, this.semesterVM);
 
             DataContext = mainViewModel;
-
         }
 
         /// <summary>
@@ -60,16 +52,12 @@ namespace IHM
                 // suppresssion des éléments qui ne sont pas ceux de base
                 gridModules.Children.OfType<Border>().ToList().ForEach(child => gridModules.Children.Remove(child));
 
-
-                await this.modulesVM.LoadModulesBySemester(semesterSelect.Id);
-                this.modules = this.modulesVM.Modules;
+                await this.modulesVM.GetModuleBySemester(semesterSelect.Id);
 
                 int decalage = 5;
 
-                foreach (var module in this.modules)
+                foreach (var module in this.modulesVM.Modules)
                 {
-
-
                     // prend en compte n° de colonnes pour les semaines
                     int gridColumnBegin = module.WeekBegin - 35;
                     int gridColumnEnd = module.WeekEnd - 35;
@@ -140,7 +128,9 @@ namespace IHM
 
         private void PlacerModuleWindow(object sender, RoutedEventArgs e)
         {
-
+            PlaceModuleWindow placeModuleWindow = new PlaceModuleWindow(semesterVM,modulesVM);
+            Grid.SetRow(placeModuleWindow, 2);
+            grid.Children.Add(placeModuleWindow);
         }
 
         private void EditModuleWindow(object sender, RoutedEventArgs e)
@@ -155,7 +145,6 @@ namespace IHM
         /// <param name="e"></param>
         private void changedSelection(object sender, SelectionChangedEventArgs e)
         {
-
             GetModuleBySemester();
         }
     }

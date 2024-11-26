@@ -1,5 +1,9 @@
-﻿using System;
+﻿using IHM_Model;
+using Model;
+using Network;
+using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -17,11 +21,76 @@ namespace IHM
     /// <summary>
     /// Logique d'interaction pour PlaceModuleWindow.xaml
     /// </summary>
-    public partial class PlaceModuleWindow : Window
+    public partial class PlaceModuleWindow : UserControl
     {
-        public PlaceModuleWindow()
+        private SemesterVM semesterVM;
+        private ModulesVM modulesVM;
+
+        public PlaceModuleWindow(SemesterVM semesterVM, ModulesVM modulesVM)
         {
             InitializeComponent();
+            
+            this.semesterVM = semesterVM;
+            this.modulesVM = modulesVM;
+            
+            // S'abonner aux changements de semestre
+            this.semesterVM.PropertyChanged += SemesterVM_PropertyChanged;
+            
+            DataContext = new MainViewModel(this.modulesVM, this.semesterVM);
+            
+            UpdateModulesList();
+        }
+
+        private async void SemesterVM_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName == "SelectedSemester")
+            {
+                await UpdateModulesList();
+            }
+        }
+
+        private async Task UpdateModulesList()
+        {
+            Semester selectedSemester = semesterVM.SelectedSemester;
+
+            if (selectedSemester != null)
+            {
+                await this.modulesVM.GetModuleBySemester(selectedSemester.Id);
+                ModulesList.ItemsSource = this.modulesVM.Modules;
+            }
+            else
+            {
+                MessageBox.Show("Veuillez sélectionner un semestre avant de placer les modules.", "Erreur", MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
+        }
+
+        private async void ClickBtnValider(object sender, RoutedEventArgs e)
+        {
+            if (modulesVM.SelectedModule == null)
+            {
+                MessageBox.Show("Aucun module sélectionné.", "Erreur", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
+            }
+            try
+            {
+                // Envoyer les modifications au serveur via ModulesVM
+                await modulesVM.UpdateModule();
+
+                // Cacher la fenêtre après la validation
+                this.Visibility = Visibility.Collapsed;
+
+                MessageBox.Show("Les modifications ont été appliquées avec succès.", "Succès", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Erreur lors de la mise à jour : {ex.Message}", "Erreur", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
+        private void ClickBtnAnnuler(object sender, RoutedEventArgs e)
+        {
+            this.Visibility = Visibility.Collapsed;
         }
     }
 }
+  

@@ -14,7 +14,7 @@
 
     <Window.Background>
         <SolidColorBrush Color="White" />
-    </Window.Background> 
+    </Window.Background>
 
     <Window.Resources>
         <FontFamily x:Key="OpenSauceOne">/Ressources/Fonts/#Open Sauce One</FontFamily>
@@ -30,19 +30,15 @@
 
     </Window.Resources>
 
-    <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="Auto"/>
-            <ColumnDefinition Width="*"/>
-        </Grid.ColumnDefinitions>
+    <Grid x:Name="grid">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="10*" />
-            <RowDefinition Height="2*" />
+            <RowDefinition Height="260" />
         </Grid.RowDefinitions>
-        
+
         <!-- Logo avec effet d'ombre -->
-        <Image Source="Ressources/Img/logoIUT.png" Stretch="UniformToFill" Grid.Row="0" Grid.Column="0" Margin="10" Width="150" Height="150" />
+        <Image Source="Ressources/Img/logoIUT.png" Stretch="UniformToFill" Grid.Row="0" Grid.Column="0" Margin="10" Width="150" Height="150" HorizontalAlignment="Left"/>
 
         <TextBlock Text="{DynamicResource TitreMainWindow}" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="30" FontWeight="Bold" Foreground="#FF2B2B5A" Grid.Column="1" Grid.ColumnSpan="2" FontFamily="Open Sauce One" TextAlignment="Center"/>
 
@@ -96,10 +92,10 @@
             </Button>
 
         </StackPanel>
-        
+
         <!-- Boutons en bas de l'écran -->
-        
-        <Button Content="{DynamicResource BtnAttributionModule}" FontFamily="{StaticResource OpenSauceOne}" Grid.Row="2" Grid.Column="1" Foreground="#FFFFFF" Background="#FF3DA79D" Height="50" Width="225" HorizontalAlignment="Right" Margin="0,0,1100,0" Padding="10" FontSize="20" Click="AttributionModuleWindow">
+
+        <Button x:Name="BtnAttributionModule" Content="{DynamicResource BtnAttributionModule}" FontFamily="{StaticResource OpenSauceOne}" Grid.Row="2" Grid.Column="1" Foreground="#FFFFFF" Background="#FF3DA79D" Height="50" Width="225" HorizontalAlignment="Left" Margin="60,0,0,0" Padding="10" FontSize="20" Click="AttributionModuleWindow">
             <Button.Style>
                 <Style TargetType="{x:Type Button}">
                     <Setter Property="Template">
@@ -121,7 +117,7 @@
             </Button.Style>
         </Button>
 
-        <Button Content="{DynamicResource BtnAttributionProfilType}" Grid.Row="2" Grid.Column="1" Foreground="#FFFFFF" FontFamily="{StaticResource OpenSauceOne}" Background="#FF3DA79D" Height="50" Width="225" HorizontalAlignment="Right" Margin="0,0,830,0" Click="AttributionProfilTypeWindow" Padding="10" FontSize="15">
+        <Button x:Name="BtnAttributionProfilType" Content="{DynamicResource BtnAttributionProfilType}" Grid.Row="2" Grid.Column="1" Foreground="#FFFFFF" FontFamily="{StaticResource OpenSauceOne}" Background="#FF3DA79D" Height="50" Width="225" HorizontalAlignment="Left" Margin="350,0,0,0" Click="AttributionProfilTypeWindow" Padding="10" FontSize="15">
             <Button.Style>
                 <Style TargetType="{x:Type Button}">
                     <Setter Property="Template">
@@ -143,7 +139,7 @@
             </Button.Style>
         </Button>
 
-        <Button Content="{DynamicResource BtnBilanAlertes}" Grid.Row="2" Grid.Column="1" Foreground="#FFFFFF" FontFamily="{StaticResource OpenSauceOne}" Background="#FF3DA79D" Height="50" Width="225" HorizontalAlignment="Right" Margin="0,0,290,0" Padding="10" FontSize="20" Click="BilanAlertWindow">
+        <Button x:Name="BtnBilanAlertes" Content="{DynamicResource BtnBilanAlertes}" Grid.Row="2" Grid.Column="1" Foreground="#FFFFFF" FontFamily="{StaticResource OpenSauceOne}" Background="#FF3DA79D" Height="50" Width="225" HorizontalAlignment="Right" Margin="0,0,350,0" Padding="10" FontSize="20" Click="BilanAlertWindow">
             <Button.Style>
                 <Style TargetType="{x:Type Button}">
                     <Setter Property="Template">
@@ -165,7 +161,7 @@
             </Button.Style>
         </Button>
 
-        <Button Content="{DynamicResource BtnPlacerModules}" Grid.Row="2" Grid.Column="1" Foreground="#FFFFFF" FontFamily="{StaticResource OpenSauceOne}" Background="#FF3DA79D" Height="50" Width="225" HorizontalAlignment="Right" Margin="0,0,20,0" Padding="10" FontSize="20" Click="PlacerModuleWindow">
+        <Button x:Name="BtnPlacerModules" Content="{DynamicResource BtnPlacerModules}" Grid.Row="2" Grid.Column="1" Foreground="#FFFFFF" FontFamily="{StaticResource OpenSauceOne}" Background="#FF3DA79D" Height="50" Width="225" HorizontalAlignment="Right" Margin="0,0,60,0" Padding="10" FontSize="20" Click="PlacerModuleWindow">
             <Button.Style>
                 <Style TargetType="{x:Type Button}">
                     <Setter Property="Template">
@@ -187,7 +183,7 @@
             </Button.Style>
         </Button>
 
-        <Button Content="{DynamicResource BtnEditerModules}" Grid.Row="2" Grid.Column="1" Foreground="#FFFFFF" FontFamily="{StaticResource OpenSauceOne}" Background="#FF3DA79D" Height="50" Width="225" HorizontalAlignment="Right" Margin="0,0,560,0" Padding="10" FontSize="20" Click="EditModuleWindow">
+        <Button x:Name="BtnEditerModules" Content="{DynamicResource BtnEditerModules}" Grid.Row="2" Grid.Column="1" Foreground="#FFFFFF" FontFamily="{StaticResource OpenSauceOne}" Background="#FF3DA79D" Height="50" Width="225" HorizontalAlignment="Center" Margin="0,0,0,0" Padding="10" FontSize="20" Click="EditModuleWindow">
             <Button.Style>
                 <Style TargetType="{x:Type Button}">
                     <Setter Property="Template">
@@ -208,204 +204,145 @@
                 </Style>
             </Button.Style>
         </Button>
-
 
         <!-- Contenu de la page -->
         <Grid Grid.Column="1" Grid.Row="1">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
                 <!--- pour le sélecteur-->
-                <RowDefinition Height="*"/>
+                <RowDefinition/>
                 <!-- pour le calendrier-->
-                <RowDefinition Height="100"/>
+                <RowDefinition Height="Auto"/>
                 <!-- pour les boutons-->
             </Grid.RowDefinitions>
-
-
 
             <ComboBox DataContext="{Binding SemesterVM}" Grid.Row="0" x:Name="semesterBox" Grid.Column="1" Height="50" Width="250" Margin="10,10,10,10" HorizontalAlignment="Left" VerticalAlignment="Top" FontFamily="{StaticResource OpenSauceOne}" FontSize="20" 
                       ItemsSource="{Binding Semesters}"
                       SelectedItem="{Binding SelectedSemester}"
                       DisplayMemberPath="Name" SelectionChanged="changedSelection"/>
 
+            <ScrollViewer Grid.Row="1" Grid.Column="1" VerticalScrollBarVisibility="Auto">
+                <Grid Grid.Row="1" Grid.Column="1" DataContext="{Binding ModulesVM}" x:Name="gridModules">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
 
-            <Grid Grid.Row="1" Grid.Column="1" DataContext="{Binding ModulesVM}" x:Name="gridModules">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="70"/>
+                        <!-- Entête du calendrier -->
+                        <RowDefinition Height="*"/>
+                        <!-- Lignes du calendrier -->
+                    </Grid.RowDefinitions>
 
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="70"/>
-                    <!-- Entête du calendrier -->
-                    <RowDefinition Height="*"/>
-                    <!-- Lignes du calendrier -->
-                </Grid.RowDefinitions>
-
-                <!-- colonnes du calendrier -->
-                <Button Grid.Column="0" Foreground="#FFFFFF" Background="#FF3DA79D" Grid.Row="0"  x:Name="BtnLeft" Width="auto" Height="50" Margin="20 10 0 0" HorizontalAlignment="Center" VerticalAlignment="Top">
-                    <Image Source="Ressources/Picto/left.png" Stretch="Uniform" Margin="10" />
-                    <Button.Style>
-                        <Style TargetType="Button">
-                            <Setter Property="Template">
-                                <Setter.Value>
-                                    <ControlTemplate TargetType="Button">
-                                        <Border x:Name="border" CornerRadius="10" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="1" >
-                                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                                        </Border>
-                                        <ControlTemplate.Triggers>
-                                            <Trigger Property="IsMouseOver" Value="True">
-                                                <Setter TargetName="border" Property="Background" Value="#FF7dbfcf"/>
-                                                <Setter Property="Foreground" Value="#000000"/>
-                                            </Trigger>
-                                        </ControlTemplate.Triggers>
-                                    </ControlTemplate>
-                                </Setter.Value>
-                            </Setter>
-                        </Style>
-                    </Button.Style>
-                </Button>
-
-
-                <Label Grid.Column="1" Grid.Row="0" Content="36" HorizontalAlignment="Center" VerticalAlignment="Top" FontFamily="{StaticResource OpenSauceOne}" FontSize="30"/>
-                <Line Grid.Column="1" Grid.Row="1" HorizontalAlignment="Center"
+                    <!-- colonnes du calendrier -->
+                    <Label Grid.Column="1" Grid.Row="0" Content="36" HorizontalAlignment="Center" VerticalAlignment="Top" FontFamily="{StaticResource OpenSauceOne}" FontSize="30"/>
+                    <Line Grid.Column="1" Grid.Row="1" HorizontalAlignment="Center"
                 X1="7" Y1="10"
                 X2="7" Y2="600"
                 Stroke="Black"
                 StrokeThickness="4" StrokeDashArray="1,2" />
 
-                <Label Grid.Column="2" Grid.Row="0" Content="37" HorizontalAlignment="Center" VerticalAlignment="Top" FontFamily="{StaticResource OpenSauceOne}" FontSize="30"/>
-                <Line Grid.Column="2" Grid.Row="1" HorizontalAlignment="Center"
+                    <Label Grid.Column="2" Grid.Row="0" Content="37" HorizontalAlignment="Center" VerticalAlignment="Top" FontFamily="{StaticResource OpenSauceOne}" FontSize="30"/>
+                    <Line Grid.Column="2" Grid.Row="1" HorizontalAlignment="Center"
                 X1="7" Y1="10"
                 X2="7" Y2="600"
                 Stroke="Black"
                 StrokeThickness="4" StrokeDashArray="1,2" />
 
-                <Label Grid.Column="3" Grid.Row="0" Content="38" HorizontalAlignment="Center" VerticalAlignment="Top" FontFamily="{StaticResource OpenSauceOne}" FontSize="30"/>
-                <Line Grid.Column="3" Grid.Row="1" HorizontalAlignment="Center"
+                    <Label Grid.Column="3" Grid.Row="0" Content="38" HorizontalAlignment="Center" VerticalAlignment="Top" FontFamily="{StaticResource OpenSauceOne}" FontSize="30"/>
+                    <Line Grid.Column="3" Grid.Row="1" HorizontalAlignment="Center"
                 X1="7" Y1="10"
                 X2="7" Y2="600"
                 Stroke="Black"
                 StrokeThickness="4" StrokeDashArray="1,2" />
 
-                <Label Grid.Column="4" Grid.Row="0" Content="39" HorizontalAlignment="Center" VerticalAlignment="Top" FontFamily="{StaticResource OpenSauceOne}" FontSize="30"/>
-                <Line Grid.Column="4" Grid.Row="1" HorizontalAlignment="Center"
+                    <Label Grid.Column="4" Grid.Row="0" Content="39" HorizontalAlignment="Center" VerticalAlignment="Top" FontFamily="{StaticResource OpenSauceOne}" FontSize="30"/>
+                    <Line Grid.Column="4" Grid.Row="1" HorizontalAlignment="Center"
                 X1="7" Y1="10"
                 X2="7" Y2="600"
                 Stroke="Black"
                 StrokeThickness="4" StrokeDashArray="1,2" />
 
-                <Label Grid.Column="5" Grid.Row="0" Content="40" HorizontalAlignment="Center" VerticalAlignment="Top" FontFamily="{StaticResource OpenSauceOne}" FontSize="30"/>
-                <Line Grid.Column="5" Grid.Row="1" HorizontalAlignment="Center"
+                    <Label Grid.Column="5" Grid.Row="0" Content="40" HorizontalAlignment="Center" VerticalAlignment="Top" FontFamily="{StaticResource OpenSauceOne}" FontSize="30"/>
+                    <Line Grid.Column="5" Grid.Row="1" HorizontalAlignment="Center"
                 X1="7" Y1="10"
                 X2="7" Y2="600"
                 Stroke="Black"
                 StrokeThickness="4" StrokeDashArray="1,2" />
 
-                <Label Grid.Column="6" Grid.Row="0" Content="41" HorizontalAlignment="Center" VerticalAlignment="Top" FontFamily="{StaticResource OpenSauceOne}" FontSize="30"/>
-                <Line Grid.Column="6" Grid.Row="1" HorizontalAlignment="Center"
+                    <Label Grid.Column="6" Grid.Row="0" Content="41" HorizontalAlignment="Center" VerticalAlignment="Top" FontFamily="{StaticResource OpenSauceOne}" FontSize="30"/>
+                    <Line Grid.Column="6" Grid.Row="1" HorizontalAlignment="Center"
                 X1="7" Y1="10"
                 X2="7" Y2="600"
                 Stroke="Black"
                 StrokeThickness="4" StrokeDashArray="1,2" />
 
-                <Label Grid.Column="7" Grid.Row="0" Content="42" HorizontalAlignment="Center" VerticalAlignment="Top" FontFamily="{StaticResource OpenSauceOne}" FontSize="30"/>
-                <Line Grid.Column="7" Grid.Row="1" HorizontalAlignment="Center"
+                    <Label Grid.Column="7" Grid.Row="0" Content="42" HorizontalAlignment="Center" VerticalAlignment="Top" FontFamily="{StaticResource OpenSauceOne}" FontSize="30"/>
+                    <Line Grid.Column="7" Grid.Row="1" HorizontalAlignment="Center"
                 X1="7" Y1="10"
                 X2="7" Y2="600"
                 Stroke="Black"
                 StrokeThickness="4" StrokeDashArray="1,2" />
 
-                <Label Grid.Column="8" Grid.Row="0" Content="43" HorizontalAlignment="Center" VerticalAlignment="Top" FontFamily="{StaticResource OpenSauceOne}" FontSize="30"/>
-                <Line Grid.Column="8" Grid.Row="1" HorizontalAlignment="Center"
+                    <Label Grid.Column="8" Grid.Row="0" Content="43" HorizontalAlignment="Center" VerticalAlignment="Top" FontFamily="{StaticResource OpenSauceOne}" FontSize="30"/>
+                    <Line Grid.Column="8" Grid.Row="1" HorizontalAlignment="Center"
                 X1="7" Y1="10"
                 X2="7" Y2="600"
                 Stroke="Black"
                 StrokeThickness="4" StrokeDashArray="1,2" />
 
-                <Label Grid.Column="9" Grid.Row="0" Content="44" HorizontalAlignment="Center" VerticalAlignment="Top" FontFamily="{StaticResource OpenSauceOne}" FontSize="30"/>
-                <Line Grid.Column="9" Grid.Row="1" HorizontalAlignment="Center"
+                    <Label Grid.Column="9" Grid.Row="0" Content="44" HorizontalAlignment="Center" VerticalAlignment="Top" FontFamily="{StaticResource OpenSauceOne}" FontSize="30"/>
+                    <Line Grid.Column="9" Grid.Row="1" HorizontalAlignment="Center"
                 X1="7" Y1="10"
                 X2="7" Y2="600"
                 Stroke="Black"
                 StrokeThickness="4" StrokeDashArray="1,2" />
 
-                <Label Grid.Column="10" Grid.Row="0" Content="45" HorizontalAlignment="Center" VerticalAlignment="Top" FontFamily="{StaticResource OpenSauceOne}" FontSize="30"/>
-                <Line Grid.Column="10" Grid.Row="1" HorizontalAlignment="Center"
+                    <Label Grid.Column="10" Grid.Row="0" Content="45" HorizontalAlignment="Center" VerticalAlignment="Top" FontFamily="{StaticResource OpenSauceOne}" FontSize="30"/>
+                    <Line Grid.Column="10" Grid.Row="1" HorizontalAlignment="Center"
                 X1="7" Y1="10"
                 X2="7" Y2="600"
                 Stroke="Black"
                 StrokeThickness="4" StrokeDashArray="1,2" />
 
-                <Label Grid.Column="11" Grid.Row="0" Content="46" HorizontalAlignment="Center" VerticalAlignment="Top" FontFamily="{StaticResource OpenSauceOne}" FontSize="30"/>
-                <Line Grid.Column="11" Grid.Row="1" HorizontalAlignment="Center"
+                    <Label Grid.Column="11" Grid.Row="0" Content="46" HorizontalAlignment="Center" VerticalAlignment="Top" FontFamily="{StaticResource OpenSauceOne}" FontSize="30"/>
+                    <Line Grid.Column="11" Grid.Row="1" HorizontalAlignment="Center"
                 X1="7" Y1="10"
                 X2="7" Y2="600"
                 Stroke="Black"
                 StrokeThickness="4" StrokeDashArray="1,2" />
 
-                <Label Grid.Column="12" Grid.Row="0" Content="47" HorizontalAlignment="Center" VerticalAlignment="Top" FontFamily="{StaticResource OpenSauceOne}" FontSize="30"/>
-                <Line Grid.Column="12" Grid.Row="1" HorizontalAlignment="Center"
+                    <Label Grid.Column="12" Grid.Row="0" Content="47" HorizontalAlignment="Center" VerticalAlignment="Top" FontFamily="{StaticResource OpenSauceOne}" FontSize="30"/>
+                    <Line Grid.Column="12" Grid.Row="1" HorizontalAlignment="Center"
                 X1="7" Y1="10"
                 X2="7" Y2="600"
                 Stroke="Black"
                 StrokeThickness="4" StrokeDashArray="1,2" />
 
-                <Label Grid.Column="13" Grid.Row="0" Content="48" HorizontalAlignment="Center" VerticalAlignment="Top" FontFamily="{StaticResource OpenSauceOne}" FontSize="30"/>
-                <Line Grid.Column="13" Grid.Row="1" HorizontalAlignment="Center"
+                    <Label Grid.Column="13" Grid.Row="0" Content="48" HorizontalAlignment="Center" VerticalAlignment="Top" FontFamily="{StaticResource OpenSauceOne}" FontSize="30"/>
+                    <Line Grid.Column="13" Grid.Row="1" HorizontalAlignment="Center"
                 X1="7" Y1="10"
                 X2="7" Y2="600"
                 Stroke="Black"
                 StrokeThickness="4" StrokeDashArray="1,2" />
-
-                <Button Foreground="#FFFFFF" Background="#FF3DA79D" Grid.Column="14" Grid.Row="0" x:Name="BtnRight" Width="auto" Height="50" Margin="0 0 20 10" HorizontalAlignment="Center" VerticalAlignment="Top">
-                    <Image Source="Ressources/Picto/right.png" Stretch="Uniform" Margin="10" />
-                    <Button.Style>
-                        <Style TargetType="Button">
-                            <Setter Property="Template">
-                                <Setter.Value>
-                                    <ControlTemplate TargetType="Button">
-                                        <Border x:Name="border" CornerRadius="10" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="1" >
-                                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                                        </Border>
-                                        <ControlTemplate.Triggers>
-                                            <Trigger Property="IsMouseOver" Value="True">
-                                                <Setter TargetName="border" Property="Background" Value="#FF7dbfcf"/>
-                                                <Setter Property="Foreground" Value="#000000"/>
-                                            </Trigger>
-                                        </ControlTemplate.Triggers>
-                                    </ControlTemplate>
-                                </Setter.Value>
-                            </Setter>
-                        </Style>
-                    </Button.Style>
-                </Button>
-
-
-                <!-- TODO : mettre des grids.row dynamiquement à chaque fois que l'on recupere un module et les placer au milieu des grid columns correspondant au centre -->
-
-                <!-- Boutons vers autre fenêtre dans la grid row 2 -->
-
-
-            </Grid>
-
+                    <!-- TODO : mettre des grids.row dynamiquement à chaque fois que l'on recupere un module et les placer au milieu des grid columns correspondant au centre -->
+                    <!-- Boutons vers autre fenêtre dans la grid row 2 -->
+                </Grid>
+            </ScrollViewer>
         </Grid>
-
     </Grid>
-
-
-
 </Window>
