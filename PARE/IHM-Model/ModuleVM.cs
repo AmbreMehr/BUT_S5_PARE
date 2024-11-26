@@ -14,41 +14,64 @@ namespace IHM_Model
     /// <author>Stéphane BASSET</author>
     public class ModuleVM : BaseVM
     {
-        private string _moduleName;
-        private Teacher[] _teacher;
+        private Module model;
 
-        public string ModuleName
+        public string Name
         {
-            get => _moduleName;
+            get => model.Name;
             set
             {
-                if (_moduleName != value)
+                if (model.Name != value)
                 {
-                    _moduleName = value;
+                    model.Name = value;
                     NotifyChange();
                 }
             }
         }
-        public Teacher[] Teacher
+
+        public int WeekBegin
         {
-            get { return _teacher; }
-            set
-            {
-                _teacher = value;
-                NotifyChange("Teacher");
-            }
+            get => model.WeekBegin;
+            set => model.WeekBegin = value;
         }
 
+        public int WeekEnd
+        {
+            get => model.WeekEnd;
+            set => model.WeekEnd = value;
+        }
+
+        public UserVM Supervisor
+        {
+            get => new UserVM(model.Supervisor);
+            set => model.Supervisor = value.Model;
+        }
+
+        public Module Model
+        {
+            get => model;
+        }
+
+        public async Task UpdateModule()
+        {
+
+        }
 
         /// <summary>
-        /// Constructeur de la classe ModulesVM, initialisant le nom du module et les enseignants.
+        /// Constructeur de la classe ModulesVM avec son modèle.
         /// </summary>
-        /// <param name="moduleName">Nom du module</param>
-        /// <param name="teacher">Nom du teacher</param>
-        public ModuleVM(string moduleName, string teacher)
+        /// <param name="model">Object Module</param>
+        public ModuleVM(Module module)
         {
-            _moduleName = moduleName;
-            _teacher = new Teacher[0];
+            this.model = module;
+        }
+
+        /// <summary>
+        /// Constructeur de la classe ModuleVM sans modèle, initialise un modèle vide
+        /// </summary>
+        public ModuleVM()
+        {
+            model = new Module();
         }
     }
 }

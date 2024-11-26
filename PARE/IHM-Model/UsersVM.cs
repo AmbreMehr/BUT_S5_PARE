@@ -1,4 +1,5 @@
 ﻿using Model;
+using Network;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,41 +15,44 @@ namespace IHM_Model
     /// /// <author>Stéphane BASSET</author>
     public class UsersVM : BaseVM
     {
-        private User[]_models;
+        private UserNetwork network;
+        private List<UserVM> models;
+        private UserVM? selectedUser;
 
         /// <summary>
         /// Propriété pour obtenir ou définir le tableau des utilisateurs.
         /// </summary>
-        public User[] Users
-            { 
-            get { return _models; } 
-            set { 
-                _models = value;
-                NotifyChange("Users");
-            }
-        
+        public List<UserVM> Users
+        { 
+            get { return models; }
         }
 
-        /// <summary>
-        /// Récupère tous les utilisateurs.
-        /// </summary>
-        /// <returns>Tableau des modules pour le semestre</returns>
-        /// <author>Stéphane BASSET</author>
-        public User[] GetAllUsers()
+        public UserVM? SelectedUser
         {
-            return _models;
+            get { return selectedUser; }
+            set
+            {
+                selectedUser = value;
+                NotifyChange("SelectedUser");
+            }
         }
 
         /// <summary>
-        /// Récupère tous lesutilisateur par role.
+        /// Récupère tous les utilisateurs par role.
         /// </summary>
         /// <param name="role"></param>
         /// <returns></returns>
         /// <author>Stéphane BASSET</author>
-        public User[] GetAllUsersByRole(Role role)
+        public async Task<List<UserVM>> GetAllUsersByRole(Role role)
         {
-            User[] users = GetAllUsers();
-            return users;
+            // @TODO Mettre en models le résultat de la requête
+            return models;
+        }
+
+        public UsersVM()
+        {
+            this.models = new List<UserVM>();
+            this.network = new UserNetwork();
         }
     }
 }

@@ -13,41 +13,40 @@ namespace IHM_Model
    /// <author>Stéphane BASSET</author>
     public class TeacherVM : BaseVM
     {
-        private Teacher _model;
-        public Teacher Teacher
+        private Teacher model;
+
+        public Teacher Model
         { 
-            get { return _model;}
-            set { 
-                _model = value;
-                NotifyChange("Teacher");
-            }
+            get { return model;}
         }
 
         /// <summary>
         /// Update un teacher.
         /// </summary>
-        /// <author>Stéphane BASSET</author>
-        public void UpdateTeacher(Teacher teacherModify)
+        public async Task UpdateTeacher()
         {
-            _model = teacherModify;
+            
         }
 
         /// <summary>
         /// Suprime un teacher.
         /// </summary>
-        /// <author>Stéphane BASSET</author>
-        public void DeleteTeacher(Teacher teacherDelete)
+        public async Task DeleteTeacher()
         {
-            _model = teacherDelete;
+            
         }
 
         /// <summary>
         /// Créer un teacher.
         /// </summary>
-        /// <author>Stéphane BASSET</author>
-        public void CreateTeacher( Teacher teacherToCreate)
+        public async Task CreateTeacher()
         {   
-            _model = teacherToCreate;
+            
+        }
+
+        public TeacherVM(Teacher model)
+        {
+            this.model = model;
         }
     }
 }
