@@ -39,6 +39,7 @@ namespace IHM_Model
             }
         }
 
+
         /// <summary>
         /// Constructeur de la classe ModulesVM, initialisant le nom du module et les enseignants.
         /// </summary>
