@@ -34,7 +34,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="10*" />
-            <RowDefinition Height="260" />
+            <RowDefinition Height="270" />
         </Grid.RowDefinitions>
 
         <!-- Logo avec effet d'ombre -->
