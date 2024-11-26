@@ -41,11 +41,7 @@ namespace Network
             HttpClientHandler handler = new HttpClientHandler();
             handler.ServerCertificateCustomValidationCallback = (message, cert, chain, sslPolicyErrors) =>
             {
-                if (cert.GetCertHashString() == "624804188CE4942B29E188C68F97CD0C89D5C104")
-                {
-                    return true;
-                }
-                return false;
+                return true;
             };
             return new HttpClient(handler);
         }

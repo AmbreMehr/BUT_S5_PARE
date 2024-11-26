@@ -23,20 +23,20 @@ namespace IHM
     /// </summary>
     public partial class PlaceModuleWindow : UserControl
     {
-        private SemesterVM semesterVM;
+        private SemestersVM semestersVM;
         private ModulesVM modulesVM;
 
-        public PlaceModuleWindow(SemesterVM semesterVM, ModulesVM modulesVM)
+        public PlaceModuleWindow(SemestersVM semestersVM, ModulesVM modulesVM)
         {
             InitializeComponent();
             
-            this.semesterVM = semesterVM;
+            this.semestersVM = semestersVM;
             this.modulesVM = modulesVM;
             
             // S'abonner aux changements de semestre
-            this.semesterVM.PropertyChanged += SemesterVM_PropertyChanged;
+            this.semestersVM.PropertyChanged += SemesterVM_PropertyChanged;
             
-            DataContext = new MainViewModel(this.modulesVM, this.semesterVM);
+            DataContext = new MainViewModel(this.modulesVM, this.semestersVM);
             
             UpdateModulesList();
         }
@@ -51,11 +51,10 @@ namespace IHM
 
         private async Task UpdateModulesList()
         {
-            Semester selectedSemester = semesterVM.SelectedSemester;
-
+            SemesterVM selectedSemester = semestersVM.SelectedSemester;
             if (selectedSemester != null)
             {
-                await this.modulesVM.GetModuleBySemester(selectedSemester.Id);
+                await this.modulesVM.GetModuleBySemester(selectedSemester);
                 ModulesList.ItemsSource = this.modulesVM.Modules;
             }
             else
@@ -74,7 +73,7 @@ namespace IHM
             try
             {
                 // Envoyer les modifications au serveur via ModulesVM
-                await modulesVM.UpdateModule();
+                await modulesVM.UpdateModules();
 
                 // Cacher la fenêtre après la validation
                 this.Visibility = Visibility.Collapsed;

@@ -29,6 +29,18 @@ namespace IHM_Model
             }
         }
 
+        public int WeekBegin
+        {
+            get => model.WeekBegin;
+            set => model.WeekBegin = value;
+        }
+
+        public int WeekEnd
+        {
+            get => model.WeekEnd;
+            set => model.WeekEnd = value;
+        }
+
         public UserVM Supervisor
         {
             get => new UserVM(model.Supervisor);

@@ -2,6 +2,7 @@
 using Network;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,16 +15,16 @@ namespace IHM_Model
     /// <author>Clotilde MALO</author>
     public class SemestersVM : BaseVM
     {
-        private List<SemesterVM> models;
+        private ObservableCollection<SemesterVM> models;
         private ISemesterNetwork semesterNetwork;
         private SemesterVM? selectedSemester;
 
         /// <summary>
         /// Get du tableau de semestres
         /// </summary>
-        public SemesterVM[] Semesters
+        public ObservableCollection<SemesterVM> Semesters
         {
-            get { return models.ToArray(); }
+            get { return models; }
         }
 
         /// <summary>
@@ -46,7 +47,7 @@ namespace IHM_Model
         public SemestersVM()
         {
             semesterNetwork = new SemesterNetwork();
-            models = new List<SemesterVM>();
+            models = new ObservableCollection<SemesterVM>();
             LoadSemesters();
         }
 
