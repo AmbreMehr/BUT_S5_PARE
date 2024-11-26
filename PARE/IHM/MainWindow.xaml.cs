@@ -93,7 +93,7 @@ namespace IHM
         private void OpenParametresPage(object sender, RoutedEventArgs e)
         {
             SettingsWindows settingsWindows = new SettingsWindows();
-            settingsWindows.Show();
+            settingsWindows.ShowDialog();
             this.Close();
         }
 
