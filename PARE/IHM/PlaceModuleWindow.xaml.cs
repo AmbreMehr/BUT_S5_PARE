@@ -33,21 +33,12 @@ namespace IHM
             this.semestersVM = semestersVM;
             this.modulesVM = modulesVM;
             
-            // S'abonner aux changements de semestre
-            this.semestersVM.PropertyChanged += SemesterVM_PropertyChanged;
             
             DataContext = new MainViewModel(this.modulesVM, this.semestersVM);
             
             UpdateModulesList();
         }
 
-        private async void SemesterVM_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
-        {
-            if (e.PropertyName == "SelectedSemester")
-            {
-                await UpdateModulesList();
-            }
-        }
 
         private async Task UpdateModulesList()
         {
