@@ -29,8 +29,7 @@ namespace IHM_Model
         /// </param>
         /// <author>Stéphane BASSET</author>
         protected void NotifyChange([CallerMemberName] string propertyName = null)
-        {
-            
+        {   
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }

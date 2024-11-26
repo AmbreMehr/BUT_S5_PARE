@@ -14,40 +14,16 @@ namespace IHM_Model
     /// <author>Stéphane BASSET</author>
     public class TeachersVM : BaseVM
     {
-        private Teacher[]_model;
-        private Module _module;
+        private List<TeacherVM> model;
         
-        public Teacher[] Teachers
+        public List<TeacherVM> Teachers
         {
-            get { return _model; }
-            set
-            {
-                _model = value;
-                NotifyChange("Teachers");
-            }
-        }
-        public Module Module
-        {
-            get { return _module; }
-            set
-            {
-                _module = value;
-                NotifyChange("Module");
-            }
+            get { return model; }
         }
 
-
-
-        /// <summary>
-        /// Récupère les Teacher pour un modules donné.
-        /// </summary>
-        /// <returns>Tableau des teacher pour les modules</returns>
-        /// <author>Stéphane BASSET</author>
-        public Teacher[] GetTeachersByModule(Module module)
+        public TeachersVM()
         {
-            // A faire: Implémenter la logique ici pour retourner les teacher associés à un   modules 
-            return _model; // Retourne le tableau des teacher, peut être modifié selon la logique
+            this.model = new List<TeacherVM>();
         }
-
     }
 }

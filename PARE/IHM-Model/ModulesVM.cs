@@ -14,9 +14,9 @@ namespace IHM_Model
     /// <author>Stéphane BASSET - Clotilde MALO</author>
     public class ModulesVM : BaseVM
     {
-        private ObservableCollection<Module> _models;
-        private ModuleVM? _selectedModule;
-        private IModuleNetwork _moduleNetwork;
+        private ObservableCollection<ModuleVM> models;
+        private ModuleVM? selectedModule;
+        private IModuleNetwork moduleNetwork;
 
         /// <summary>
         /// Get et set du tableau de modules
@@ -24,14 +24,7 @@ namespace IHM_Model
         /// <author> Clotilde MALO </author>
         public ObservableCollection<ModuleVM> Modules
         {
-            get {
-                ObservableCollection<ModuleVM> vms = new ObservableCollection<ModuleVM>();
-                foreach (Module module in _models)
-                {
-                    vms.Add(new ModuleVM(module));
-                }
-                return vms; 
-            }
+            get => models;
         }
 
         /// <summary>
@@ -40,14 +33,13 @@ namespace IHM_Model
         /// <author> Clotilde MALO </author>
         public ModuleVM? SelectedModule
         {
-            get { return _selectedModule; }
+            get { return selectedModule; }
             set
             {
-                _selectedModule = value;
+                selectedModule = value;
                 NotifyChange("SelectedModule");
             }
         }
-
 
         /// <summary>
         /// Constructeur initialisant le tableau de modules.
@@ -55,8 +47,8 @@ namespace IHM_Model
         /// <author>Stéphane BASSET</author>
         public ModulesVM() 
         {
-            this._moduleNetwork = new ModuleNetwork();
-            this._models = new ObservableCollection<Module>();
+            this.moduleNetwork = new ModuleNetwork();
+            this.models = new ObservableCollection<ModuleVM>();
         }
 
         /// <summary>
@@ -78,11 +70,11 @@ namespace IHM_Model
         /// </summary>
         /// <param name="idSemester">id du semestre souhaité</param>
         /// <returns>Tableau des modules pour le semestre</returns>
-        /// <author>Stéphane BASSET</author>
+        /// <author>Ambre Mehr</author>
         public async Task<ObservableCollection<ModuleVM>> GetModuleBySemester(SemesterVM semester)
         {
             Modules.Clear();
-            Module[] modules = await _moduleNetwork.GetModuleBySemester(semester.Model.id);
+            Module[] modules = await moduleNetwork.GetModuleBySemester(semester.Model.Id);
             foreach (Module module in modules)
             {
                 ModuleVM moduleVM = new ModuleVM(module);
@@ -95,11 +87,11 @@ namespace IHM_Model
         /// Récupère tout les modules
         /// </summary>
         /// <returns>tout les modules</returns>
-        /// <author>Lucas PRUNIER</author>
+        /// <author>Ambre Mehr</author>
         public async Task<ObservableCollection<ModuleVM>> GetAllModules()
         {
             Modules.Clear();
-            Module[] modules = await _moduleNetwork.GetAllModules();
+            Module[] modules = await moduleNetwork.GetAllModules();
             foreach (Module module in modules)
             {
                 ModuleVM moduleVM = new ModuleVM(module);
@@ -117,13 +109,16 @@ namespace IHM_Model
         {
             try
             {
-                // Appeler l'API pour mettre à jour tous les modules
-                // @TODO Sauvegarder tous les modules, soit en faisant un foreach moduleVM puis moduleVM.Update
-                // Soit en envoyant la liste complète de modèles à l'API (autorisé dans un VM de toucher au modèle
+                // Demande à tous les ModuleVM de mettre à jour le modèle en backend
+                foreach (ModuleVM moduleVM in models)
+                {
+                    await moduleVM.UpdateModule();
+                }
             }
             catch (Exception ex)
             {
                 // Gérer les erreurs
+                // @TODO Les textes d'erreur doivent être en fichier de ressource
                 throw new ApplicationException("Erreur lors de la mise à jour du module.", ex);
             }
         }

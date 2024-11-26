@@ -16,7 +16,7 @@ namespace IHM_Model
     {
         private Module model;
 
-        public string ModuleName
+        public string Name
         {
             get => model.Name;
             set
@@ -35,6 +35,15 @@ namespace IHM_Model
             set => model.Supervisor = value.Model;
         }
 
+        public Module Model
+        {
+            get => model;
+        }
+
+        public async Task UpdateModule()
+        {
+
+        }
 
         /// <summary>
         /// Constructeur de la classe ModulesVM avec son modèle.
@@ -42,7 +51,7 @@ namespace IHM_Model
         /// <param name="model">Object Module</param>
         public ModuleVM(Module module)
         {
-            
+            this.model = module;
         }
 
         /// <summary>
