@@ -12,6 +12,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace IHM
 {
@@ -64,7 +65,7 @@ namespace IHM
         private void AddModule(string moduleName)
         {
             StackPanel module = new StackPanel { Margin = new Thickness(0, 10, 0, 10) };
-
+           
             TextBlock moduleTitle = new TextBlock
             {
                 Text = moduleName,
@@ -76,14 +77,12 @@ namespace IHM
             module.Children.Add(moduleTitle);
 
             AddGridHeaders(module);
-
+            AddProgramRow(module);
 
             StackPanel teacherContainer = new StackPanel();
             module.Children.Add(teacherContainer);
             AddTeacherButton(teacherContainer, module);
 
-
-            AddTeacherRow(teacherContainer);
 
             modulesPanel.Children.Add(module);
 
@@ -103,12 +102,41 @@ namespace IHM
                 Margin = new Thickness(5)
             };
 
-            headerStack.Children.Add(new TextBlock { Text = (string)Application.Current.FindResource("ProgramModule"), Width = 120, FontWeight = FontWeights.Bold });
-            headerStack.Children.Add(new TextBlock { Text = (string)Application.Current.FindResource("TD"), Width = 50, FontWeight = FontWeights.Bold });
-            headerStack.Children.Add(new TextBlock { Text = (string)Application.Current.FindResource("TP"), Width = 50, FontWeight = FontWeights.Bold });
-            headerStack.Children.Add(new TextBlock { Text = (string)Application.Current.FindResource("CM"), Width = 50, FontWeight = FontWeights.Bold });
+            headerStack.Children.Add(new TextBlock { Text = (string)System.Windows.Application.Current.FindResource("TD"), Width = 50, FontWeight = FontWeights.Bold });
+            headerStack.Children.Add(new TextBlock { Text = (string)System.Windows.Application.Current.FindResource("TP"), Width = 50, FontWeight = FontWeights.Bold });
+            headerStack.Children.Add(new TextBlock { Text = (string)System.Windows.Application.Current.FindResource("CM"), Width = 50, FontWeight = FontWeights.Bold });
+
 
             moduleStack.Children.Add(headerStack);
+        }
+
+        /// <summary>
+        /// Ajoute la ligne avec les heures au programme
+        /// </summary>
+        /// <param name="moduleStack"></param>
+        private void AddProgramRow(StackPanel moduleStack)
+        {
+            StackPanel programStack = new StackPanel
+            {
+                Orientation = Orientation.Horizontal,
+                HorizontalAlignment = HorizontalAlignment.Center,
+                Margin = new Thickness(5)
+            };
+
+            TextBlock programBlock = new TextBlock { Text = (string)System.Windows.Application.Current.FindResource("ProgramModule"), Width = 120, FontWeight = FontWeights.Bold };
+
+            // TEST A REMPLACER : a remplir avec les heures du module
+            TextBlock tdBlock = new TextBlock { Text = "2", Width = 120, FontWeight = FontWeights.Bold };
+            TextBlock tpBlock = new TextBlock { Text = "8", Width = 120, FontWeight = FontWeights.Bold };
+            TextBlock cmBlock = new TextBlock { Text = "6", Width = 120, FontWeight = FontWeights.Bold };
+
+            programStack.Children.Add(programBlock);
+            programStack.Children.Add(tdBlock);
+            programStack.Children.Add(tpBlock);
+            programStack.Children.Add(cmBlock);
+           
+
+            moduleStack.Children.Add(programStack);
         }
 
         /// <summary>
@@ -137,7 +165,6 @@ namespace IHM
             TextBox cmBox = new TextBox { Width = 50, Margin = new Thickness(5) };
 
 
-
             rowStack.Children.Add(teacherComboBox);
             rowStack.Children.Add(tdBox);
             rowStack.Children.Add(tpBox);
@@ -157,7 +184,7 @@ namespace IHM
         {
             Button deleteButton = new Button
             {
-                Content = (string)Application.Current.FindResource("SupprimerEnseignant"),
+                Content = (string)System.Windows.Application.Current.FindResource("SupprimerEnseignant"),
                 Width = 200,
                 Margin = new Thickness(5)
             };
@@ -176,7 +203,7 @@ namespace IHM
         {
             Button addButton = new Button
             {
-                Content = (string)Application.Current.FindResource("AjoutEnseignant"),
+                Content = (string)System.Windows.Application.Current.FindResource("AjoutEnseignant"),
                 Width = 200,
                 Margin = new Thickness(5),
                 HorizontalAlignment = HorizontalAlignment.Center
@@ -196,7 +223,7 @@ namespace IHM
         {
             // TO DO : envoyer à VM
 
-            MessageBox.Show((string)Application.Current.FindResource("MessageModif"), (string)Application.Current.FindResource("Confirmation"), MessageBoxButton.OK, MessageBoxImage.Information);
+            MessageBox.Show((string)System.Windows.Application.Current.FindResource("MessageModif"), (string)System.Windows.Application.Current.FindResource("Confirmation"), MessageBoxButton.OK, MessageBoxImage.Information);
 
         }
 
