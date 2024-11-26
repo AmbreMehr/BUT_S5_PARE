@@ -1,4 +1,5 @@
-﻿using Model;
+﻿using Microsoft.EntityFrameworkCore;
+using Model;
 using Storage;
 using Storage.InterfaceDAO;
 
@@ -64,5 +65,12 @@ namespace API.Services
             IEnumerable<Module> module = this.moduleDao.ListAll();
             return module.ToArray();
         }
+
+        public bool UpdateModule(Module module)
+        {
+            moduleDao.Update(module);
+            return true;
+        }
+
     }
 }
