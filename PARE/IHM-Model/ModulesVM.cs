@@ -15,27 +15,30 @@ namespace IHM_Model
     public class ModulesVM : BaseVM
     {
         private ObservableCollection<Module> _models;
-        private Module _selectedModule;
+        private ModuleVM? _selectedModule;
         private IModuleNetwork _moduleNetwork;
 
         /// <summary>
         /// Get et set du tableau de modules
         /// </summary>
         /// <author> Clotilde MALO </author>
-        public ObservableCollection<Module> Modules
+        public ObservableCollection<ModuleVM> Modules
         {
-            get { return _models; }
-            set
-            {
-                _models = value;
-                NotifyChange("Modules");
+            get {
+                ObservableCollection<ModuleVM> vms = new ObservableCollection<ModuleVM>();
+                foreach (Module module in _models)
+                {
+                    vms.Add(new ModuleVM(module));
+                }
+                return vms; 
             }
         }
+
         /// <summary>
         /// Get et set du module sélectionné
         /// </summary>
         /// <author> Clotilde MALO </author>
-        public Module SelectedModule
+        public ModuleVM? SelectedModule
         {
             get { return _selectedModule; }
             set
@@ -76,10 +79,16 @@ namespace IHM_Model
         /// <param name="idSemester">id du semestre souhaité</param>
         /// <returns>Tableau des modules pour le semestre</returns>
         /// <author>Stéphane BASSET</author>
-        public async Task<ObservableCollection<Module>> GetModuleBySemester(int idSemester)
+        public async Task<ObservableCollection<ModuleVM>> GetModuleBySemester(SemesterVM semester)
         {
-            Modules = new ObservableCollection<Module>(await _moduleNetwork.GetModuleBySemester(idSemester));
-            return Modules; 
+            Modules.Clear();
+            Module[] modules = await _moduleNetwork.GetModuleBySemester(semester.Model.id);
+            foreach (Module module in modules)
+            {
+                ModuleVM moduleVM = new ModuleVM(module);
+                Modules.Add(moduleVM);
+            }
+            return Modules;
         }
 
         /// <summary>
@@ -87,30 +96,30 @@ namespace IHM_Model
         /// </summary>
         /// <returns>tout les modules</returns>
         /// <author>Lucas PRUNIER</author>
-        public async Task<ObservableCollection<Module>> GetAllModules()
+        public async Task<ObservableCollection<ModuleVM>> GetAllModules()
         {
-            Modules = new ObservableCollection<Module>(await _moduleNetwork.GetAllModules());
+            Modules.Clear();
+            Module[] modules = await _moduleNetwork.GetAllModules();
+            foreach (Module module in modules)
+            {
+                ModuleVM moduleVM = new ModuleVM(module);
+                Modules.Add(moduleVM);
+            }
             return Modules;
         }
 
         /// <summary>
-        /// Met à jour le module sélectionné via le réseau.
+        /// Met à jour les modules dans le backend
         /// </summary>
         /// <returns>Une tâche asynchrone.</returns>
         /// <author>Lucas PRUNIER</author>
-        public async Task UpdateModule()
+        public async Task UpdateModules()
         {
-            if (SelectedModule == null)
-            {
-                throw new InvalidOperationException("Aucun module sélectionné pour la mise à jour.");
-            }
-
             try
             {
-                // Appeler l'API pour mettre à jour le module
-                await _moduleNetwork.UpdateModule(SelectedModule);
-                Modules = new ObservableCollection<Module>(await _moduleNetwork.GetAllModules());
-                NotifyChange("SelectedModule");
+                // Appeler l'API pour mettre à jour tous les modules
+                // @TODO Sauvegarder tous les modules, soit en faisant un foreach moduleVM puis moduleVM.Update
+                // Soit en envoyant la liste complète de modèles à l'API (autorisé dans un VM de toucher au modèle
             }
             catch (Exception ex)
             {

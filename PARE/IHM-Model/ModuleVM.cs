@@ -14,41 +14,43 @@ namespace IHM_Model
     /// <author>Stéphane BASSET</author>
     public class ModuleVM : BaseVM
     {
-        private string _moduleName;
-        private Teacher[] _teacher;
+        private Module model;
 
         public string ModuleName
         {
-            get => _moduleName;
+            get => model.Name;
             set
             {
-                if (_moduleName != value)
+                if (model.Name != value)
                 {
-                    _moduleName = value;
+                    model.Name = value;
                     NotifyChange();
                 }
             }
         }
-        public Teacher[] Teacher
+
+        public UserVM Supervisor
         {
-            get { return _teacher; }
-            set
-            {
-                _teacher = value;
-                NotifyChange("Teacher");
-            }
+            get => new UserVM(model.Supervisor);
+            set => model.Supervisor = value.Model;
         }
 
 
         /// <summary>
-        /// Constructeur de la classe ModulesVM, initialisant le nom du module et les enseignants.
+        /// Constructeur de la classe ModulesVM avec son modèle.
         /// </summary>
-        /// <param name="moduleName">Nom du module</param>
-        /// <param name="teacher">Nom du teacher</param>
-        public ModuleVM(string moduleName, string teacher)
+        /// <param name="model">Object Module</param>
+        public ModuleVM(Module module)
         {
-            _moduleName = moduleName;
-            _teacher = new Teacher[0];
+            
+        }
+
+        /// <summary>
+        /// Constructeur de la classe ModuleVM sans modèle, initialise un modèle vide
+        /// </summary>
+        public ModuleVM()
+        {
+            model = new Module();
         }
     }
 }
