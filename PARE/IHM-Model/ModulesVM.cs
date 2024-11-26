@@ -54,9 +54,7 @@ namespace IHM_Model
         {
             this._moduleNetwork = new ModuleNetwork();
             this._models = new ObservableCollection<Module>();
-
         }
-
 
         /// <summary>
         /// Récupère le nombre d'heures pour une semaine donnée.
@@ -80,10 +78,8 @@ namespace IHM_Model
         /// <author>Stéphane BASSET</author>
         public async Task<ObservableCollection<Module>> GetModuleBySemester(int idSemester)
         {
-            var modules = await _moduleNetwork.GetModuleBySemester(idSemester);
-            Modules = new ObservableCollection<Module>(modules);
+            Modules = new ObservableCollection<Module>(await _moduleNetwork.GetModuleBySemester(idSemester));
             return Modules; 
-
         }
 
         /// <summary>
@@ -93,9 +89,7 @@ namespace IHM_Model
         /// <author>Clotilde MALO</author>
         public async Task LoadModulesBySemester(int idSemester)
         {
-            var modules = await GetModuleBySemester(idSemester);
-            Modules = new ObservableCollection<Module>(modules);
-
+            Modules = await GetModuleBySemester(idSemester);
         }
 
         /// <summary>
@@ -105,12 +99,20 @@ namespace IHM_Model
         /// <author>Lucas PRUNIER</author>
         public async Task<ObservableCollection<Module>> GetAllModules()
         {
-            var modules = await _moduleNetwork.GetAllModules();
-            Modules = new ObservableCollection<Module>(modules);
+            Modules = new ObservableCollection<Module>(await _moduleNetwork.GetAllModules());
             return Modules;
         }
 
-
-
+        /// <summary>
+        /// Met à jour le module sélectionné via le réseau.
+        /// </summary>
+        /// <returns>Une tâche asynchrone.</returns>
+        /// <author>Lucas PRUNIER</author>
+        public async Task UpdateModule()
+        {
+            await _moduleNetwork.UpdateModule(SelectedModule);
+            Modules = new ObservableCollection<Module>(await _moduleNetwork.GetAllModules());
+            NotifyChange("SelectedModule");
+        }
     }
 }

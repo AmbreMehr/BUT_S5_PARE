@@ -49,7 +49,17 @@ namespace Network
 
         public async Task UpdateModule(Module module)
         {
-            throw new NotImplementedException();
+            using (var client = NetworkConfiguration.Instance.HttpClient)
+            {
+                string query = NetworkConfiguration.Instance.ApiUrl + "api/module/UpdateModule";
+                HttpResponseMessage response = await client.PutAsJsonAsync(query, module);
+                if (!response.IsSuccessStatusCode)
+                {
+                    // En cas d'erreur, lever une exception ou gérer l'erreur
+                    string error = await response.Content.ReadAsStringAsync();
+                    throw new Exception($"Erreur lors de la mise à jour du module : {response.StatusCode}, Détails : {error}");
+                }
+            }
         }
     }
 }
