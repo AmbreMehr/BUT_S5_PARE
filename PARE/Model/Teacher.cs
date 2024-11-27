@@ -89,7 +89,7 @@ namespace Model
                 }
                 else
                 {
-                    assignedTdHours = value;
+                    assignedCmHours = value;
                 }
             }
         }
