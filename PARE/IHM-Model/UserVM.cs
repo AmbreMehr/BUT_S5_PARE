@@ -24,6 +24,14 @@ namespace IHM_Model
         }
 
         /// <summary>
+        /// Renvoie le nom complet de l'utilisateur
+        /// </summary>
+        public string Fullname
+        {
+            get => model.FirstName + " " + model.LastName;
+        }
+
+        /// <summary>
         /// Initialise l'utilisateur
         /// </summary>
         /// <param name="model"></param>

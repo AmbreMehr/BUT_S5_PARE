@@ -41,5 +41,12 @@ namespace Network
         /// </summary>
         /// <returns>Liste de Role</returns>
         Task<Role[]> GetAllRoles();
+
+        /// <summary>
+        /// Async, renvoie tous les utilisateurs d'un rôle
+        /// </summary>
+        /// <param name="role">Role</param>
+        /// <returns>User list</returns>
+        Task<User[]> GetUsersByRole(Roles role);
     }
 }
