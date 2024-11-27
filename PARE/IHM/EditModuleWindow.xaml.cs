@@ -24,6 +24,7 @@ namespace IHM
     {
         private SemestersVM semestersVM;
         private ModulesVM modulesVM;
+        private TeachersVM teachersVM;
 
         /// <summary>
         /// Initialise la fenêtre d'édition de module
@@ -34,12 +35,9 @@ namespace IHM
         {
             this.semestersVM = semestersVM;
             this.modulesVM = new ModulesVM();
+            this.teachersVM = new TeachersVM();
             InitializeComponent();
             InitializeSemesterBox(this.semestersVM);
-
-
-
-
         }
 
         /// <summary>
@@ -52,8 +50,22 @@ namespace IHM
             foreach (ModuleVM moduleVM in modulesVM.Modules)
             {
                 AddModule(moduleVM);
+                List<TeacherVM> TeachersVM = await GetTeachersByModule(moduleVM);
+                foreach (TeacherVM teacherVM in TeachersVM)
+                {
+                    AddTeacherRow(modulesPanel, teacherVM);
+                    teachersVM.SelectedTeacher = teacherVM;
+                }
+
             }
-        }
+            }
+
+         private async Task<List<TeacherVM>> GetTeachersByModule(ModuleVM Module)
+         {
+             // à voir quoi clear
+             return await this.teachersVM.GetTeachersByModule(Module);
+
+         }
 
 
 
@@ -79,7 +91,7 @@ namespace IHM
         private void AddModule(ModuleVM moduleVM)
         {
             StackPanel module = new StackPanel { Margin = new Thickness(0, 10, 0, 10) };
-           
+
             TextBlock moduleTitle = new TextBlock
             {
                 Text = moduleVM.Name,
@@ -147,7 +159,7 @@ namespace IHM
             programStack.Children.Add(tdBlock);
             programStack.Children.Add(tpBlock);
             programStack.Children.Add(cmBlock);
-           
+
 
             moduleStack.Children.Add(programStack);
         }
@@ -157,7 +169,8 @@ namespace IHM
         /// <author>Clotilde MALO</author>
         /// </summary>
         /// <param name="moduleStack">panneau de module</param>
-        private void AddTeacherRow(StackPanel moduleStack)
+        /// <param name="teacherVM">teacher à ajouter => peut être null si on ajoute une ligne vide</param>
+        private void AddTeacherRow(StackPanel moduleStack, TeacherVM teacherVM)
         {
             StackPanel rowStack = new StackPanel
             {
@@ -168,14 +181,34 @@ namespace IHM
 
             ComboBox teacherComboBox = new ComboBox { Width = 120, Margin = new Thickness(5) };
 
-            // TEST A REMPLACER : a remplir avec tous les profs après (Récupéré les teacher associé au module avant)
-            teacherComboBox.Items.Add("M. Bidule");
-            teacherComboBox.Items.Add("Mme Machin");
 
+            // TEST A REMPLACER : a remplir avec tous les profs après (Récupéré les teacher associé au module avant)
+            //teacherComboBox.Items.Add("M. Bidule");
+            //teacherComboBox.Items.Add("Mme Machin");
+
+            teacherComboBox.DataContext = teachersVM;
+            teacherComboBox.SelectedItem = teachersVM.SelectedTeacher;
+            teacherComboBox.ItemsSource = teachersVM.Teachers;
+            teacherComboBox.DisplayMemberPath = "User";
+
+            // Evenement sur modification de la liste déroulante enseignant
+            teacherComboBox.SelectionChanged += (sender, e) =>
+            {
+                teachersVM.SelectedTeacher = (TeacherVM)teacherComboBox.SelectedItem;
+            };
 
             TextBox tdBox = new TextBox { Width = 50, Margin = new Thickness(5) };
             TextBox tpBox = new TextBox { Width = 50, Margin = new Thickness(5) };
             TextBox cmBox = new TextBox { Width = 50, Margin = new Thickness(5) };
+
+            if (teacherVM.User != null)
+                teacherComboBox.SelectedItem = teacherVM.User.ToString();
+            if (teacherVM.AssignedTdHours != null)
+                tdBox.Text = teacherVM.AssignedTdHours.ToString();
+            if (teacherVM.AssignedTpHours != null)
+                tpBox.Text = teacherVM.AssignedTpHours.ToString();
+            if (teacherVM.AssignedCmHours != null)
+                cmBox.Text = teacherVM.AssignedCmHours.ToString();
 
 
             rowStack.Children.Add(teacherComboBox);
@@ -207,7 +240,7 @@ namespace IHM
         }
 
         /// <summary>
-        /// Ajoute un bouton pour ajouter une ligne d'enseignant/heure
+        /// Ajoute un bouton pour ajouter une ligne d'enseignant/heure et au clic dessus créé un teacherVM et une ligne
         /// <author>Clotilde MALO</author>
         /// </summary>
         /// <param name="teacherContainer">panneau d'enseignant</param>
@@ -221,7 +254,11 @@ namespace IHM
                 Margin = new Thickness(5),
                 HorizontalAlignment = HorizontalAlignment.Center
             };
-            addButton.Click += (sender, e) => AddTeacherRow(teacherContainer);
+            addButton.Click += (sender, e) =>
+            {
+                TeacherVM teacherVM = new TeacherVM();
+                AddTeacherRow(teacherContainer, teacherVM);
+            };
 
             module.Children.Add(addButton);
         }
