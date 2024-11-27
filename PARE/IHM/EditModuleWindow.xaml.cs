@@ -39,7 +39,17 @@ namespace IHM
             this.teachersVM = new TeachersVM();
             this.usersVM = new UsersVM();
             InitializeComponent();
+            InitializeAllProfessors();
             InitializeSemesterBox(this.semestersVM);
+        }
+
+        /// <summary>
+        /// Initialise la récupération de tous les utilisateurs rôle professeurs
+        /// </summary>
+        private async void InitializeAllProfessors()
+        {
+            await usersVM.GetAllProfessors();
+
         }
 
         /// <summary>
@@ -185,7 +195,7 @@ namespace IHM
 
             teacherComboBox.SelectedItem = teacherVM.User;
             teacherComboBox.ItemsSource = usersVM.Users;
-            teacherComboBox.DisplayMemberPath = "FullName";
+            teacherComboBox.DisplayMemberPath = "Fullname";
 
             // Evenement sur modification de la liste déroulante enseignant
             teacherComboBox.SelectionChanged += (sender, e) =>
