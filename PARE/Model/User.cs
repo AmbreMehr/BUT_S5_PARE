@@ -141,5 +141,18 @@ namespace Model
         {
             return this.firstName + " " + this.lastName;
         }
+
+        public override bool Equals(object? obj)
+        {
+            return obj is User user &&
+                   id == user.id &&
+                   firstName == user.firstName &&
+                   lastName == user.lastName;
+        }
+
+        public override int GetHashCode()
+        {
+            return HashCode.Combine(id, firstName, lastName);
+        }
     }
 }

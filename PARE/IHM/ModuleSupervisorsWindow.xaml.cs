@@ -33,8 +33,8 @@ namespace IHM
 
         private async void InitializeData()
         {
-            await GetModulesBySemester();
             await context.UsersVM.GetAllProfessors();
+            await GetModulesBySemester();
         }
 
         private async Task GetModulesBySemester()
