@@ -18,6 +18,9 @@ namespace IHM_Model
         private Module model;
         private IModuleNetwork moduleNetwork;
 
+        /// <summary>
+        /// Get et set pour le nom du module
+        /// </summary>
         public string Name
         {
             get => model.Name;
@@ -31,45 +34,71 @@ namespace IHM_Model
             }
         }
 
+        /// <summary>
+        /// Get et set pour la semaine de commencement d'un module
+        /// </summary>
         public int WeekBegin
         {
             get => model.WeekBegin;
             set => model.WeekBegin = value;
         }
 
+        /// <summary>
+        /// Get et set pour la semaine de fin d'un module
+        /// </summary>
         public int WeekEnd
         {
             get => model.WeekEnd;
             set => model.WeekEnd = value;
         }
 
+        /// <summary>
+        /// Get et set pour le nombre d'heures de TD du module
+        /// </summary>
         public int HoursTd
         {
             get => model.HoursTd;
             set => model.HoursTd = value;
         }
+
+        /// <summary>
+        /// Get et set pour le nombre d'heures de TP du module
+        /// </summary>
         public int HoursTp
         {
             get => model.HoursTp;
             set => model.HoursTp = value;
         }
+
+        /// <summary>
+        /// Get et set pour le nombre d'heures de CM du module
+        /// </summary>
         public int HoursCM
         {
             get => model.HoursCM;
             set => model.HoursCM = value;
         }
 
+        /// <summary>
+        /// Get et set pour le responsable du module
+        /// </summary>
         public UserVM Supervisor
         {
             get => new UserVM(model.Supervisor);
             set => model.Supervisor = value.Model;
         }
 
+        /// <summary>
+        /// Get pour le model du VM, utile aux autres VM
+        /// </summary>
         public Module Model
         {
             get => model;
         }
 
+        /// <summary>
+        /// Async, Met à jour le modèle dans l'API
+        /// </summary>
         public async Task UpdateModule()
         {
             await moduleNetwork.UpdateModule(model);

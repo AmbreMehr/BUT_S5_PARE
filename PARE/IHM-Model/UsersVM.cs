@@ -20,13 +20,16 @@ namespace IHM_Model
         private UserVM? selectedUser;
 
         /// <summary>
-        /// Propriété pour obtenir ou définir le tableau des utilisateurs.
+        /// Propriété pour obtenir le tableau des utilisateursVM.
         /// </summary>
         public List<UserVM> Users
         { 
             get { return models; }
         }
 
+        /// <summary>
+        /// Permet de récupérer et modifier l'utilisateur sélectionné.
+        /// </summary>
         public UserVM? SelectedUser
         {
             get { return selectedUser; }
@@ -38,10 +41,10 @@ namespace IHM_Model
         }
 
         /// <summary>
-        /// Récupère tous les utilisateurs par role.
+        /// Récupère tous les utilisateursVM par role.
         /// </summary>
-        /// <param name="role"></param>
-        /// <returns></returns>
+        /// <param name="role">role de l'utilisateur</param>
+        /// <returns>liste d'utilisateurs VM ayant le role demandé</returns>
         /// <author>Stéphane BASSET</author>
         public async Task<List<UserVM>> GetAllUsersByRole(Role role)
         {
@@ -49,6 +52,9 @@ namespace IHM_Model
             return models;
         }
 
+        /// <summary>
+        /// Initialise la classe UsersVM avec un tableau vide de UserVM et un UserNetwork.
+        /// </summary>
         public UsersVM()
         {
             this.models = new List<UserVM>();

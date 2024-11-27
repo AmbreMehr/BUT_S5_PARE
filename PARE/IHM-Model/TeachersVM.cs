@@ -16,11 +16,17 @@ namespace IHM_Model
     {
         private List<TeacherVM> model;
         
+        /// <summary>
+        /// Recupère la liste des teachers VM
+        /// </summary>
         public List<TeacherVM> Teachers
         {
             get { return model; }
         }
 
+        /// <summary>
+        /// Initialise la classe avec la liste des teachers VM à vide
+        /// </summary>
         public TeachersVM()
         {
             this.model = new List<TeacherVM>();
