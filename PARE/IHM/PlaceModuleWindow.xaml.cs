@@ -54,7 +54,7 @@ namespace IHM
             }
             else
             {
-                MessageBox.Show("Veuillez sélectionner un semestre avant de placer les modules.", "Erreur", MessageBoxButton.OK, MessageBoxImage.Warning);
+                MessageBox.Show((string)System.Windows.Application.Current.FindResource("SelectionSemestre"), (string)System.Windows.Application.Current.FindResource("Erreur"), MessageBoxButton.OK, MessageBoxImage.Warning);
             }
         }
 
@@ -64,8 +64,8 @@ namespace IHM
             {
                 await modulesVM.UpdateModules(); // Appel à la méthode qui met à jour les modules
                 MessageBox.Show(
-                    "Les modules ont été mis à jour avec succès.",
-                    "Succès",
+                     (string)System.Windows.Application.Current.FindResource("MiseAJourModules"),
+                    (string)System.Windows.Application.Current.FindResource("Succes"),
                     MessageBoxButton.OK,
                     MessageBoxImage.Information);
 
@@ -76,8 +76,8 @@ namespace IHM
             {
                 // Gestion des erreurs liées aux semaines hors limites
                 MessageBox.Show(
-                    $"Erreur : {ex.Message}",
-                    "Erreur de validation",
+                    $"{ ex.Message}",
+                    (string)System.Windows.Application.Current.FindResource("ErreurDeValidation"),
                     MessageBoxButton.OK,
                     MessageBoxImage.Warning);
             }
@@ -85,8 +85,8 @@ namespace IHM
             {
                 // Gestion des erreurs liées à des règles métier non respectées
                 MessageBox.Show(
-                    $"Erreur : {ex.Message}",
-                    "Erreur de validation",
+                    $"{ex.Message}",
+                    (string)System.Windows.Application.Current.FindResource("ErreurDeValidation"),
                     MessageBoxButton.OK,
                     MessageBoxImage.Warning);
             }
@@ -94,8 +94,8 @@ namespace IHM
             {
                 // Gestion des erreurs générales encapsulées dans ApplicationException
                 MessageBox.Show(
-                    $"Erreur : {ex.InnerException?.Message ?? ex.Message}",
-                    "Erreur lors de la mise à jour",
+                    $"{ex.InnerException?.Message ?? ex.Message}", 
+                    (string)System.Windows.Application.Current.FindResource("ErreurDeMiseAJour"),
                     MessageBoxButton.OK,
                     MessageBoxImage.Error);
             }
@@ -103,14 +103,12 @@ namespace IHM
             {
                 // Gestion des erreurs inattendues
                 MessageBox.Show(
-                    $"Une erreur inattendue s'est produite : {ex.Message}",
-                    "Erreur",
+                    $"{ex.Message}",
+                    (string)System.Windows.Application.Current.FindResource("ErreurInnatendue"),
                     MessageBoxButton.OK,
                     MessageBoxImage.Error);
             }
         }
-
-
 
         private void ClickBtnAnnuler(object sender, RoutedEventArgs e)
         {
