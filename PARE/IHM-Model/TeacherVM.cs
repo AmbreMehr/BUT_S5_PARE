@@ -15,13 +15,16 @@ namespace IHM_Model
     {
         private Teacher model;
 
+        /// <summary>
+        /// Récupère l'enseignant
+        /// </summary>
         public Teacher Model
         { 
             get { return model;}
         }
 
         /// <summary>
-        /// Update un teacher.
+        /// Met à jour un teacher.
         /// </summary>
         public async Task UpdateTeacher()
         {
@@ -44,6 +47,10 @@ namespace IHM_Model
             
         }
 
+        /// <summary>
+        /// Initialise la classe en lui passant un enseignant (teacher)
+        /// </summary>
+        /// <param name="model"></param>
         public TeacherVM(Teacher model)
         {
             this.model = model;

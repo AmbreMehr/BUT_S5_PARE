@@ -15,11 +15,18 @@ namespace IHM_Model
     {
         private User model;
 
+        /// <summary>
+        /// Recupère l'utilisateur
+        /// </summary>
         public User Model
         {
             get => model;
         }
 
+        /// <summary>
+        /// Initialise l'utilisateur
+        /// </summary>
+        /// <param name="model"></param>
         public UserVM (User model)
         {
             this.model = model;

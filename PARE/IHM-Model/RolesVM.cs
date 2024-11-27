@@ -16,11 +16,17 @@ namespace IHM_Model
     {
         private List<RoleVM> models;
         
+        /// <summary>
+        /// Récupère la liste des rôlesVM
+        /// </summary>
         public List<RoleVM> Roles
         {     
             get { return models; }
         }
 
+        /// <summary>
+        /// Initialise la classe avec la liste des rôles VM à vide
+        /// </summary>
         public RolesVM()
         {
             models = new List<RoleVM>();
