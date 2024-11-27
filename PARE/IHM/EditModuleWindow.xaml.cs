@@ -36,7 +36,6 @@ namespace IHM
             this.modulesVM = new ModulesVM();
             InitializeComponent();
             InitializeSemesterBox(this.semestersVM);
-            GetModulesBySemester();
 
 
 
