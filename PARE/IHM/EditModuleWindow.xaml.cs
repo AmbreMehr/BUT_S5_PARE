@@ -23,6 +23,7 @@ namespace IHM
     public partial class EditModuleWindow : Window
     {
         private SemestersVM semestersVM;
+        private ModulesVM modulesVM;
 
         /// <summary>
         /// Initialise la fenêtre d'édition de module
@@ -32,17 +33,30 @@ namespace IHM
         public EditModuleWindow(SemestersVM semestersVM)
         {
             this.semestersVM = semestersVM;
+            this.modulesVM = new ModulesVM();
             InitializeComponent();
             InitializeSemesterBox(this.semestersVM);
+            GetModulesBySemester();
 
-            // TEST A REMPLACER : Créé un faux module
-            AddModule("Module 1");
-            AddModule("Module 1");
-            AddModule("Module 1");
-            AddModule("Module 1");
-            AddModule("Module 1");
+
+
 
         }
+
+        /// <summary>
+        /// Récupère les modules selon le semestre et les ajoute à la fenêtre
+        /// </summary>
+        private async void GetModulesBySemester()
+        {
+            modulesPanel.Children.Clear();
+            await this.modulesVM.GetModuleBySemester(semestersVM.SelectedSemester);
+            foreach (ModuleVM moduleVM in modulesVM.Modules)
+            {
+                AddModule(moduleVM);
+            }
+        }
+
+
 
         /// <summary>
         /// Initialise la liste déroulante des semestres
@@ -54,6 +68,7 @@ namespace IHM
             semesterBox.DataContext = semestersVM;
             semesterBox.SelectedItem = semestersVM.SelectedSemester;
             semesterBox.ItemsSource = semestersVM.Semesters;
+            semesterBox.DisplayMemberPath = "Name";
         }
 
 
@@ -62,13 +77,13 @@ namespace IHM
         /// <author>Clotilde MALO</author>
         /// </summary>
         /// <param name="moduleName">nom du module</param>
-        private void AddModule(string moduleName)
+        private void AddModule(ModuleVM moduleVM)
         {
             StackPanel module = new StackPanel { Margin = new Thickness(0, 10, 0, 10) };
            
             TextBlock moduleTitle = new TextBlock
             {
-                Text = moduleName,
+                Text = moduleVM.Name,
                 FontSize = 16,
                 FontWeight = FontWeights.Bold,
                 Margin = new Thickness(0, 0, 0, 5),
@@ -77,7 +92,7 @@ namespace IHM
             module.Children.Add(moduleTitle);
 
             AddGridHeaders(module);
-            AddProgramRow(module);
+            AddProgramRow(module, moduleVM);
 
             StackPanel teacherContainer = new StackPanel();
             module.Children.Add(teacherContainer);
@@ -114,7 +129,7 @@ namespace IHM
         /// Ajoute la ligne avec les heures au programme
         /// </summary>
         /// <param name="moduleStack"></param>
-        private void AddProgramRow(StackPanel moduleStack)
+        private void AddProgramRow(StackPanel moduleStack, ModuleVM moduleVM)
         {
             StackPanel programStack = new StackPanel
             {
@@ -125,10 +140,9 @@ namespace IHM
 
             TextBlock programBlock = new TextBlock { Text = (string)System.Windows.Application.Current.FindResource("ProgramModule"), Width = 120, FontWeight = FontWeights.Bold };
 
-            // TEST A REMPLACER : a remplir avec les heures du module
-            TextBlock tdBlock = new TextBlock { Text = "2", Width = 120, FontWeight = FontWeights.Bold };
-            TextBlock tpBlock = new TextBlock { Text = "8", Width = 120, FontWeight = FontWeights.Bold };
-            TextBlock cmBlock = new TextBlock { Text = "6", Width = 120, FontWeight = FontWeights.Bold };
+            TextBlock tdBlock = new TextBlock { Text = moduleVM.HoursTd.ToString(), Width = 120, FontWeight = FontWeights.Bold };
+            TextBlock tpBlock = new TextBlock { Text = moduleVM.HoursTp.ToString(), Width = 120, FontWeight = FontWeights.Bold };
+            TextBlock cmBlock = new TextBlock { Text = moduleVM.HoursCM.ToString(), Width = 120, FontWeight = FontWeights.Bold };
 
             programStack.Children.Add(programBlock);
             programStack.Children.Add(tdBlock);
@@ -155,7 +169,7 @@ namespace IHM
 
             ComboBox teacherComboBox = new ComboBox { Width = 120, Margin = new Thickness(5) };
 
-            // TEST A REMPLACER : a remplir avec tous les profs après
+            // TEST A REMPLACER : a remplir avec tous les profs après (Récupéré les teacher associé au module avant)
             teacherComboBox.Items.Add("M. Bidule");
             teacherComboBox.Items.Add("Mme Machin");
 
@@ -239,6 +253,18 @@ namespace IHM
             MainWindow mainWindow = new MainWindow();
             mainWindow.Show();
             this.Close();
+        }
+
+        /// <summary>
+        /// A la modification du semestre permet de modifier les modules
+        /// <author>Clotilde MALO</author>
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void SemestersChange(object sender, SelectionChangedEventArgs e)
+        {
+            semestersVM.SelectedSemester = (SemesterVM)semesterBox.SelectedItem;
+            GetModulesBySemester();
         }
     }
 }

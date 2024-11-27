@@ -11,6 +11,7 @@
     <system:String x:Key="BtnModifier">Modify</system:String>
     <system:String x:Key="MessageModif">The changes have been saved</system:String>
     <system:String x:Key="Confirmation">Confirmation</system:String>
+    <system:String x:Key="Retour">Back</system:String>
 
     <!--MainWindow-->
     <system:String x:Key="TitreMainWindow">Distribution of modules</system:String>
@@ -42,5 +43,7 @@
     <system:String x:Key="TD">TD</system:String>
     <system:String x:Key="TP">TP</system:String>
     <system:String x:Key="CM">CM</system:String>
+    <system:String x:Key="infoChangmtSemestre">Warning : when you change semesters you must save your changes before clicking on "Submit".</system:String>
+
 
 </ResourceDictionary>

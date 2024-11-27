@@ -11,7 +11,8 @@
     <system:String x:Key="BtnModifier">Modifier</system:String>
     <system:String x:Key="MessageModif">Les modifications ont bien été enregistrées</system:String>
     <system:String x:Key="Confirmation">Confirmation</system:String>
-    
+    <system:String x:Key="Retour">Retour</system:String>
+
     <!--MainWindow-->
     <system:String x:Key="TitreMainWindow">Répartition des modules</system:String>
     <system:String x:Key="BtnAttributionModule">Attribution module</system:String>
@@ -43,5 +44,6 @@
     <system:String x:Key="TD">TD</system:String>
     <system:String x:Key="TP">TP</system:String>
     <system:String x:Key="CM">CM</system:String>
+    <system:String x:Key="infoChangmtSemestre">Attention : quand vous changez de semestres il faut enregistrer vos modifications avant en cliquant sur "Valider".</system:String>
     
 </ResourceDictionary>
