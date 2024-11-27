@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace IHM_Model
 {
+    /// !!! Pas utilisé pour le moment
     /// <summary>
     /// La classe TypicalProfileVM gère les Profil type des teacher
     /// Le setter déclenche une notification de changement.

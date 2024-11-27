@@ -20,7 +20,7 @@ namespace IHM_Model
         /// <summary>
         /// Get et set du ViewModel des semestres
         /// </summary>
-        public SemesterVM SemesterVM { get; set; }
+        public SemestersVM SemestersVM { get; set; }
 
         /// <summary>
         /// Constructeur de la classe MainViewModel 
@@ -28,10 +28,10 @@ namespace IHM_Model
         /// <param name="modulesVM">modules view model</param>
         /// <param name="semesterVM">semestre view model</param>
 
-        public MainViewModel(ModulesVM modulesVM, SemesterVM semesterVM)
+        public MainViewModel(ModulesVM modulesVM, SemestersVM semesterVM)
         {
             this.ModulesVM = modulesVM;
-            this.SemesterVM = semesterVM;
+            this.SemestersVM = semesterVM;
         }
     }
 

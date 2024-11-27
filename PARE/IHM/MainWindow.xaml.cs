@@ -21,7 +21,7 @@ namespace IHM
     /// <author>Clotilde MALO</author>
     public partial class MainWindow : Window
     {
-        private SemesterVM semesterVM;
+        private SemestersVM semestersVM;
         private ModulesVM modulesVM;
 
         /// <summary>
@@ -30,10 +30,9 @@ namespace IHM
         public MainWindow()
         {
             InitializeComponent();
-
-            this.semesterVM = new SemesterVM();
+            this.semestersVM = new SemestersVM();
             this.modulesVM = new ModulesVM();
-            MainViewModel mainViewModel = new MainViewModel(this.modulesVM, this.semesterVM);
+            MainViewModel mainViewModel = new MainViewModel(this.modulesVM, this.semestersVM);
 
             DataContext = mainViewModel;
         }
@@ -41,26 +40,20 @@ namespace IHM
         /// <summary>
         /// Récupération des modules par semestre sélectionné
         /// </summary>
-        public async void GetModuleBySemester()
-        {
-            // Recupere le semestre sélectionné
-            Semester semesterSelect = (Semester)semesterBox.SelectedItem;
-
-
-            if (semesterSelect != null)
+        public async void GetModulesBySemester()
+        { 
+            if (semestersVM.SelectedSemester != null)
             {
                 // suppresssion des éléments qui ne sont pas ceux de base
                 gridModules.Children.OfType<Border>().ToList().ForEach(child => gridModules.Children.Remove(child));
-
-                await this.modulesVM.GetModuleBySemester(semesterSelect.Id);
-
+                await this.modulesVM.GetModuleBySemester(semestersVM.SelectedSemester);
                 int decalage = 5;
 
-                foreach (var module in this.modulesVM.Modules)
+                foreach (ModuleVM moduleVM in modulesVM.Modules)
                 {
                     // prend en compte n° de colonnes pour les semaines
-                    int gridColumnBegin = module.WeekBegin - 35;
-                    int gridColumnEnd = module.WeekEnd - 35;
+                    int gridColumnBegin = moduleVM.WeekBegin - 35;
+                    int gridColumnEnd = moduleVM.WeekEnd - 35;
 
                     // Créé un rectangle et texte pour le module
                     Border moduleRectangle = new Border
@@ -77,7 +70,7 @@ namespace IHM
 
                     TextBlock textBlock = new TextBlock
                     {
-                        Text = module.Name,
+                        Text = moduleVM.Name,
                         HorizontalAlignment = HorizontalAlignment.Center,
                         VerticalAlignment = VerticalAlignment.Center,
                         FontSize = 16,
@@ -100,7 +93,7 @@ namespace IHM
         private void OpenParametresPage(object sender, RoutedEventArgs e)
         {
             SettingsWindows settingsWindows = new SettingsWindows();
-            settingsWindows.Show();
+            settingsWindows.ShowDialog();
             this.Close();
         }
 
@@ -128,9 +121,26 @@ namespace IHM
 
         private void PlacerModuleWindow(object sender, RoutedEventArgs e)
         {
-            PlaceModuleWindow placeModuleWindow = new PlaceModuleWindow(semesterVM,modulesVM);
+            PlaceModuleWindow placeModuleWindow = new PlaceModuleWindow(semestersVM, modulesVM);
+
+            ToggleBottomButtonsVisibility(false);
+
+
             Grid.SetRow(placeModuleWindow, 2);
             grid.Children.Add(placeModuleWindow);
+
+            placeModuleWindow.ValidationCompleted += (s, args) =>
+            {
+                grid.Children.Remove(placeModuleWindow); 
+                ToggleBottomButtonsVisibility(true);
+
+                GetModulesBySemester(); // Rafraîchit la vue
+            };
+            placeModuleWindow.Canceled += (s, args) =>
+            {
+                grid.Children.Remove(placeModuleWindow); 
+                ToggleBottomButtonsVisibility(true); 
+            };
         }
 
         private void EditModuleWindow(object sender, RoutedEventArgs e)
@@ -145,7 +155,18 @@ namespace IHM
         /// <param name="e"></param>
         private void changedSelection(object sender, SelectionChangedEventArgs e)
         {
-            GetModuleBySemester();
+
+            GetModulesBySemester();
         }
+
+        private void ToggleBottomButtonsVisibility(bool IsVisible)
+        {
+            BtnAttributionModule.Visibility = IsVisible ? Visibility.Visible : Visibility.Collapsed;
+            BtnAttributionProfilType.Visibility = IsVisible ? Visibility.Visible : Visibility.Collapsed;
+            BtnBilanAlertes.Visibility = IsVisible ? Visibility.Visible : Visibility.Collapsed;
+            BtnEditerModules.Visibility = IsVisible ? Visibility.Visible : Visibility.Collapsed;
+            BtnPlacerModules.Visibility = IsVisible ? Visibility.Visible : Visibility.Collapsed;
+        }
+
     }
 }
