@@ -1,18 +1,34 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Model;
+using Storage;
+using Storage.InterfaceDAO;
 
 namespace API.Services
 {
+    /// <summary>
+    /// Classe qui gère les services enseignants
+    /// </summary>
     public class TeacherService
     {
+        private ITeacherDao teacherDao;
+
+        /// <summary>
+        /// Initialise le teacherdao
+        /// </summary>
+        public TeacherService()
+        {
+            this.teacherDao = new TeacherDaoSqlite();
+        }
+
         /// <summary>
         /// Renvoie tous les enseignants qui sont assignés au module
+        /// <author>Clotilde MALO</author>
         /// </summary>
-        /// <param name="module">Module enseigné</param>
+        /// <param name="idModule">id du module enseigné</param>
         /// <returns>Liste de Teacher qui enseignent le module</returns>
-        public Teacher[] GetTeachersByModule(Module module)
+        public Teacher[] GetTeachersByModule(string idModule)
         {
-            throw new NotImplementedException();
+            return this.teacherDao.ListForModule(idModule);
         }
 
         /// <summary>

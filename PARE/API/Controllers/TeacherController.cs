@@ -12,13 +12,15 @@ namespace API.Controllers
     {
         /// <summary>
         /// Renvoie tous les enseignants qui sont assignés au module
+        /// <author>Clotilde MALO</author>
         /// </summary>
-        /// <param name="module">Module enseigné</param>
+        /// <param name="idModule">id du module enseigné</param>
         /// <returns>Liste de Teacher qui enseignent le module</returns>
         [HttpGet("GetTeachersByModule", Name = "GetTeachersByModule")]
-        public Teacher[] GetTeachersByModule(Module module)
+        public Teacher[] GetTeachersByModule(string idModule)
         {
-            throw new NotImplementedException();
+            Teacher[] teachers = this.TeacherService.GetTeachersByModule(idModule);
+            return teachers;
         }
 
         /// <summary>
