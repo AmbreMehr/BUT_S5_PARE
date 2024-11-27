@@ -25,6 +25,7 @@ namespace IHM
         private SemestersVM semestersVM;
         private ModulesVM modulesVM;
         private TeachersVM teachersVM;
+        private UsersVM usersVM;
 
         /// <summary>
         /// Initialise la fenêtre d'édition de module
@@ -36,6 +37,7 @@ namespace IHM
             this.semestersVM = semestersVM;
             this.modulesVM = new ModulesVM();
             this.teachersVM = new TeachersVM();
+            this.usersVM = new UsersVM();
             InitializeComponent();
             InitializeSemesterBox(this.semestersVM);
         }
@@ -181,15 +183,9 @@ namespace IHM
 
             ComboBox teacherComboBox = new ComboBox { Width = 120, Margin = new Thickness(5) };
 
-
-            // TEST A REMPLACER : a remplir avec tous les profs après (Récupéré les teacher associé au module avant)
-            //teacherComboBox.Items.Add("M. Bidule");
-            //teacherComboBox.Items.Add("Mme Machin");
-
-            teacherComboBox.DataContext = teachersVM;
-            teacherComboBox.SelectedItem = teachersVM.SelectedTeacher;
-            teacherComboBox.ItemsSource = teachersVM.Teachers;
-            teacherComboBox.DisplayMemberPath = "User";
+            teacherComboBox.SelectedItem = teacherVM.User;
+            teacherComboBox.ItemsSource = usersVM.Users;
+            teacherComboBox.DisplayMemberPath = "FullName";
 
             // Evenement sur modification de la liste déroulante enseignant
             teacherComboBox.SelectionChanged += (sender, e) =>
@@ -202,13 +198,13 @@ namespace IHM
             TextBox cmBox = new TextBox { Width = 50, Margin = new Thickness(5) };
 
             if (teacherVM.User != null)
-                teacherComboBox.SelectedItem = teacherVM.User.ToString();
-            if (teacherVM.AssignedTdHours != null)
+            {
+                teacherComboBox.SelectedItem = teacherVM;
                 tdBox.Text = teacherVM.AssignedTdHours.ToString();
-            if (teacherVM.AssignedTpHours != null)
                 tpBox.Text = teacherVM.AssignedTpHours.ToString();
-            if (teacherVM.AssignedCmHours != null)
                 cmBox.Text = teacherVM.AssignedCmHours.ToString();
+            }
+
 
 
             rowStack.Children.Add(teacherComboBox);
