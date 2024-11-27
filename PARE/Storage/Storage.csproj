@@ -11,9 +11,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Resource Include="bdd.db">
+    <Content Include="bdd.db">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
+    </Content>
   </ItemGroup>
 
   <ItemGroup>
