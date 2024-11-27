@@ -15,10 +15,19 @@ namespace API.Controllers
         /// </summary>
         /// <param name="module">Module à mettre à jour</param>
         /// <returns>HTTP Code</returns>
-        [HttpPost("update", Name = "UpdateModule")]
+        [HttpPut("UpdateModule", Name = "UpdateModule")]
         public IActionResult UpdateModule(Module module)
         {
-            throw new NotImplementedException();
+            // Appeler le service pour mettre à jour le module
+            bool isUpdated = this.ModuleService.UpdateModule(module);
+            if (isUpdated)
+            {
+                return Ok("Le module a été mis à jour avec succès.");
+            }
+            else
+            {
+                return NotFound("Le module avec l'ID spécifié n'existe pas.");
+            }
         }
 
         /// <summary>

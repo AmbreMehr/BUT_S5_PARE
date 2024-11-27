@@ -14,26 +14,22 @@ namespace IHM_Model
     /// <author>Stéphane BASSET</author>
     public class RolesVM : BaseVM
     {
-        private Role[]_models;
-        public Role[] Role
+        private List<RoleVM> models;
+        
+        /// <summary>
+        /// Récupère la liste des rôlesVM
+        /// </summary>
+        public List<RoleVM> Roles
         {     
-            get { return _models; } 
-            set { 
-                _models = value;
-                NotifyChange("Role");
-            }
-
+            get { return models; }
         }
 
-
         /// <summary>
-        /// Récupère les modules.
+        /// Initialise la classe avec la liste des rôles VM à vide
         /// </summary>
-        /// <returns>Nom des modules</returns>
-        /// <author>Stéphane BASSET</author>
-        public Role[] GetAllRooles()
-        {  
-            return _models; 
+        public RolesVM()
+        {
+            models = new List<RoleVM>();
         }
     }
 }

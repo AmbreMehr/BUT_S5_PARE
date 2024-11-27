@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Model;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,24 +13,31 @@ namespace IHM_Model
     /// <author>Stéphane BASSET</author>
     public class UserVM : BaseVM
     {
-        private UserVM _model;
+        private User model;
 
-        public UserVM User
-        {
-            get { return _model; }
-            set
-            {
-                _model = value;
-                NotifyChange("User");
-            }
-        }
         /// <summary>
-        /// Update un Utilisateur.
+        /// Recupère l'utilisateur
         /// </summary>
-        /// <author>Stéphane BASSET</author>
-        public void UpdateUser(UserVM user)
+        public User Model
         {
-            _model = user;
+            get => model;
+        }
+
+        /// <summary>
+        /// Initialise l'utilisateur
+        /// </summary>
+        /// <param name="model"></param>
+        public UserVM (User model)
+        {
+            this.model = model;
+        }
+
+        /// <summary>
+        /// Met à jour l'utilisateur dans le backend
+        /// </summary>
+        public async Task UpdateUser()
+        {
+            
         }
     }
 }

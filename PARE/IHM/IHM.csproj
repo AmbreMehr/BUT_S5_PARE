@@ -43,16 +43,22 @@
   <ItemGroup>
     <Resource Include="Ressources\Fonts\OpenSauceOne-Black.ttf" />
     <Resource Include="Ressources\Fonts\OpenSauceOne-BlackItalic.ttf" />
-    <Resource Include="Ressources\Fonts\OpenSauceOne-Bold.ttf" />
+    <Resource Include="Ressources\Fonts\OpenSauceOne-Bold.ttf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="Ressources\Fonts\OpenSauceOne-BoldItalic.ttf" />
     <Resource Include="Ressources\Fonts\OpenSauceOne-ExtraBold.ttf" />
     <Resource Include="Ressources\Fonts\OpenSauceOne-ExtraBoldItalic.ttf" />
     <Resource Include="Ressources\Fonts\OpenSauceOne-Italic.ttf" />
-    <Resource Include="Ressources\Fonts\OpenSauceOne-Light.ttf" />
+    <Resource Include="Ressources\Fonts\OpenSauceOne-Light.ttf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="Ressources\Fonts\OpenSauceOne-LightItalic.ttf" />
     <Resource Include="Ressources\Fonts\OpenSauceOne-Medium.ttf" />
     <Resource Include="Ressources\Fonts\OpenSauceOne-MediumItalic.ttf" />
-    <Resource Include="Ressources\Fonts\OpenSauceOne-Regular.ttf" />
+    <Resource Include="Ressources\Fonts\OpenSauceOne-Regular.ttf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="Ressources\Fonts\OpenSauceOne-SemiBold.ttf" />
     <Resource Include="Ressources\Fonts\OpenSauceOne-SemiBoldItalic.ttf" />
     <Resource Include="Ressources\Img\logoIUT.png" />

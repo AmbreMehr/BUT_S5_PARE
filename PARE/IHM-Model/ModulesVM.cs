@@ -14,49 +14,42 @@ namespace IHM_Model
     /// <author>Stéphane BASSET - Clotilde MALO</author>
     public class ModulesVM : BaseVM
     {
-        private ObservableCollection<Module> _models;
-        private Module _selectedModule;
-        private IModuleNetwork _moduleNetwork;
+        private ObservableCollection<ModuleVM> models;
+        private ModuleVM? selectedModule;
+        private IModuleNetwork moduleNetwork;
 
         /// <summary>
         /// Get et set du tableau de modules
         /// </summary>
         /// <author> Clotilde MALO </author>
-        public ObservableCollection<Module> Modules
+        public ObservableCollection<ModuleVM> Modules
         {
-            get { return _models; }
-            set
-            {
-                _models = value;
-                NotifyChange("Modules");
-            }
+            get => models;
         }
+
         /// <summary>
         /// Get et set du module sélectionné
         /// </summary>
         /// <author> Clotilde MALO </author>
-        public Module SelectedModule
+        public ModuleVM? SelectedModule
         {
-            get { return _selectedModule; }
+            get { return selectedModule; }
             set
             {
-                _selectedModule = value;
+                selectedModule = value;
                 NotifyChange("SelectedModule");
             }
         }
-
 
         /// <summary>
         /// Constructeur initialisant le tableau de modules.
         /// </summary>
         /// <author>Stéphane BASSET</author>
-        public ModulesVM(IModuleNetwork moduleNetwork) 
+        public ModulesVM() 
         {
-            this._moduleNetwork = moduleNetwork;
-            this._models = new ObservableCollection<Module>();
-
+            this.moduleNetwork = new ModuleNetwork();
+            this.models = new ObservableCollection<ModuleVM>();
         }
-
 
         /// <summary>
         /// Récupère le nombre d'heures pour une semaine donnée.
@@ -77,28 +70,57 @@ namespace IHM_Model
         /// </summary>
         /// <param name="idSemester">id du semestre souhaité</param>
         /// <returns>Tableau des modules pour le semestre</returns>
-        /// <author>Stéphane BASSET</author>
-        public async Task<ObservableCollection<Module>> GetModuleBySemester(int idSemester)
+        /// <author>Ambre Mehr</author>
+        public async Task<ObservableCollection<ModuleVM>> GetModuleBySemester(SemesterVM semester)
         {
-            var modules = await _moduleNetwork.GetModuleBySemester(idSemester);
-            Modules = new ObservableCollection<Module>(modules);
-            return Modules; 
-
+            Modules.Clear();
+            Module[] modules = await moduleNetwork.GetModuleBySemester(semester.Model.Id);
+            foreach (Module module in modules)
+            {
+                ModuleVM moduleVM = new ModuleVM(module);
+                Modules.Add(moduleVM);
+            }
+            return Modules;
         }
 
         /// <summary>
-        /// Fait l'appel pour récupérer les modules pour un semestre donné.
+        /// Récupère tout les modules
         /// </summary>
-        /// <param name="idSemester">id du semestre</param>
-        /// <author>Clotilde MALO</author>
-        public async Task LoadModulesBySemester(int idSemester)
+        /// <returns>tout les modules</returns>
+        /// <author>Ambre Mehr</author>
+        public async Task<ObservableCollection<ModuleVM>> GetAllModules()
         {
-            var modules = await GetModuleBySemester(idSemester);
-            Modules = new ObservableCollection<Module>(modules);
-
+            Modules.Clear();
+            Module[] modules = await moduleNetwork.GetAllModules();
+            foreach (Module module in modules)
+            {
+                ModuleVM moduleVM = new ModuleVM(module);
+                Modules.Add(moduleVM);
+            }
+            return Modules;
         }
 
-
-
+        /// <summary>
+        /// Met à jour les modules dans le backend
+        /// </summary>
+        /// <returns>Une tâche asynchrone.</returns>
+        /// <author>Lucas PRUNIER</author>
+        public async Task UpdateModules()
+        {
+            try
+            {
+                // Demande à tous les ModuleVM de mettre à jour le modèle en backend
+                foreach (ModuleVM moduleVM in models)
+                {
+                    await moduleVM.UpdateModule();
+                }
+            }
+            catch (Exception ex)
+            {
+                // Gérer les erreurs
+                // @TODO Les textes d'erreur doivent être en fichier de ressource
+                throw new ApplicationException("Erreur lors de la mise à jour du module.", ex);
+            }
+        }
     }
 }
