@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace Storage
 {
@@ -85,7 +86,28 @@ namespace Storage
 
         public void Update(Teacher teacher)
         {
-            throw new NotImplementedException();
+            if (teacher == null || teacher.User == null)
+                throw new ArgumentNullException(nameof(teacher), "Teacher ou User ne peut pas être null.");
+
+
+            db.Connection.Open();
+            var cmd = db.Connection.CreateCommand();
+            cmd.CommandText = "UPDATE TeacherOfModule " +
+                  "SET idUser = @idUser, " +
+                  "assignedCMHours = @CMHours, " +
+                  "assignedTDHours = @TDHours, " +
+                  "assignedTPHours = @TPHours " +
+                  "WHERE idTeacherOfModule = @idTeacher;";
+
+            cmd.Parameters.AddWithValue("@idUser", teacher.User.Id);
+            cmd.Parameters.AddWithValue("@CMHours", teacher.AssignedCmHours);
+            cmd.Parameters.AddWithValue("@TDHours", teacher.AssignedTdHours);
+            cmd.Parameters.AddWithValue("@TPHours", teacher.AssignedTpHours);
+            cmd.Parameters.AddWithValue("@idTeacher", teacher.Id);
+
+            
+            cmd.ExecuteNonQuery();
+            db.Connection.Close();
         }
 
         public Teacher Reader2Teacher(SqliteDataReader reader)
@@ -100,7 +122,8 @@ namespace Storage
             teacher.AssignedCmHours = Convert.ToInt32(reader["assignedCMHours"]);
             teacher.AssignedTdHours = Convert.ToInt32(reader["assignedTDHours"]);
             teacher.AssignedTpHours = Convert.ToInt32(reader["assignedTPHours"]);
-          
+            teacher.Id = Convert.ToInt32(reader["idTeacherOfModule"]);
+
 
 
             return teacher;

@@ -31,7 +31,18 @@ namespace API.Controllers
         [HttpPost("update", Name = "UpdateTeacher")]
         public IActionResult UpdateTeacher(Teacher teacher)
         {
-            throw new NotImplementedException();
+            IActionResult result = BadRequest();
+            try
+            {
+                this.TeacherService.UpdateTeacher(teacher);
+                result = Ok("L'enseignant a été mis à jour avec succès.");
+            }
+            catch
+            {
+                result = NotFound("L'enseignant n'a pas été mis à jour.");
+            }
+            return result;
+
         }
 
         /// <summary>

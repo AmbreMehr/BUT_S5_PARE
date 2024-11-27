@@ -36,9 +36,9 @@ namespace API.Services
         /// </summary>
         /// <param name="teacher">Teacher à mettre à jour</param>
         /// <returns>boolean</returns>
-        public bool UpdateTeacher(Teacher teacher)
+        public void UpdateTeacher(Teacher teacher)
         {
-            throw new NotImplementedException();
+            this.teacherDao.Update(teacher);
         }
 
         /// <summary>
