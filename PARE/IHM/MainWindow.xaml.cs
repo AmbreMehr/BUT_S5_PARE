@@ -151,7 +151,7 @@ namespace IHM
         /// <param name="e"></param>
         private void EditModuleWindow(object sender, RoutedEventArgs e)
         {
-            new EditModuleWindow(semesterVM).Show();
+            new EditModuleWindow(semestersVM).Show();
             this.Close();
         }
 

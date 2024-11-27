@@ -22,18 +22,18 @@ namespace IHM
     /// </summary>
     public partial class EditModuleWindow : Window
     {
-        private SemesterVM semesterVM;
+        private SemestersVM semestersVM;
 
         /// <summary>
         /// Initialise la fenêtre d'édition de module
         /// <author>Clotilde MALO</author>
         /// </summary>
         /// <param name="semesterVM">VM de semestre de la mainwindow</param>
-        public EditModuleWindow(SemesterVM semesterVM)
+        public EditModuleWindow(SemestersVM semestersVM)
         {
-            this.semesterVM = semesterVM;
+            this.semestersVM = semestersVM;
             InitializeComponent();
-            InitializeSemesterBox(this.semesterVM);
+            InitializeSemesterBox(this.semestersVM);
 
             // TEST A REMPLACER : Créé un faux module
             AddModule("Module 1");
@@ -49,11 +49,11 @@ namespace IHM
         /// <author>Clotilde MALO</author>
         /// </summary>
         /// <param name="semesterVM">VM de semestre avec les données</param>
-        private void InitializeSemesterBox(SemesterVM semesterVM)
+        private void InitializeSemesterBox(SemestersVM semestersVM)
         {
-            semesterBox.DataContext = semesterVM;
-            semesterBox.SelectedItem = semesterVM.SelectedSemester;
-            semesterBox.ItemsSource = semesterVM.Semesters;
+            semesterBox.DataContext = semestersVM;
+            semesterBox.SelectedItem = semestersVM.SelectedSemester;
+            semesterBox.ItemsSource = semestersVM.Semesters;
         }
 
 
