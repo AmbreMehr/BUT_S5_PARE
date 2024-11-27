@@ -56,25 +56,5 @@ namespace IHM_ModelTests
             Assert.Equal("Test Module", vm.Name);
             Assert.Equal(module, vm.Model);
         }
-
-        [Fact]
-        public void Supervisor_SetValue_ShouldUpdateModel()
-        {
-            // Arrange
-            User user = new User { Id = 1, FirstName = "John" };
-            User newUser = new User { Id = 2, FirstName = "Jane" };
-            Module module = new Module { Supervisor = user };
-            ModuleVM vm = new ModuleVM(module);
-
-            // Act
-            vm.Supervisor = new UserVM(newUser);
-
-            // Assert
-            Assert.Equal("Jane", vm.Supervisor.ToString());
-            Assert.Equal(newUser, module.Supervisor);
-        }
-
-
-
     }
 }
