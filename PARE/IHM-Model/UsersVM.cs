@@ -41,14 +41,18 @@ namespace IHM_Model
         }
 
         /// <summary>
-        /// Récupère tous les utilisateursVM par role.
+        /// Récupère tous les enseignants
         /// </summary>
         /// <param name="role">role de l'utilisateur</param>
-        /// <returns>liste d'utilisateurs VM ayant le role demandé</returns>
-        /// <author>Stéphane BASSET</author>
-        public async Task<List<UserVM>> GetAllUsersByRole(Role role)
+        /// <returns>UserVM list</returns>
+        public async Task<List<UserVM>> GetAllProfessors()
         {
-            // @TODO Mettre en models le résultat de la requête
+            models.Clear();
+            User[] users = await network.GetUsersByRole(Roles.Professor);
+            foreach (User professor in users)
+            {
+                models.Add(new UserVM(professor));
+            }
             return models;
         }
 

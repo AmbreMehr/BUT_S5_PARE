@@ -65,5 +65,18 @@ namespace API.Controllers
             IEnumerable<Role> roles = this.UserService.GetAllRoles();
             return roles.ToArray();
         }
+
+        /// <summary>
+        /// Renvoie la liste d'utilisateurs ayant le rôle passé en paramètre
+        /// </summary>
+        /// <param name="roleId">id du rôle</param>
+        /// <returns>Tableau de User</returns>
+        /// <author>AmbreMehr</author>
+        [HttpGet("GetAllByRole", Name = "GetAllByRole")]
+        public User[] GetAllByRole(int roleId)
+        {
+            IEnumerable<User> users = UserService.GetAllByRole(roleId);
+            return users.ToArray();
+        }
     }
 }

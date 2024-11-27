@@ -75,5 +75,17 @@ namespace API.Services
             IEnumerable<Role> roles = this.roleDao.ListAll();
             return roles.ToArray();
         }
+
+        /// <summary>
+        /// Renvoie la liste d'utilisateurs ayant le rôle passé en paramètre
+        /// </summary>
+        /// <param name="roleId">id du rôle</param>
+        /// <returns>Tableau de User</returns>
+        /// <author>AmbreMehr</author>
+        public User[] GetAllByRole(int roleId)
+        {
+            return userDao.ListAllByRole(roleId);
+
+        }
     }
 }

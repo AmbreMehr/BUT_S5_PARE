@@ -106,7 +106,9 @@ namespace IHM
 
         private void AttributionModuleWindow(object sender, RoutedEventArgs e)
         {
-            
+            ModuleSupervisorsWindow moduleSupervisorsWindow = new ModuleSupervisorsWindow(semestersVM);
+            moduleSupervisorsWindow.Show();
+            this.Close();
         }
 
         private void AttributionProfilTypeWindow(object sender, RoutedEventArgs e)
