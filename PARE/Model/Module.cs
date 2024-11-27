@@ -178,13 +178,12 @@ namespace Model
         }
 
         /// <summary>
-        /// Constructeur de module vide
+        /// Constructeur vide de module
         /// </summary>
         public Module()
         {
 
         }
-
 
     }
 }

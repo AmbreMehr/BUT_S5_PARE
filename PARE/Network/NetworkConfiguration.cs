@@ -41,7 +41,7 @@ namespace Network
             HttpClientHandler handler = new HttpClientHandler();
             handler.ServerCertificateCustomValidationCallback = (message, cert, chain, sslPolicyErrors) =>
             {
-                    return true;
+                return true;
             };
             return new HttpClient(handler);
         }

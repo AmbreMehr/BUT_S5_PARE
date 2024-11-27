@@ -1,0 +1,134 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <!--IconButton-->
+    <Style x:Key="IconButton" TargetType="Button">
+        <Setter Property="Background" Value="{DynamicResource ButtonColor}"/>
+        <Setter Property="Foreground" Value="{DynamicResource ButtonText}"/>
+        <Setter Property="Height" Value="100"/>
+        <Setter Property="Margin" Value="0,0,20,0"/>
+        <Setter Property="Template">
+                <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border x:Name="border" CornerRadius="10" 
+                                Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}" 
+                                BorderThickness="1" >
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="border" Property="Background" Value="{DynamicResource ButtonHover}"/>
+                            <Setter Property="Foreground" Value="{DynamicResource ButtonTextHover}"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+    </Style>
+
+
+    <!--ButtonText-->
+    <Style x:Key="ButtonText1" TargetType="Button">
+        <Setter Property="Foreground" Value="{DynamicResource ButtonText}"/>
+        <Setter Property="FontFamily" Value="{DynamicResource OpenSauceOne}"/>
+        <Setter Property="Background" Value="{DynamicResource ButtonColor}"/>
+        <Setter Property="Height" Value="50"/>
+        <Setter Property="Width" Value="225"/>
+        <Setter Property="Padding" Value="10"/>
+        <Setter Property="FontSize" Value="17"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border x:Name="border" CornerRadius="10" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="1" >
+                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="border" Property="Background" Value="{DynamicResource ButtonHover}"/>
+                            <Setter Property="Foreground" Value="{DynamicResource ButtonTextHover}"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+
+    <!--ButtonLanguage-->
+    <Style x:Key="ButtonLanguage" TargetType="Button">
+        <Setter Property="Foreground" Value="{DynamicResource ButtonText}"/>
+        <Setter Property="Background" Value="{DynamicResource ButtonColor}"/>
+        <Setter Property="HorizontalAlignment" Value="Center"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="Height" Value="250"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border x:Name="border" CornerRadius="10" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="1" >
+                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="border" Property="Background" Value="{DynamicResource ButtonHover}"/>
+                            <Setter Property="Foreground" Value="{DynamicResource ButtonTextHover}"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!--ButtonTextLanguage-->
+    <Style x:Key="ButtonTextLanguage"  TargetType="Button">
+        <Setter Property="Background" Value="{DynamicResource ButtonColor}"/>
+        <Setter Property="Foreground" Value="{DynamicResource ButtonText}"/>
+        <Setter Property="FontFamily" Value="{DynamicResource OpenSauceOne}"/>
+        <Setter Property="Padding" Value="10"/>
+        <Setter Property="FontSize" Value="40"/>
+        <Setter Property="Margin" Value="70, 20, 70, 20"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border x:Name="border" CornerRadius="10" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="1">
+                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="border" Property="Background" Value="{DynamicResource ButtonHover}"/>
+                            <Setter Property="Foreground" Value="{DynamicResource ButtonTextHover}"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+
+    <!--ButtonTextLogin-->
+    <Style x:Key="ButtonTextLogin" TargetType="Button">
+        <Setter Property="Foreground" Value="{DynamicResource ButtonText}"/>
+        <Setter Property="FontFamily" Value="{DynamicResource OpenSauceOne}"/>
+        <Setter Property="Background" Value="{DynamicResource ButtonColor}"/>
+        <Setter Property="Margin" Value="120, 40, 120, 40"/>
+        <Setter Property="FontSize" Value="20"/>
+        <Setter Property="Padding" Value="10"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border x:Name="border" CornerRadius="10" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="1">
+                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="border" Property="Background" Value="{DynamicResource ButtonHover}"/>
+                            <Setter Property="Foreground" Value="{DynamicResource ButtonTextHover}"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+
+</ResourceDictionary>
