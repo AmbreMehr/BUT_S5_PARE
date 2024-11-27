@@ -59,12 +59,59 @@ namespace IHM
         }
 
         private async void ClickBtnValider(object sender, RoutedEventArgs e)
-        {            
-            await modulesVM.UpdateModules();
-            ValidationCompleted?.Invoke(this, EventArgs.Empty);
-            await UpdateModulesList();
-            this.Visibility = Visibility.Collapsed;
+        {
+            try
+            {
+                await modulesVM.UpdateModules(); // Appel à la méthode qui met à jour les modules
+                MessageBox.Show(
+                    "Les modules ont été mis à jour avec succès.",
+                    "Succès",
+                    MessageBoxButton.OK,
+                    MessageBoxImage.Information);
+
+                ValidationCompleted?.Invoke(this, EventArgs.Empty); // Notifie la fin de la validation
+                this.Visibility = Visibility.Collapsed;
+            }
+            catch (ArgumentOutOfRangeException ex)
+            {
+                // Gestion des erreurs liées aux semaines hors limites
+                MessageBox.Show(
+                    $"Erreur : {ex.Message}",
+                    "Erreur de validation",
+                    MessageBoxButton.OK,
+                    MessageBoxImage.Warning);
+            }
+            catch (InvalidOperationException ex)
+            {
+                // Gestion des erreurs liées à des règles métier non respectées
+                MessageBox.Show(
+                    $"Erreur : {ex.Message}",
+                    "Erreur de validation",
+                    MessageBoxButton.OK,
+                    MessageBoxImage.Warning);
+            }
+            catch (ApplicationException ex)
+            {
+                // Gestion des erreurs générales encapsulées dans ApplicationException
+                MessageBox.Show(
+                    $"Erreur : {ex.InnerException?.Message ?? ex.Message}",
+                    "Erreur lors de la mise à jour",
+                    MessageBoxButton.OK,
+                    MessageBoxImage.Error);
+            }
+            catch (Exception ex)
+            {
+                // Gestion des erreurs inattendues
+                MessageBox.Show(
+                    $"Une erreur inattendue s'est produite : {ex.Message}",
+                    "Erreur",
+                    MessageBoxButton.OK,
+                    MessageBoxImage.Error);
+            }
         }
+
+
+
         private void ClickBtnAnnuler(object sender, RoutedEventArgs e)
         {
             Canceled?.Invoke(this, EventArgs.Empty);
