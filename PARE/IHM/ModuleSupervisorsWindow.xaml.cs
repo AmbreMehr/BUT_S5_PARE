@@ -1,4 +1,5 @@
-﻿using System;
+﻿using IHM_Model;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -17,11 +18,23 @@ namespace IHM
     /// <summary>
     /// Logique d'interaction pour AssignProfilWindow.xaml
     /// </summary>
-    public partial class AssignProfilWindow : Window
+    public partial class ModuleSupervisorsWindow : Window
     {
-        public AssignProfilWindow()
+        private SemestersVM semestersVM;
+
+        public ModuleSupervisorsWindow(SemestersVM semestersVM)
         {
+            this.semestersVM = semestersVM;
+            DataContext = semestersVM;
+
             InitializeComponent();
+        }
+
+        private void ClickCancelButton(object sender, RoutedEventArgs e)
+        {
+            MainWindow mainWindow = new MainWindow();
+            mainWindow.Show();
+            this.Close();
         }
     }
 }
