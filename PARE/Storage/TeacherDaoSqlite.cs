@@ -67,7 +67,8 @@ namespace Storage
                                 " LEFT JOIN TypicalProfile AS tp ON tp.idTypicalProfile = u.idTypicalProfile" +
                                 " LEFT JOIN RoleOfUser AS ru ON u.idUser = ru.idUser" +
                                 " LEFT JOIN Role AS r ON r.idRole = ru.idRole" +
-                                " WHERE t.idModule = @moduleId;";
+                                " WHERE t.idModule = @moduleId" +
+                                " GROUP BY idTeacherOfModule;";
               cmd.Parameters.AddWithValue("@moduleId", idModule);
         
               using (var reader = cmd.ExecuteReader())
