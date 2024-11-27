@@ -1,4 +1,5 @@
 ﻿using Model;
+using Network;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,6 +17,8 @@ namespace IHM_Model
         private Teacher model;
         private UserVM user;
 
+        private ITeacherNetwork teacherNetwork;
+
         /// <summary>
         /// Récupère l'enseignant
         /// </summary>
@@ -30,6 +33,14 @@ namespace IHM_Model
         public UserVM User
         {
             get { return user; }
+            set
+            {
+                if (user != value)
+                {
+                    user = value;
+                    NotifyChange();
+                }
+            }
         }
 
         /// <summary>
@@ -38,6 +49,14 @@ namespace IHM_Model
         public int AssignedTdHours
         {
             get { return model.AssignedTdHours; }
+            set
+            {
+                if (model.AssignedTdHours != value)
+                {
+                    model.AssignedTdHours = value;
+                    NotifyChange();
+                }
+            }
         }
 
         /// <summary>
@@ -46,6 +65,14 @@ namespace IHM_Model
         public int AssignedTpHours
         {
             get { return model.AssignedTpHours; }
+            set
+            {
+                if (model.AssignedTpHours != value)
+                {
+                    model.AssignedTpHours = value;
+                    NotifyChange();
+                }
+            }
         }
 
         /// <summary>
@@ -54,6 +81,14 @@ namespace IHM_Model
         public int AssignedCmHours
         {
             get { return model.AssignedCmHours; }
+            set
+            {
+                if (model.AssignedCmHours != value)
+                {
+                    model.AssignedCmHours = value;
+                    NotifyChange();
+                }
+            }
         }
 
         /// <summary>
@@ -61,7 +96,8 @@ namespace IHM_Model
         /// </summary>
         public async Task UpdateTeacher()
         {
-            
+            await teacherNetwork.UpdateTeacher(model);
+
         }
 
         /// <summary>
@@ -88,14 +124,16 @@ namespace IHM_Model
         {
             this.model = model;
             this.user =  new UserVM(model.User);
+            this.teacherNetwork = new TeacherNetwork();
+
         }
 
         /// <summary>
-        /// Initialise le teacherVM en le laissant vide
+        /// Initialise le teacherVM en le laissant vide et initialise le teacherNetwork
         /// </summary>
         public TeacherVM()
         {
-
+            this.teacherNetwork = new TeacherNetwork();
         }
     }
 }

@@ -19,7 +19,7 @@ namespace IHM_Model
     {
         private List<TeacherVM> model;
         private ITeacherNetwork teacherNetwork;
-        private TeacherVM? selectedTeacher;
+        private UserVM? selectedTeacher;
 
 
         /// <summary>
@@ -33,7 +33,7 @@ namespace IHM_Model
         /// <summary>
         /// Get et set de l'enseignant sélectionné
         /// </summary>
-        public TeacherVM? SelectedTeacher
+        public UserVM? SelectedTeacher
         {
             get { return selectedTeacher; }
             set

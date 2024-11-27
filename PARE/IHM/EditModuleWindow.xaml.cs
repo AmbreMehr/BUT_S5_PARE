@@ -1,7 +1,9 @@
 ﻿using IHM_Model;
+using Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -66,18 +68,18 @@ namespace IHM
                 foreach (TeacherVM teacherVM in TeachersVM)
                 {
                     AddTeacherRow(modulesPanel, teacherVM);
-                    teachersVM.SelectedTeacher = teacherVM;
+                    teachersVM.SelectedTeacher = teacherVM.User;
                 }
 
             }
-            }
+        }
 
-         private async Task<List<TeacherVM>> GetTeachersByModule(ModuleVM Module)
-         {
-             // à voir quoi clear
-             return await this.teachersVM.GetTeachersByModule(Module);
+        private async Task<List<TeacherVM>> GetTeachersByModule(ModuleVM Module)
+        {
+            // à voir quoi clear
+            return await this.teachersVM.GetTeachersByModule(Module);
 
-         }
+        }
 
 
 
@@ -110,7 +112,8 @@ namespace IHM
                 FontSize = 16,
                 FontWeight = FontWeights.Bold,
                 Margin = new Thickness(0, 0, 0, 5),
-                HorizontalAlignment = HorizontalAlignment.Center
+                HorizontalAlignment = HorizontalAlignment.Center,
+
             };
             module.Children.Add(moduleTitle);
 
@@ -188,7 +191,8 @@ namespace IHM
             {
                 Orientation = Orientation.Horizontal,
                 HorizontalAlignment = HorizontalAlignment.Center,
-                Margin = new Thickness(5)
+                Margin = new Thickness(5),
+                Tag = teacherVM
             };
 
             ComboBox teacherComboBox = new ComboBox { Width = 120, Margin = new Thickness(5) };
@@ -200,7 +204,7 @@ namespace IHM
             // Evenement sur modification de la liste déroulante enseignant
             teacherComboBox.SelectionChanged += (sender, e) =>
             {
-                teachersVM.SelectedTeacher = (TeacherVM)teacherComboBox.SelectedItem;
+                teachersVM.SelectedTeacher = (UserVM)teacherComboBox.SelectedItem;
             };
 
             TextBox tdBox = new TextBox { Width = 50, Margin = new Thickness(5) };
@@ -216,7 +220,6 @@ namespace IHM
             }
 
 
-
             rowStack.Children.Add(teacherComboBox);
             rowStack.Children.Add(tdBox);
             rowStack.Children.Add(tpBox);
@@ -225,6 +228,8 @@ namespace IHM
 
             moduleStack.Children.Add(rowStack);
         }
+
+
 
         /// <summary>
         /// Ajoute un bouton pour supprimer une ligne d'enseignant/heure
@@ -275,11 +280,24 @@ namespace IHM
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void UpdateTeacher(object sender, RoutedEventArgs e)
+        private async void UpdateTeacher(object sender, RoutedEventArgs e)
         {
-            // TO DO : envoyer à VM
+            foreach (TeacherVM teacherVM in teachersVM.Teachers)
+            {
+                /* update teacherVM non fonctionnel
+                teacherVM.User = (UserVM)teacherComboBox.SelectedItem;
+                teacherVM.AssignedTdHours = int.Parse(tdBox.Text);
+                teacherVM.AssignedTpHours = int.Parse(tpBox.Text);
+                teacherVM.AssignedCmHours = int.Parse(cmBox.Text);
+                */
+
+                await teacherVM.UpdateTeacher();
+
+
+            }
 
             MessageBox.Show((string)System.Windows.Application.Current.FindResource("MessageModif"), (string)System.Windows.Application.Current.FindResource("Confirmation"), MessageBoxButton.OK, MessageBoxImage.Information);
+            BackHome(sender, e);
 
         }
 
