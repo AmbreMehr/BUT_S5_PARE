@@ -49,7 +49,7 @@
             </Button>
 
         </StackPanel>
-
+        
         <!-- Boutons en bas de l'écran -->
         <Button x:Name="BtnAttributionModule" 
                 HorizontalAlignment="Left" Margin="60,0,0,0"
@@ -93,10 +93,10 @@
                 Style="{StaticResource ButtonText1}"
                 Content="{DynamicResource BtnEditerModules}" 
                 Click="EditModuleWindow">
-           
+
         </Button>
 
-        <!-- Contenu de la page -->
+            <!-- Contenu de la page -->
         <Grid Grid.Column="1" Grid.Row="1">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>

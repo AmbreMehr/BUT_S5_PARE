@@ -26,6 +26,10 @@ namespace IHM
         private SemestersVM semestersVM;
         private ModulesVM modulesVM;
 
+        public event EventHandler ValidationCompleted;
+        public event EventHandler Canceled;
+
+
         public PlaceModuleWindow(SemestersVM semestersVM, ModulesVM modulesVM)
         {
             InitializeComponent();
@@ -55,16 +59,15 @@ namespace IHM
         }
 
         private async void ClickBtnValider(object sender, RoutedEventArgs e)
-        {
-                // Envoyer les modifications au serveur via ModulesVM
-                await modulesVM.UpdateModules();
-                // Mettre à jour la liste des modules
-                await UpdateModulesList();
-                // Cacher la fenêtre après la validation
-                this.Visibility = Visibility.Collapsed;
+        {            
+            await modulesVM.UpdateModules();
+            ValidationCompleted?.Invoke(this, EventArgs.Empty);
+            await UpdateModulesList();
+            this.Visibility = Visibility.Collapsed;
         }
         private void ClickBtnAnnuler(object sender, RoutedEventArgs e)
         {
+            Canceled?.Invoke(this, EventArgs.Empty);
             this.Visibility = Visibility.Collapsed;
         }
     }

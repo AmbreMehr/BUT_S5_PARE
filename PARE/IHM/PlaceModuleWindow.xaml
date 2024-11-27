@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:IHM"
         mc:Ignorable="d"
-        Height="270" Width="1500">
+        Height="270">
 
     <UserControl.Background>
         <SolidColorBrush Color="White" />
@@ -19,7 +19,7 @@
 
         <!-- Liste des modules avec WrapPanel -->
         <ScrollViewer Grid.Row="0" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Disabled">
-            <ItemsControl  x:Name="ModulesList">
+            <ItemsControl x:Name="ModulesList" HorizontalAlignment="Center">
                 <!-- Utilisation de WrapPanel pour une disposition horizontale -->
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>

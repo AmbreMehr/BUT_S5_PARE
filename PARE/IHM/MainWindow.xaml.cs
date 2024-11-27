@@ -122,8 +122,23 @@ namespace IHM
         private void PlacerModuleWindow(object sender, RoutedEventArgs e)
         {
             PlaceModuleWindow placeModuleWindow = new PlaceModuleWindow(semestersVM, modulesVM);
+
+            ToggleBottomButtonsVisibility(false);
+
+
             Grid.SetRow(placeModuleWindow, 2);
             grid.Children.Add(placeModuleWindow);
+
+            placeModuleWindow.ValidationCompleted += (s, args) =>
+            {
+                grid.Children.Remove(placeModuleWindow); 
+                ToggleBottomButtonsVisibility(true); 
+            };
+            placeModuleWindow.Canceled += (s, args) =>
+            {
+                grid.Children.Remove(placeModuleWindow); 
+                ToggleBottomButtonsVisibility(true); 
+            };
         }
 
         private void EditModuleWindow(object sender, RoutedEventArgs e)
@@ -141,5 +156,15 @@ namespace IHM
 
             GetModulesBySemester();
         }
+
+        private void ToggleBottomButtonsVisibility(bool IsVisible)
+        {
+            BtnAttributionModule.Visibility = IsVisible ? Visibility.Visible : Visibility.Collapsed;
+            BtnAttributionProfilType.Visibility = IsVisible ? Visibility.Visible : Visibility.Collapsed;
+            BtnBilanAlertes.Visibility = IsVisible ? Visibility.Visible : Visibility.Collapsed;
+            BtnEditerModules.Visibility = IsVisible ? Visibility.Visible : Visibility.Collapsed;
+            BtnPlacerModules.Visibility = IsVisible ? Visibility.Visible : Visibility.Collapsed;
+        }
+
     }
 }
