@@ -19,7 +19,7 @@
 
         <!-- Liste des modules avec WrapPanel -->
         <ScrollViewer Grid.Row="0" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Disabled">
-            <ItemsControl ItemsSource="{Binding Modules}" x:Name="ModulesList">
+            <ItemsControl  x:Name="ModulesList">
                 <!-- Utilisation de WrapPanel pour une disposition horizontale -->
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
