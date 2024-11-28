@@ -9,15 +9,14 @@ namespace IHM_Model.Exceptions
     /// <summary>
     /// Exception levée lorsque la semaine de début est inférieure à 35 ou supérieure à 53 : positionnement module
     /// </summary>
-    public class ExceptionHourEnd : Exception
+    public class ExceptionWeekBegin : Exception
     {
         /// <summary>
-        /// Initialise une nouvelle instance de la classe ExceptionHourEnd
+        /// Initialise une nouvelle instance de la classe ExceptionHourBegin
         /// </summary>
         /// <param name="message">message par défaut</param>
-        public ExceptionHourEnd(string message = "La semaine de fin doit être comprise entre 35 et 53.") : base(message)
+        public ExceptionWeekBegin(string message) : base(message)
         {
         }
-
     }
 }

@@ -15,7 +15,7 @@ namespace IHM_Model.Exceptions
         /// Initialise une nouvelle instance de la classe ExceptionHourProgram
         /// </summary>
         /// <param name="message">message par défaut</param>
-        public ExceptionHourProgram(string message = "Les heures assignés à l'enseignant doivent être inférieures ou égales aux heures du programme.") : base(message)
+        public ExceptionHourProgram(string message) : base(message)
         {
         }
 

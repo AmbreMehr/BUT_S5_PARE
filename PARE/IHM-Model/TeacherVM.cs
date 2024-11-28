@@ -128,14 +128,14 @@ namespace IHM_Model
                         || this.AssignedTdHours > this.Module.HoursTd
                         || this.AssignedTpHours > this.Module.HoursTp)
                 {
-                    throw new ArgumentOutOfRangeException("Les heures assignés à l'enseignant doivent être inférieures ou égales aux heures du programme");
+                    throw new ExceptionHourProgram(Ressource.StringRes.HourProgram);
                 }
 
                 if (this.AssignedTpHours < 0 ||
                     this.AssignedTdHours < 0 ||
                     this.AssignedCmHours < 0)
                 {
-                    throw new ArgumentNullException("Les heures assignés à l'enseignant ne peuvent pas être validées.");
+                    throw new ExceptionHourNegative(Ressource.StringRes.HourNegative);
                 }
                 
                 await teacherNetwork.UpdateTeacher(model);
@@ -145,7 +145,7 @@ namespace IHM_Model
             catch (Exception ex)
             {
                 // Gérer les autres erreurs
-                throw new ApplicationException("Erreur lors de la mise à jour de l'enseignant.", ex);
+                throw new ApplicationException(Ressource.StringRes.ErrorMAJTeacher, ex);
             }
 
         }
@@ -169,14 +169,14 @@ namespace IHM_Model
                     || this.AssignedTdHours > this.Module.HoursTd
                     || this.AssignedTpHours > this.Module.HoursTp)
             {
-                throw new ExceptionHourProgram();
+                throw new ExceptionHourProgram(Ressource.StringRes.HourProgram);
             }
 
             if (this.AssignedTpHours < 0 ||
                 this.AssignedTdHours < 0 ||
                 this.AssignedCmHours < 0)
             {
-                throw new ExceptionHourNegative();
+                throw new ExceptionHourNegative(Ressource.StringRes.HourNegative);
             }
             try
             {
@@ -186,7 +186,7 @@ namespace IHM_Model
             catch (Exception ex)
             {
                 // Gérer les autres erreurs
-                throw new ApplicationException("Erreur lors de l'ajout de l'enseignant.", ex);
+                throw new ApplicationException(Ressource.StringRes.ErrorAddTeacher, ex);
             }
         }
 

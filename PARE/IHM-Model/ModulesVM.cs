@@ -113,22 +113,22 @@ namespace IHM_Model
                 // Vérification des règles métier
                 if (moduleVM.WeekBegin < 35 || moduleVM.WeekBegin > 53)
                 {
-                    throw new ExceptionHourBegin();
+                    throw new ExceptionWeekBegin(Ressource.StringRes.WeekBegin);
                 }
 
                 if (moduleVM.WeekEnd < 35 || moduleVM.WeekEnd > 53)
                 {
-                    throw new ExceptionHourEnd();
+                    throw new ExceptionWeekEnd(Ressource.StringRes.WeekEnd);
                 }
 
                 if (moduleVM.WeekBegin > moduleVM.WeekEnd)
                 {
-                    throw new ExceptionHourBeginAfterHourEnd();
+                    throw new ExceptionWeekBeginAfterWeekEnd(Ressource.StringRes.WeekBeginAfterWeekEnd);
                 }
 
                 if (moduleVM.WeekBegin == moduleVM.WeekEnd)
                 {
-                    throw new ExceptionSameHourBeginEnd();
+                    throw new ExceptionSameWeekBeginEnd(Ressource.StringRes.SameWeekBeginEnd);
                 }
                 try
                 {
@@ -138,7 +138,7 @@ namespace IHM_Model
                 catch (Exception ex)
                 {
                     // Gérer les erreurs
-                    throw new ApplicationException("Erreur lors de la mise à jour du module.", ex);
+                    throw new ApplicationException(Ressource.StringRes.ErrorMAJModule, ex);
                 }
             }
         }
