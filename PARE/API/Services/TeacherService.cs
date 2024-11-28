@@ -54,9 +54,9 @@ namespace API.Services
         /// </summary>
         /// <param name="teacher">Teacher à créer</param>
         /// <returns>boolean</returns>
-        public bool CreateTeacher(Teacher teacher)
+        public void CreateTeacher(Teacher teacher)
         {
-            throw new NotImplementedException();
+            this.teacherDao.Create(teacher);
         }
     }
 }

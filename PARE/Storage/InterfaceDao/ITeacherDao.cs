@@ -39,5 +39,11 @@ namespace Storage.InterfaceDAO
         /// </summary>
         /// <param name="teacher">enseignant à supprimer d'un module</param>
         public void Delete(Teacher teacher);
+
+        /// <summary>
+        /// Créé un enseignant pour un module
+        /// </summary>
+        /// <param name="teacher">enseignant à ajouter au module</param>
+        public void Create(Teacher teacher);
     }
 }

@@ -74,7 +74,17 @@ namespace API.Controllers
         [HttpPost("create", Name = "CreateTeacher")]
         public IActionResult CreateTeacher(Teacher teacher)
         {
-            throw new NotImplementedException();
+            IActionResult result = BadRequest();
+            try
+            {
+                this.TeacherService.CreateTeacher(teacher);
+                result = Ok("L'enseignant a été ajouté avec succès.");
+            }
+            catch
+            {
+                result = NotFound("L'enseignant n'a pas été ajouté.");
+            }
+            return result;
         }
     }
 }

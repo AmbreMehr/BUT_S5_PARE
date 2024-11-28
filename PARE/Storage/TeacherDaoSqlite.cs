@@ -4,6 +4,7 @@ using Storage.InterfaceDAO;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
@@ -133,7 +134,7 @@ namespace Storage
         public void Delete(Teacher teacher)
         {
             if (teacher == null)
-                throw new ArgumentNullException(nameof(teacher), "Teacher ou User ne peut pas être null.");
+                throw new ArgumentNullException(nameof(teacher), "Teacher ne peut pas être null.");
 
 
             db.Connection.Open();
@@ -143,6 +144,32 @@ namespace Storage
                                " WHERE idTeacherOfModule = @idTeacher;";
 
             cmd.Parameters.AddWithValue("@idTeacher", teacher.Id);
+
+
+            cmd.ExecuteNonQuery();
+            db.Connection.Close();
+
+        }
+
+        public void Create(Teacher teacher)
+        {
+            if (teacher == null)
+                throw new ArgumentNullException(nameof(teacher), "Teacher ne peut pas être null.");
+
+
+            db.Connection.Open();
+            var cmd = db.Connection.CreateCommand();
+            cmd.CommandText = "INSERT" +
+                               " INTO TeacherOfModule" +
+                               " (idTeacherOfModule, assignedTDHours, assignedTPHours, assignedCMHours, idUser, idModule)" +
+                               " VALUES" +
+                               " (NULL, @assignedTDHours, @assignedTPHours, @assignedCMHours, @idUser, @idModule);";
+
+            cmd.Parameters.AddWithValue("@assignedTDHours", teacher.AssignedTdHours);
+            cmd.Parameters.AddWithValue("@assignedTPHours", teacher.AssignedTpHours);
+            cmd.Parameters.AddWithValue("@assignedCMHours", teacher.AssignedCmHours);
+            cmd.Parameters.AddWithValue("@idUser", teacher.User.Id);
+            cmd.Parameters.AddWithValue("@idModule", teacher.Module.Id);
 
 
             cmd.ExecuteNonQuery();
