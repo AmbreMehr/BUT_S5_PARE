@@ -11,7 +11,7 @@
         ResizeMode="NoResize"
         WindowStartupLocation="CenterScreen"
         WindowState="Maximized">
-    
+
 
     <Window.Background>
         <SolidColorBrush Color="{DynamicResource BackgroundColor}"/>
@@ -49,7 +49,7 @@
             </Button>
 
         </StackPanel>
-        
+
         <!-- Boutons en bas de l'écran -->
         <Button x:Name="BtnAttributionModule" 
                 HorizontalAlignment="Left" Margin="60,0,0,0"
@@ -57,7 +57,7 @@
                 Content="{DynamicResource BtnAttributionModule}" 
                 Grid.Row="2" Grid.Column="1"
                 Click="AttributionModuleWindow">
-           
+
         </Button>
 
         <Button x:Name="BtnAttributionProfilType" 
@@ -66,7 +66,7 @@
                 Content="{DynamicResource BtnAttributionProfilType}" 
                 Grid.Row="2" Grid.Column="1" 
                 Click="AttributionProfilTypeWindow">
-       
+
         </Button>
 
         <Button x:Name="BtnBilanAlertes" 
@@ -75,7 +75,7 @@
                 Content="{DynamicResource BtnBilanAlertes}" 
                 Grid.Row="2" Grid.Column="1" 
                 Click="BilanAlertWindow">
-            
+
         </Button>
 
         <Button x:Name="BtnPlacerModules" 
@@ -84,7 +84,7 @@
                 Content="{DynamicResource BtnPlacerModules}" 
                 Grid.Row="2" Grid.Column="1" 
                 Click="PlacerModuleWindow">
-            
+
         </Button>
 
         <Button x:Name="BtnEditerModules" 
@@ -96,8 +96,11 @@
 
         </Button>
 
-            <!-- Contenu de la page -->
-        <Grid Grid.Column="1" Grid.Row="1">
+        <!-- Contenu de la page -->
+        <Grid Grid.Column="1" Grid.Row="1" Cursor="Hand">
+            <Grid.Background>
+                <ImageBrush/>
+            </Grid.Background>
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
                 <!--- pour le sélecteur-->
@@ -107,10 +110,28 @@
                 <!-- pour les boutons-->
             </Grid.RowDefinitions>
 
-            <ComboBox DataContext="{Binding SemestersVM}" Grid.Row="0" x:Name="semesterBox" Grid.Column="1" Height="50" Width="250" Margin="10,10,10,10" HorizontalAlignment="Left" VerticalAlignment="Top" FontFamily="{StaticResource OpenSauceOne}" FontSize="20" 
+            <ComboBox 
+                      DataContext="{Binding SemestersVM}" 
+                      x:Name="semesterBox" 
+                      Height="50" 
+                      Width="250" 
+                      Margin="10,10,10,10" 
+                      HorizontalAlignment="Left" 
+                      VerticalAlignment="Center" 
                       ItemsSource="{Binding Semesters}"
                       SelectedItem="{Binding SelectedSemester}"
-                      DisplayMemberPath="Name" SelectionChanged="changedSelection"/>
+                      DisplayMemberPath="Name"
+                      SelectionChanged="changedSelection" 
+                      FontFamily="{StaticResource OpenSauceOne}" 
+                      FontSize="22"    
+                      HorizontalContentAlignment="Center" 
+                      VerticalContentAlignment="Center" 
+                      Cursor="Cross" 
+                      Foreground="{DynamicResource TitleColor}" 
+                      FontWeight="Bold">
+            </ComboBox>
+
+
 
             <ScrollViewer Grid.Row="1" Grid.Column="1" VerticalScrollBarVisibility="Auto">
                 <Grid Grid.Row="1" Grid.Column="1" DataContext="{Binding ModulesVM}" x:Name="gridModules">
@@ -177,7 +198,7 @@
                     <Line Grid.Column="12" Grid.Row="1" Style="{StaticResource DashedLineStyle}"/>
 
                     <Label Grid.Column="13" Grid.Row="0" Content="48" HorizontalAlignment="Center" VerticalAlignment="Top" FontFamily="{StaticResource OpenSauceOne}" FontSize="30"/>
-                    <Line Grid.Column="13" Grid.Row="1" Style="{StaticResource DashedLineStyle}"/>    
+                    <Line Grid.Column="13" Grid.Row="1" Style="{StaticResource DashedLineStyle}"/>
 
                 </Grid>
             </ScrollViewer>
