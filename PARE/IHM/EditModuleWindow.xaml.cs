@@ -383,7 +383,11 @@ namespace IHM
         /// <param name="ex"></param>
         private void GestionException(Exception ex)
         {
-            MessageBox.Show($"{ex.Message}",
+            var exception = ex;
+            if (ex.InnerException != null) 
+                exception = ex.InnerException;
+
+            MessageBox.Show($"{exception.Message}",
                             (string)System.Windows.Application.Current.FindResource("ErreurDeValidation"),
                             MessageBoxButton.OK,
                             MessageBoxImage.Warning);
