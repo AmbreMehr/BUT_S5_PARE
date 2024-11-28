@@ -38,7 +38,6 @@ namespace IHM
         private async void InitializeData()
         {
             await context.UsersVM.GetAllProfessors();
-            await GetModulesBySemester();
         }
 
         /// <summary>
@@ -107,6 +106,16 @@ namespace IHM
             this.Close();
         }
 
+        private async void SemesterSelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            await GetModulesBySemester();
+        }
+
+        private async void ClickSubmitButton(object sender, RoutedEventArgs e)
+        {
+            await context.ModulesVM.UpdateModules();
+        }
+
         public struct ModuleSupervisorsContext
         {
             public SemestersVM SemestersVM { get; set; }
@@ -119,16 +128,6 @@ namespace IHM
                 ModulesVM = new ModulesVM();
                 UsersVM = new UsersVM();
             }
-        }
-
-        private async void SemesterSelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            await GetModulesBySemester();
-        }
-
-        private async void ClickSubmitButton(object sender, RoutedEventArgs e)
-        {
-            await context.ModulesVM.UpdateModules();
         }
     }
 }
