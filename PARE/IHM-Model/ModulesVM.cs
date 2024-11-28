@@ -101,7 +101,7 @@ namespace IHM_Model
         }
 
         /// <summary>
-        /// Met à jour les modules dans le backend
+        /// Met à jour les modules dans le backend en validant les données.
         /// </summary>
         /// <returns>Une tâche asynchrone.</returns>
         /// <author>Lucas PRUNIER</author>
@@ -109,9 +109,34 @@ namespace IHM_Model
         {
             try
             {
-                // Demande à tous les ModuleVM de mettre à jour le modèle en backend
                 foreach (ModuleVM moduleVM in models)
                 {
+                    // Vérification des règles métier
+                    if (moduleVM.WeekBegin < 35 || moduleVM.WeekBegin > 53)
+                    {
+                        throw new ArgumentOutOfRangeException(nameof(moduleVM.WeekBegin),
+                            $"La semaine de début ({moduleVM.WeekBegin}) doit être comprise entre 35 et 53.");
+                    }
+
+                    if (moduleVM.WeekEnd < 35 || moduleVM.WeekEnd > 53)
+                    {
+                        throw new ArgumentOutOfRangeException(nameof(moduleVM.WeekEnd),
+                            $"La semaine de fin ({moduleVM.WeekEnd}) doit être comprise entre 35 et 53.");
+                    }
+
+                    if (moduleVM.WeekBegin > moduleVM.WeekEnd)
+                    {
+                        throw new InvalidOperationException(
+                            $"La semaine de début ({moduleVM.WeekBegin}) ne peut pas être supérieure à la semaine de fin ({moduleVM.WeekEnd}).");
+                    }
+
+                    if (moduleVM.WeekBegin == moduleVM.WeekEnd)
+                    {
+                        throw new InvalidOperationException(
+                            $"La semaine de début ({moduleVM.WeekBegin}) ne peut pas être égale à la semaine de fin ({moduleVM.WeekEnd}).");
+                    }
+
+                    // Si tout est valide, mettre à jour le module dans le backend
                     await moduleVM.UpdateModule();
                 }
             }

@@ -64,49 +64,9 @@
 
         <!-- Boutons -->
         <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center" Margin="10">
-            <Button Content="{DynamicResource BtnAnnuler}" Width="100" Margin="5" Foreground="#FFFFFF" Background="#FF3DA79D" Height="25" Click="ClickBtnAnnuler">
-                <Button.Style>
-                    <Style TargetType="{x:Type Button}">
-                        <Setter Property="Template">
-                            <Setter.Value>
-                                <ControlTemplate TargetType="{x:Type Button}">
-                                    <Border x:Name="border" CornerRadius="10" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="1" >
-                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                                    </Border>
-                                    <ControlTemplate.Triggers>
-                                        <Trigger Property="IsMouseOver" Value="True">
-                                            <Setter TargetName="border" Property="Background" Value="#FF7dbfcf"/>
-                                            <Setter Property="Foreground" Value="#000000"/>
-                                        </Trigger>
-                                    </ControlTemplate.Triggers>
-                                </ControlTemplate>
-                            </Setter.Value>
-                        </Setter>
-                    </Style>
-                </Button.Style>
-            </Button>
+            <Button Style="{StaticResource ButtonText1}" Content="{DynamicResource BtnAnnuler}" Width="100" Margin="5" Foreground="#FFFFFF" Background="#FF3DA79D" Height="25" Click="ClickBtnAnnuler"/>
 
-            <Button Content="{DynamicResource BtnValider}" Width="100" Margin="5" Foreground="#FFFFFF" Background="#FF3DA79D" Height="25" Click="ClickBtnValider">
-            <Button.Style>
-                <Style TargetType="{x:Type Button}">
-                    <Setter Property="Template">
-                        <Setter.Value>
-                            <ControlTemplate TargetType="{x:Type Button}">
-                                <Border x:Name="border" CornerRadius="10" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="1" >
-                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                                </Border>
-                                <ControlTemplate.Triggers>
-                                    <Trigger Property="IsMouseOver" Value="True">
-                                        <Setter TargetName="border" Property="Background" Value="#FF7dbfcf"/>
-                                        <Setter Property="Foreground" Value="#000000"/>
-                                    </Trigger>
-                                </ControlTemplate.Triggers>
-                            </ControlTemplate>
-                        </Setter.Value>
-                    </Setter>
-                </Style>
-            </Button.Style>
-            </Button>
+            <Button Style="{StaticResource ButtonText1}" Content="{DynamicResource BtnValider}" Width="100" Margin="5" Foreground="#FFFFFF" Background="#FF3DA79D" Height="25" Click="ClickBtnValider"/>
         </StackPanel>
     </Grid>
 </UserControl>

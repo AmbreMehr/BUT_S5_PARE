@@ -32,5 +32,14 @@
     <!--ToolTips-->
     <system:String x:Key="ToolTipPageParamètres">Paramètres</system:String>
     <system:String x:Key="ToolTipLogOut">Se déconnecter</system:String>
-    
+
+    <!--MessagesBox-->
+    <system:String x:Key="Erreur">Erreur</system:String>
+    <system:String x:Key="Succes">Succès</system:String>
+    <system:String x:Key="SelectionSemestre">Veuillez sélectionner un semestre avant de placer les modules</system:String>
+    <system:String x:Key="MiseAJourModules">Les modules ont été mis à jour avec succès.</system:String>
+    <system:String x:Key="ErreurDeValidation">Erreur de validation</system:String>
+    <system:String x:Key="ErreurDeMiseAJour">Erreur lors de la mise à jour</system:String>
+    <system:String x:Key="ErreurInnatendue">Une erreur inattendue s'est produite</system:String>
+
 </ResourceDictionary>

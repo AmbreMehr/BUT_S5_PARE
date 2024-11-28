@@ -32,4 +32,13 @@
     <system:String x:Key="ToolTipPageParamètres">Parameters</system:String>
     <system:String x:Key="ToolTipLogOut">Log Out</system:String>
 
+    <!--MessagesBox-->
+    <system:String x:Key="Erreur">Error</system:String>
+    <system:String x:Key="Succes">Succes</system:String>
+    <system:String x:Key="SelectionSemestre">Please select a semester before placing modules</system:String>
+    <system:String x:Key="MiseAJourModules">The modules have been successfully updated.</system:String>
+    <system:String x:Key="ErreurDeValidation">Validation error</system:String>
+    <system:String x:Key="ErreurDeMiseAJour">Update error</system:String>
+    <system:String x:Key="ErreurInnatendue">An unexpected error has occurred</system:String>
+
 </ResourceDictionary>
