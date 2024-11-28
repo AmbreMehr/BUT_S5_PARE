@@ -145,7 +145,7 @@ namespace IHM_Model
             catch (Exception ex)
             {
                 // Gérer les autres erreurs
-                throw new ApplicationException(Ressource.StringRes.ErrorMAJTeacher, ex);
+                throw new Exception(Ressource.StringRes.ErrorMAJTeacher, ex);
             }
 
         }
@@ -186,7 +186,7 @@ namespace IHM_Model
             catch (Exception ex)
             {
                 // Gérer les autres erreurs
-                throw new ApplicationException(Ressource.StringRes.ErrorAddTeacher, ex);
+                throw new Exception(Ressource.StringRes.ErrorAddTeacher, ex);
             }
         }
 
