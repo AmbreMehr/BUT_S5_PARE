@@ -151,6 +151,8 @@ namespace Model
         public Module(Semester semester)
         {
             this.semester = semester;
+            this.supervisor = new User();
+            this.name = "";
         }
 
         /// <summary>
@@ -158,7 +160,9 @@ namespace Model
         /// </summary>
         public Module()
         {
-
+            this.semester = new Semester();
+            this.supervisor = new User();
+            this.name = "";
         }
 
     }
