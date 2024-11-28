@@ -29,7 +29,11 @@ namespace IHM
         public event EventHandler ValidationCompleted;
         public event EventHandler Canceled;
 
-
+        /// <summary>
+        /// Constructeur du component, affiche les semestres à placer et met à jour la liste des modules
+        /// </summary>
+        /// <param name="semestersVM"></param>
+        /// <param name="modulesVM"></param>
         public PlaceModuleWindow(SemestersVM semestersVM, ModulesVM modulesVM)
         {
             InitializeComponent();
@@ -43,7 +47,10 @@ namespace IHM
             Task task = UpdateModulesList();
         }
 
-
+        /// <summary>
+        /// Méthode permettant de mettre à jour les différents modules dans l'affichage
+        /// </summary>
+        /// <returns></returns>
         private async Task UpdateModulesList()
         {
             SemesterVM? selectedSemester = semestersVM.SelectedSemester;
@@ -57,7 +64,11 @@ namespace IHM
                 MessageBox.Show((string)System.Windows.Application.Current.FindResource("SelectionSemestre"), (string)System.Windows.Application.Current.FindResource("Erreur"), MessageBoxButton.OK, MessageBoxImage.Warning);
             }
         }
-
+        /// <summary>
+        /// Logique du bouton Valider
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private async void ClickBtnValider(object sender, RoutedEventArgs e)
         {
             try
@@ -109,7 +120,11 @@ namespace IHM
                     MessageBoxImage.Error);
             }
         }
-
+        /// <summary>
+        /// Logique du bouton Annuler
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ClickBtnAnnuler(object sender, RoutedEventArgs e)
         {
             Canceled?.Invoke(this, EventArgs.Empty);

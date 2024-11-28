@@ -42,8 +42,10 @@
     <system:String x:Key="TitleModuleSupervisorsWindow">Responsables de ressources</system:String>
     <system:String x:Key="SupervisorCol">Responsable</system:String>
     <system:String x:Key="ModuleCol">Module</system:String>
+    <system:String x:Key="WeekBegin">Semaine de début</system:String>
+    <system:String x:Key="WeekEnd">Semaine de fin</system:String>
 
- 
+    
     <!--Edition des Modules-->
     <system:String x:Key="TitreEditionModules">Edition des modules</system:String>
     <system:String x:Key="ProgramModule">Au programme</system:String>

@@ -40,23 +40,6 @@ namespace IHM_Model
             this.model = model;
         }
 
-        /// <summary>
-        /// Renvoi l'utilisateur en chaîne de caractère (prénom nom)
-        /// </summary>
-        /// <returns>chaîne de caractère avec prénom et nom utilisateur</returns>
-        public string ToString()
-        {
-            return (this.model.FirstName + " " + this.model.LastName);
-        }
-
-        /// <summary>
-        /// Met à jour l'utilisateur dans le backend
-        /// </summary>
-        public async Task UpdateUser()
-        {
-            
-        }
-
         public override bool Equals(object? obj)
         {
             return obj is UserVM vM &&

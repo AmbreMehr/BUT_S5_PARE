@@ -143,7 +143,6 @@ namespace IHM_Model
             catch (Exception ex)
             {
                 // Gérer les erreurs
-                // @TODO Les textes d'erreur doivent être en fichier de ressource
                 throw new ApplicationException("Erreur lors de la mise à jour du module.", ex);
             }
         }
