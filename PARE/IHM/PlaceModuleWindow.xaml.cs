@@ -83,43 +83,25 @@ namespace IHM
                 ValidationCompleted?.Invoke(this, EventArgs.Empty); // Notifie la fin de la validation
                 this.Visibility = Visibility.Collapsed;
             }
-            catch (ArgumentOutOfRangeException ex)
-            {
-                // Gestion des erreurs liées aux semaines hors limites
-                MessageBox.Show(
-                    $"{ ex.Message}",
-                    (string)System.Windows.Application.Current.FindResource("ErreurDeValidation"),
-                    MessageBoxButton.OK,
-                    MessageBoxImage.Warning);
-            }
-            catch (InvalidOperationException ex)
-            {
-                // Gestion des erreurs liées à des règles métier non respectées
-                MessageBox.Show(
-                    $"{ex.Message}",
-                    (string)System.Windows.Application.Current.FindResource("ErreurDeValidation"),
-                    MessageBoxButton.OK,
-                    MessageBoxImage.Warning);
-            }
-            catch (ApplicationException ex)
-            {
-                // Gestion des erreurs générales encapsulées dans ApplicationException
-                MessageBox.Show(
-                    $"{ex.InnerException?.Message ?? ex.Message}", 
-                    (string)System.Windows.Application.Current.FindResource("ErreurDeMiseAJour"),
-                    MessageBoxButton.OK,
-                    MessageBoxImage.Error);
-            }
             catch (Exception ex)
             {
-                // Gestion des erreurs inattendues
-                MessageBox.Show(
-                    $"{ex.Message}",
-                    (string)System.Windows.Application.Current.FindResource("ErreurInnatendue"),
-                    MessageBoxButton.OK,
-                    MessageBoxImage.Error);
+                GestionException(ex, "ErreurDeValidation");
             }
         }
+
+        /// <summary>
+        /// Permet d'affiche une pop up pour l'affichage des exceptions
+        /// </summary>
+        /// <param name="ex">exception</param>
+        /// <param name="RessourceName">nom de la ressource pour titre</param>
+        private void GestionException(Exception ex, string RessourceName)
+        {
+            MessageBox.Show($"{ex.Message}",
+                            (string)System.Windows.Application.Current.FindResource(RessourceName),
+                            MessageBoxButton.OK,
+                            MessageBoxImage.Warning);
+        }
+
         /// <summary>
         /// Logique du bouton Annuler
         /// </summary>

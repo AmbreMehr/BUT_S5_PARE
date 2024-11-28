@@ -1,4 +1,5 @@
-﻿using Model;
+﻿using IHM_Model.Exceptions;
+using Model;
 using Network;
 using System;
 using System.Collections.ObjectModel;
@@ -107,43 +108,38 @@ namespace IHM_Model
         /// <author>Lucas PRUNIER</author>
         public async Task UpdateModules()
         {
-            try
+            foreach (ModuleVM moduleVM in models)
             {
-                foreach (ModuleVM moduleVM in models)
+                // Vérification des règles métier
+                if (moduleVM.WeekBegin < 35 || moduleVM.WeekBegin > 53)
                 {
-                    // Vérification des règles métier
-                    if (moduleVM.WeekBegin < 35 || moduleVM.WeekBegin > 53)
-                    {
-                        throw new ArgumentOutOfRangeException(nameof(moduleVM.WeekBegin),
-                            $"La semaine de début ({moduleVM.WeekBegin}) doit être comprise entre 35 et 53.");
-                    }
+                    throw new ExceptionHourBegin();
+                }
 
-                    if (moduleVM.WeekEnd < 35 || moduleVM.WeekEnd > 53)
-                    {
-                        throw new ArgumentOutOfRangeException(nameof(moduleVM.WeekEnd),
-                            $"La semaine de fin ({moduleVM.WeekEnd}) doit être comprise entre 35 et 53.");
-                    }
+                if (moduleVM.WeekEnd < 35 || moduleVM.WeekEnd > 53)
+                {
+                    throw new ExceptionHourEnd();
+                }
 
-                    if (moduleVM.WeekBegin > moduleVM.WeekEnd)
-                    {
-                        throw new InvalidOperationException(
-                            $"La semaine de début ({moduleVM.WeekBegin}) ne peut pas être supérieure à la semaine de fin ({moduleVM.WeekEnd}).");
-                    }
+                if (moduleVM.WeekBegin > moduleVM.WeekEnd)
+                {
+                    throw new ExceptionHourBeginAfterHourEnd();
+                }
 
-                    if (moduleVM.WeekBegin == moduleVM.WeekEnd)
-                    {
-                        throw new InvalidOperationException(
-                            $"La semaine de début ({moduleVM.WeekBegin}) ne peut pas être égale à la semaine de fin ({moduleVM.WeekEnd}).");
-                    }
-
-                    // Si tout est valide, mettre à jour le module dans le backend
+                if (moduleVM.WeekBegin == moduleVM.WeekEnd)
+                {
+                    throw new ExceptionSameHourBeginEnd();
+                }
+                try
+                {
                     await moduleVM.UpdateModule();
                 }
-            }
-            catch (Exception ex)
-            {
-                // Gérer les erreurs
-                throw new ApplicationException("Erreur lors de la mise à jour du module.", ex);
+
+                catch (Exception ex)
+                {
+                    // Gérer les erreurs
+                    throw new ApplicationException("Erreur lors de la mise à jour du module.", ex);
+                }
             }
         }
     }
