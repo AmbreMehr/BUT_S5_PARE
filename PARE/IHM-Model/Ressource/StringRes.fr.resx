@@ -135,7 +135,7 @@
   <data name="SameWeekBeginEnd" xml:space="preserve">
     <value>La semaine de début ne peut pas être égale à la semaine de fin</value>
   </data>
-  <data name="ErrorTeacher" xml:space="preserve">
+  <data name="ErrorAddTeacher" xml:space="preserve">
     <value>Erreur lors de l'ajout de l'enseignant</value>
   </data>
   <data name="ErrorMAJModule" xml:space="preserve">
@@ -143,5 +143,8 @@
   </data>
   <data name="ErrorMAJTeacher" xml:space="preserve">
     <value>Erreur lors de la mise à jour de l'enseignant</value>
+  </data>
+  <data name="ErrorTeacher" xml:space="preserve">
+    <value>Erreur lors de l'ajout de l'enseignant</value>
   </data>
 </root>

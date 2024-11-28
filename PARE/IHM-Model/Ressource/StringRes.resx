@@ -144,4 +144,7 @@
   <data name="ErrorMAJTeacher" xml:space="preserve">
     <value>Error during update the teacher</value>
   </data>
+  <data name="ErrorTeacher" xml:space="preserve">
+    <value>Error during the add of the teacher</value>
+  </data>
 </root>

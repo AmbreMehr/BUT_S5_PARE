@@ -88,6 +88,15 @@ namespace IHM_Model.Ressource {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Error during the add of the teacher.
+        /// </summary>
+        internal static string ErrorTeacher {
+            get {
+                return ResourceManager.GetString("ErrorTeacher", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à The teacher’s assigned hours are negative and cannot be validated..
         /// </summary>
         internal static string HourNegative {
