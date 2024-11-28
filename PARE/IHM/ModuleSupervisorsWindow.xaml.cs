@@ -24,24 +24,31 @@ namespace IHM
 
         public ModuleSupervisorsWindow(SemestersVM semestersVM)
         {
-            context = new ModuleSupervisorsContext(semestersVM);
-            DataContext = context;
-
             InitializeComponent();
+
+            context = new ModuleSupervisorsContext(semestersVM);
             InitializeData();
+
+            DataContext = context;
         }
 
+        /// <summary>
+        /// Async, initialise les données de la fenêtre
+        /// </summary>
         private async void InitializeData()
         {
             await context.UsersVM.GetAllProfessors();
             await GetModulesBySemester();
         }
 
+        /// <summary>
+        /// Async, Récupère la liste des modules pour le semestre et met à jour l'IHM
+        /// </summary>
         private async Task GetModulesBySemester()
         {
             if (context.SemestersVM.SelectedSemester != null) 
             {
-                foreach (UIElement child in ModuleList.Children.OfType<Border>())
+                foreach (UIElement child in ModuleList.Children.OfType<Border>().ToList())
                 {
                     ModuleList.Children.Remove(child);
                 }
@@ -54,9 +61,14 @@ namespace IHM
                     ComboBox moduleSupervisorBox = new ComboBox
                     {
                         ItemsSource = context.UsersVM.Users,
-                        SelectedItem = moduleVM.Supervisor,
                         DisplayMemberPath = "Fullname"
                     };
+                    Binding moduleSupervisorBinding = new Binding("Supervisor")
+                    {
+                        Source = moduleVM
+                    };
+                    moduleSupervisorBox.SetBinding(ComboBox.SelectedItemProperty, moduleSupervisorBinding);
+
                     Border moduleNameCell = NewBorder();
                     TextBlock moduleNameBox = new TextBlock
                     {
@@ -107,6 +119,16 @@ namespace IHM
                 ModulesVM = new ModulesVM();
                 UsersVM = new UsersVM();
             }
+        }
+
+        private async void SemesterSelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            await GetModulesBySemester();
+        }
+
+        private async void ClickSubmitButton(object sender, RoutedEventArgs e)
+        {
+            await context.ModulesVM.UpdateModules();
         }
     }
 }

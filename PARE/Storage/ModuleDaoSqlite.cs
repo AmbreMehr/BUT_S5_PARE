@@ -69,12 +69,14 @@ namespace Storage
             var cmd = db.Connection.CreateCommand();
             cmd.CommandText = "UPDATE Modules " +
                   "SET weekBegin = @weekBegin, " +
-                  "weekEnd = @weekEnd " +
+                  "weekEnd = @weekEnd, " +
+                  "supervisor = @supervisorId " +
                   "WHERE idModule = @idModule;";
 
             // Ajout des paramètres avec leurs valeurs
             cmd.Parameters.AddWithValue("@weekBegin", module.WeekBegin);
             cmd.Parameters.AddWithValue("@weekEnd", module.WeekEnd);
+            cmd.Parameters.AddWithValue("@supervisorId", module.Supervisor.Id);
             cmd.Parameters.AddWithValue("@idModule", module.Id);
 
             // Exécuter la commande
