@@ -3,6 +3,7 @@ using Network;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -119,7 +120,32 @@ namespace IHM_Model
         /// </summary>
         public async Task UpdateTeacher()
         {
-            await teacherNetwork.UpdateTeacher(model);
+            try
+            {
+                // Verif règles métier
+                if (this.AssignedCmHours > this.Module.HoursCM 
+                        || this.AssignedTdHours > this.Module.HoursTd
+                        || this.AssignedTpHours > this.Module.HoursTp)
+                {
+                    throw new ArgumentOutOfRangeException("Les heures assignés à l'enseignant doivent être inférieures ou égales aux heures du programme");
+                }
+
+                if (this.AssignedTpHours < 0 ||
+                    this.AssignedTdHours < 0 ||
+                    this.AssignedCmHours < 0)
+                {
+                    throw new ArgumentNullException("Les heures assignés à l'enseignant ne peuvent pas être validées.");
+                }
+                
+                await teacherNetwork.UpdateTeacher(model);
+
+                
+            }
+            catch (Exception ex)
+            {
+                // Gérer les autres erreurs
+                throw new ApplicationException("Erreur lors de la mise à jour de l'enseignant.", ex);
+            }
 
         }
 
@@ -135,8 +161,32 @@ namespace IHM_Model
         /// Créer un teacher.
         /// </summary>
         public async Task CreateTeacher()
-        {   
-            await teacherNetwork.CreateTeacher(model);
+        {
+            try
+            {
+                // Verif règles métier
+                if (this.AssignedCmHours > this.Module.HoursCM
+                        || this.AssignedTdHours > this.Module.HoursTd
+                        || this.AssignedTpHours > this.Module.HoursTp)
+                {
+                    throw new ArgumentOutOfRangeException("Les heures assignés à l'enseignant doivent être inférieures ou égales aux heures du programme");
+                }
+
+                if (this.AssignedTpHours < 0 ||
+                    this.AssignedTdHours < 0 ||
+                    this.AssignedCmHours < 0)
+                {
+                    throw new ArgumentNullException("Les heures assignés à l'enseignant ne peuvent pas être validées.");
+                }
+
+                await teacherNetwork.CreateTeacher(model);
+
+            }
+            catch (Exception ex)
+            {
+                // Gérer les autres erreurs
+                throw new ApplicationException("Erreur lors de l'ajout de l'enseignant.", ex);
+            }
         }
 
         /// <summary>
