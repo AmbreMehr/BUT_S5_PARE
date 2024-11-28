@@ -138,6 +138,30 @@ namespace Storage
             throw new NotImplementedException();
         }
 
-        
+        public User[] ListAllByRole(int roleId)
+        {
+            db.Connection.Open();
+            var cmd = db.Connection.CreateCommand();
+            cmd.CommandText = "SELECT u.idUser" +
+                              " FROM Users AS u" +
+                              " LEFT JOIN RoleOfUser AS ru ON u.idUser = ru.idUser" +
+                              " WHERE ru.idRole = @roleId ;";
+            cmd.Parameters.AddWithValue("@roleId", roleId);
+            List<User> users = new List<User>();
+            List<int> list = new List<int>();
+            using (var reader = cmd.ExecuteReader())
+            {
+                while (reader.Read()) 
+                {
+                    list.Add(Convert.ToInt32(reader["idUser"]));
+                }
+            }
+            db.Connection.Close();
+            foreach (int userId in list)
+            {
+                users.Add(Read(userId));
+            }
+            return users.ToArray();
+        }
     }
 }

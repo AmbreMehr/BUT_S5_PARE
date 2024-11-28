@@ -24,6 +24,14 @@ namespace IHM_Model
         }
 
         /// <summary>
+        /// Renvoie le nom complet de l'utilisateur
+        /// </summary>
+        public string Fullname
+        {
+            get => model.FirstName + " " + model.LastName;
+        }
+
+        /// <summary>
         /// Initialise l'utilisateur
         /// </summary>
         /// <param name="model"></param>
@@ -38,6 +46,17 @@ namespace IHM_Model
         public async Task UpdateUser()
         {
             
+        }
+
+        public override bool Equals(object? obj)
+        {
+            return obj is UserVM vM &&
+                   EqualityComparer<User>.Default.Equals(model, vM.model);
+        }
+
+        public override int GetHashCode()
+        {
+            return HashCode.Combine(model);
         }
     }
 }
