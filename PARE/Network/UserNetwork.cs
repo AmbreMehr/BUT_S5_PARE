@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http.Json;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -32,7 +33,7 @@ namespace Network
 
         public async Task<User[]> GetUsersByRole(Roles role)
         {
-            IEnumerable<User> users = new List<User>();
+            IEnumerable<User>? users = new List<User>();
             using (var client = NetworkConfiguration.Instance.HttpClient)
             {
                 string query = NetworkConfiguration.Instance.ApiUrl + "api/user/GetAllByRole?roleId="+((int)role);
@@ -42,7 +43,7 @@ namespace Network
                     users = await response.Content.ReadFromJsonAsync(typeof(IEnumerable<User>)) as IEnumerable<User>;
                 }
             }
-            return users.ToArray();
+            return (User[])(users != null ? users.ToArray() : new User[0]);
         }
 
         public async Task UpdateUser(User user)

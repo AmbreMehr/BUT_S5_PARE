@@ -10,9 +10,7 @@ namespace Network
     /// <author>AmbreMehr</author>
     public class NetworkParameters
     {
-        private string apiUrl;
-
         [DataMember]
-        public string ApiUrl { get => apiUrl; set => apiUrl = value; }
+        public string ?ApiUrl { get; set; }
     }
 }

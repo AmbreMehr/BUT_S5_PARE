@@ -18,13 +18,6 @@ namespace Network
         Task UpdateModule(Module module);
 
         /// <summary>
-        /// Async, renvoie le nombre d'heures suivies par les étudiants pour une semaine donnée
-        /// </summary>
-        /// <param name="week">int numéro de la semaine selon le calendrier civil</param>
-        /// <returns>int nombre d'heures suivies par les étudiants</returns>
-        Task<int> GetHoursByWeek(int week);
-
-        /// <summary>
         /// Async, renvoie les modules contenus dans un semestre
         /// </summary>
         /// <param name="semester">Semester</param>

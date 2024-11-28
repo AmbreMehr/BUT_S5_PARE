@@ -19,7 +19,7 @@ namespace Network
         /// <author>AmbreMehr</author>
         public async Task<Module[]> GetAllModules()
         {
-            IEnumerable<Module> modules = new List<Module>();
+            IEnumerable<Module>? modules = new List<Module>();
             using (HttpClient? client = NetworkConfiguration.Instance.HttpClient)
             {
                 string query = NetworkConfiguration.Instance.ApiUrl + "api/module/GetAllModules";
@@ -29,12 +29,7 @@ namespace Network
                     modules = await response.Content.ReadFromJsonAsync(typeof(IEnumerable<Module>)) as IEnumerable<Module>;
                 }
             }
-            return modules.ToArray();
-        }
-
-        public async Task<int> GetHoursByWeek(int week)
-        {
-            throw new NotImplementedException();
+            return (Module[])(modules != null ? modules.ToArray() : Enumerable.Empty<Module>());
         }
 
         /// <summary>
@@ -46,7 +41,7 @@ namespace Network
         /// <author>AmbreMehr</author>
         public async Task<Module[]> GetModuleBySemester(int semester)
         {
-            IEnumerable<Module> modules = new List<Module>();
+            IEnumerable<Module>? modules = new List<Module>();
             using (HttpClient? client = NetworkConfiguration.Instance.HttpClient)
             {
                 string query = NetworkConfiguration.Instance.ApiUrl + "api/module/GetModulesBySemester?semester=" + semester;
@@ -56,7 +51,7 @@ namespace Network
                     modules = await response.Content.ReadFromJsonAsync(typeof(IEnumerable<Module>)) as IEnumerable<Module>;
                 }
             }
-            return modules.ToArray();
+            return (Module[])(modules != null ? modules.ToArray() : Enumerable.Empty<Module>());
         }
 
         /// <summary>

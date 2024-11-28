@@ -39,14 +39,14 @@ namespace IHM
             
             
             DataContext = new MainViewModel(this.modulesVM, this.semestersVM);
-            
-            UpdateModulesList();
+
+            Task task = UpdateModulesList();
         }
 
 
         private async Task UpdateModulesList()
         {
-            SemesterVM selectedSemester = semestersVM.SelectedSemester;
+            SemesterVM? selectedSemester = semestersVM.SelectedSemester;
             if (selectedSemester != null)
             {
                 await this.modulesVM.GetModuleBySemester(selectedSemester);
