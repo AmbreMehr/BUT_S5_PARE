@@ -18,6 +18,7 @@ namespace Model
         private int assignedTdHours;
         private int assignedTpHours;
         private int assignedCmHours;
+        private int id;
 
         /// <summary>
         /// Get et set de l'utilisateur qui est enseignant 
@@ -28,6 +29,18 @@ namespace Model
         /// Get et set du module enseigné
         /// </summary>
         public Module Module { get => module; set => module = value; }
+
+        /// <summary>
+        /// Get et set de l'id de l'enseignant
+        /// </summary>
+        public int Id
+        {
+            get => id;
+            set
+            {
+                id = value;
+            }
+        }
 
         /// <summary>
         /// Get et set du nbre heure TD assigné à ce prof
@@ -89,7 +102,7 @@ namespace Model
                 }
                 else
                 {
-                    assignedTdHours = value;
+                    assignedCmHours = value;
                 }
             }
         }

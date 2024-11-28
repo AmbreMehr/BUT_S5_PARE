@@ -12,13 +12,15 @@ namespace API.Controllers
     {
         /// <summary>
         /// Renvoie tous les enseignants qui sont assignés au module
+        /// <author>Clotilde MALO</author>
         /// </summary>
-        /// <param name="module">Module enseigné</param>
+        /// <param name="idModule">id du module enseigné</param>
         /// <returns>Liste de Teacher qui enseignent le module</returns>
         [HttpGet("GetTeachersByModule", Name = "GetTeachersByModule")]
-        public Teacher[] GetTeachersByModule(Module module)
+        public Teacher[] GetTeachersByModule(int idModule)
         {
-            throw new NotImplementedException();
+            Teacher[] teachers = this.TeacherService.GetTeachersByModule(idModule);
+            return teachers;
         }
 
         /// <summary>
@@ -29,7 +31,18 @@ namespace API.Controllers
         [HttpPost("update", Name = "UpdateTeacher")]
         public IActionResult UpdateTeacher(Teacher teacher)
         {
-            throw new NotImplementedException();
+            IActionResult result = BadRequest();
+            try
+            {
+                this.TeacherService.UpdateTeacher(teacher);
+                result = Ok("L'enseignant a été mis à jour avec succès.");
+            }
+            catch
+            {
+                result = NotFound("L'enseignant n'a pas été mis à jour.");
+            }
+            return result;
+
         }
 
         /// <summary>
@@ -39,8 +52,18 @@ namespace API.Controllers
         /// <returns>HTTP Code</returns>
         [HttpPost("delete", Name = "DeleteTeacher")]
         public IActionResult DeleteTeacher(Teacher teacher) 
-        { 
-            throw new NotImplementedException(); 
+        {
+            IActionResult result = BadRequest();
+            try
+            {
+                this.TeacherService.DeleteTeacher(teacher);
+                result = Ok("L'enseignant a été supprimé avec succès.");
+            }
+            catch
+            {
+                result = NotFound("L'enseignant n'a pas été supprimé.");
+            }
+            return result;
         }
 
         /// <summary>
@@ -51,7 +74,17 @@ namespace API.Controllers
         [HttpPost("create", Name = "CreateTeacher")]
         public IActionResult CreateTeacher(Teacher teacher)
         {
-            throw new NotImplementedException();
+            IActionResult result = BadRequest();
+            try
+            {
+                this.TeacherService.CreateTeacher(teacher);
+                result = Ok("L'enseignant a été ajouté avec succès.");
+            }
+            catch
+            {
+                result = NotFound("L'enseignant n'a pas été ajouté.");
+            }
+            return result;
         }
     }
 }

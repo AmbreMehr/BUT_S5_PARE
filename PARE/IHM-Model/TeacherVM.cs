@@ -1,4 +1,5 @@
 ﻿using Model;
+using Network;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,6 +16,10 @@ namespace IHM_Model
     {
         private Teacher model;
 
+        private ITeacherNetwork teacherNetwork;
+
+        private bool isInStorage;
+
         /// <summary>
         /// Récupère l'enseignant
         /// </summary>
@@ -24,11 +29,98 @@ namespace IHM_Model
         }
 
         /// <summary>
+        /// Récupère le moduleVM associé à l'enseignant
+        /// </summary>
+        public ModuleVM Module
+        {
+            get
+            {
+                return new ModuleVM(model.Module);
+            }
+            set
+            {
+                model.Module = value.Model;
+                NotifyChange();
+            }
+        }
+
+        /// <summary>
+        /// Récupère l'utilisateurVM associé à l'enseignant
+        /// </summary>
+        public UserVM User
+        {
+            get { return new UserVM(model.User); }
+            set
+            {
+                model.User = value.Model;
+                NotifyChange();
+            }
+        }
+
+        /// <summary>
+        /// Get et set qui indique si le teacherVM est dans la BDD
+        /// </summary>
+        public bool IsInStorage
+        {
+            get { return isInStorage; }
+            set { isInStorage = value; }
+        }
+
+        /// <summary>
+        /// Récupère les heures de TD assigné à l'enseignant
+        /// </summary>
+        public int AssignedTdHours
+        {
+            get { return model.AssignedTdHours; }
+            set
+            {
+                if (model.AssignedTdHours != value)
+                {
+                    model.AssignedTdHours = value;
+                    NotifyChange();
+                }
+            }
+        }
+
+        /// <summary>
+        /// Récupère les heures de TP assigné à l'enseignant
+        /// </summary>
+        public int AssignedTpHours
+        {
+            get { return model.AssignedTpHours; }
+            set
+            {
+                if (model.AssignedTpHours != value)
+                {
+                    model.AssignedTpHours = value;
+                    NotifyChange();
+                }
+            }
+        }
+
+        /// <summary>
+        /// Récupère les heures de CM assigné à l'enseignant
+        /// </summary>
+        public int AssignedCmHours
+        {
+            get { return model.AssignedCmHours; }
+            set
+            {
+                if (model.AssignedCmHours != value)
+                {
+                    model.AssignedCmHours = value;
+                    NotifyChange();
+                }
+            }
+        }
+
+        /// <summary>
         /// Met à jour un teacher.
         /// </summary>
         public async Task UpdateTeacher()
         {
-            
+            await teacherNetwork.UpdateTeacher(model);
+
         }
 
         /// <summary>
@@ -36,7 +128,7 @@ namespace IHM_Model
         /// </summary>
         public async Task DeleteTeacher()
         {
-            
+            await teacherNetwork.DeleteTeacher(model);
         }
 
         /// <summary>
@@ -44,7 +136,7 @@ namespace IHM_Model
         /// </summary>
         public async Task CreateTeacher()
         {   
-            
+            await teacherNetwork.CreateTeacher(model);
         }
 
         /// <summary>
@@ -54,6 +146,17 @@ namespace IHM_Model
         public TeacherVM(Teacher model)
         {
             this.model = model;
+            this.teacherNetwork = new TeacherNetwork();
+
+        }
+
+        /// <summary>
+        /// Initialise le teacherVM en le laissant vide et initialise le teacherNetwork
+        /// </summary>
+        public TeacherVM()
+        {
+            this.model = new Teacher();
+            this.teacherNetwork = new TeacherNetwork();
         }
     }
 }

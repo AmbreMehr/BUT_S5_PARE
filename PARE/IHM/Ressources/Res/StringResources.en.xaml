@@ -10,6 +10,10 @@
     <system:String x:Key="BtnValider">Submit</system:String>
     <system:String x:Key="BtnAnnuler">Cancel</system:String>
     <system:String x:Key="BtnModifier">Modify</system:String>
+    <system:String x:Key="MessageModif">The changes have been saved</system:String>
+    <system:String x:Key="Confirmation">Confirmation</system:String>
+    <system:String x:Key="Retour">Back</system:String>
+    <system:String x:Key="MessageSuppr">Do you really want to delete this element ?</system:String>
 
     <!--  MainWindow  -->
     <system:String x:Key="TitreMainWindow">Distribution of modules</system:String>
@@ -46,5 +50,16 @@
     <system:String x:Key="ErreurDeValidation">Validation error</system:String>
     <system:String x:Key="ErreurDeMiseAJour">Update error</system:String>
     <system:String x:Key="ErreurInnatendue">An unexpected error has occurred</system:String>
+
+    <!--Edition des Modules-->
+    <system:String x:Key="TitreEditionModules">Module Edition</system:String>
+    <system:String x:Key="ProgramModule">Program</system:String>
+    <system:String x:Key="AjoutEnseignant">Add a teacher</system:String>
+    <system:String x:Key="SupprimerEnseignant">Delete a teacher</system:String>
+    <system:String x:Key="TD">TD</system:String>
+    <system:String x:Key="TP">TP</system:String>
+    <system:String x:Key="CM">CM</system:String>
+    <system:String x:Key="infoChangmtSemestre">Warning : when you change semester you must save your changes before clicking on "Submit".</system:String>
+
 
 </ResourceDictionary>

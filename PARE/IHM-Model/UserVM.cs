@@ -41,6 +41,15 @@ namespace IHM_Model
         }
 
         /// <summary>
+        /// Renvoi l'utilisateur en chaîne de caractère (prénom nom)
+        /// </summary>
+        /// <returns>chaîne de caractère avec prénom et nom utilisateur</returns>
+        public string ToString()
+        {
+            return (this.model.FirstName + " " + this.model.LastName);
+        }
+
+        /// <summary>
         /// Met à jour l'utilisateur dans le backend
         /// </summary>
         public async Task UpdateUser()

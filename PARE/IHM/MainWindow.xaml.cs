@@ -160,9 +160,16 @@ namespace IHM
             };
         }
 
+        /// <summary>
+        /// Evenement pour ouvrir la fenêtre d'édition de module
+        /// </summary>
+        /// <author>Clotilde MALO</author>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void EditModuleWindow(object sender, RoutedEventArgs e)
         {
-
+            new EditModuleWindow(semestersVM).Show();
+            this.Close();
         }
 
         /// <summary>
