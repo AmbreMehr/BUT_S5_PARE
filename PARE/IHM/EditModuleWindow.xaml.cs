@@ -370,21 +370,8 @@ namespace IHM
                         MessageBoxButton.OK, MessageBoxImage.Information);
                 BackHome(sender, e);
             }
-            catch (ArgumentNullException ex)
-            {
-                // Gestion des erreurs liées aux heures négatives
-                GestionException(ex);
-            }
-            catch (ArgumentOutOfRangeException ex)
-            {
-                // Gestion des erreurs liées aux heures de programme
-                GestionException(ex);
-
-            }
-
             catch (Exception ex)
             {
-                // Gestion des autres erreurs possibles
                 GestionException(ex);
             }
             
