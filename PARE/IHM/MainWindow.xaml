@@ -110,29 +110,12 @@
                 <!-- pour les boutons-->
             </Grid.RowDefinitions>
 
-            <ComboBox 
-                      DataContext="{Binding SemestersVM}" 
-                      x:Name="semesterBox" 
-                      Height="50" 
-                      Width="250" 
-                      Margin="10,10,10,10" 
-                      HorizontalAlignment="Left" 
-                      VerticalAlignment="Center" 
+            <ComboBox DataContext="{Binding SemestersVM}" Grid.Row="0" x:Name="semesterBox" Grid.Column="1" Height="50" Width="250" Margin="10,10,10,10" HorizontalAlignment="Left" VerticalAlignment="Top" FontFamily="{StaticResource OpenSauceOne}" FontSize="20" 
                       ItemsSource="{Binding Semesters}"
                       SelectedItem="{Binding SelectedSemester}"
-                      DisplayMemberPath="Name"
-                      SelectionChanged="changedSelection" 
-                      FontFamily="{StaticResource OpenSauceOne}" 
-                      FontSize="22"    
-                      HorizontalContentAlignment="Center" 
-                      VerticalContentAlignment="Center" 
-                      Cursor="Cross" 
-                      Foreground="{DynamicResource TitleColor}" 
-                      FontWeight="Bold">
-            </ComboBox>
-
-
-
+                      DisplayMemberPath="Name" SelectionChanged="changedSelection"
+                      HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+            
             <ScrollViewer Grid.Row="1" Grid.Column="1" VerticalScrollBarVisibility="Auto">
                 <Grid Grid.Row="1" Grid.Column="1" DataContext="{Binding ModulesVM}" x:Name="gridModules">
                     <Grid.ColumnDefinitions>
