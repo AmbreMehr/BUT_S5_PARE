@@ -26,8 +26,8 @@ namespace IHM
         private SemestersVM semestersVM;
         private ModulesVM modulesVM;
 
-        public event EventHandler ValidationCompleted;
-        public event EventHandler Canceled;
+        public event EventHandler ValidationCompleted = delegate { };
+        public event EventHandler Canceled = delegate { };
 
         /// <summary>
         /// Constructeur du component, affiche les semestres à placer et met à jour la liste des modules
