@@ -155,30 +155,8 @@ namespace IHM_Model
         /// </summary>
         public async Task DeleteTeacher()
         {
-            // Verif règles métier
-            if (this.AssignedCmHours > this.Module.HoursCM
-                    || this.AssignedTdHours > this.Module.HoursTd
-                    || this.AssignedTpHours > this.Module.HoursTp)
-            {
-                throw new ExceptionHourProgram();
-            }
+            await teacherNetwork.DeleteTeacher(model);
 
-            if (this.AssignedTpHours < 0 ||
-                this.AssignedTdHours < 0 ||
-                this.AssignedCmHours < 0)
-            {
-                throw new ExceptionHourNegative();
-            }
-            try
-            {
-                await teacherNetwork.DeleteTeacher(model);
-
-            }
-            catch (Exception ex)
-            {
-                // Gérer les autres erreurs
-                throw new ApplicationException("Erreur lors de la mise à jour de l'enseignant.", ex);
-            }
         }
 
         /// <summary>
