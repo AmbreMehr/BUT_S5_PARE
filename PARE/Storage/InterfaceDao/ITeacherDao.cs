@@ -33,5 +33,11 @@ namespace Storage.InterfaceDAO
         /// <param name="reader">reader utilisé</param>
         /// <returns>enseignant converti</returns>
         public Teacher Reader2Teacher(SqliteDataReader reader);
+
+        /// <summary>
+        /// Supprime un enseignant d'un module
+        /// </summary>
+        /// <param name="teacher">enseignant à supprimer d'un module</param>
+        public void Delete(Teacher teacher);
     }
 }

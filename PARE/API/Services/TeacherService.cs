@@ -35,7 +35,6 @@ namespace API.Services
         /// Met à jour l'objet Enseignant reçu
         /// </summary>
         /// <param name="teacher">Teacher à mettre à jour</param>
-        /// <returns>boolean</returns>
         public void UpdateTeacher(Teacher teacher)
         {
             this.teacherDao.Update(teacher);
@@ -45,10 +44,9 @@ namespace API.Services
         /// Supprime l'objet Enseignant reçu
         /// </summary>
         /// <param name="teacher">Teacher à supprimer</param>
-        /// <returns>bool</returns>
-        public bool DeleteTeacher(Teacher teacher)
+        public void DeleteTeacher(Teacher teacher)
         {
-            throw new NotImplementedException();
+            this.teacherDao.Delete(teacher);
         }
 
         /// <summary>

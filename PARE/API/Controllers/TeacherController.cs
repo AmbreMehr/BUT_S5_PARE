@@ -52,8 +52,18 @@ namespace API.Controllers
         /// <returns>HTTP Code</returns>
         [HttpPost("delete", Name = "DeleteTeacher")]
         public IActionResult DeleteTeacher(Teacher teacher) 
-        { 
-            throw new NotImplementedException(); 
+        {
+            IActionResult result = BadRequest();
+            try
+            {
+                this.TeacherService.DeleteTeacher(teacher);
+                result = Ok("L'enseignant a été supprimé avec succès.");
+            }
+            catch
+            {
+                result = NotFound("L'enseignant n'a pas été supprimé.");
+            }
+            return result;
         }
 
         /// <summary>

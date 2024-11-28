@@ -129,5 +129,25 @@ namespace Storage
             return teacher;
 
         }
+
+        public void Delete(Teacher teacher)
+        {
+            if (teacher == null)
+                throw new ArgumentNullException(nameof(teacher), "Teacher ou User ne peut pas être null.");
+
+
+            db.Connection.Open();
+            var cmd = db.Connection.CreateCommand();
+            cmd.CommandText = "DELETE" +
+                               " FROM TeacherOfModule" +
+                               " WHERE idTeacherOfModule = @idTeacher;";
+
+            cmd.Parameters.AddWithValue("@idTeacher", teacher.Id);
+
+
+            cmd.ExecuteNonQuery();
+            db.Connection.Close();
+
+        }
     }
 }
