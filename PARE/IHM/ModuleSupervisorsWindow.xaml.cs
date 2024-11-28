@@ -24,24 +24,30 @@ namespace IHM
 
         public ModuleSupervisorsWindow(SemestersVM semestersVM)
         {
-            context = new ModuleSupervisorsContext(semestersVM);
-            DataContext = context;
-
             InitializeComponent();
+
+            context = new ModuleSupervisorsContext(semestersVM);
             InitializeData();
+
+            DataContext = context;
         }
 
+        /// <summary>
+        /// Async, initialise les données de la fenêtre
+        /// </summary>
         private async void InitializeData()
         {
             await context.UsersVM.GetAllProfessors();
-            await GetModulesBySemester();
         }
 
+        /// <summary>
+        /// Async, Récupère la liste des modules pour le semestre et met à jour l'IHM
+        /// </summary>
         private async Task GetModulesBySemester()
         {
             if (context.SemestersVM.SelectedSemester != null) 
             {
-                foreach (UIElement child in ModuleList.Children.OfType<Border>())
+                foreach (UIElement child in ModuleList.Children.OfType<Border>().ToList())
                 {
                     ModuleList.Children.Remove(child);
                 }
@@ -54,9 +60,14 @@ namespace IHM
                     ComboBox moduleSupervisorBox = new ComboBox
                     {
                         ItemsSource = context.UsersVM.Users,
-                        SelectedItem = moduleVM.Supervisor,
                         DisplayMemberPath = "Fullname"
                     };
+                    Binding moduleSupervisorBinding = new Binding("Supervisor")
+                    {
+                        Source = moduleVM
+                    };
+                    moduleSupervisorBox.SetBinding(ComboBox.SelectedItemProperty, moduleSupervisorBinding);
+
                     Border moduleNameCell = NewBorder();
                     TextBlock moduleNameBox = new TextBlock
                     {
@@ -90,9 +101,42 @@ namespace IHM
 
         private void ClickCancelButton(object sender, RoutedEventArgs e)
         {
+            BackToMainWindow();
+        }
+
+        private void BackToMainWindow()
+        {
             MainWindow mainWindow = new MainWindow();
             mainWindow.Show();
             this.Close();
+        }
+
+        private async void SemesterSelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            await GetModulesBySemester();
+        }
+
+        private async void ClickSubmitButton(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                await context.ModulesVM.UpdateModules();
+            }
+            catch (Exception ex)
+            {
+                // Gestion des erreurs générales encapsulées dans ApplicationException
+                MessageBox.Show(
+                    $"{ex.InnerException?.Message ?? ex.Message}",
+                    (string)System.Windows.Application.Current.FindResource("ErreurDeMiseAJour"),
+                    MessageBoxButton.OK,
+                    MessageBoxImage.Error);
+            }
+            MessageBox.Show(
+                (string)System.Windows.Application.Current.FindResource("MiseAJourModules"),
+                (string)System.Windows.Application.Current.FindResource("Succes"),
+                MessageBoxButton.OK,
+                MessageBoxImage.Information);
+            BackToMainWindow();
         }
 
         public struct ModuleSupervisorsContext

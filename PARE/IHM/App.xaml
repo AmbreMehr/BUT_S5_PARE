@@ -17,7 +17,9 @@
                 <ResourceDictionary Source="Ressources/Styles/RectangleStyle.xaml"/>
                 <ResourceDictionary Source="Ressources/Styles/LabelStyle.xaml"/>
                 <ResourceDictionary Source="Ressources/Styles/TextBlockStyle.xaml"/>
-                
+                <ResourceDictionary Source="Ressources/Styles/ComboBoxStyle.xaml"/>
+
+
                 <ResourceDictionary Source="Ressources/Color/ColorRes.xaml"/>
                 
                 <ResourceDictionary Source="Ressources/Res/StringResources.fr.xaml"/>
