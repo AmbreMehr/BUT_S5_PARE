@@ -15,7 +15,6 @@ namespace IHM_Model
     public class TeacherVM : BaseVM
     {
         private Teacher model;
-        private UserVM user;
 
         private ITeacherNetwork teacherNetwork;
 
@@ -32,14 +31,11 @@ namespace IHM_Model
         /// </summary>
         public UserVM User
         {
-            get { return user; }
+            get { return new UserVM(model.User); }
             set
             {
-                if (user != value)
-                {
-                    user = value;
-                    NotifyChange();
-                }
+                model.User = value.Model;
+                NotifyChange();
             }
         }
 
@@ -123,7 +119,6 @@ namespace IHM_Model
         public TeacherVM(Teacher model)
         {
             this.model = model;
-            this.user =  new UserVM(model.User);
             this.teacherNetwork = new TeacherNetwork();
 
         }

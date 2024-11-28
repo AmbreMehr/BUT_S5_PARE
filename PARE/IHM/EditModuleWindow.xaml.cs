@@ -27,6 +27,7 @@ namespace IHM
         private SemestersVM semestersVM;
         private ModulesVM modulesVM;
         private TeachersVM teachersVM;
+        private TeachersVM teachersVMQuery;
         private UsersVM usersVM;
 
         /// <summary>
@@ -39,6 +40,7 @@ namespace IHM
             this.semestersVM = semestersVM;
             this.modulesVM = new ModulesVM();
             this.teachersVM = new TeachersVM();
+            this.teachersVMQuery = new TeachersVM();
             this.usersVM = new UsersVM();
             InitializeComponent();
             InitializeAllProfessors();
@@ -64,22 +66,18 @@ namespace IHM
             foreach (ModuleVM moduleVM in modulesVM.Modules)
             {
                 AddModule(moduleVM);
-                List<TeacherVM> TeachersVM = await GetTeachersByModule(moduleVM);
+                List<TeacherVM> TeachersVM = await this.teachersVMQuery.GetTeachersByModule(moduleVM);
                 foreach (TeacherVM teacherVM in TeachersVM)
                 {
+                    
+                    this.teachersVM.Teachers.Add(teacherVM);
                     AddTeacherRow(modulesPanel, teacherVM);
-                    teachersVM.SelectedTeacher = teacherVM.User;
                 }
 
             }
         }
 
-        private async Task<List<TeacherVM>> GetTeachersByModule(ModuleVM Module)
-        {
-            // à voir quoi clear
-            return await this.teachersVM.GetTeachersByModule(Module);
 
-        }
 
 
 
@@ -179,6 +177,7 @@ namespace IHM
             moduleStack.Children.Add(programStack);
         }
 
+
         /// <summary>
         /// Ajoute une ligne d'enseignant/heure
         /// <author>Clotilde MALO</author>
@@ -191,21 +190,24 @@ namespace IHM
             {
                 Orientation = Orientation.Horizontal,
                 HorizontalAlignment = HorizontalAlignment.Center,
-                Margin = new Thickness(5),
-                Tag = teacherVM
+                Margin = new Thickness(5)
             };
 
             ComboBox teacherComboBox = new ComboBox { Width = 120, Margin = new Thickness(5) };
 
-            teacherComboBox.SelectedItem = teacherVM.User;
             teacherComboBox.ItemsSource = usersVM.Users;
             teacherComboBox.DisplayMemberPath = "Fullname";
+            teacherComboBox.Name = "teacherComboBox";
+            teacherComboBox.SelectedItem = teacherVM.User;
 
-            // Evenement sur modification de la liste déroulante enseignant
-            teacherComboBox.SelectionChanged += (sender, e) =>
+            Binding bindingSelected = new Binding("User")
             {
-                teachersVM.SelectedTeacher = (UserVM)teacherComboBox.SelectedItem;
+                Source = teacherVM,
+                Mode = BindingMode.TwoWay
+
             };
+            teacherComboBox.SetBinding(ComboBox.SelectedItemProperty, bindingSelected);
+
 
             TextBox tdBox = new TextBox { Width = 50, Margin = new Thickness(5) };
             TextBox tpBox = new TextBox { Width = 50, Margin = new Thickness(5) };
@@ -284,13 +286,8 @@ namespace IHM
         {
             foreach (TeacherVM teacherVM in teachersVM.Teachers)
             {
-                /* update teacherVM non fonctionnel
-                teacherVM.User = (UserVM)teacherComboBox.SelectedItem;
-                teacherVM.AssignedTdHours = int.Parse(tdBox.Text);
-                teacherVM.AssignedTpHours = int.Parse(tpBox.Text);
-                teacherVM.AssignedCmHours = int.Parse(cmBox.Text);
-                */
-
+                /* update teacherVM non fonctionnel*/
+    
                 await teacherVM.UpdateTeacher();
 
 
