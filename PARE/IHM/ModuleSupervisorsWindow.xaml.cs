@@ -47,6 +47,7 @@ namespace IHM
         {
             if (context.SemestersVM.SelectedSemester != null) 
             {
+                // Retire les modules de l'interface
                 foreach (UIElement child in ModuleList.Children.OfType<Border>().ToList())
                 {
                     ModuleList.Children.Remove(child);
@@ -55,7 +56,7 @@ namespace IHM
                 int iRow = 0;
                 foreach (ModuleVM moduleVM in context.ModulesVM.Modules)
                 {
-                    // Créer une bordure pour le tableau
+                    // Créer la séléction du responsable du module
                     Border moduleSupervisorCell = NewBorder();
                     ComboBox moduleSupervisorBox = new ComboBox
                     {
@@ -68,6 +69,7 @@ namespace IHM
                     };
                     moduleSupervisorBox.SetBinding(ComboBox.SelectedItemProperty, moduleSupervisorBinding);
 
+                    // Créer l'affichage du nom du module
                     Border moduleNameCell = NewBorder();
                     TextBlock moduleNameBox = new TextBlock
                     {
@@ -76,6 +78,8 @@ namespace IHM
                         VerticalAlignment = VerticalAlignment.Center,
                         FontSize = 18
                     };
+
+                    // Place les nouveaux éléments dans l'IHM
                     moduleSupervisorCell.Child = moduleSupervisorBox;
                     moduleNameCell.Child = moduleNameBox;
                     Grid.SetColumn(moduleSupervisorCell, 0);
@@ -121,6 +125,12 @@ namespace IHM
             try
             {
                 await context.ModulesVM.UpdateModules();
+                MessageBox.Show(
+                    (string)System.Windows.Application.Current.FindResource("MiseAJourModules"),
+                    (string)System.Windows.Application.Current.FindResource("Succes"),
+                    MessageBoxButton.OK,
+                    MessageBoxImage.Information);
+                BackToMainWindow();
             }
             catch (Exception ex)
             {
@@ -131,12 +141,6 @@ namespace IHM
                     MessageBoxButton.OK,
                     MessageBoxImage.Error);
             }
-            MessageBox.Show(
-                (string)System.Windows.Application.Current.FindResource("MiseAJourModules"),
-                (string)System.Windows.Application.Current.FindResource("Succes"),
-                MessageBoxButton.OK,
-                MessageBoxImage.Information);
-            BackToMainWindow();
         }
 
         public struct ModuleSupervisorsContext
