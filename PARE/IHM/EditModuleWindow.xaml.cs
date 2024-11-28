@@ -120,7 +120,7 @@ namespace IHM
 
             StackPanel teacherContainer = new StackPanel();
             module.Children.Add(teacherContainer);
-            AddTeacherButton(teacherContainer, module);
+            AddTeacherButton(teacherContainer, module, moduleVM);
 
 
             modulesPanel.Children.Add(module);
@@ -197,13 +197,12 @@ namespace IHM
 
             teacherComboBox.ItemsSource = usersVM.Users;
             teacherComboBox.DisplayMemberPath = "Fullname";
-            teacherComboBox.Name = "teacherComboBox";
-            teacherComboBox.SelectedItem = teacherVM.User;
 
             Binding bindingSelected = new Binding("User")
             {
                 Source = teacherVM,
-                Mode = BindingMode.TwoWay
+                Mode = BindingMode.TwoWay,
+                UpdateSourceTrigger = UpdateSourceTrigger.PropertyChanged
 
             };
             teacherComboBox.SetBinding(ComboBox.SelectedItemProperty, bindingSelected);
@@ -213,12 +212,37 @@ namespace IHM
             TextBox tpBox = new TextBox { Width = 50, Margin = new Thickness(5) };
             TextBox cmBox = new TextBox { Width = 50, Margin = new Thickness(5) };
 
-            if (teacherVM.User != null)
+
+            Binding bindingTd = new Binding("AssignedTdHours")
             {
-                teacherComboBox.SelectedItem = teacherVM;
-                tdBox.Text = teacherVM.AssignedTdHours.ToString();
-                tpBox.Text = teacherVM.AssignedTpHours.ToString();
-                cmBox.Text = teacherVM.AssignedCmHours.ToString();
+                Source = teacherVM,
+                Mode = BindingMode.TwoWay,
+                UpdateSourceTrigger = UpdateSourceTrigger.PropertyChanged
+            };
+            tdBox.SetBinding(TextBox.TextProperty, bindingTd);
+
+
+            Binding bindingTp = new Binding("AssignedTpHours")
+            {
+                Source = teacherVM,
+                Mode = BindingMode.TwoWay,
+                UpdateSourceTrigger = UpdateSourceTrigger.PropertyChanged
+            };
+            tpBox.SetBinding(TextBox.TextProperty, bindingTp);
+
+
+            Binding bindingCm = new Binding("AssignedCmHours")
+            {
+                Source = teacherVM,
+                Mode = BindingMode.TwoWay,
+                UpdateSourceTrigger = UpdateSourceTrigger.PropertyChanged
+            };
+            cmBox.SetBinding(TextBox.TextProperty, bindingCm);
+
+
+            if (teacherVM.User.Model != null)
+            {
+                teacherVM.IsInStorage = true;
             }
 
 
@@ -258,7 +282,7 @@ namespace IHM
         /// </summary>
         /// <param name="teacherContainer">panneau d'enseignant</param>
         /// <param name="module">panneau de module</param>
-        private void AddTeacherButton(StackPanel teacherContainer, StackPanel module)
+        private void AddTeacherButton(StackPanel teacherContainer, StackPanel module, ModuleVM moduleVM)
         {
             Button addButton = new Button
             {
@@ -270,6 +294,8 @@ namespace IHM
             addButton.Click += (sender, e) =>
             {
                 TeacherVM teacherVM = new TeacherVM();
+                this.teachersVM.Teachers.Add(teacherVM);
+                teacherVM.Module = moduleVM;
                 AddTeacherRow(teacherContainer, teacherVM);
             };
 
@@ -286,10 +312,15 @@ namespace IHM
         {
             foreach (TeacherVM teacherVM in teachersVM.Teachers)
             {
-                /* update teacherVM non fonctionnel*/
-    
-                await teacherVM.UpdateTeacher();
+                if (teacherVM.IsInStorage)
+                {
+                    await teacherVM.UpdateTeacher();
 
+                }
+                else
+                {
+                    await teacherVM.CreateTeacher();
+                }
 
             }
 
@@ -297,6 +328,7 @@ namespace IHM
             BackHome(sender, e);
 
         }
+
 
 
         /// <summary>

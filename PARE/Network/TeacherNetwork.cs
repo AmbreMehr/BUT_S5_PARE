@@ -12,7 +12,16 @@ namespace Network
     {
         public async Task CreateTeacher(Teacher teacher)
         {
-            throw new NotImplementedException();
+            using (HttpClient? client = NetworkConfiguration.Instance.HttpClient)
+            {
+                string query = NetworkConfiguration.Instance.ApiUrl + "api/teacher/create";
+                HttpResponseMessage response = await client.PostAsJsonAsync(query, teacher);
+                if (!response.IsSuccessStatusCode)
+                {
+                    string error = await response.Content.ReadAsStringAsync();
+                    throw new Exception($"Erreur lors de la création de l'enseignant : {response.StatusCode}, Détails : {error}");
+                }
+            }
         }
 
         public async Task DeleteTeacher(Teacher teacher)

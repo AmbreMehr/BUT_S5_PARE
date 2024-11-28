@@ -18,12 +18,27 @@ namespace IHM_Model
 
         private ITeacherNetwork teacherNetwork;
 
+        private bool isInStorage;
+
         /// <summary>
         /// Récupère l'enseignant
         /// </summary>
         public Teacher Model
         { 
             get { return model;}
+        }
+
+        public ModuleVM Module
+        {
+            get
+            {
+                return new ModuleVM(model.Module);
+            }
+            set
+            {
+                model.Module = value.Model;
+                NotifyChange();
+            }
         }
 
         /// <summary>
@@ -37,6 +52,15 @@ namespace IHM_Model
                 model.User = value.Model;
                 NotifyChange();
             }
+        }
+
+        /// <summary>
+        /// Get et set qui indique si le teacherVM est dans la BDD
+        /// </summary>
+        public bool IsInStorage
+        {
+            get { return isInStorage; }
+            set { isInStorage = value; }
         }
 
         /// <summary>
@@ -109,7 +133,7 @@ namespace IHM_Model
         /// </summary>
         public async Task CreateTeacher()
         {   
-            
+            await teacherNetwork.CreateTeacher(model);
         }
 
         /// <summary>
@@ -128,6 +152,7 @@ namespace IHM_Model
         /// </summary>
         public TeacherVM()
         {
+            this.model = new Teacher();
             this.teacherNetwork = new TeacherNetwork();
         }
     }
