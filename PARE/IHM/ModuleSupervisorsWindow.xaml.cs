@@ -38,7 +38,6 @@ namespace IHM
         private async void InitializeData()
         {
             await context.UsersVM.GetAllProfessors();
-            await GetModulesBySemester();
         }
 
         /// <summary>
@@ -102,9 +101,42 @@ namespace IHM
 
         private void ClickCancelButton(object sender, RoutedEventArgs e)
         {
+            BackToMainWindow();
+        }
+
+        private void BackToMainWindow()
+        {
             MainWindow mainWindow = new MainWindow();
             mainWindow.Show();
             this.Close();
+        }
+
+        private async void SemesterSelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            await GetModulesBySemester();
+        }
+
+        private async void ClickSubmitButton(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                await context.ModulesVM.UpdateModules();
+            }
+            catch (Exception ex)
+            {
+                // Gestion des erreurs générales encapsulées dans ApplicationException
+                MessageBox.Show(
+                    $"{ex.InnerException?.Message ?? ex.Message}",
+                    (string)System.Windows.Application.Current.FindResource("ErreurDeMiseAJour"),
+                    MessageBoxButton.OK,
+                    MessageBoxImage.Error);
+            }
+            MessageBox.Show(
+                (string)System.Windows.Application.Current.FindResource("MiseAJourModules"),
+                (string)System.Windows.Application.Current.FindResource("Succes"),
+                MessageBoxButton.OK,
+                MessageBoxImage.Information);
+            BackToMainWindow();
         }
 
         public struct ModuleSupervisorsContext
@@ -119,16 +151,6 @@ namespace IHM
                 ModulesVM = new ModulesVM();
                 UsersVM = new UsersVM();
             }
-        }
-
-        private async void SemesterSelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            await GetModulesBySemester();
-        }
-
-        private async void ClickSubmitButton(object sender, RoutedEventArgs e)
-        {
-            await context.ModulesVM.UpdateModules();
         }
     }
 }
