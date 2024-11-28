@@ -69,7 +69,7 @@
                     FontFamily="{StaticResource OpenSauceOne}" 
                     Grid.Row="2" Grid.Column="1" 
                     Style="{DynamicResource ButtonText1}"
-                    Click="UpdateTeacher">
+                    Click="UpdateCreateTeacher">
 
             </Button>
         </Grid>

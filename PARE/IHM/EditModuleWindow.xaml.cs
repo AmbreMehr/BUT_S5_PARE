@@ -186,6 +186,7 @@ namespace IHM
         /// <param name="teacherVM">teacher à ajouter => peut être null si on ajoute une ligne vide</param>
         private void AddTeacherRow(StackPanel moduleStack, TeacherVM teacherVM)
         {
+            // Création de la ligne
             StackPanel rowStack = new StackPanel
             {
                 Orientation = Orientation.Horizontal,
@@ -193,6 +194,7 @@ namespace IHM
                 Margin = new Thickness(5)
             };
 
+            // Création de la liste déroulante + binding
             ComboBox teacherComboBox = new ComboBox { Width = 120, Margin = new Thickness(5) };
 
             teacherComboBox.ItemsSource = usersVM.Users;
@@ -207,7 +209,7 @@ namespace IHM
             };
             teacherComboBox.SetBinding(ComboBox.SelectedItemProperty, bindingSelected);
 
-
+            // Création des champs avec les heures (TD, TP, CM) + binding
             TextBox tdBox = new TextBox { Width = 50, Margin = new Thickness(5) };
             TextBox tpBox = new TextBox { Width = 50, Margin = new Thickness(5) };
             TextBox cmBox = new TextBox { Width = 50, Margin = new Thickness(5) };
@@ -240,18 +242,22 @@ namespace IHM
             cmBox.SetBinding(TextBox.TextProperty, bindingCm);
 
 
+            // Si l'enseignant est déjà enregistré, on le signale
             if (teacherVM.User.Model != null)
             {
                 teacherVM.IsInStorage = true;
             }
 
-
+            // Ajout des éléments à la ligne
             rowStack.Children.Add(teacherComboBox);
             rowStack.Children.Add(tdBox);
             rowStack.Children.Add(tpBox);
             rowStack.Children.Add(cmBox);
+
+            // Appel de la méthode pour ajouter le bouton de suppression
             DeleteTeacherButton(rowStack, moduleStack, teacherVM);
 
+            // Ajout de la ligne au panneau de module
             moduleStack.Children.Add(rowStack);
         }
 
@@ -265,14 +271,17 @@ namespace IHM
         /// <param name="module">panneau de module</param>
         private void DeleteTeacherButton(StackPanel row, StackPanel module, TeacherVM teacherVM)
         {
+            // Création du bouton
             Button deleteButton = new Button
             {
                 Content = (string)System.Windows.Application.Current.FindResource("SupprimerEnseignant"),
                 Width = 200,
                 Margin = new Thickness(5)
             };
+            // Ajout du bouton à la ligne
             row.Children.Add(deleteButton);
 
+            // Gestion du clic sur le bouton : supprime en bdd
             deleteButton.Click += (sender, e) =>
             {
                 MessageBoxResult result = MessageBox.Show((string)System.Windows.Application.Current.FindResource("MessageSuppr"), 
@@ -286,8 +295,6 @@ namespace IHM
                         DeleteTeacherButton(teacherVM);
                     }
                 }
-
-
             };
 
         }
@@ -297,11 +304,10 @@ namespace IHM
         /// <param name="teacherVM">VM associé à l'enseignant</param>
         private async void DeleteTeacherButton(TeacherVM teacherVM)
         {
-                if (teacherVM.IsInStorage)
-                {
-                    await teacherVM.DeleteTeacher();
-
-                }
+            if (teacherVM.IsInStorage)
+            {
+                await teacherVM.DeleteTeacher();
+            }
 
         }
 
@@ -314,6 +320,7 @@ namespace IHM
         /// <param name="module">panneau de module</param>
         private void AddTeacherButton(StackPanel teacherContainer, StackPanel module, ModuleVM moduleVM)
         {
+            // Création du bouton
             Button addButton = new Button
             {
                 Content = (string)System.Windows.Application.Current.FindResource("AjoutEnseignant"),
@@ -321,6 +328,11 @@ namespace IHM
                 Margin = new Thickness(5),
                 HorizontalAlignment = HorizontalAlignment.Center
             };
+
+            // Ajout du bouton au panneau d'enseignant
+            module.Children.Add(addButton);
+
+            // Gestion du clic sur le bouton : ajoute une ligne
             addButton.Click += (sender, e) =>
             {
                 TeacherVM teacherVM = new TeacherVM();
@@ -329,7 +341,6 @@ namespace IHM
                 AddTeacherRow(teacherContainer, teacherVM);
             };
 
-            module.Children.Add(addButton);
         }
 
         /// <summary>
@@ -338,7 +349,7 @@ namespace IHM
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private async void UpdateTeacher(object sender, RoutedEventArgs e)
+        private async void UpdateCreateTeacher(object sender, RoutedEventArgs e)
         {
             foreach (TeacherVM teacherVM in teachersVM.Teachers)
             {
@@ -356,9 +367,7 @@ namespace IHM
 
             MessageBox.Show((string)System.Windows.Application.Current.FindResource("MessageModif"), (string)System.Windows.Application.Current.FindResource("Confirmation"), MessageBoxButton.OK, MessageBoxImage.Information);
             BackHome(sender, e);
-
         }
-
 
 
         /// <summary>
@@ -385,5 +394,7 @@ namespace IHM
             semestersVM.SelectedSemester = (SemesterVM)semesterBox.SelectedItem;
             GetModulesBySemester();
         }
+
+
     }
 }

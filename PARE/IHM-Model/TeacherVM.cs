@@ -28,6 +28,9 @@ namespace IHM_Model
             get { return model;}
         }
 
+        /// <summary>
+        /// Récupère le moduleVM associé à l'enseignant
+        /// </summary>
         public ModuleVM Module
         {
             get
