@@ -41,19 +41,34 @@ namespace IHM
         /// Récupération des modules par semestre sélectionné
         /// </summary>
         public async void GetModulesBySemester()
-        { 
+        {
             if (semestersVM.SelectedSemester != null)
             {
-                // suppresssion des éléments qui ne sont pas ceux de base
+                // Suppression des éléments qui ne sont pas ceux de base
                 gridModules.Children.OfType<Border>().ToList().ForEach(child => gridModules.Children.Remove(child));
                 await this.modulesVM.GetModuleBySemester(semestersVM.SelectedSemester);
+
+                // Crée une copie immuable des modules pour éviter des modifications pendant l'itération
+                var modulesCopy = modulesVM.Modules.ToList();
+
                 int decalage = 5;
 
-                foreach (ModuleVM moduleVM in modulesVM.Modules)
+                foreach (ModuleVM moduleVM in modulesCopy)
                 {
-                    // prend en compte n° de colonnes pour les semaines
+                    // Prend en compte n° de colonnes pour les semaines
                     int gridColumnBegin = moduleVM.WeekBegin - 35;
                     int gridColumnEnd = moduleVM.WeekEnd - 35;
+
+                    // Valider les indices de colonnes calculés
+                    if (gridColumnBegin < 0 || gridColumnEnd < 0 || gridColumnBegin > gridColumnEnd)
+                    {
+                        MessageBox.Show(
+                            $"Le module '{moduleVM.Name}' a des indices de colonne invalides : Début={moduleVM.WeekBegin}, Fin={moduleVM.WeekEnd}.",
+                            "Erreur de placement",
+                            MessageBoxButton.OK,
+                            MessageBoxImage.Warning);
+                        continue; // Ignore ce module et passe au suivant
+                    }
 
                     // Créé un rectangle et texte pour le module
                     Border moduleRectangle = new Border
@@ -65,7 +80,6 @@ namespace IHM
                         Height = 40,
                         Margin = new Thickness(35, decalage, 35, 0),
                         VerticalAlignment = VerticalAlignment.Top
-
                     };
 
                     TextBlock textBlock = new TextBlock
@@ -87,8 +101,9 @@ namespace IHM
                     decalage += 60;
                 }
             }
-                    
         }
+
+
 
         private void OpenParametresPage(object sender, RoutedEventArgs e)
         {
@@ -136,7 +151,7 @@ namespace IHM
                 grid.Children.Remove(placeModuleWindow); 
                 ToggleBottomButtonsVisibility(true);
 
-                GetModulesBySemester(); // Rafraîchit la vue
+                GetModulesBySemester();
             };
             placeModuleWindow.Canceled += (s, args) =>
             {
@@ -157,7 +172,6 @@ namespace IHM
         /// <param name="e"></param>
         private void changedSelection(object sender, SelectionChangedEventArgs e)
         {
-
             GetModulesBySemester();
         }
 

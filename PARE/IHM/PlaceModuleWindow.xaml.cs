@@ -54,17 +54,62 @@ namespace IHM
             }
             else
             {
-                MessageBox.Show("Veuillez sélectionner un semestre avant de placer les modules.", "Erreur", MessageBoxButton.OK, MessageBoxImage.Warning);
+                MessageBox.Show((string)System.Windows.Application.Current.FindResource("SelectionSemestre"), (string)System.Windows.Application.Current.FindResource("Erreur"), MessageBoxButton.OK, MessageBoxImage.Warning);
             }
         }
 
         private async void ClickBtnValider(object sender, RoutedEventArgs e)
-        {            
-            await modulesVM.UpdateModules();
-            ValidationCompleted?.Invoke(this, EventArgs.Empty);
-            await UpdateModulesList();
-            this.Visibility = Visibility.Collapsed;
+        {
+            try
+            {
+                await modulesVM.UpdateModules(); // Appel à la méthode qui met à jour les modules
+                MessageBox.Show(
+                     (string)System.Windows.Application.Current.FindResource("MiseAJourModules"),
+                    (string)System.Windows.Application.Current.FindResource("Succes"),
+                    MessageBoxButton.OK,
+                    MessageBoxImage.Information);
+
+                ValidationCompleted?.Invoke(this, EventArgs.Empty); // Notifie la fin de la validation
+                this.Visibility = Visibility.Collapsed;
+            }
+            catch (ArgumentOutOfRangeException ex)
+            {
+                // Gestion des erreurs liées aux semaines hors limites
+                MessageBox.Show(
+                    $"{ ex.Message}",
+                    (string)System.Windows.Application.Current.FindResource("ErreurDeValidation"),
+                    MessageBoxButton.OK,
+                    MessageBoxImage.Warning);
+            }
+            catch (InvalidOperationException ex)
+            {
+                // Gestion des erreurs liées à des règles métier non respectées
+                MessageBox.Show(
+                    $"{ex.Message}",
+                    (string)System.Windows.Application.Current.FindResource("ErreurDeValidation"),
+                    MessageBoxButton.OK,
+                    MessageBoxImage.Warning);
+            }
+            catch (ApplicationException ex)
+            {
+                // Gestion des erreurs générales encapsulées dans ApplicationException
+                MessageBox.Show(
+                    $"{ex.InnerException?.Message ?? ex.Message}", 
+                    (string)System.Windows.Application.Current.FindResource("ErreurDeMiseAJour"),
+                    MessageBoxButton.OK,
+                    MessageBoxImage.Error);
+            }
+            catch (Exception ex)
+            {
+                // Gestion des erreurs inattendues
+                MessageBox.Show(
+                    $"{ex.Message}",
+                    (string)System.Windows.Application.Current.FindResource("ErreurInnatendue"),
+                    MessageBoxButton.OK,
+                    MessageBoxImage.Error);
+            }
         }
+
         private void ClickBtnAnnuler(object sender, RoutedEventArgs e)
         {
             Canceled?.Invoke(this, EventArgs.Empty);
