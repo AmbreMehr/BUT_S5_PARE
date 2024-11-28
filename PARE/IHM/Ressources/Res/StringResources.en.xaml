@@ -41,7 +41,9 @@
     <system:String x:Key="TitleModuleSupervisorsWindow">Module supervisors</system:String>
     <system:String x:Key="SupervisorCol">Supervisor</system:String>
     <system:String x:Key="ModuleCol">Module</system:String>
-   
+    <system:String x:Key="WeekBegin">Start Week</system:String>
+    <system:String x:Key="WeekEnd">End Week</system:String>
+
     <!--MessagesBox-->
     <system:String x:Key="Erreur">Error</system:String>
     <system:String x:Key="Succes">Succes</system:String>

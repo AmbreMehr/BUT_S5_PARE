@@ -61,26 +61,23 @@ namespace IHM
         /// </summary>
         private async void GetModulesBySemester()
         {
-            modulesPanel.Children.Clear();
-            await this.modulesVM.GetModuleBySemester(semestersVM.SelectedSemester);
-            foreach (ModuleVM moduleVM in modulesVM.Modules)
+            if (semestersVM.SelectedSemester != null)
             {
-                AddModule(moduleVM);
-                List<TeacherVM> TeachersVM = await this.teachersVMQuery.GetTeachersByModule(moduleVM);
-                foreach (TeacherVM teacherVM in TeachersVM)
+                modulesPanel.Children.Clear();
+                await this.modulesVM.GetModuleBySemester(semestersVM.SelectedSemester);
+                foreach (ModuleVM moduleVM in modulesVM.Modules)
                 {
-                    
-                    this.teachersVM.Teachers.Add(teacherVM);
-                    AddTeacherRow(modulesPanel, teacherVM);
+                    AddModule(moduleVM);
+                    List<TeacherVM> TeachersVM = await this.teachersVMQuery.GetTeachersByModule(moduleVM);
+                    foreach (TeacherVM teacherVM in TeachersVM)
+                    {
+
+                        this.teachersVM.Teachers.Add(teacherVM);
+                        AddTeacherRow(modulesPanel, teacherVM);
+                    }
                 }
-
-            }
+            } 
         }
-
-
-
-
-
         /// <summary>
         /// Initialise la liste déroulante des semestres
         /// <author>Clotilde MALO</author>

@@ -11,26 +11,6 @@ namespace Network
 {
     public class UserNetwork : IUserNetwork
     {
-        public async Task<Role[]> GetAllRoles()
-        {
-            throw new NotImplementedException();
-        }
-
-        public async Task<User[]> GetAllUsers()
-        {
-            throw new NotImplementedException();
-        }
-
-        public async Task<TypicalProfile[]> GetTypicalProfiles()
-        {
-            throw new NotImplementedException();
-        }
-
-        public async Task<User> GetUserById(int id)
-        {
-            throw new NotImplementedException();
-        }
-
         public async Task<User[]> GetUsersByRole(Roles role)
         {
             IEnumerable<User>? users = new List<User>();
@@ -44,11 +24,6 @@ namespace Network
                 }
             }
             return (User[])(users != null ? users.ToArray() : new User[0]);
-        }
-
-        public async Task UpdateUser(User user)
-        {
-            throw new NotImplementedException();
         }
     }
 }

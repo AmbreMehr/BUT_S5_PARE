@@ -76,7 +76,7 @@ namespace Storage
             // Ajout des paramètres avec leurs valeurs
             cmd.Parameters.AddWithValue("@weekBegin", module.WeekBegin);
             cmd.Parameters.AddWithValue("@weekEnd", module.WeekEnd);
-            cmd.Parameters.AddWithValue("@supervisorId", module.Supervisor.Id);
+            cmd.Parameters.AddWithValue("@supervisorId", module.Supervisor.Id == 0 ? DBNull.Value : module.Supervisor.Id);
             cmd.Parameters.AddWithValue("@idModule", module.Id);
 
             // Exécuter la commande

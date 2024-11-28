@@ -87,6 +87,7 @@ namespace Model
             this.lastName = lastName;
             this.realHours = realHours;
             this.roles = new List<Role>();
+            this.profil = new TypicalProfile();
         }
 
         /// <summary>
@@ -102,6 +103,7 @@ namespace Model
             this.lastName = lastName;
             this.realHours = 0;
             this.roles = new List<Role>();
+            this.profil = new TypicalProfile();
         }
 
         /// <summary>
@@ -109,8 +111,11 @@ namespace Model
         /// </summary>
         public User()
         {
+            this.firstName = "";
+            this.lastName = "";
             this.realHours = 0;
             this.roles = new List<Role>();
+            this.profil = new TypicalProfile();
         }
 
 
