@@ -27,7 +27,7 @@ namespace Storage
             db = new DatabaseSqlite();
         }
 
-        public Teacher[] ListForModule(string idModule)
+        public Teacher[] ListForModule(int idModule)
         {
             List<Teacher> teachers = new List<Teacher>();
               db.Connection.Open();

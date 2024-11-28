@@ -19,7 +19,7 @@ namespace Storage.InterfaceDAO
         /// </summary>
         /// <param name="idModule">id du module</param>
         /// <returns>enseignants qui est assigné au module</returns>
-        public Teacher[] ListForModule(string idModule);
+        public Teacher[] ListForModule(int idModule);
 
         /// <summary>
         /// Met à jour l'enseignant

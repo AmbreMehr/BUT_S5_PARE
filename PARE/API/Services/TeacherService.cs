@@ -26,7 +26,7 @@ namespace API.Services
         /// </summary>
         /// <param name="idModule">id du module enseigné</param>
         /// <returns>Liste de Teacher qui enseignent le module</returns>
-        public Teacher[] GetTeachersByModule(string idModule)
+        public Teacher[] GetTeachersByModule(int idModule)
         {
             return this.teacherDao.ListForModule(idModule);
         }

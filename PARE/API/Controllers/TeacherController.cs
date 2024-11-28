@@ -17,7 +17,7 @@ namespace API.Controllers
         /// <param name="idModule">id du module enseigné</param>
         /// <returns>Liste de Teacher qui enseignent le module</returns>
         [HttpGet("GetTeachersByModule", Name = "GetTeachersByModule")]
-        public Teacher[] GetTeachersByModule(string idModule)
+        public Teacher[] GetTeachersByModule(int idModule)
         {
             Teacher[] teachers = this.TeacherService.GetTeachersByModule(idModule);
             return teachers;
