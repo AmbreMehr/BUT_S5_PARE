@@ -66,10 +66,13 @@ namespace API.Services
             return module.ToArray();
         }
 
-        public bool UpdateModule(Module module)
+        /// <summary>
+        /// Met à jour le module
+        /// </summary>
+        /// <param name="module">module à mettre à jour</param>
+        public void UpdateModule(Module module)
         {
             moduleDao.Update(module);
-            return true;
         }
 
     }

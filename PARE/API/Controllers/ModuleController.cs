@@ -18,16 +18,17 @@ namespace API.Controllers
         [HttpPut("UpdateModule", Name = "UpdateModule")]
         public IActionResult UpdateModule(Module module)
         {
-            // Appeler le service pour mettre à jour le module
-            bool isUpdated = this.ModuleService.UpdateModule(module);
-            if (isUpdated)
+            IActionResult result = BadRequest();
+            try
             {
-                return Ok("Le module a été mis à jour avec succès.");
+                this.ModuleService.UpdateModule(module);
+                result = Ok("Le module a été mis à jour avec succès.");
             }
-            else
+            catch
             {
-                return NotFound("Le module avec l'ID spécifié n'existe pas.");
+                result = NotFound("Le module avec l'ID spécifié n'existe pas.");
             }
+            return result;
         }
 
         /// <summary>
