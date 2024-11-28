@@ -50,7 +50,7 @@
     <system:String x:Key="TD">TD</system:String>
     <system:String x:Key="TP">TP</system:String>
     <system:String x:Key="CM">CM</system:String>
-    <system:String x:Key="infoChangmtSemestre">Warning : when you change semesters you must save your changes before clicking on "Submit".</system:String>
+    <system:String x:Key="infoChangmtSemestre">Warning : when you change semester you must save your changes before clicking on "Submit".</system:String>
 
 
 </ResourceDictionary>

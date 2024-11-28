@@ -52,6 +52,6 @@
     <system:String x:Key="TD">TD</system:String>
     <system:String x:Key="TP">TP</system:String>
     <system:String x:Key="CM">CM</system:String>
-    <system:String x:Key="infoChangmtSemestre">Attention : quand vous changez de semestres il faut enregistrer vos modifications avant en cliquant sur "Valider".</system:String>
+    <system:String x:Key="infoChangmtSemestre">Attention : quand vous changez de semestre il faut enregistrer vos modifications avant en cliquant sur "Valider".</system:String>
     
 </ResourceDictionary>
