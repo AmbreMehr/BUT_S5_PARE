@@ -351,22 +351,58 @@ namespace IHM
         /// <param name="e"></param>
         private async void UpdateCreateTeacher(object sender, RoutedEventArgs e)
         {
-            foreach (TeacherVM teacherVM in teachersVM.Teachers)
+            try
             {
-                if (teacherVM.IsInStorage)
+                foreach (TeacherVM teacherVM in teachersVM.Teachers)
                 {
-                    await teacherVM.UpdateTeacher();
+
+                    if (teacherVM.IsInStorage)
+                    {
+                        await teacherVM.UpdateTeacher();
+
+                    }
+                    else
+                    {
+                        await teacherVM.CreateTeacher();
+                    }
+
 
                 }
-                else
-                {
-                    await teacherVM.CreateTeacher();
-                }
+                MessageBox.Show((string)System.Windows.Application.Current.FindResource("MessageModif"), 
+                        (string)System.Windows.Application.Current.FindResource("Confirmation"), 
+                        MessageBoxButton.OK, MessageBoxImage.Information);
+                BackHome(sender, e);
+            }
+            catch (ArgumentNullException ex)
+            {
+                // Gestion des erreurs liées aux heures négatives
+                GestionException(ex);
+            }
+            catch (ArgumentOutOfRangeException ex)
+            {
+                // Gestion des erreurs liées aux heures de programme
+                GestionException(ex);
 
             }
 
-            MessageBox.Show((string)System.Windows.Application.Current.FindResource("MessageModif"), (string)System.Windows.Application.Current.FindResource("Confirmation"), MessageBoxButton.OK, MessageBoxImage.Information);
-            BackHome(sender, e);
+            catch (Exception ex)
+            {
+                // Gestion des autres erreurs possibles
+                GestionException(ex);
+            }
+            
+        }
+
+        /// <summary>
+        /// Permet d'affiche une pop up pour l'affichage des exceptions
+        /// </summary>
+        /// <param name="ex"></param>
+        private void GestionException(Exception ex)
+        {
+            MessageBox.Show($"{ex.Message}",
+                            (string)System.Windows.Application.Current.FindResource("ErreurDeValidation"),
+                            MessageBoxButton.OK,
+                            MessageBoxImage.Warning);
         }
 
 
