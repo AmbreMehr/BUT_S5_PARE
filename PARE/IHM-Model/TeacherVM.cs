@@ -125,7 +125,7 @@ namespace IHM_Model
         /// </summary>
         public async Task DeleteTeacher()
         {
-            
+            await teacherNetwork.DeleteTeacher(model);
         }
 
         /// <summary>

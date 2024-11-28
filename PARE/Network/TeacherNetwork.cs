@@ -26,7 +26,16 @@ namespace Network
 
         public async Task DeleteTeacher(Teacher teacher)
         {
-            throw new NotImplementedException();
+            using (HttpClient? client = NetworkConfiguration.Instance.HttpClient)
+            {
+                string query = NetworkConfiguration.Instance.ApiUrl + "api/teacher/delete";
+                HttpResponseMessage response = await client.PostAsJsonAsync(query, teacher);
+                if (!response.IsSuccessStatusCode)
+                {
+                    string error = await response.Content.ReadAsStringAsync();
+                    throw new Exception($"Erreur lors de la suppression de l'enseignant : {response.StatusCode}, Détails : {error}");
+                }
+            }
         }
 
         public async Task<Teacher[]> GetTeachersByModule(Module module)

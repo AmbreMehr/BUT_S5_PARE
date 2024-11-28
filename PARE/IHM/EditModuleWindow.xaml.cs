@@ -250,7 +250,7 @@ namespace IHM
             rowStack.Children.Add(tdBox);
             rowStack.Children.Add(tpBox);
             rowStack.Children.Add(cmBox);
-            DeleteTeacherButton(rowStack, moduleStack);
+            DeleteTeacherButton(rowStack, moduleStack, teacherVM);
 
             moduleStack.Children.Add(rowStack);
         }
@@ -258,12 +258,12 @@ namespace IHM
 
 
         /// <summary>
-        /// Ajoute un bouton pour supprimer une ligne d'enseignant/heure
+        /// Ajoute un bouton pour supprimer une ligne d'enseignant/heure et gère son clic
         /// <author>Clotilde MALO</author>
         /// </summary>
         /// <param name="row">ligne à supprimer</param>
         /// <param name="module">panneau de module</param>
-        private void DeleteTeacherButton(StackPanel row, StackPanel module)
+        private void DeleteTeacherButton(StackPanel row, StackPanel module, TeacherVM teacherVM)
         {
             Button deleteButton = new Button
             {
@@ -271,10 +271,40 @@ namespace IHM
                 Width = 200,
                 Margin = new Thickness(5)
             };
-            deleteButton.Click += (sender, e) => module.Children.Remove(row);
             row.Children.Add(deleteButton);
 
+            deleteButton.Click += (sender, e) =>
+            {
+                MessageBoxResult result = MessageBox.Show((string)System.Windows.Application.Current.FindResource("MessageSuppr"), 
+                                            (string)System.Windows.Application.Current.FindResource("Confirmation"), MessageBoxButton.YesNo, MessageBoxImage.Question);
+
+               if (result == MessageBoxResult.Yes)
+                {
+                    module.Children.Remove(row);
+                    if (teacherVM.IsInStorage)
+                    {
+                        DeleteTeacherButton(teacherVM);
+                    }
+                }
+
+
+            };
+
         }
+        /// <summary>
+        /// Permet d'appeler la méthode de suppression d'un enseignant si l'enseignant est enregistré dans la bdd
+        /// </summary>
+        /// <param name="teacherVM">VM associé à l'enseignant</param>
+        private async void DeleteTeacherButton(TeacherVM teacherVM)
+        {
+                if (teacherVM.IsInStorage)
+                {
+                    await teacherVM.DeleteTeacher();
+
+                }
+
+        }
+
 
         /// <summary>
         /// Ajoute un bouton pour ajouter une ligne d'enseignant/heure et au clic dessus créé un teacherVM et une ligne

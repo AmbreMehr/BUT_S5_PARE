@@ -13,6 +13,7 @@
     <system:String x:Key="MessageModif">The changes have been saved</system:String>
     <system:String x:Key="Confirmation">Confirmation</system:String>
     <system:String x:Key="Retour">Back</system:String>
+    <system:String x:Key="MessageSuppr">Do you really want to delete this element ?</system:String>
 
     <!--  MainWindow  -->
     <system:String x:Key="TitreMainWindow">Distribution of modules</system:String>
