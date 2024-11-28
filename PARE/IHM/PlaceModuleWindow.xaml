@@ -51,9 +51,9 @@
                                 </Grid>
 
                                 <!-- Champs pour les semaines -->
-                                <TextBlock Text="Semaine de début" FontWeight="Bold" />
+                                <TextBlock Text="{DynamicResource WeekBegin}" FontWeight="Bold" />
                                 <TextBox Height="25" Text="{Binding WeekBegin, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
-                                <TextBlock Text="Semaine de fin" FontWeight="Bold" />
+                                <TextBlock Text="{DynamicResource WeekEnd}" FontWeight="Bold" />
                                 <TextBox Height="25" Text="{Binding WeekEnd, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                             </StackPanel>
                         </Border>
