@@ -167,7 +167,7 @@ namespace IHM_Model
                 this.AssignedTdHours < 0 ||
                 this.AssignedCmHours < 0)
             {
-                throw new ExceptionHourNull();
+                throw new ExceptionHourNegative();
             }
             try
             {
@@ -198,7 +198,7 @@ namespace IHM_Model
                 this.AssignedTdHours < 0 ||
                 this.AssignedCmHours < 0)
             {
-                throw new ExceptionHourNull();
+                throw new ExceptionHourNegative();
             }
             try
             {

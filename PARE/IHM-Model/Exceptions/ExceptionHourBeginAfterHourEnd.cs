@@ -7,15 +7,15 @@ using System.Threading.Tasks;
 namespace IHM_Model.Exceptions
 {
     /// <summary>
-    /// Exception levée lorsque les heures assignées à l'enseignant sont supérieures aux heures du programme : édition module
+    /// Exception levée lorsque les heures de début sont supérieures aux heures de fin : positionnement module
     /// </summary>
-    public class ExceptionHourProgram : Exception
+    public class ExceptionHourBeginAfterHourEnd : Exception
     {
         /// <summary>
         /// Initialise une nouvelle instance de la classe ExceptionHourProgram
         /// </summary>
         /// <param name="message">message par défaut</param>
-        public ExceptionHourProgram(string message = "Les heures assignés à l'enseignant doivent être inférieures ou égales aux heures du programme.") : base(message)
+        public ExceptionHourBeginAfterHourEnd(string message = "La semaine de début ne peut pas être supérieure à la semaine de fin") : base(message)
         {
         }
 
