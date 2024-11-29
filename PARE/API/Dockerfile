@@ -18,7 +18,7 @@ COPY ["API/API.csproj", "API/"]
 COPY ["Model/Model.csproj", "Model/"]
 COPY ["Storage/Storage.csproj", "Storage/"]
 RUN dotnet restore "./API/API.csproj"
-COPY . .
+COPY --chmod=777 . .
 WORKDIR "/src/API"
 RUN dotnet build "./API.csproj" -c $BUILD_CONFIGURATION -o /app/build
 

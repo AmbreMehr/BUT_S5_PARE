@@ -24,9 +24,9 @@ namespace API.Controllers
                 this.ModuleService.UpdateModule(module);
                 result = Ok("Le module a été mis à jour avec succès.");
             }
-            catch
+            catch (Exception ex)
             {
-                result = NotFound("Le module avec l'ID spécifié n'existe pas.");
+                result = NotFound(ex.Message);
             }
             return result;
         }
