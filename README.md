@@ -15,10 +15,10 @@ PARE : Programme d'Aide à la Répartition des Enseignements
 - Autorisation de visualisation différentes selon les rôles attribués
 - Ajout d'un enseignant sur une ressource (avec ses heures assignés)
   
-## Fonctionnalité implémenté au sprint 1
+## Fonctionnalité implémenté au sprint 1 (alpha)
 - Visualisation des ressources (modules) sur un planning
 
-## Fonctionnalités implémentés au sprint 2
+## Fonctionnalités implémentés au sprint 2 (beta)
 - Positionnement des ressources sur le planning
 - Assignation d'une ressource à un enseignant -> devient responsable de la ressource
 - Ajout d'un enseignant sur une ressource (avec ses heures assignés) + suppression et mise à jour
@@ -31,3 +31,11 @@ Un SDK 8.0 est utilisé.
 Les packages installés sont :
 - Microsoft.Data.Sqlite
 - Microsoft.EntityFrameworkCore.Sqlite
+
+## Version alpha - déployé
+Lien vers le Serveur : https://10.128.207.64:8081/ 
+Lien vers le Client : https://nextcloud.noctabou.win/index.php/s/xpgB3iijmpHiYG5 
+
+## Version beta - déployé
+Lien vers le Serveur : https://10.128.207.64:8081/ 
+Lien vers le Client : https://nextcloud.noctabou.win/index.php/s/WGXZRByJRqDL962 
