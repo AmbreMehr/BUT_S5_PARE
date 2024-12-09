@@ -148,9 +148,6 @@ namespace IHM
 
             placeModuleWindow.ValidationCompleted += (s, args) =>
             {
-                grid.Children.Remove(placeModuleWindow); 
-                ToggleBottomButtonsVisibility(true);
-
                 GetModulesBySemester();
             };
             placeModuleWindow.Canceled += (s, args) =>

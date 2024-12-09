@@ -33,9 +33,7 @@ namespace IHM
 
         private void CloseLoginWindow(object sender, RoutedEventArgs e)
         {
-            MainWindow mainWindow = new MainWindow();
-            mainWindow.Show();
-            this.Close();
+            Application.Current.Shutdown(); // Ferme l'application
         }
     }
 }
