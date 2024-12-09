@@ -49,7 +49,7 @@ namespace IHM
                 await this.modulesVM.GetModuleBySemester(semestersVM.SelectedSemester);
 
                 // Crée une copie immuable des modules pour éviter des modifications pendant l'itération
-                var modulesCopy = modulesVM.Modules.ToList();
+                IEnumerable<ModuleVM> modulesCopy = modulesVM.ModulesROnly;
 
                 int decalage = 5;
 

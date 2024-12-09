@@ -30,6 +30,11 @@ namespace IHM_Model
             get => models;
         }
 
+        public ReadOnlyCollection<ModuleVM> ModulesROnly
+        {
+            get => models.AsReadOnly();
+        }
+
         /// <summary>
         /// Renvoie et remplace le module sélectionné
         /// </summary>
