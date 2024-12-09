@@ -22,7 +22,7 @@ namespace API.Controllers
             try
             {
                 this.ModuleService.UpdateModule(module);
-                result = Ok("Le module a été mis à jour avec succès.");
+                result = Ok();
             }
             catch (Exception ex)
             {
