@@ -77,6 +77,7 @@ namespace IHM
                         this.teachersVM.Teachers.Add(teacherVM);
                         AddTeacherRow(moduleVM, modulesPanel, teacherVM);
                     }
+                    // A la création permet d'initialiser les couleurs des heures
                     AvertHour(moduleVM, module);
 
                 }
@@ -168,9 +169,9 @@ namespace IHM
 
             TextBlock programBlock = new TextBlock { Text = (string)System.Windows.Application.Current.FindResource("ProgramModule"), Width = 120, FontWeight = FontWeights.Bold };
 
-            TextBlock tdBlock = new TextBlock { Text = moduleVM.HoursTd.ToString(), Width = 120, FontWeight = FontWeights.Bold };
-            TextBlock tpBlock = new TextBlock { Text = moduleVM.HoursTp.ToString(), Width = 120, FontWeight = FontWeights.Bold };
-            TextBlock cmBlock = new TextBlock { Text = moduleVM.HoursCM.ToString(), Width = 120, FontWeight = FontWeights.Bold };
+            TextBlock tdBlock = new TextBlock { Tag = "TdHours", Text = moduleVM.HoursTd.ToString(), Width = 120, FontWeight = FontWeights.Bold };
+            TextBlock tpBlock = new TextBlock { Tag = "TpHours", Text = moduleVM.HoursTp.ToString(), Width = 120, FontWeight = FontWeights.Bold };
+            TextBlock cmBlock = new TextBlock { Tag = "CmHours", Text = moduleVM.HoursCM.ToString(), Width = 120, FontWeight = FontWeights.Bold };
 
             programStack.Children.Add(programBlock);
             programStack.Children.Add(tdBlock);
@@ -197,6 +198,17 @@ namespace IHM
                 Orientation = Orientation.Horizontal,
                 HorizontalAlignment = HorizontalAlignment.Center,
                 Margin = new Thickness(5)
+            };
+
+            // Abonnement à l'événement PropertyChanged
+            teacherVM.PropertyChanged += (s, e) =>
+            {
+                if (e.PropertyName == nameof(TeacherVM.AssignedTdHours) ||
+                    e.PropertyName == nameof(TeacherVM.AssignedTpHours) ||
+                    e.PropertyName == nameof(TeacherVM.AssignedCmHours))
+                {
+                    AvertHour(moduleVM, moduleStack);
+                }
             };
 
             // Création de la liste déroulante + binding
@@ -410,49 +422,39 @@ namespace IHM
                 hoursCm += teacherVM.AssignedCmHours;
             }
 
-            // Mise en rouge des heures programmes si les heures sont dépassées ou pas atteinte
-            if (hoursTp > moduleVM.HoursTp || hoursTp < moduleVM.HoursTp)
-            {
-                module.Children.OfType<StackPanel>().Where(x => x.Children.OfType<TextBlock>().Where
-                    (y => y.Text == (string)System.Windows.Application.Current.FindResource("ProgramModule")).Any()).First().
-                    Children.OfType<TextBlock>().Where(x => x.Text == moduleVM.HoursTp.ToString()).First().Background = Brushes.Red;
-            }
-            if (hoursTd > moduleVM.HoursTd || hoursTd < moduleVM.HoursTd)
-            {
-                module.Children.OfType<StackPanel>().Where(x => x.Children.OfType<TextBlock>().Where
-                        (y => y.Text == (string)System.Windows.Application.Current.FindResource("ProgramModule")).Any()).First().
-                        Children.OfType<TextBlock>().Where(x => x.Text == moduleVM.HoursTd.ToString()).First().Background = Brushes.Red;
-            }
-            
-            if (hoursCm > moduleVM.HoursCM || hoursCm < moduleVM.HoursCM)
-            {
-                module.Children.OfType<StackPanel>().Where(x => x.Children.OfType<TextBlock>().Where
-                    (y => y.Text == (string)System.Windows.Application.Current.FindResource("ProgramModule")).Any()).First().
-                    Children.OfType<TextBlock>().Where(x => x.Text == moduleVM.HoursCM.ToString()).First().Background = Brushes.Red;
-            }
-
-            // Mise en vert des heures programmes si les heures sont atteintes
-            if (hoursTp == moduleVM.HoursTp)
-            {
-                module.Children.OfType<StackPanel>().Where(x => x.Children.OfType<TextBlock>().Where
-                    (y => y.Text == (string)System.Windows.Application.Current.FindResource("ProgramModule")).Any()).First().
-                    Children.OfType<TextBlock>().Where(x => x.Text == moduleVM.HoursTp.ToString()).First().Background = Brushes.Green;
-            }
-            if (hoursTd == moduleVM.HoursTd)
-            {
-                module.Children.OfType<StackPanel>().Where(x => x.Children.OfType<TextBlock>().Where
-                    (y => y.Text == (string)System.Windows.Application.Current.FindResource("ProgramModule")).Any()).First().
-                    Children.OfType<TextBlock>().Where(x => x.Text == moduleVM.HoursTd.ToString()).First().Background = Brushes.Green;
-            }
-            if (hoursCm == moduleVM.HoursCM)
-            {
-                module.Children.OfType<StackPanel>().Where(x => x.Children.OfType<TextBlock>().Where
-                    (y => y.Text == (string)System.Windows.Application.Current.FindResource("ProgramModule")).Any()).First().
-                    Children.OfType<TextBlock>().Where(x => x.Text == moduleVM.HoursCM.ToString()).First().Background = Brushes.Green;
-            }
-            
+            UpdateHourStatus(module,hoursTp, "TpHours");
+            UpdateHourStatus(module, hoursTd, "TdHours");
+            UpdateHourStatus(module, hoursCm, "CmHours");
 
 
+        }
+
+        /// <summary>
+        /// Met à jour le statut des heures (rouge si non atteintes, vert si atteintes)
+        /// </summary>
+        /// <param name="module">panneau de modules</param>
+        /// <param name="assignedHours">heures totales assignés</param>
+        /// <param name="programHours">heures au programme</param>
+        private void UpdateHourStatus(StackPanel module, int assignedHours, string tag)
+        {
+            var programStack = (string)System.Windows.Application.Current.FindResource("ProgramModule");
+            var hoursTarget = module.Children.OfType<StackPanel>()
+        .SelectMany(stackP => stackP.Children.OfType<TextBlock>())
+        .FirstOrDefault(tb => tb.Tag?.ToString() == tag);
+
+            if (hoursTarget != null)
+            {
+                 if (assignedHours == int.Parse(hoursTarget.Text))
+                 {
+                    hoursTarget.Foreground = (SolidColorBrush)System.Windows.Application.Current.FindResource("HourGood");
+
+                 }
+                else
+                {
+                    hoursTarget.Foreground = (SolidColorBrush)System.Windows.Application.Current.FindResource("HourNotGood");
+
+                }
+            }
         }
 
         /// <summary>
