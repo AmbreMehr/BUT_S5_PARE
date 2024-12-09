@@ -10,6 +10,8 @@
     <system:String x:Key="BtnValider">Valider</system:String>
     <system:String x:Key="BtnAnnuler">Annuler</system:String>
     <system:String x:Key="BtnModifier">Modifier</system:String>
+    <system:String x:Key="BtnSave">Enregistrer</system:String>
+    <system:String x:Key="BtnQuit">Quitter</system:String>
     <system:String x:Key="MessageModif">Les modifications ont bien été enregistrées</system:String>
     <system:String x:Key="Confirmation">Confirmation</system:String>
     <system:String x:Key="Retour">Retour</system:String>
