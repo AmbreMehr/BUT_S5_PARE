@@ -440,7 +440,7 @@ namespace IHM
             var programStack = (string)System.Windows.Application.Current.FindResource("ProgramModule");
             var hoursTarget = module.Children.OfType<StackPanel>()
                 .SelectMany(stackP => stackP.Children.OfType<TextBlock>())
-                .FirstOrDefault(tb => tb.Tag?.ToString() == tag); // null qd on change direct
+                .FirstOrDefault(tb => tb.Tag?.ToString() == tag);
 
             if (hoursTarget != null)
             {
