@@ -22,12 +22,6 @@ namespace Storage.InterfaceDAO
         public User Read(int id);
 
         /// <summary>
-        /// Modifie l'utilisateur
-        /// </summary>
-        /// <param name="user">utilisateur à modifié</param>
-        public void Update(User user);
-
-        /// <summary>
         /// Renvoi tous les utilisateurs
         /// </summary>
         /// <returns>utilisateurs</returns>
