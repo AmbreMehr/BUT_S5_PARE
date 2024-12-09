@@ -18,6 +18,8 @@ namespace IHM_Model
         private ObservableCollection<ModuleVM> models;
         private ModuleVM? selectedModule;
         private IModuleNetwork moduleNetwork;
+        private int semesterFirstWeek;
+        private int semesterLastWeek;
 
         /// <summary>
         /// Get et set du tableau de modules
@@ -50,6 +52,8 @@ namespace IHM_Model
         {
             this.moduleNetwork = new ModuleNetwork();
             this.models = new ObservableCollection<ModuleVM>();
+            this.semesterFirstWeek = 35;
+            this.semesterLastWeek = 53;
         }
 
         /// <summary>
@@ -105,18 +109,23 @@ namespace IHM_Model
         /// Met à jour les modules dans le backend en validant les données.
         /// </summary>
         /// <returns>Une tâche asynchrone.</returns>
+        /// <exception cref="ExceptionWeekBegin">La première semaine du module est hors des limites du semestre</exception>
+        /// <exception cref="ExceptionWeekEnd">La dernière semaine du module est hors des limites du semestre</exception>
+        /// <exception cref="ExceptionWeekBeginAfterWeekEnd">La première semaine du module est après la dernière semaine du module</exception>
+        /// <exception cref="ExceptionSameWeekBeginEnd">Le module commence et se termine la même semaine</exception>
+        /// <exception cref="ApplicationException">Erreur lors de la mise à jour du module</exception>
         /// <author>Lucas PRUNIER</author>
         public async Task UpdateModules()
         {
             foreach (ModuleVM moduleVM in models)
             {
                 // Vérification des règles métier
-                if (moduleVM.WeekBegin < 35 || moduleVM.WeekBegin > 53)
+                if (moduleVM.WeekBegin < semesterFirstWeek || moduleVM.WeekBegin > semesterLastWeek)
                 {
                     throw new ExceptionWeekBegin(Ressource.StringRes.WeekBegin);
                 }
 
-                if (moduleVM.WeekEnd < 35 || moduleVM.WeekEnd > 53)
+                if (moduleVM.WeekEnd < semesterFirstWeek || moduleVM.WeekEnd > semesterLastWeek)
                 {
                     throw new ExceptionWeekEnd(Ressource.StringRes.WeekEnd);
                 }
