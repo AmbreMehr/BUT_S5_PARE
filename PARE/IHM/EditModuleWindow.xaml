@@ -59,13 +59,13 @@
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
 
-            <Button Content="{DynamicResource Retour}" 
+            <Button Content="{DynamicResource BtnQuit}" 
                     FontFamily="{StaticResource OpenSauceOne}" 
                     Grid.Row="2" Grid.Column="0" 
                     Style="{DynamicResource ButtonText1}"
                     Click="BackHome"/>
 
-            <Button Content="{DynamicResource BtnValider}" 
+            <Button Content="{DynamicResource BtnSave}" 
                     FontFamily="{StaticResource OpenSauceOne}" 
                     Grid.Row="2" Grid.Column="1" 
                     Style="{DynamicResource ButtonText1}"

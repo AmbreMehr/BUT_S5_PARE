@@ -368,7 +368,7 @@ namespace IHM
                 MessageBox.Show((string)System.Windows.Application.Current.FindResource("MessageModif"), 
                         (string)System.Windows.Application.Current.FindResource("Confirmation"), 
                         MessageBoxButton.OK, MessageBoxImage.Information);
-                BackHome(sender, e);
+                //BackHome(sender, e);
             }
             catch (Exception ex)
             {
