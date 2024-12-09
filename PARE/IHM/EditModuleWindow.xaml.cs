@@ -75,7 +75,7 @@ namespace IHM
                     {
 
                         this.teachersVM.Teachers.Add(teacherVM);
-                        AddTeacherRow(moduleVM, modulesPanel, teacherVM);
+                        AddTeacherRow(moduleVM, module, teacherVM);
                     }
                     // A la création permet d'initialiser les couleurs des heures
                     AvertHour(moduleVM, module);
@@ -363,7 +363,7 @@ namespace IHM
                 TeacherVM teacherVM = new TeacherVM();
                 this.teachersVM.Teachers.Add(teacherVM);
                 teacherVM.Module = moduleVM;
-                AddTeacherRow(moduleVM, teacherContainer, teacherVM);
+                AddTeacherRow(moduleVM, module, teacherVM);
             };
 
         }
@@ -434,17 +434,17 @@ namespace IHM
         /// </summary>
         /// <param name="module">panneau de modules</param>
         /// <param name="assignedHours">heures totales assignés</param>
-        /// <param name="programHours">heures au programme</param>
+        /// <param name="tag">tag des textes à mettre à jour</param>
         private void UpdateHourStatus(StackPanel module, int assignedHours, string tag)
         {
             var programStack = (string)System.Windows.Application.Current.FindResource("ProgramModule");
             var hoursTarget = module.Children.OfType<StackPanel>()
-        .SelectMany(stackP => stackP.Children.OfType<TextBlock>())
-        .FirstOrDefault(tb => tb.Tag?.ToString() == tag);
+                .SelectMany(stackP => stackP.Children.OfType<TextBlock>())
+                .FirstOrDefault(tb => tb.Tag?.ToString() == tag); // null qd on change direct
 
             if (hoursTarget != null)
             {
-                 if (assignedHours == int.Parse(hoursTarget.Text))
+                if (assignedHours == int.Parse(hoursTarget.Text))
                  {
                     hoursTarget.Foreground = (SolidColorBrush)System.Windows.Application.Current.FindResource("HourGood");
 
