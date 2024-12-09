@@ -104,7 +104,11 @@ namespace IHM
         }
 
 
-
+        /// <summary>
+        /// Ouvre la page des paramètres
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void OpenParametresPage(object sender, RoutedEventArgs e)
         {
             SettingsWindows settingsWindows = new SettingsWindows();
@@ -112,6 +116,11 @@ namespace IHM
             this.Close();
         }
 
+        /// <summary>
+        /// Permet de se déconnecter de l'application et ramène sur la page de login
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void LogOut(object sender, RoutedEventArgs e)
         {
             LoginWindow loginWindow = new LoginWindow();
@@ -119,6 +128,11 @@ namespace IHM
             this.Close();
         }
 
+        /// <summary>
+        /// Ouvre la page Attribution des modules
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void AttributionModuleWindow(object sender, RoutedEventArgs e)
         {
             ModuleSupervisorsWindow moduleSupervisorsWindow = new ModuleSupervisorsWindow(semestersVM);
@@ -126,16 +140,31 @@ namespace IHM
             this.Close();
         }
 
+        /// <summary>
+        /// Ouvrira la page Attribution profil type
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void AttributionProfilTypeWindow(object sender, RoutedEventArgs e)
         {
 
         }
 
+        /// <summary>
+        /// Ouvrira la page Bilan des alertes
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void BilanAlertWindow(object sender, RoutedEventArgs e)
         {
 
         }
 
+        /// <summary>
+        /// Affiche le component qui permet de placer / modifier temporellement les modules
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void PlacerModuleWindow(object sender, RoutedEventArgs e)
         {
             PlaceModuleWindow placeModuleWindow = new PlaceModuleWindow(semestersVM, modulesVM);
@@ -179,6 +208,10 @@ namespace IHM
             GetModulesBySemester();
         }
 
+        /// <summary>
+        /// Méthode permettant de modifier la visibilité des boutons sur l'écran d'accueil
+        /// </summary>
+        /// <param name="IsVisible"></param>
         private void ToggleBottomButtonsVisibility(bool IsVisible)
         {
             BtnAttributionModule.Visibility = IsVisible ? Visibility.Visible : Visibility.Collapsed;
