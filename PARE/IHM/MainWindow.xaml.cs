@@ -63,8 +63,8 @@ namespace IHM
                     if (gridColumnBegin < 0 || gridColumnEnd < 0 || gridColumnBegin > gridColumnEnd)
                     {
                         MessageBox.Show(
-                            $"Le module '{moduleVM.Name}' a des indices de colonne invalides : Début={moduleVM.WeekBegin}, Fin={moduleVM.WeekEnd}.",
-                            "Erreur de placement",
+                            $"{moduleVM.Name} : " + (string)System.Windows.Application.Current.FindResource("MessageTitleModulePlacementInvalide"),
+                            (string)System.Windows.Application.Current.FindResource("MessageTitleModulePlacementInvalide"),
                             MessageBoxButton.OK,
                             MessageBoxImage.Warning);
                         continue; // Ignore ce module et passe au suivant
