@@ -22,7 +22,7 @@ namespace IHM_Model
         private int semesterLastWeek;
 
         /// <summary>
-        /// Get et set du tableau de modules
+        /// Renvoie le tableau de modules
         /// </summary>
         /// <author> Clotilde MALO </author>
         public ObservableCollection<ModuleVM> Modules
@@ -31,7 +31,7 @@ namespace IHM_Model
         }
 
         /// <summary>
-        /// Get et set du module sélectionné
+        /// Renvoie et remplace le module sélectionné
         /// </summary>
         /// <author> Clotilde MALO </author>
         public ModuleVM? SelectedModule
