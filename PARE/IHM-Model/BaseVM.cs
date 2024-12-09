@@ -18,7 +18,7 @@ namespace IHM_Model
         /// Événement déclenché lorsque la valeur d'une propriété est modifiée. Il permet aux interfaces utilisateur de réagir aux changements des données.
         /// </summary>
         /// <author>Stéphane BASSET</author>
-        public event PropertyChangedEventHandler PropertyChanged;
+        public event PropertyChangedEventHandler? PropertyChanged;
 
         /// <summary>
         /// Elle déclenche l'événement PropertyChanged avec le nom de la propriété modifiée.
@@ -28,9 +28,8 @@ namespace IHM_Model
         /// Nom de la propriété qui a changé. Si aucun nom n'est spécifié, l'attribut CallerMemberName passe automatiquement le nom de la propriété appelante.
         /// </param>
         /// <author>Stéphane BASSET</author>
-        protected void NotifyChange([CallerMemberName] string propertyName = null)
-        {
-            
+        protected void NotifyChange([CallerMemberName] string? propertyName = null)
+        {   
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }

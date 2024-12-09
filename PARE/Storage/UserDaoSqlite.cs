@@ -104,17 +104,6 @@ namespace Storage
 
         public User Read(int id)
         {
-            throw new NotImplementedException();
-        }
-
-        public void Update(User user)
-        {
-            throw new NotImplementedException();
-        }
-
-        /*
-        public User GetUserById(int idUser)
-        {
             User user = new User();
             db.Connection.Open();
             var cmd = db.Connection.CreateCommand();
@@ -133,14 +122,46 @@ namespace Storage
                                " LEFT JOIN RoleOfUser AS ru ON u.idUser = ru.idUser" +
                                " LEFT JOIN Role AS r ON ru.idRole = r.idRole" +
                                " WHERE u.idUser = @idUser";
-            cmd.Parameters.AddWithValue("@idUser", idUser);
+            cmd.Parameters.AddWithValue("@idUser", id);
             using (var reader = cmd.ExecuteReader())
             {
+                reader.Read();
                 user = Reader2User(reader);
 
             }
             db.Connection.Close();
             return user;
-        }*/
+        }
+
+        public void Update(User user)
+        {
+            throw new NotImplementedException();
+        }
+
+        public User[] ListAllByRole(int roleId)
+        {
+            db.Connection.Open();
+            var cmd = db.Connection.CreateCommand();
+            cmd.CommandText = "SELECT u.idUser" +
+                              " FROM Users AS u" +
+                              " LEFT JOIN RoleOfUser AS ru ON u.idUser = ru.idUser" +
+                              " WHERE ru.idRole = @roleId ;";
+            cmd.Parameters.AddWithValue("@roleId", roleId);
+            List<User> users = new List<User>();
+            List<int> list = new List<int>();
+            using (var reader = cmd.ExecuteReader())
+            {
+                while (reader.Read()) 
+                {
+                    list.Add(Convert.ToInt32(reader["idUser"]));
+                }
+            }
+            db.Connection.Close();
+            foreach (int userId in list)
+            {
+                users.Add(Read(userId));
+            }
+            return users.ToArray();
+        }
     }
 }

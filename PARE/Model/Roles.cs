@@ -4,9 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace IHM_Model
+namespace Model
 {
-    public class INotifyPropertyChange
+    public enum Roles
     {
+        Admin = 1, 
+        Chief = 2, 
+        Professor = 3
     }
 }

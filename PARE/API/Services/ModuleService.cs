@@ -1,4 +1,5 @@
-﻿using Model;
+﻿using Microsoft.EntityFrameworkCore;
+using Model;
 using Storage;
 using Storage.InterfaceDAO;
 
@@ -64,5 +65,15 @@ namespace API.Services
             IEnumerable<Module> module = this.moduleDao.ListAll();
             return module.ToArray();
         }
+
+        /// <summary>
+        /// Met à jour le module
+        /// </summary>
+        /// <param name="module">module à mettre à jour</param>
+        public void UpdateModule(Module module)
+        {
+            moduleDao.Update(module);
+        }
+
     }
 }

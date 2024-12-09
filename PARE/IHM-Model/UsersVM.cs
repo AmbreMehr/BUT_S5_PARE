@@ -1,4 +1,5 @@
 ﻿using Model;
+using Network;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,41 +15,54 @@ namespace IHM_Model
     /// /// <author>Stéphane BASSET</author>
     public class UsersVM : BaseVM
     {
-        private User[]_models;
+        private UserNetwork network;
+        private List<UserVM> models;
+        private UserVM? selectedUser;
 
         /// <summary>
-        /// Propriété pour obtenir ou définir le tableau des utilisateurs.
+        /// Propriété pour obtenir le tableau des utilisateursVM.
         /// </summary>
-        public User[] Users
-            { 
-            get { return _models; } 
-            set { 
-                _models = value;
-                NotifyChange("Users");
+        public List<UserVM> Users
+        { 
+            get { return models; }
+        }
+
+        /// <summary>
+        /// Permet de récupérer et modifier l'utilisateur sélectionné.
+        /// </summary>
+        public UserVM? SelectedUser
+        {
+            get { return selectedUser; }
+            set
+            {
+                selectedUser = value;
+                NotifyChange("SelectedUser");
             }
-        
         }
 
         /// <summary>
-        /// Récupère tous les utilisateurs.
+        /// Récupère tous les enseignants
         /// </summary>
-        /// <returns>Tableau des modules pour le semestre</returns>
-        /// <author>Stéphane BASSET</author>
-        public User[] GetAllUsers()
+        /// <param name="role">role de l'utilisateur</param>
+        /// <returns>UserVM list</returns>
+        public async Task<List<UserVM>> GetAllProfessors()
         {
-            return _models;
+            models.Clear();
+            User[] users = await network.GetUsersByRole(Roles.Professor);
+            foreach (User professor in users)
+            {
+                models.Add(new UserVM(professor));
+            }
+            return models;
         }
 
         /// <summary>
-        /// Récupère tous lesutilisateur par role.
+        /// Initialise la classe UsersVM avec un tableau vide de UserVM et un UserNetwork.
         /// </summary>
-        /// <param name="role"></param>
-        /// <returns></returns>
-        /// <author>Stéphane BASSET</author>
-        public User[] GetAllUsersByRole(Role role)
+        public UsersVM()
         {
-            User[] users = GetAllUsers();
-            return users;
+            this.models = new List<UserVM>();
+            this.network = new UserNetwork();
         }
     }
 }

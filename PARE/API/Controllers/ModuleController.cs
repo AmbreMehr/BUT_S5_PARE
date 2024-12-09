@@ -15,10 +15,20 @@ namespace API.Controllers
         /// </summary>
         /// <param name="module">Module à mettre à jour</param>
         /// <returns>HTTP Code</returns>
-        [HttpPost("update", Name = "UpdateModule")]
+        [HttpPut("UpdateModule", Name = "UpdateModule")]
         public IActionResult UpdateModule(Module module)
         {
-            throw new NotImplementedException();
+            IActionResult result = BadRequest();
+            try
+            {
+                this.ModuleService.UpdateModule(module);
+                result = Ok("Le module a été mis à jour avec succès.");
+            }
+            catch (Exception ex)
+            {
+                result = NotFound(ex.Message);
+            }
+            return result;
         }
 
         /// <summary>

@@ -21,12 +21,8 @@ namespace IHM
     /// <author>Clotilde MALO</author>
     public partial class MainWindow : Window
     {
-        private Module module;
-        private SemesterVM semesterVM;
-        private ISemesterNetwork semesterNetwork;
-        private IModuleNetwork moduleNetwork;
+        private SemestersVM semestersVM;
         private ModulesVM modulesVM;
-        private ObservableCollection<Module> modules;
 
         /// <summary>
         /// Constructeur de la classe MainWindow : initialise les composants de la fenêtre principale
@@ -34,45 +30,45 @@ namespace IHM
         public MainWindow()
         {
             InitializeComponent();
-
-            this.module = new Module();
-            this.semesterNetwork = new SemesterNetwork();
-            this.semesterVM = new SemesterVM(semesterNetwork);
-            this.moduleNetwork = new ModuleNetwork();
-            this.modulesVM = new ModulesVM(moduleNetwork);
-            MainViewModel mainViewModel = new MainViewModel(this.modulesVM, this.semesterVM);
+            this.semestersVM = new SemestersVM();
+            this.modulesVM = new ModulesVM();
+            MainViewModel mainViewModel = new MainViewModel(this.modulesVM, this.semestersVM);
 
             DataContext = mainViewModel;
-
         }
 
         /// <summary>
         /// Récupération des modules par semestre sélectionné
         /// </summary>
-        public async void GetModuleBySemester()
+        public async void GetModulesBySemester()
         {
-            // Recupere le semestre sélectionné
-            Semester semesterSelect = (Semester)semesterBox.SelectedItem;
-
-
-            if (semesterSelect != null)
+            if (semestersVM.SelectedSemester != null)
             {
-                // suppresssion des éléments qui ne sont pas ceux de base
+                // Suppression des éléments qui ne sont pas ceux de base
                 gridModules.Children.OfType<Border>().ToList().ForEach(child => gridModules.Children.Remove(child));
+                await this.modulesVM.GetModuleBySemester(semestersVM.SelectedSemester);
 
-
-                await this.modulesVM.LoadModulesBySemester(semesterSelect.Id);
-                this.modules = this.modulesVM.Modules;
+                // Crée une copie immuable des modules pour éviter des modifications pendant l'itération
+                var modulesCopy = modulesVM.Modules.ToList();
 
                 int decalage = 5;
 
-                foreach (var module in this.modules)
+                foreach (ModuleVM moduleVM in modulesCopy)
                 {
+                    // Prend en compte n° de colonnes pour les semaines
+                    int gridColumnBegin = moduleVM.WeekBegin - 35;
+                    int gridColumnEnd = moduleVM.WeekEnd - 35;
 
-
-                    // prend en compte n° de colonnes pour les semaines
-                    int gridColumnBegin = module.WeekBegin - 35;
-                    int gridColumnEnd = module.WeekEnd - 35;
+                    // Valider les indices de colonnes calculés
+                    if (gridColumnBegin < 0 || gridColumnEnd < 0 || gridColumnBegin > gridColumnEnd)
+                    {
+                        MessageBox.Show(
+                            $"Le module '{moduleVM.Name}' a des indices de colonne invalides : Début={moduleVM.WeekBegin}, Fin={moduleVM.WeekEnd}.",
+                            "Erreur de placement",
+                            MessageBoxButton.OK,
+                            MessageBoxImage.Warning);
+                        continue; // Ignore ce module et passe au suivant
+                    }
 
                     // Créé un rectangle et texte pour le module
                     Border moduleRectangle = new Border
@@ -84,12 +80,11 @@ namespace IHM
                         Height = 40,
                         Margin = new Thickness(35, decalage, 35, 0),
                         VerticalAlignment = VerticalAlignment.Top
-
                     };
 
                     TextBlock textBlock = new TextBlock
                     {
-                        Text = module.Name,
+                        Text = moduleVM.Name,
                         HorizontalAlignment = HorizontalAlignment.Center,
                         VerticalAlignment = VerticalAlignment.Center,
                         FontSize = 16,
@@ -106,13 +101,14 @@ namespace IHM
                     decalage += 60;
                 }
             }
-                    
         }
+
+
 
         private void OpenParametresPage(object sender, RoutedEventArgs e)
         {
             SettingsWindows settingsWindows = new SettingsWindows();
-            settingsWindows.Show();
+            settingsWindows.ShowDialog();
             this.Close();
         }
 
@@ -125,7 +121,9 @@ namespace IHM
 
         private void AttributionModuleWindow(object sender, RoutedEventArgs e)
         {
-            
+            ModuleSupervisorsWindow moduleSupervisorsWindow = new ModuleSupervisorsWindow(semestersVM);
+            moduleSupervisorsWindow.Show();
+            this.Close();
         }
 
         private void AttributionProfilTypeWindow(object sender, RoutedEventArgs e)
@@ -140,12 +138,38 @@ namespace IHM
 
         private void PlacerModuleWindow(object sender, RoutedEventArgs e)
         {
+            PlaceModuleWindow placeModuleWindow = new PlaceModuleWindow(semestersVM, modulesVM);
 
+            ToggleBottomButtonsVisibility(false);
+
+
+            Grid.SetRow(placeModuleWindow, 2);
+            grid.Children.Add(placeModuleWindow);
+
+            placeModuleWindow.ValidationCompleted += (s, args) =>
+            {
+                grid.Children.Remove(placeModuleWindow); 
+                ToggleBottomButtonsVisibility(true);
+
+                GetModulesBySemester();
+            };
+            placeModuleWindow.Canceled += (s, args) =>
+            {
+                grid.Children.Remove(placeModuleWindow); 
+                ToggleBottomButtonsVisibility(true); 
+            };
         }
 
+        /// <summary>
+        /// Evenement pour ouvrir la fenêtre d'édition de module
+        /// </summary>
+        /// <author>Clotilde MALO</author>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void EditModuleWindow(object sender, RoutedEventArgs e)
         {
-
+            new EditModuleWindow(semestersVM).Show();
+            this.Close();
         }
 
         /// <summary>
@@ -155,8 +179,17 @@ namespace IHM
         /// <param name="e"></param>
         private void changedSelection(object sender, SelectionChangedEventArgs e)
         {
-
-            GetModuleBySemester();
+            GetModulesBySemester();
         }
+
+        private void ToggleBottomButtonsVisibility(bool IsVisible)
+        {
+            BtnAttributionModule.Visibility = IsVisible ? Visibility.Visible : Visibility.Collapsed;
+            BtnAttributionProfilType.Visibility = IsVisible ? Visibility.Visible : Visibility.Collapsed;
+            BtnBilanAlertes.Visibility = IsVisible ? Visibility.Visible : Visibility.Collapsed;
+            BtnEditerModules.Visibility = IsVisible ? Visibility.Visible : Visibility.Collapsed;
+            BtnPlacerModules.Visibility = IsVisible ? Visibility.Visible : Visibility.Collapsed;
+        }
+
     }
 }

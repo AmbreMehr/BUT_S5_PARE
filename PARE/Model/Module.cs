@@ -101,48 +101,24 @@ namespace Model
         }
         /// <summary>
         /// Get et set de la semaine de début
-        /// <exception>La semaine de début ne peut ni être négative ni supérieur à 53</exception>
         /// </summary>
         public int WeekBegin {
             get => weekBegin;
             set
             {
-                if (value < 0)
-                {
-                    throw new ArgumentException("La semaine de début ne peut pas être négative");
-                }
-                else if (value > 53)
-                {
-                    throw new ArgumentException("La semaine de début ne peut pas être supérieur à 53");
-                }
-                else
-                {
-                    weekBegin = value;
-                }
+                weekBegin = value;
             }
         }
 
         /// <summary>
         /// Get et set de la semaine de fin
-        /// <exception>La semaine de fin ne peut ni être négative ni supérieur à 53</exception>
         /// </summary>
         public int WeekEnd
         {
             get => weekEnd;
             set
             {
-                if (value < 0)
-                {
-                    throw new ArgumentException("La semaine de fin ne peut pas être négative");
-                }
-                else if (value > 53)
-                {
-                    throw new ArgumentException("La semaine de fin ne peut pas être supérieur à 53");
-                }
-                else
-                {
-                    weekEnd = value;
-                }
+                weekEnd = value;
             }
         }
         /// <summary>
@@ -175,16 +151,19 @@ namespace Model
         public Module(Semester semester)
         {
             this.semester = semester;
+            this.supervisor = new User();
+            this.name = "";
         }
 
         /// <summary>
-        /// Constructeur de module vide
+        /// Constructeur vide de module
         /// </summary>
         public Module()
         {
-
+            this.semester = new Semester();
+            this.supervisor = new User();
+            this.name = "";
         }
-
 
     }
 }

@@ -5,8 +5,74 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:IHM"
         mc:Ignorable="d"
-        Title="EditModuleWindow" Height="450" Width="800">
+        Title="{DynamicResource TitreEditionModules}"
+        Height="1000" Width="1500"
+        ResizeMode="NoResize"
+        WindowStartupLocation="CenterScreen"
+        WindowState="Maximized">
+
+    <Window.Background>
+        <SolidColorBrush Color="{DynamicResource BackgroundColor}" />
+    </Window.Background>
+
     <Grid>
-        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="150" />
+            <RowDefinition Height="90" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="75" />
+        </Grid.RowDefinitions>
+        <!-- Logo avec effet d'ombre -->
+        <Image Source="Ressources/Img/logoIUT.png" Stretch="UniformToFill" Grid.Row="0" Grid.Column="0" Margin="10" Width="150" Height="150" HorizontalAlignment="Left"/>
+
+        <TextBlock Grid.Row="0" Text="{DynamicResource TitreEditionModules}" Style="{DynamicResource TitleText}" FontSize="30" HorizontalAlignment="Center" VerticalAlignment="Center" />
+
+        <Grid Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="35" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <ComboBox  Grid.Row="1" x:Name="semesterBox" 
+                   Height="40" Width="250"
+                   HorizontalAlignment="Center" VerticalAlignment="Center" 
+                   FontFamily="{StaticResource OpenSauceOne}" FontSize="20" SelectionChanged="SemestersChange"/>
+
+            <Label Grid.Row="0" x:Name="infoSemester"
+               Content="{DynamicResource infoChangmtSemestre}"
+               HorizontalAlignment="Center"
+               VerticalAlignment="Top"
+               Margin="0"
+               Height="30"/>
+        </Grid>
+
+
+
+        <ScrollViewer Grid.Row="2" VerticalScrollBarVisibility="Auto">
+            <StackPanel x:Name="modulesPanel" Margin="10">
+                <!-- Module dynamiquement ajoutés-->
+            </StackPanel>
+        </ScrollViewer>
+
+        <Grid Grid.Row="3">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <Button Content="{DynamicResource Retour}" 
+                    FontFamily="{StaticResource OpenSauceOne}" 
+                    Grid.Row="2" Grid.Column="0" 
+                    Style="{DynamicResource ButtonText1}"
+                    Click="BackHome"/>
+
+            <Button Content="{DynamicResource BtnValider}" 
+                    FontFamily="{StaticResource OpenSauceOne}" 
+                    Grid.Row="2" Grid.Column="1" 
+                    Style="{DynamicResource ButtonText1}"
+                    Click="UpdateCreateTeacher">
+
+            </Button>
+        </Grid>
+
     </Grid>
 </Window>

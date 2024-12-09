@@ -1,15 +1,20 @@
-﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
-                    xmlns:system="clr-namespace:System;assembly=netstandard">
+<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:system="clr-namespace:System;assembly=netstandard">
 
-    <!--Bienvenue-->
+    <!--  Bienvenue  -->
     <system:String x:Key="TitreBienvenue">Bienvenue !</system:String>
 
-    <!--General-->
+    <!--  General  -->
     <system:String x:Key="BtnValider">Valider</system:String>
     <system:String x:Key="BtnAnnuler">Annuler</system:String>
     <system:String x:Key="BtnModifier">Modifier</system:String>
-    
+    <system:String x:Key="MessageModif">Les modifications ont bien été enregistrées</system:String>
+    <system:String x:Key="Confirmation">Confirmation</system:String>
+    <system:String x:Key="Retour">Retour</system:String>
+    <system:String x:Key="MessageSuppr">Voulez-vous vraiment supprimer cet élément ?</system:String>
+
     <!--MainWindow-->
     <system:String x:Key="TitreMainWindow">Répartition des modules</system:String>
     <system:String x:Key="BtnAttributionModule">Attribution module</system:String>
@@ -19,18 +24,45 @@
     <system:String x:Key="BtnEditerModules">Editer les modules</system:String>
 
 
-    <!--Connexion-->
+    <!--  Connexion  -->
     <system:String x:Key="TitreFenetreConnexion">Connexion</system:String>
     <system:String x:Key="TitreConnexion">Entrez vos informations de connexion</system:String>
     <system:String x:Key="LabelLogin">Nom d'utilisateur :</system:String>
     <system:String x:Key="LabelPassword">Mot de passe :</system:String>
     <system:String x:Key="BtnLogin">Se connecter</system:String>
 
-    <!--Parametre-->
+    <!--  Parametre  -->
     <system:String x:Key="TitreParam">Paramètres</system:String>
 
-    <!--ToolTips-->
+    <!--  ToolTips  -->
     <system:String x:Key="ToolTipPageParamètres">Paramètres</system:String>
     <system:String x:Key="ToolTipLogOut">Se déconnecter</system:String>
+
+    <!--  Attribution module  -->
+    <system:String x:Key="TitleModuleSupervisorsWindow">Responsables de ressources</system:String>
+    <system:String x:Key="SupervisorCol">Responsable</system:String>
+    <system:String x:Key="ModuleCol">Module</system:String>
+    <system:String x:Key="WeekBegin">Semaine de début</system:String>
+    <system:String x:Key="WeekEnd">Semaine de fin</system:String>
+
     
+    <!--Edition des Modules-->
+    <system:String x:Key="TitreEditionModules">Edition des modules</system:String>
+    <system:String x:Key="ProgramModule">Au programme</system:String>
+    <system:String x:Key="AjoutEnseignant">Ajouter un enseignant</system:String>
+    <system:String x:Key="SupprimerEnseignant">Supprimer un enseignant</system:String>
+    <system:String x:Key="TD">TD</system:String>
+    <system:String x:Key="TP">TP</system:String>
+    <system:String x:Key="CM">CM</system:String>
+    <system:String x:Key="infoChangmtSemestre">Attention : quand vous changez de semestre il faut enregistrer vos modifications avant en cliquant sur "Valider".</system:String>
+    
+    <!--MessagesBox-->
+    <system:String x:Key="Erreur">Erreur</system:String>
+    <system:String x:Key="Succes">Succès</system:String>
+    <system:String x:Key="SelectionSemestre">Veuillez sélectionner un semestre avant de placer les modules</system:String>
+    <system:String x:Key="MiseAJourModules">Les modules ont été mis à jour avec succès.</system:String>
+    <system:String x:Key="ErreurDeValidation">Erreur de validation</system:String>
+    <system:String x:Key="ErreurDeMiseAJour">Erreur lors de la mise à jour</system:String>
+    <system:String x:Key="ErreurInnatendue">Une erreur inattendue s'est produite</system:String>
+
 </ResourceDictionary>
