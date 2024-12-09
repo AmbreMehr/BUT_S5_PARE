@@ -22,6 +22,8 @@
     <system:String x:Key="BtnBilanAlertes">Alerts report</system:String>
     <system:String x:Key="BtnPlacerModules">Place the modules</system:String>
     <system:String x:Key="BtnEditerModules">Edit modules</system:String>
+    <system:String x:Key="MessageContentModulePlacementInvalide">This module is wrongly placed.</system:String>
+    <system:String x:Key="MessageTitleModulePlacementInvalide">Placement error</system:String>
 
     <!--  Connexion  -->
     <system:String x:Key="TitreFenetreConnexion">Connection</system:String>
@@ -44,7 +46,7 @@
     <system:String x:Key="WeekBegin">Start Week</system:String>
     <system:String x:Key="WeekEnd">End Week</system:String>
 
-    <!--MessagesBox-->
+    <!--  MessagesBox  -->
     <system:String x:Key="Erreur">Error</system:String>
     <system:String x:Key="Succes">Succes</system:String>
     <system:String x:Key="SelectionSemestre">Please select a semester before placing modules</system:String>
@@ -53,7 +55,7 @@
     <system:String x:Key="ErreurDeMiseAJour">Update error</system:String>
     <system:String x:Key="ErreurInnatendue">An unexpected error has occurred</system:String>
 
-    <!--Edition des Modules-->
+    <!--  Edition des Modules  -->
     <system:String x:Key="TitreEditionModules">Module Edition</system:String>
     <system:String x:Key="ProgramModule">Program</system:String>
     <system:String x:Key="AjoutEnseignant">Add a teacher</system:String>

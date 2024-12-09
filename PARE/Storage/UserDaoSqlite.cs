@@ -133,11 +133,6 @@ namespace Storage
             return user;
         }
 
-        public void Update(User user)
-        {
-            throw new NotImplementedException();
-        }
-
         public User[] ListAllByRole(int roleId)
         {
             db.Connection.Open();

@@ -12,15 +12,23 @@ namespace IHM_Model
     /// <author> Clotilde MALO</author>
     public class MainViewModel
     {
-        /// <summary>
-        /// Get et set du ViewModel des modules
-        /// </summary>
-        public ModulesVM ModulesVM { get; set; }
+        private ModulesVM modulesVM;
+        private SemestersVM semestersVM;
+
 
         /// <summary>
-        /// Get et set du ViewModel des semestres
+        /// Renvoie le ViewModel des modules
         /// </summary>
-        public SemestersVM SemestersVM { get; set; }
+        public ModulesVM ModulesVM {
+            get => modulesVM;
+        }
+
+        /// <summary>
+        /// Renvoie le ViewModel des semestres
+        /// </summary>
+        public SemestersVM SemestersVM { 
+            get => semestersVM;
+        }
 
         /// <summary>
         /// Constructeur de la classe MainViewModel 
@@ -30,8 +38,8 @@ namespace IHM_Model
 
         public MainViewModel(ModulesVM modulesVM, SemestersVM semesterVM)
         {
-            this.ModulesVM = modulesVM;
-            this.SemestersVM = semesterVM;
+            this.modulesVM = modulesVM;
+            this.semestersVM = semesterVM;
         }
     }
 

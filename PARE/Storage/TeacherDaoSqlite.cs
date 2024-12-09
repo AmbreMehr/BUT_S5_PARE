@@ -88,7 +88,7 @@ namespace Storage
         public void Update(Teacher teacher)
         {
             if (teacher == null || teacher.User == null)
-                throw new ArgumentNullException(nameof(teacher), "Teacher ou User ne peut pas être null.");
+                throw new ArgumentNullException(nameof(teacher), Ressource.StringRes.TeacherOrUserNull);
 
 
             db.Connection.Open();

@@ -11,9 +11,9 @@ using System.Threading.Tasks;
 namespace IHM_Model
 {  
     /// <summary>
-   /// La classe `TeachersVM` gère les teacher dans l'application PARE.
-   /// </summary>
-   /// <author>Stéphane BASSET</author>
+    /// La classe `TeachersVM` gère les teacher dans l'application PARE.
+    /// </summary>
+    /// <author>Stéphane BASSET</author>
     public class TeacherVM : BaseVM
     {
         private Teacher model;
@@ -119,6 +119,9 @@ namespace IHM_Model
         /// <summary>
         /// Met à jour un teacher.
         /// </summary>
+        /// <exception cref="ExceptionHourProgram">L'enseignant a plus d'heures à faire qu'il y en a dans le module</exception>
+        /// <exception cref="ExceptionHourNegative">Un nombre d'heures est négatif</exception>
+        /// <exception cref="Exception">Erreur lors de la mise à jour</exception>
         public async Task UpdateTeacher()
         {
             try
@@ -162,6 +165,9 @@ namespace IHM_Model
         /// <summary>
         /// Créer un teacher.
         /// </summary>
+        /// <exception cref="ExceptionHourProgram">L'enseignant a plus d'heures à faire qu'il y en a dans le module</exception>
+        /// <exception cref="ExceptionHourNegative">Un nombre d'heures est négatif</exception>
+        /// <exception cref="Exception">Erreur lors de l'ajout</exception>
         public async Task CreateTeacher()
         {
             // Verif règles métier
