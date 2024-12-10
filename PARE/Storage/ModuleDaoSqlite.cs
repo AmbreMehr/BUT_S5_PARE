@@ -108,6 +108,8 @@ namespace Storage
                                ", nameSemester" +
                                ", numberGroupTp" +
                                ", m.supervisor" +
+                               ", SemesterWeekBegin" +
+                               ", SemesterWeekEnd" +
                                " FROM Modules AS m" +
                                " LEFT JOIN Semester AS s ON m.idSemester = s.idSemester" +
                                " WHERE m.idSemester = @semesterId;";
