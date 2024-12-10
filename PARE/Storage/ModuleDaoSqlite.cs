@@ -62,9 +62,6 @@ namespace Storage
         {
             List<Module> modules = new List<Module>();
 
-            Console.WriteLine($"Updating Module: {module.Id}, {module.WeekBegin}, {module.WeekEnd}");
-
-
             db.Connection.Open();
             var cmd = db.Connection.CreateCommand();
             cmd.CommandText = "UPDATE Modules " +
@@ -86,7 +83,7 @@ namespace Storage
             // Vérification si aucune ligne n'a été mise à jour
             if (rowsAffected == 0)
             {
-                throw new InvalidOperationException($"No module found with id {module.Id}");
+                throw new InvalidOperationException($"{Ressource.StringRes.ModuleIdNotFound} {module.Id}");
             }
 
         }

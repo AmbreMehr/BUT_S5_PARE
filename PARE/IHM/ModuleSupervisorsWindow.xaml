@@ -125,15 +125,15 @@
                 Grid.Column="0"
                 HorizontalAlignment="Center"
                 VerticalAlignment="Center"
-                Click="ClickCancelButton"
-                Content="{DynamicResource Retour}"
+                Click="ClickQuitButton"
+                Content="{DynamicResource BtnQuit}"
                 Style="{StaticResource ButtonText1}" />
             <Button
                 Grid.Column="1"
                 HorizontalAlignment="Center"
                 VerticalAlignment="Center"
                 Click="ClickSubmitButton"
-                Content="{DynamicResource BtnValider}"
+                Content="{DynamicResource BtnSave}"
                 Style="{StaticResource ButtonText1}" />
         </Grid>
     </Grid>

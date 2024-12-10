@@ -35,11 +35,11 @@ namespace API.Controllers
             try
             {
                 this.TeacherService.UpdateTeacher(teacher);
-                result = Ok("L'enseignant a été mis à jour avec succès.");
+                result = Ok();
             }
             catch
             {
-                result = NotFound("L'enseignant n'a pas été mis à jour.");
+                result = NotFound();
             }
             return result;
 
@@ -57,11 +57,11 @@ namespace API.Controllers
             try
             {
                 this.TeacherService.DeleteTeacher(teacher);
-                result = Ok("L'enseignant a été supprimé avec succès.");
+                result = Ok();
             }
             catch
             {
-                result = NotFound("L'enseignant n'a pas été supprimé.");
+                result = NotFound();
             }
             return result;
         }
@@ -78,11 +78,11 @@ namespace API.Controllers
             try
             {
                 this.TeacherService.CreateTeacher(teacher);
-                result = Ok("L'enseignant a été ajouté avec succès.");
+                result = Ok();
             }
             catch
             {
-                result = NotFound("L'enseignant n'a pas été ajouté.");
+                result = NotFound();
             }
             return result;
         }
