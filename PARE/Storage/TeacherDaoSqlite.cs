@@ -253,7 +253,9 @@ namespace Storage
             Teacher[] teachers = ListForUser(teacher.User.Id);
             foreach(Teacher t in teachers)
             {
-                realHours += t.AssignedCmHours + t.AssignedTdHours + t.AssignedTpHours;
+                realHours += t.AssignedCmHours 
+                    + (t.AssignedTdHours * (t.Module.Semester.NbTpGroups / 2 + t.Module.Semester.NbTpGroups % 2) 
+                    + (t.AssignedTpHours * t.Module.Semester.NbTpGroups));
             }
             // Mise à jour des heures réelles
             UserDaoSqlite userDao = new UserDaoSqlite();
