@@ -44,6 +44,8 @@ namespace IHM
         {
             if (semestersVM.SelectedSemester != null)
             {
+                UpdateWeekSemester(semestersVM.SelectedSemester);
+
                 // Suppression des éléments qui ne sont pas ceux de base
                 gridModules.Children.OfType<Border>().ToList().ForEach(child => gridModules.Children.Remove(child));
                 await this.modulesVM.GetModuleBySemester(semestersVM.SelectedSemester);
@@ -221,5 +223,21 @@ namespace IHM
             BtnPlacerModules.Visibility = IsVisible ? Visibility.Visible : Visibility.Collapsed;
         }
 
+        private void UpdateWeekSemester(SemesterVM semestreActuel)
+        {
+            labelSemaine1.Content = semestreActuel.WeekBegin.ToString();
+            labelSemaine2.Content = (semestreActuel.WeekBegin+1).ToString();
+            labelSemaine3.Content = (semestreActuel.WeekBegin+2).ToString();
+            labelSemaine4.Content = (semestreActuel.WeekBegin+3).ToString();
+            labelSemaine5.Content = (semestreActuel.WeekBegin+4).ToString();
+            labelSemaine6.Content = (semestreActuel.WeekBegin+5).ToString();
+            labelSemaine7.Content = (semestreActuel.WeekBegin+6).ToString();
+            labelSemaine8.Content = (semestreActuel.WeekBegin+7).ToString();
+            labelSemaine9.Content = (semestreActuel.WeekBegin+8).ToString();
+            labelSemaine10.Content = (semestreActuel.WeekBegin+9).ToString();
+            labelSemaine11.Content = (semestreActuel.WeekBegin+10).ToString();
+            labelSemaine12.Content = (semestreActuel.WeekBegin+11).ToString();
+            labelSemaine13.Content = (semestreActuel.WeekBegin+12).ToString();
+        }
     }
 }
