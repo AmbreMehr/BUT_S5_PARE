@@ -15,6 +15,9 @@ namespace Model
         private int id;
         private string name;
         private int nbTpGroups;
+        private int semesterWeekBegin;
+        private int semesterWeekEnd;
+
 
         /// <summary>
         /// Get et set de l'id du semestre
@@ -25,6 +28,16 @@ namespace Model
         /// Get et set du nom du semestre (équivalent à une promotion)
         /// </summary>
         public string Name { get => name; set => name = value; }
+
+        /// <summary>
+        /// Get et set du numéro de la semaine de début du semestre
+        /// </summary>
+        public int SemesterWeekBegin { get => semesterWeekBegin; set => semesterWeekBegin = value; }
+
+        /// <summary>
+        /// Get et set du numéro de la semaine de fin du semestre
+        /// </summary>
+        public int SemesterWeekEnd { get => semesterWeekEnd; set => semesterWeekEnd = value; }
 
         /// <summary>
         /// Get et set du nbre de groupe de TP par semestre
@@ -43,15 +56,22 @@ namespace Model
                 }
             }
         }
+
+
+
         /// <summary>
         /// Constructeur de semestre avec tous les paramètres
         /// </summary>
         /// <param name="name">nom du semestre</param>
         /// <param name="nbTpGroups">nbre de groupe de TP</param>
-        public Semester(string name, int nbTpGroups)
+        /// <param name="SemesterWeekBegin">numéro de début de semestre</param>
+        /// <param name="SemesterWeekEnd">numéro de fin de semestre</param>
+        public Semester(string name, int nbTpGroups, int semesterWeekBegin, int semesterWeekEnd)
         {
             this.name = name;
             this.nbTpGroups = nbTpGroups;
+            this.semesterWeekBegin = semesterWeekBegin;
+            this.semesterWeekEnd = semesterWeekEnd;
         }
 
         /// <summary>
