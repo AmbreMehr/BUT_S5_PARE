@@ -19,4 +19,8 @@
     <Color x:Key="BackgroundColor">White</Color>
 
 
+    <SolidColorBrush x:Key="HourNotGood" Color="Red"/>
+    <SolidColorBrush x:Key="HourGood" Color="#FF39CB0E"/>
+
+
 </ResourceDictionary>

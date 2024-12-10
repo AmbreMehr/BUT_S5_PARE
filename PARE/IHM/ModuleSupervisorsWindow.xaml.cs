@@ -103,7 +103,7 @@ namespace IHM
             };
         }
 
-        private void ClickCancelButton(object sender, RoutedEventArgs e)
+        private void ClickQuitButton(object sender, RoutedEventArgs e)
         {
             BackToMainWindow();
         }
@@ -130,7 +130,6 @@ namespace IHM
                     (string)System.Windows.Application.Current.FindResource("Succes"),
                     MessageBoxButton.OK,
                     MessageBoxImage.Information);
-                BackToMainWindow();
             }
             catch (Exception ex)
             {
