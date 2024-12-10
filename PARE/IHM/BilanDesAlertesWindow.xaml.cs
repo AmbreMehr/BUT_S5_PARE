@@ -33,7 +33,7 @@ namespace IHM
         /// Affiche toutes les informations dans le tableau 
         /// </summary>
         /// <returns></returns>
-        public async Task DisplayAllTeachers()
+        private async Task DisplayAllTeachers()
         {
             List<UserVM> professors = await usersVM.GetAllProfessors();
             int iRow = 0;
@@ -48,19 +48,20 @@ namespace IHM
             {
                 Border nameprofessorBorder = NewBorder();
                 TextBlock professorNameBlock = new TextBlock();
-                CreationCelluleTableau(professorNameBlock, professor.Fullname);
+                CreationCelluleTableau(professorNameBlock, professor.Fullname,professor, nameprofessorBorder);
+
 
                 Border typicalprofilBorder = NewBorder();
                 TextBlock typicalprofilBlock = new TextBlock();
-                CreationCelluleTableau(typicalprofilBlock, professor.Profile);
+                CreationCelluleTableau(typicalprofilBlock, professor.Profile,professor, typicalprofilBorder);
 
                 Border serviceBorder = NewBorder();
                 TextBlock serviceBlock = new TextBlock();
-                CreationCelluleTableau(serviceBlock, professor.ServiceHour.ToString());
+                CreationCelluleTableau(serviceBlock, professor.ServiceHour.ToString(),professor, serviceBorder);
 
                 Border realhoursBorder = NewBorder();
                 TextBlock realhoursBlock = new TextBlock();
-                CreationCelluleTableau(realhoursBlock, professor.RealHours.ToString());
+                CreationCelluleTableau(realhoursBlock, professor.RealHours.ToString(),professor, realhoursBorder);
 
                 // Place les nouveaux éléments dans l'IHM
                 nameprofessorBorder.Child = professorNameBlock;
@@ -96,13 +97,15 @@ namespace IHM
         /// </summary>
         /// <param name="block"></param>
         /// <param name="content"></param>
-        private void CreationCelluleTableau(TextBlock block, string content)
+        private void CreationCelluleTableau(TextBlock block, string content, UserVM professor, Border border)
         {
             block.Text = content;
             block.HorizontalAlignment = HorizontalAlignment.Center;
             block.VerticalAlignment = VerticalAlignment.Center;
             block.FontSize = 18;
+            border.Background = ColorierCellules(professor);
         }
+
 
         /// <summary>
         /// Méthode créant une bordure pour chaque élément du tableau
@@ -115,6 +118,21 @@ namespace IHM
                 BorderBrush = new SolidColorBrush(Colors.Black),
                 BorderThickness = new Thickness(2)
             };
+        }
+
+        /// <summary>
+        /// Méthode permettant de colorier les cellules en fonction du nombre d'heures réelles du professeur
+        /// </summary>
+        /// <param name="professor"></param>
+        /// <returns></returns>
+        private SolidColorBrush ColorierCellules(UserVM professor)
+        {
+            SolidColorBrush couleur = (SolidColorBrush)System.Windows.Application.Current.FindResource("RealHoursEqualService");
+            if (professor.RealHours > professor.ServiceHour)
+                couleur = (SolidColorBrush)System.Windows.Application.Current.FindResource("RealHoursOverService");
+            else if (professor.RealHours < professor.ServiceHour)
+                couleur = (SolidColorBrush)System.Windows.Application.Current.FindResource("RealHoursUnderService");
+                return couleur;
         }
 
         /// <summary>

@@ -22,5 +22,12 @@
     <SolidColorBrush x:Key="HourNotGood" Color="Red"/>
     <SolidColorBrush x:Key="HourGood" Color="#FF39CB0E"/>
 
+    <SolidColorBrush x:Key="RealHoursOverService" Color="Orange"/>
+    <SolidColorBrush x:Key="RealHoursUnderService" Color="Red"/>
+    <SolidColorBrush x:Key="RealHoursEqualService" Color="White"/>
+
+
+
+
 
 </ResourceDictionary>

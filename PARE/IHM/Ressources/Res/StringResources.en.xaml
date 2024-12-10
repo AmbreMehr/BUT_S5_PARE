@@ -73,7 +73,7 @@
     <system:String x:Key="ProfilType">Typical profile</system:String>
     <system:String x:Key="Service">Service</system:String>
     <system:String x:Key="NbHeuresReel">Real number of hours</system:String>
-    <system:String x:Key="Enseignant">Teacher</system:String>
+    <system:String x:Key="Enseignant">Teachers</system:String>
 
 
 </ResourceDictionary>

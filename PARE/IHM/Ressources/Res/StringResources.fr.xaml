@@ -75,7 +75,7 @@
     <system:String x:Key="ProfilType">Profil Type</system:String>
     <system:String x:Key="Service">Service</system:String>
     <system:String x:Key="NbHeuresReel">Nombre d'heures réelles</system:String>
-    <system:String x:Key="Enseignant">Enseignant</system:String>
+    <system:String x:Key="Enseignant">Enseignants</system:String>
 
 
 </ResourceDictionary>
