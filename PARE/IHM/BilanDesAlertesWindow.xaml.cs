@@ -29,12 +29,13 @@ namespace IHM
             DisplayAllTeachers();
         }
 
-
+        /// <summary>
+        /// Affiche toutes les informations dans le tableau 
+        /// </summary>
+        /// <returns></returns>
         public async Task DisplayAllTeachers()
         {
-           
             List<UserVM> professors = await usersVM.GetAllProfessors();
-
             int iRow = 0;
 
             // Retire les modules de l'interface
@@ -89,7 +90,12 @@ namespace IHM
                 iRow++;
             }
         }
-        
+       
+        /// <summary>
+        /// Méthode permettant la simplification de la création de cellules dans le tableau
+        /// </summary>
+        /// <param name="block"></param>
+        /// <param name="content"></param>
         private void CreationCelluleTableau(TextBlock block, string content)
         {
             block.Text = content;
@@ -97,7 +103,6 @@ namespace IHM
             block.VerticalAlignment = VerticalAlignment.Center;
             block.FontSize = 18;
         }
-
 
         /// <summary>
         /// Méthode créant une bordure pour chaque élément du tableau
@@ -111,6 +116,7 @@ namespace IHM
                 BorderThickness = new Thickness(2)
             };
         }
+
         /// <summary>
         /// Bouton permettant de revenir à la mainWindow
         /// </summary>

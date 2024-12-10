@@ -18,6 +18,7 @@
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="2*" />
+            <RowDefinition Height="1*" />
             <RowDefinition Height="4*" />
             <RowDefinition Height="4*" />
             <RowDefinition Height="1*" />
@@ -39,101 +40,101 @@
              Style="{DynamicResource TitleText}"
              Text="{DynamicResource TitleBilanDesAlertes}" />
         <TextBlock
-             VerticalAlignment="Center"
-             HorizontalAlignment="Right"
-             Margin="0,40,40,0"
-             FontSize="30"
-             FontFamily="{StaticResource OpenSauceOne}" 
-             Text="{DynamicResource Enseignant}" />
+             Grid.Row="1"
+             Text="{DynamicResource Enseignant}"
+             Style="{DynamicResource TitleText}"
+             FontSize="27"/>
 
         <Button 
             Content="{DynamicResource BtnQuit}" 
             FontFamily="{StaticResource OpenSauceOne}" 
-            Grid.Row="3" Grid.Column="0" 
+            Grid.Row="4" Grid.Column="0" 
             Style="{DynamicResource ButtonText1}"
             Click="RetourMainWindow"/>
 
-        <Grid Grid.Row="1" Grid.Column="0">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="*" />
-            </Grid.ColumnDefinitions>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="30" />
-                <RowDefinition Height="*" />
-            </Grid.RowDefinitions>
-
-            <Border
-                Grid.Row="0"
-                Grid.Column="0"
-                BorderBrush="Black"
-                BorderThickness="1">
-
-                <TextBlock
-                    HorizontalAlignment="Center"
-                    VerticalAlignment="Center"
-                    FontSize="20"
-                    FontWeight="Bold"
-                    Text="{DynamicResource NomdeEnseignant}" />
-            </Border>
-
-            <Border
-                Grid.Row="0"
-                Grid.Column="1"
-                BorderBrush="Black"
-                BorderThickness="1">
-
-                <TextBlock
-                    HorizontalAlignment="Center"
-                    VerticalAlignment="Center"
-                    FontSize="20"
-                    FontWeight="Bold"
-                    Text="{DynamicResource ProfilType}" />
-            </Border>
-
-            <Border
-                Grid.Row="0"
-                Grid.Column="2"
-                BorderBrush="Black"
-                BorderThickness="1">
-
-                <TextBlock
-                    HorizontalAlignment="Center"
-                    VerticalAlignment="Center"
-                    FontSize="20"
-                    FontWeight="Bold"
-                    Text="{DynamicResource Service}" />
-            </Border>
-
-            <Border
-                Grid.Row="0"
-                Grid.Column="3"
-                BorderBrush="Black"
-                BorderThickness="1">
-
-                <TextBlock
-                    HorizontalAlignment="Center"
-                    VerticalAlignment="Center"
-                    FontSize="20"
-                    FontWeight="Bold"
-                    Text="{DynamicResource NbHeuresReel}" />
-            </Border>
-
-            <Grid
-                x:Name="TeacherList"
-                Grid.Row="1"
-                Grid.Column="0"
-                Grid.ColumnSpan="4">
+        <ScrollViewer Grid.Row="2" VerticalScrollBarVisibility="Auto">
+            <Grid Grid.Row="2" Grid.Column="0">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*" />
                     <ColumnDefinition Width="*" />
                     <ColumnDefinition Width="*" />
                     <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
-                <Grid.RowDefinitions />
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="30" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+
+                <Border
+                    Grid.Row="0"
+                    Grid.Column="0"
+                    BorderBrush="Black"
+                    BorderThickness="1">
+
+                    <TextBlock
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        FontSize="20"
+                        FontWeight="Bold"
+                        Text="{DynamicResource NomdeEnseignant}" />
+                </Border>
+
+                <Border
+                    Grid.Row="0"
+                    Grid.Column="1"
+                    BorderBrush="Black"
+                    BorderThickness="1">
+
+                    <TextBlock
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        FontSize="20"
+                        FontWeight="Bold"
+                        Text="{DynamicResource ProfilType}" />
+                </Border>
+
+                <Border
+                    Grid.Row="0"
+                    Grid.Column="2"
+                    BorderBrush="Black"
+                    BorderThickness="1">
+
+                    <TextBlock
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        FontSize="20"
+                        FontWeight="Bold"
+                        Text="{DynamicResource Service}" />
+                </Border>
+
+                <Border
+                    Grid.Row="0"
+                    Grid.Column="3"
+                    BorderBrush="Black"
+                    BorderThickness="1">
+
+                    <TextBlock
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        FontSize="20"
+                        FontWeight="Bold"
+                        Text="{DynamicResource NbHeuresReel}" />
+                </Border>
+
+                <Grid
+                    x:Name="TeacherList"
+                    Grid.Row="1"
+                    Grid.Column="0"
+                    Grid.ColumnSpan="4">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions />
+                </Grid>
             </Grid>
-        </Grid>
+        </ScrollViewer>
     </Grid>
 </Window>
