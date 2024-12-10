@@ -3,6 +3,7 @@ using Model;
 using Network;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Reflection;
 using System.Text;
@@ -11,10 +12,10 @@ using System.Threading.Tasks;
 namespace IHM_Model
 {  
     /// <summary>
-    /// La classe `TeachersVM` gère les teacher dans l'application PARE.
-    /// </summary>
-    /// <author>Stéphane BASSET</author>
-    public class TeacherVM : BaseVM
+   /// La classe `TeachersVM` gère les teacher dans l'application PARE.
+   /// </summary>
+   /// <author>Stéphane BASSET</author>
+    public class TeacherVM : BaseVM, INotifyPropertyChanged
     {
         private Teacher model;
 
@@ -80,6 +81,7 @@ namespace IHM_Model
                 {
                     model.AssignedTdHours = value;
                     NotifyChange();
+                    OnPropertyChanged(nameof(AssignedTdHours));
                 }
             }
         }
@@ -96,6 +98,7 @@ namespace IHM_Model
                 {
                     model.AssignedTpHours = value;
                     NotifyChange();
+                    OnPropertyChanged(nameof(AssignedTpHours));
                 }
             }
         }
@@ -112,6 +115,7 @@ namespace IHM_Model
                 {
                     model.AssignedCmHours = value;
                     NotifyChange();
+                    OnPropertyChanged(nameof(AssignedCmHours));
                 }
             }
         }
@@ -214,6 +218,21 @@ namespace IHM_Model
         {
             this.model = new Teacher();
             this.teacherNetwork = new TeacherNetwork();
+        }
+
+
+        /// <summary>
+        /// Permet de notifier les changements de propriétés
+        /// </summary>
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        /// <summary>
+        /// Notifie les changements de propriétés
+        /// </summary>
+        /// <param name="propertyName">nom de la propriété</param>
+        protected virtual void OnPropertyChanged(string propertyName)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 }

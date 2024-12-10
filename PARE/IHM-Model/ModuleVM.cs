@@ -17,6 +17,24 @@ namespace IHM_Model
     {
         private Module model;
         private IModuleNetwork moduleNetwork;
+        private List<TeacherVM> teachersInCharge;
+
+        /// <summary>
+        /// Get et set pour la liste des professeurs intervenant sur le module
+        /// </summary>
+        public List<TeacherVM> TeachersInCharge
+        {
+            get => teachersInCharge;
+            set
+            {
+                if (teachersInCharge != value)
+                {
+                    teachersInCharge = value;
+                    NotifyChange();
+                }
+            }
+        }
+
 
         /// <summary>
         /// Get et set pour le nom du module
@@ -112,6 +130,7 @@ namespace IHM_Model
         {
             this.model = module;
             this.moduleNetwork = new ModuleNetwork();
+            this.teachersInCharge = new List<TeacherVM>();
         }
 
         /// <summary>
@@ -121,6 +140,8 @@ namespace IHM_Model
         {
             model = new Module();
             moduleNetwork = new ModuleNetwork();
+            this.teachersInCharge = new List<TeacherVM>();
+
         }
     }
 }
