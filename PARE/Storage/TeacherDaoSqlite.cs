@@ -153,6 +153,7 @@ namespace Storage
 
             cmd.ExecuteNonQuery();
             db.Connection.Close();
+            UpdateRealHours(teacher);
 
         }
 
