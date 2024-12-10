@@ -57,12 +57,8 @@ namespace IHM
 
                 foreach (ModuleVM moduleVM in modulesCopy)
                 {
-                    // Prend en compte n° de colonnes pour les semaines
-                    int gridColumnBegin = moduleVM.WeekBegin - 35;
-                    int gridColumnEnd = moduleVM.WeekEnd - 35;
-
                     // Valider les indices de colonnes calculés
-                    if (gridColumnBegin < 0 || gridColumnEnd < 0 || gridColumnBegin > gridColumnEnd)
+                    if (moduleVM.WeekBegin < 0 ||moduleVM.WeekEnd < 0 || moduleVM.WeekBegin > moduleVM.WeekEnd)
                     {
                         MessageBox.Show(
                             $"Le module '{moduleVM.Name}' a des indices de colonne invalides : Début={moduleVM.WeekBegin}, Fin={moduleVM.WeekEnd}.",
@@ -95,8 +91,8 @@ namespace IHM
 
                     moduleRectangle.Child = textBlock;
 
-                    Grid.SetColumn(moduleRectangle, gridColumnBegin);
-                    Grid.SetColumnSpan(moduleRectangle, gridColumnEnd - gridColumnBegin + 1);
+                    Grid.SetColumn(moduleRectangle, moduleVM.WeekBegin);
+                    Grid.SetColumnSpan(moduleRectangle, moduleVM.WeekEnd - moduleVM.WeekBegin + 1);
                     Grid.SetRow(moduleRectangle, 1);
 
                     gridModules.Children.Add(moduleRectangle);
