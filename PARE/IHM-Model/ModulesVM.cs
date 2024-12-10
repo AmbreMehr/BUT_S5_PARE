@@ -18,6 +18,7 @@ namespace IHM_Model
         private ObservableCollection<ModuleVM> models;
         private ModuleVM? selectedModule;
         private IModuleNetwork moduleNetwork;
+        private SemesterVM semester;
 
         /// <summary>
         /// Get et set du tableau de modules
@@ -111,15 +112,15 @@ namespace IHM_Model
             foreach (ModuleVM moduleVM in models)
             {
                 // Vérification des règles métier
-                if (moduleVM.WeekBegin < 35 || moduleVM.WeekBegin > 53)
+               if (moduleVM.WeekBegin < 2 || moduleVM.WeekEnd > 14)
                 {
-                    throw new ExceptionWeekBegin(Ressource.StringRes.WeekBegin);
+                    throw new ExceptionWeekBeginAndWeekEndSemesterEven(Ressource.StringRes.SemesterEven);
                 }
 
-                if (moduleVM.WeekEnd < 35 || moduleVM.WeekEnd > 53)
+                /*if (moduleVM.WeekEnd > 14 ||moduleVM.WeekEnd > 53)
                 {
                     throw new ExceptionWeekEnd(Ressource.StringRes.WeekEnd);
-                }
+                }*/
 
                 if (moduleVM.WeekBegin > moduleVM.WeekEnd)
                 {
