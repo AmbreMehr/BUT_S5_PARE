@@ -22,12 +22,6 @@ namespace Storage.InterfaceDAO
         public User Read(int id);
 
         /// <summary>
-        /// Modifie l'utilisateur
-        /// </summary>
-        /// <param name="user">utilisateur à modifié</param>
-        public void Update(User user);
-
-        /// <summary>
         /// Renvoi tous les utilisateurs
         /// </summary>
         /// <returns>utilisateurs</returns>
@@ -53,5 +47,13 @@ namespace Storage.InterfaceDAO
         /// <param name="roleId">id du rôle</param>
         /// <returns>Tableau de User</returns>
         public User[] ListAllByRole(int roleId);
+
+
+        /// <summary>
+        /// Met à jour les heures réelles d'un utilisateur
+        /// </summary>
+        /// <param name="idUser">id de l'utilisateur</param>
+        /// <param name="realHours">nombre d'heure totale faite</param>
+        public void UpdateRealHours(int idUser, int realHours);
     }
 }

@@ -3,14 +3,14 @@
 namespace IHM_Model
 {
     /// <summary>
-    /// ViewModel pour la classe Role
+    /// VueModèle pour la classe Role
     /// </summary>
     public class RoleVM : BaseVM
     {
         private Role model;
 
         /// <summary>
-        /// Get le nom du role
+        /// Renvoie le nom du role
         /// </summary>
         public String Name
         {

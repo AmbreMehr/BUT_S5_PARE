@@ -24,4 +24,19 @@
     </Content>
   </ItemGroup>
 
+  <ItemGroup>
+    <Compile Update="Ressource\StringRes.Designer.cs">
+      <DependentUpon>StringRes.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="Ressource\StringRes.resx">
+      <LastGenOutput>StringRes.Designer.cs</LastGenOutput>
+      <Generator>ResXFileCodeGenerator</Generator>
+    </EmbeddedResource>
+  </ItemGroup>
+
 </Project>
