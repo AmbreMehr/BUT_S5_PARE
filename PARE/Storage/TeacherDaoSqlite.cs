@@ -107,8 +107,13 @@ namespace Storage
             cmd.Parameters.AddWithValue("@idTeacher", teacher.Id);
 
             
+
             cmd.ExecuteNonQuery();
+
             db.Connection.Close();
+
+            UpdateRealHours(teacher);
+
         }
 
         public Teacher Reader2Teacher(SqliteDataReader reader)
@@ -175,6 +180,10 @@ namespace Storage
             cmd.ExecuteNonQuery();
             db.Connection.Close();
 
+            UpdateRealHours(teacher);
+        }
+
+
         public Teacher[] ListForUser(int idUser)
         {
             List<Teacher> teachers = new List<Teacher>();
@@ -234,9 +243,21 @@ namespace Storage
         }
 
         /// <summary>
-        /// Mise à jour des heures réelles de l'utilisateur - appel de la méthode de UserDaoSqlite
+        /// Calcul et met à jour les heures réelles de l'utilisateur - appel de la méthode de UserDaoSqlite
         /// </summary>
         /// <param name="teacher">enseignant pour lequel il faut mettre à jour</param>
+        private void UpdateRealHours(Teacher teacher)
+        {
+            // Récupération des heures réelles 
+            int realHours = 0;
+            Teacher[] teachers = ListForUser(teacher.User.Id);
+            foreach(Teacher t in teachers)
+            {
+                realHours += t.AssignedCmHours + t.AssignedTdHours + t.AssignedTpHours;
+            }
+            // Mise à jour des heures réelles
+            UserDaoSqlite userDao = new UserDaoSqlite();
+            userDao.UpdateRealHours(teacher.User.Id, realHours); 
         }
     }
 }
