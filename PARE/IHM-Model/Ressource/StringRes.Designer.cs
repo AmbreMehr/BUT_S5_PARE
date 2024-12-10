@@ -124,6 +124,15 @@ namespace IHM_Model.Ressource {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à the begin week should be between 2 ans 14.
+        /// </summary>
+        internal static string SemesterEven {
+            get {
+                return ResourceManager.GetString("SemesterEven", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à The begin week should be between 35 and 53.
         /// </summary>
         internal static string WeekBegin {

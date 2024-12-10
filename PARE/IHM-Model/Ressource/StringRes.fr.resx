@@ -147,4 +147,7 @@
   <data name="ErrorTeacher" xml:space="preserve">
     <value>Erreur lors de l'ajout de l'enseignant</value>
   </data>
+  <data name="SemesterEven" xml:space="preserve">
+    <value>La semaine de début doit être compris enntre 2 et 14</value>
+  </data>
 </root>
