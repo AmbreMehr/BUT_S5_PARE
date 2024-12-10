@@ -175,6 +175,68 @@ namespace Storage
             cmd.ExecuteNonQuery();
             db.Connection.Close();
 
+        public Teacher[] ListForUser(int idUser)
+        {
+            List<Teacher> teachers = new List<Teacher>();
+            db.Connection.Open();
+            var cmd = db.Connection.CreateCommand();
+            cmd.CommandText = "SELECT" +
+                                " idTeacherOfModule" +
+                                ", t.assignedTDHours" +
+                                ", t.assignedCMHours" +
+                                ", t.assignedTPHours" +
+                                ", t.idUser" +
+                                ", u.firstname" +
+                                ", u.lastname" +
+                                ", u.realHours" +
+                                ", u.idTypicalProfile" +
+                                ", m.idModule" +
+                                ", m.name" +
+                                ", m.hourTD" +
+                                ", m.hourTP" +
+                                ", m.hourCM" +
+                                ", m.weekBegin" +
+                                ", m.weekEnd" +
+                                ", m.idSemester" +
+                                ", m.supervisor" +
+                                ", s.idSemester" +
+                                ", s.nameSemester" +
+                                ", s.numberGroupTp" +
+                                ", tp.idTypicalProfile" +
+                                ", tp.nameTypicalProfile" +
+                                ", tp.serviceHours" +
+                                ", r.idRole" +
+                                ", r.roleName" +
+                                ", ru.idRole" +
+                                ", ru.idUser" +
+                                " FROM" +
+                                " TeacherOfModule AS t" +
+                                " LEFT JOIN Users AS u ON u.idUser = t.idUser" +
+                                " LEFT JOIN Modules AS m ON m.idModule = t.idModule" +
+                                " LEFT JOIN Semester AS s ON s.idSemester = m.idSemester" +
+                                " LEFT JOIN TypicalProfile AS tp ON tp.idTypicalProfile = u.idTypicalProfile" +
+                                " LEFT JOIN RoleOfUser AS ru ON u.idUser = ru.idUser" +
+                                " LEFT JOIN Role AS r ON r.idRole = ru.idRole" +
+                                " WHERE u.idUser = @idUser" +
+                                " GROUP BY idTeacherOfModule;";
+            cmd.Parameters.AddWithValue("@idUser", idUser);
+
+            using (var reader = cmd.ExecuteReader())
+            {
+                while (reader.Read())
+                {
+                    teachers.Add(Reader2Teacher(reader));
+                }
+            }
+            db.Connection.Close();
+
+            return teachers.ToArray();
+        }
+
+        /// <summary>
+        /// Mise à jour des heures réelles de l'utilisateur - appel de la méthode de UserDaoSqlite
+        /// </summary>
+        /// <param name="teacher">enseignant pour lequel il faut mettre à jour</param>
         }
     }
 }
