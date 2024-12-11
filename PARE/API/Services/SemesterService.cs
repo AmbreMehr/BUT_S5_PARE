@@ -10,6 +10,7 @@ namespace API.Services
     public class SemesterService
     {
         private ISemesterDao semesterDao;
+        private IModuleDao moduleDao;
 
         /// <summary>
         /// Constructeur de la classe, initialise ses dépendances aux DAO
@@ -17,6 +18,7 @@ namespace API.Services
         public SemesterService ()
         {
             this.semesterDao = new SemesterDaoSqlite();
+            this.moduleDao = new ModuleDaoSqlite();
         }
 
         /// <summary>
@@ -27,6 +29,35 @@ namespace API.Services
         public IEnumerable<Semester> GetAll()
         {
             return this.semesterDao.ListAll();
+        }
+
+        /// <summary>
+        /// Renvoie le nombre d'heures que les étudiants feront par semaine sur un semestre donné
+        /// </summary>
+        /// <param name="semesterId">semestre pour lequel calculer</param>
+        /// <returns>dictionnaire semaine -> heures des étudiants</returns>
+        public Dictionary<int, float> GetHoursPerWeekBySemester(int semesterId)
+        {
+            Module[] modules = this.moduleDao.GetAllBySemester(semesterId);
+            return ComputeHoursPerWeek(modules);
+        }
+
+        private Dictionary<int, float> ComputeHoursPerWeek(Module[] modules)
+        {
+            Dictionary<int, float> hoursByWeek = new Dictionary<int, float>();
+            foreach (Module module in modules)
+            {
+                int moduleDuration = module.WeekEnd - module.WeekBegin + 1;
+                float moduleHours = module.HoursCM + module.HoursTd + module.HoursTp;
+
+                for (int week = module.WeekBegin; week <= module.WeekEnd; week++)
+                {
+                    if (!hoursByWeek.ContainsKey(week))
+                        hoursByWeek[week] = 0;
+                    hoursByWeek[week] += moduleHours / moduleDuration;
+                }
+            }
+            return hoursByWeek;
         }
     }
 }
