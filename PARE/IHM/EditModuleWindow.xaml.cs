@@ -147,7 +147,7 @@ namespace IHM
                 Margin = new Thickness(5)
             };
 
-            headerStack.Children.Add(new TextBlock { Text = (string)System.Windows.Application.Current.FindResource("TD"), Width = 50, FontWeight = FontWeights.Bold });
+            headerStack.Children.Add(new TextBlock { Text = (string)System.Windows.Application.Current.FindResource("TD"), Margin = new Thickness(100,0,0,0), Width = 50, FontWeight = FontWeights.Bold });
             headerStack.Children.Add(new TextBlock { Text = (string)System.Windows.Application.Current.FindResource("TP"), Width = 50, FontWeight = FontWeights.Bold });
             headerStack.Children.Add(new TextBlock { Text = (string)System.Windows.Application.Current.FindResource("CM"), Width = 50, FontWeight = FontWeights.Bold });
 
@@ -168,11 +168,11 @@ namespace IHM
                 Margin = new Thickness(5)
             };
 
-            TextBlock programBlock = new TextBlock { Text = (string)System.Windows.Application.Current.FindResource("ProgramModule"), Width = 120, FontWeight = FontWeights.Bold };
+            TextBlock programBlock = new TextBlock { Text = (string)System.Windows.Application.Current.FindResource("ProgramModule"), Width = 100, FontWeight = FontWeights.Bold };
 
-            TextBlock tdBlock = new TextBlock { Tag = "TdHours", Text = moduleVM.HoursTd.ToString(), Width = 120, FontWeight = FontWeights.Bold };
-            TextBlock tpBlock = new TextBlock { Tag = "TpHours", Text = moduleVM.HoursTp.ToString(), Width = 120, FontWeight = FontWeights.Bold };
-            TextBlock cmBlock = new TextBlock { Tag = "CmHours", Text = moduleVM.HoursCM.ToString(), Width = 120, FontWeight = FontWeights.Bold };
+            TextBlock tdBlock = new TextBlock { Tag = "TdHours", Text = moduleVM.HoursTd.ToString(), Width = 50, FontWeight = FontWeights.Bold };
+            TextBlock tpBlock = new TextBlock { Tag = "TpHours", Text = moduleVM.HoursTp.ToString(), Width = 50, FontWeight = FontWeights.Bold };
+            TextBlock cmBlock = new TextBlock { Tag = "CmHours", Text = moduleVM.HoursCM.ToString(), Width = 50, FontWeight = FontWeights.Bold };
 
             programStack.Children.Add(programBlock);
             programStack.Children.Add(tdBlock);
@@ -213,7 +213,7 @@ namespace IHM
             };
 
             // Création de la liste déroulante + binding
-            ComboBox teacherComboBox = new ComboBox { Width = 120, Margin = new Thickness(5) };
+            ComboBox teacherComboBox = new ComboBox { Width = 100, Margin = new Thickness(5) };
 
             teacherComboBox.ItemsSource = usersVM.Users;
             teacherComboBox.DisplayMemberPath = "Fullname";
