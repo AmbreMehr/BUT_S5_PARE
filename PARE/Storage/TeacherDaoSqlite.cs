@@ -239,6 +239,8 @@ namespace Storage
                                 ", r.roleName" +
                                 ", ru.idRole" +
                                 ", ru.idUser" +
+                                ", SemesterWeekBegin" +
+                                ", SemesterWeekEnd" +
                                 " FROM" +
                                 " TeacherOfModule AS t" +
                                 " LEFT JOIN Users AS u ON u.idUser = t.idUser" +
