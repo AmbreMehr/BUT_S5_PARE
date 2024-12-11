@@ -1,4 +1,5 @@
-﻿using Model;
+using IHM_Model.Exceptions;
+using Model;
 using Network;
 
 namespace IHM_Model
@@ -14,6 +15,30 @@ namespace IHM_Model
         public Semester Model
         {
             get => model;
+        }
+
+        /// <summary>
+        /// Récupère la semaine de début
+        /// </summary>
+        public int WeekBegin
+        {
+            get => model.SemesterWeekBegin;
+        }
+
+        /// <summary>
+        /// Récupère la semaine de fin
+        /// </summary>
+        public int WeekEnd
+        {
+            get => model.SemesterWeekEnd;
+        }
+
+        /// <summary>
+        /// Calcule le nombre de semaines dans un semestre en fonction de la semaine de début et de fin
+        /// </summary>
+        public int NbWeek
+        {
+            get => WeekEnd - WeekBegin +1;
         }
 
         /// <summary>

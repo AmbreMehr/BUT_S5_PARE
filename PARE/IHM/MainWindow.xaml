@@ -148,43 +148,43 @@
                     <!-- placeholder charge étudiante -->
 
                     <!-- colonnes du calendrier -->
-                    <Label Grid.Column="1" Grid.Row="1" Content="36" HorizontalAlignment="Center" VerticalAlignment="Top" FontFamily="{StaticResource OpenSauceOne}" FontSize="30"/>
+                    <Label x:Name="labelSemaine1" Grid.Column="1" Grid.Row="1"  HorizontalAlignment="Center" VerticalAlignment="Top" FontFamily="{StaticResource OpenSauceOne}" FontSize="30"/>
                     <Line Grid.Column="1" Grid.Row="2" Style="{StaticResource DashedLineStyle}" />
 
-                    <Label Grid.Column="2" Grid.Row="1" Content="37" HorizontalAlignment="Center" VerticalAlignment="Top" FontFamily="{StaticResource OpenSauceOne}" FontSize="30"/>
+                    <Label x:Name="labelSemaine2" Grid.Column="2" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Top" FontFamily="{StaticResource OpenSauceOne}" FontSize="30"/>
                     <Line Grid.Column="2" Grid.Row="2" Style="{StaticResource DashedLineStyle}"/>
 
-                    <Label Grid.Column="3" Grid.Row="1" Content="38" HorizontalAlignment="Center" VerticalAlignment="Top" FontFamily="{StaticResource OpenSauceOne}" FontSize="30"/>
+                    <Label x:Name="labelSemaine3" Grid.Column="3" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Top" FontFamily="{StaticResource OpenSauceOne}" FontSize="30"/>
                     <Line Grid.Column="3" Grid.Row="2" Style="{StaticResource DashedLineStyle}" />
 
-                    <Label Grid.Column="4" Grid.Row="1" Content="39" HorizontalAlignment="Center" VerticalAlignment="Top" FontFamily="{StaticResource OpenSauceOne}" FontSize="30"/>
+                    <Label x:Name="labelSemaine4" Grid.Column="4" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Top" FontFamily="{StaticResource OpenSauceOne}" FontSize="30"/>
                     <Line Grid.Column="4" Grid.Row="2" Style="{StaticResource DashedLineStyle}" />
 
-                    <Label Grid.Column="5" Grid.Row="1" Content="40" HorizontalAlignment="Center" VerticalAlignment="Top" FontFamily="{StaticResource OpenSauceOne}" FontSize="30"/>
+                    <Label x:Name="labelSemaine5" Grid.Column="5" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Top" FontFamily="{StaticResource OpenSauceOne}" FontSize="30"/>
                     <Line Grid.Column="5" Grid.Row="2" Style="{StaticResource DashedLineStyle}" />
 
-                    <Label Grid.Column="6" Grid.Row="1" Content="41" HorizontalAlignment="Center" VerticalAlignment="Top" FontFamily="{StaticResource OpenSauceOne}" FontSize="30"/>
+                    <Label x:Name="labelSemaine6" Grid.Column="6" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Top" FontFamily="{StaticResource OpenSauceOne}" FontSize="30"/>
                     <Line Grid.Column="6" Grid.Row="2" Style="{StaticResource DashedLineStyle}"/>
 
-                    <Label Grid.Column="7" Grid.Row="1" Content="42" HorizontalAlignment="Center" VerticalAlignment="Top" FontFamily="{StaticResource OpenSauceOne}" FontSize="30"/>
+                    <Label x:Name="labelSemaine7" Grid.Column="7" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Top" FontFamily="{StaticResource OpenSauceOne}" FontSize="30"/>
                     <Line Grid.Column="7" Grid.Row="2" Style="{StaticResource DashedLineStyle}" />
 
-                    <Label Grid.Column="8" Grid.Row="1" Content="43" HorizontalAlignment="Center" VerticalAlignment="Top" FontFamily="{StaticResource OpenSauceOne}" FontSize="30"/>
+                    <Label x:Name="labelSemaine8" Grid.Column="8" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Top" FontFamily="{StaticResource OpenSauceOne}" FontSize="30"/>
                     <Line Grid.Column="8" Grid.Row="2" Style="{StaticResource DashedLineStyle}" />
 
-                    <Label Grid.Column="9" Grid.Row="1" Content="44" HorizontalAlignment="Center" VerticalAlignment="Top" FontFamily="{StaticResource OpenSauceOne}" FontSize="30"/>
+                    <Label x:Name="labelSemaine9" Grid.Column="9" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Top" FontFamily="{StaticResource OpenSauceOne}" FontSize="30"/>
                     <Line Grid.Column="9" Grid.Row="2" Style="{StaticResource DashedLineStyle}"/>
 
-                    <Label Grid.Column="10" Grid.Row="1" Content="45" HorizontalAlignment="Center" VerticalAlignment="Top" FontFamily="{StaticResource OpenSauceOne}" FontSize="30"/>
+                    <Label x:Name="labelSemaine10" Grid.Column="10" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Top" FontFamily="{StaticResource OpenSauceOne}" FontSize="30"/>
                     <Line Grid.Column="10" Grid.Row="2" Style="{StaticResource DashedLineStyle}"/>
 
-                    <Label Grid.Column="11" Grid.Row="1" Content="46" HorizontalAlignment="Center" VerticalAlignment="Top" FontFamily="{StaticResource OpenSauceOne}" FontSize="30"/>
+                    <Label x:Name="labelSemaine11" Grid.Column="11" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Top" FontFamily="{StaticResource OpenSauceOne}" FontSize="30"/>
                     <Line Grid.Column="11" Grid.Row="2" Style="{StaticResource DashedLineStyle}" />
 
-                    <Label Grid.Column="12" Grid.Row="1" Content="47" HorizontalAlignment="Center" VerticalAlignment="Top" FontFamily="{StaticResource OpenSauceOne}" FontSize="30"/>
+                    <Label x:Name="labelSemaine12" Grid.Column="12" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Top" FontFamily="{StaticResource OpenSauceOne}" FontSize="30"/>
                     <Line Grid.Column="12" Grid.Row="2" Style="{StaticResource DashedLineStyle}"/>
 
-                    <Label Grid.Column="13" Grid.Row="1" Content="48" HorizontalAlignment="Center" VerticalAlignment="Top" FontFamily="{StaticResource OpenSauceOne}" FontSize="30"/>
+                    <Label x:Name="labelSemaine13" Grid.Column="13" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Top" FontFamily="{StaticResource OpenSauceOne}" FontSize="30"/>
                     <Line Grid.Column="13" Grid.Row="2" Style="{StaticResource DashedLineStyle}"/>
 
                 </Grid>

@@ -24,6 +24,11 @@ namespace IHM
             InitializeComponent();
         }
 
+        /// <summary>
+        /// Logique quand on clique sur le bouton login, on est juste renvoyé sur l'écran principal
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void BoutonLogin(object sender, RoutedEventArgs e)
         {
             MainWindow mainWindow = new MainWindow();
@@ -31,11 +36,14 @@ namespace IHM
             this.Close();
         }
 
+        /// <summary>
+        /// L'application est fermée si on clique sur le bouton Close 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void CloseLoginWindow(object sender, RoutedEventArgs e)
         {
-            MainWindow mainWindow = new MainWindow();
-            mainWindow.Show();
-            this.Close();
+            Application.Current.Shutdown(); // Ferme l'application
         }
     }
 }

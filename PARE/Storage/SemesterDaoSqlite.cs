@@ -34,6 +34,8 @@ namespace Storage
                                " idSemester" +
                                ", nameSemester" +
                                ", numberGroupTp" +
+                               ", SemesterWeekBegin" +
+                               ", SemesterWeekEnd"+
                                " FROM Semester;";
             using (var reader = cmd.ExecuteReader())
             {
@@ -54,6 +56,9 @@ namespace Storage
             semester.Id = Convert.ToInt32(reader["idSemester"]);
             semester.Name = reader["nameSemester"].ToString();
             semester.NbTpGroups = Convert.ToInt32(reader["numberGroupTp"]);
+            semester.SemesterWeekBegin = Convert.ToInt32(reader["SemesterWeekBegin"]);
+            semester.SemesterWeekEnd = Convert.ToInt32(reader["SemesterWeekEnd"]);
+
             return semester;
         }
     }

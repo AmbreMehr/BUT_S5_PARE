@@ -61,6 +61,8 @@ namespace Storage
                                 ", r.roleName" +
                                 ", ru.idRole" +
                                 ", ru.idUser" +
+                                ", SemesterWeekBegin" +
+                                ", SemesterWeekEnd" +
                                 " FROM" +
                                 " TeacherOfModule AS t" +
                                 " LEFT JOIN Users AS u ON u.idUser = t.idUser" +
@@ -91,7 +93,20 @@ namespace Storage
                 throw new ArgumentNullException(nameof(teacher), Ressource.StringRes.TeacherOrUserNull);
 
 
+            // Récupération de l'id de l'enseignant avant la modification - pour mettre à jour les heures réelles si changement d'enseignant
             db.Connection.Open();
+            var cmd1 = db.Connection.CreateCommand();
+            cmd1.CommandText = "SELECT idUser FROM TeacherOfModule WHERE idTeacherOfModule = @idTeacher;";
+            cmd1.Parameters.AddWithValue("@idTeacher", teacher.Id);
+            int idTeacherBefore = 0;
+            using (var reader = cmd1.ExecuteReader())
+            {
+                reader.Read();
+                idTeacherBefore = Convert.ToInt32(reader["idUser"]);
+
+            }
+
+
             var cmd = db.Connection.CreateCommand();
             cmd.CommandText = "UPDATE TeacherOfModule " +
                   "SET idUser = @idUser, " +
@@ -107,8 +122,18 @@ namespace Storage
             cmd.Parameters.AddWithValue("@idTeacher", teacher.Id);
 
             
+
             cmd.ExecuteNonQuery();
+
+
             db.Connection.Close();
+            // Mise à jour des heures réelles s'il y a eu un changement d'enseignant
+            if (idTeacherBefore != teacher.User.Id)
+            {
+                UpdateRealHours(idTeacherBefore);
+            }
+            UpdateRealHours(teacher.User.Id);
+
         }
 
         public Teacher Reader2Teacher(SqliteDataReader reader)
@@ -148,6 +173,7 @@ namespace Storage
 
             cmd.ExecuteNonQuery();
             db.Connection.Close();
+            UpdateRealHours(teacher.User.Id);
 
         }
 
@@ -175,6 +201,86 @@ namespace Storage
             cmd.ExecuteNonQuery();
             db.Connection.Close();
 
+            UpdateRealHours(teacher.User.Id);
+        }
+
+
+        public Teacher[] ListForUser(int idUser)
+        {
+            List<Teacher> teachers = new List<Teacher>();
+            db.Connection.Open();
+            var cmd = db.Connection.CreateCommand();
+            cmd.CommandText = "SELECT" +
+                                " idTeacherOfModule" +
+                                ", t.assignedTDHours" +
+                                ", t.assignedCMHours" +
+                                ", t.assignedTPHours" +
+                                ", t.idUser" +
+                                ", u.firstname" +
+                                ", u.lastname" +
+                                ", u.realHours" +
+                                ", u.idTypicalProfile" +
+                                ", m.idModule" +
+                                ", m.name" +
+                                ", m.hourTD" +
+                                ", m.hourTP" +
+                                ", m.hourCM" +
+                                ", m.weekBegin" +
+                                ", m.weekEnd" +
+                                ", m.idSemester" +
+                                ", m.supervisor" +
+                                ", s.idSemester" +
+                                ", s.nameSemester" +
+                                ", s.numberGroupTp" +
+                                ", tp.idTypicalProfile" +
+                                ", tp.nameTypicalProfile" +
+                                ", tp.serviceHours" +
+                                ", r.idRole" +
+                                ", r.roleName" +
+                                ", ru.idRole" +
+                                ", ru.idUser" +
+                                " FROM" +
+                                " TeacherOfModule AS t" +
+                                " LEFT JOIN Users AS u ON u.idUser = t.idUser" +
+                                " LEFT JOIN Modules AS m ON m.idModule = t.idModule" +
+                                " LEFT JOIN Semester AS s ON s.idSemester = m.idSemester" +
+                                " LEFT JOIN TypicalProfile AS tp ON tp.idTypicalProfile = u.idTypicalProfile" +
+                                " LEFT JOIN RoleOfUser AS ru ON u.idUser = ru.idUser" +
+                                " LEFT JOIN Role AS r ON r.idRole = ru.idRole" +
+                                " WHERE u.idUser = @idUser" +
+                                " GROUP BY idTeacherOfModule;";
+            cmd.Parameters.AddWithValue("@idUser", idUser);
+
+            using (var reader = cmd.ExecuteReader())
+            {
+                while (reader.Read())
+                {
+                    teachers.Add(Reader2Teacher(reader));
+                }
+            }
+            db.Connection.Close();
+
+            return teachers.ToArray();
+        }
+
+        /// <summary>
+        /// Calcul et met à jour les heures réelles de l'utilisateur - appel de la méthode de UserDaoSqlite
+        /// </summary>
+        /// <param name="userId">id de l'utilisateur</param>
+        private void UpdateRealHours(int userId)
+        {
+            // Récupération des heures réelles 
+            int realHours = 0;
+            Teacher[] teachers = ListForUser(userId);
+            foreach(Teacher t in teachers)
+            {
+                realHours += t.AssignedCmHours 
+                    + (t.AssignedTdHours * (t.Module.Semester.NbTpGroups / 2 + t.Module.Semester.NbTpGroups % 2) 
+                    + (t.AssignedTpHours * t.Module.Semester.NbTpGroups));
+            }
+            // Mise à jour des heures réelles
+            UserDaoSqlite userDao = new UserDaoSqlite();
+            userDao.UpdateRealHours(userId, realHours); 
         }
     }
 }

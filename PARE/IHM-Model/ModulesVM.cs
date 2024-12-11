@@ -3,6 +3,8 @@ using Model;
 using Network;
 using System;
 using System.Collections.ObjectModel;
+using System.ComponentModel.DataAnnotations;
+using System.Data;
 using System.Reflection;
 using System.Threading.Tasks;
 using Module = Model.Module;
@@ -18,8 +20,6 @@ namespace IHM_Model
         private ObservableCollection<ModuleVM> models;
         private ModuleVM? selectedModule;
         private IModuleNetwork moduleNetwork;
-        private int semesterFirstWeek;
-        private int semesterLastWeek;
 
         /// <summary>
         /// Renvoie le tableau de modules
@@ -57,8 +57,6 @@ namespace IHM_Model
         {
             this.moduleNetwork = new ModuleNetwork();
             this.models = new ObservableCollection<ModuleVM>();
-            this.semesterFirstWeek = 35;
-            this.semesterLastWeek = 53;
         }
 
         /// <summary>
@@ -124,36 +122,42 @@ namespace IHM_Model
         {
             foreach (ModuleVM moduleVM in models)
             {
-                // Vérification des règles métier
-                if (moduleVM.WeekBegin < semesterFirstWeek || moduleVM.WeekBegin > semesterLastWeek)
-                {
-                    throw new ExceptionWeekBegin(Ressource.StringRes.WeekBegin);
-                }
-
-                if (moduleVM.WeekEnd < semesterFirstWeek || moduleVM.WeekEnd > semesterLastWeek)
-                {
-                    throw new ExceptionWeekEnd(Ressource.StringRes.WeekEnd);
-                }
-
-                if (moduleVM.WeekBegin > moduleVM.WeekEnd)
-                {
-                    throw new ExceptionWeekBeginAfterWeekEnd(Ressource.StringRes.WeekBeginAfterWeekEnd);
-                }
-
-                if (moduleVM.WeekBegin == moduleVM.WeekEnd)
-                {
-                    throw new ExceptionSameWeekBeginEnd(Ressource.StringRes.SameWeekBeginEnd);
-                }
                 try
                 {
+                    ValidateModule(moduleVM);
                     await moduleVM.UpdateModule();
                 }
-
-                catch (Exception ex)
+                catch (Exception ex) when (ex is ValidationException || ex is ApplicationException)
                 {
-                    // Gérer les erreurs
+                    // Logique centralisée pour la gestion des exceptions
                     throw new ApplicationException(Ressource.StringRes.ErrorMAJModule, ex);
                 }
+            }
+        }
+
+        /// <summary>
+        /// Valide les données d'un module.
+        /// </summary>
+        /// <param name="moduleVM">Le module à valider.</param>
+        /// <exception cref="ValidationException">Lancée si les données ne sont pas valides.</exception>
+        private void ValidateModule(ModuleVM moduleVM)
+        {
+            int weekBegin = moduleVM.WeekBegin;
+            int weekEnd = moduleVM.WeekEnd;
+
+            if (weekBegin > weekEnd)
+            {
+                throw new ExceptionWeekBeginAfterWeekEnd(Ressource.StringRes.WeekBeginAfterWeekEnd);
+            }
+
+            if (weekBegin == weekEnd)
+            {
+                throw new ExceptionSameWeekBeginEnd(Ressource.StringRes.SameWeekBeginEnd);
+            }
+
+            if (weekBegin < moduleVM.Model.Semester.SemesterWeekBegin || weekEnd > moduleVM.Model.Semester.SemesterWeekEnd)
+            {
+                throw new ExceptionWeekBeginAndWeekEndSemesterEven(Ressource.StringRes.SemesterEven);
             }
         }
     }

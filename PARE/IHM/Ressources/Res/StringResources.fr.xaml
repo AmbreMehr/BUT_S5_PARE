@@ -69,4 +69,13 @@
     <system:String x:Key="ErreurDeMiseAJour">Erreur lors de la mise à jour</system:String>
     <system:String x:Key="ErreurInnatendue">Une erreur inattendue s'est produite</system:String>
 
+    <!--Bilan des Alertes-->
+    <system:String x:Key="TitleBilanDesAlertes">Bilan des alertes</system:String>
+    <system:String x:Key="NomdeEnseignant">Nom de l'enseignant</system:String>
+    <system:String x:Key="ProfilType">Profil Type</system:String>
+    <system:String x:Key="Service">Service</system:String>
+    <system:String x:Key="NbHeuresReel">Nombre d'heures réelles</system:String>
+    <system:String x:Key="Enseignant">Enseignants</system:String>
+
+
 </ResourceDictionary>
