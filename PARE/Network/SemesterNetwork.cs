@@ -31,7 +31,7 @@ namespace Network
                 }
                 catch (Exception ex) 
                 {
-                    throw new Exception("The API did not start correctly or is inaccessible.", ex);
+                    throw new Exception(Ressource.StringRes.APIError, ex);
                 }
             }
             return semesters.ToArray();

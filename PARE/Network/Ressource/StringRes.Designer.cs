@@ -61,6 +61,15 @@ namespace Network.Ressource {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à The API did not start correctly or is inaccessible..
+        /// </summary>
+        internal static string APIError {
+            get {
+                return ResourceManager.GetString("APIError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Error while updating the module.
         /// </summary>
         internal static string ModuleUpdateError {

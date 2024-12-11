@@ -254,7 +254,7 @@ namespace IHM
         {
             MessageBox.Show(
                 errorMessage,
-                "Error",
+                (string)System.Windows.Application.Current.FindResource("Erreur"),
                 MessageBoxButton.OK,
                 MessageBoxImage.Error
             );
