@@ -91,7 +91,20 @@ namespace Storage
                 throw new ArgumentNullException(nameof(teacher), Ressource.StringRes.TeacherOrUserNull);
 
 
+            // Récupération de l'id de l'enseignant avant la modification - pour mettre à jour les heures réelles si changement d'enseignant
             db.Connection.Open();
+            var cmd1 = db.Connection.CreateCommand();
+            cmd1.CommandText = "SELECT idUser FROM TeacherOfModule WHERE idTeacherOfModule = @idTeacher;";
+            cmd1.Parameters.AddWithValue("@idTeacher", teacher.Id);
+            int idTeacherBefore = 0;
+            using (var reader = cmd1.ExecuteReader())
+            {
+                reader.Read();
+                idTeacherBefore = Convert.ToInt32(reader["idUser"]);
+
+            }
+
+
             var cmd = db.Connection.CreateCommand();
             cmd.CommandText = "UPDATE TeacherOfModule " +
                   "SET idUser = @idUser, " +
@@ -110,9 +123,14 @@ namespace Storage
 
             cmd.ExecuteNonQuery();
 
-            db.Connection.Close();
 
-            UpdateRealHours(teacher);
+            db.Connection.Close();
+            // Mise à jour des heures réelles s'il y a eu un changement d'enseignant
+            if (idTeacherBefore != teacher.User.Id)
+            {
+                UpdateRealHours(idTeacherBefore);
+            }
+            UpdateRealHours(teacher.User.Id);
 
         }
 
@@ -153,6 +171,7 @@ namespace Storage
 
             cmd.ExecuteNonQuery();
             db.Connection.Close();
+            UpdateRealHours(teacher.User.Id);
 
         }
 
@@ -180,7 +199,7 @@ namespace Storage
             cmd.ExecuteNonQuery();
             db.Connection.Close();
 
-            UpdateRealHours(teacher);
+            UpdateRealHours(teacher.User.Id);
         }
 
 
@@ -245,19 +264,21 @@ namespace Storage
         /// <summary>
         /// Calcul et met à jour les heures réelles de l'utilisateur - appel de la méthode de UserDaoSqlite
         /// </summary>
-        /// <param name="teacher">enseignant pour lequel il faut mettre à jour</param>
-        private void UpdateRealHours(Teacher teacher)
+        /// <param name="userId">id de l'utilisateur</param>
+        private void UpdateRealHours(int userId)
         {
             // Récupération des heures réelles 
             int realHours = 0;
-            Teacher[] teachers = ListForUser(teacher.User.Id);
+            Teacher[] teachers = ListForUser(userId);
             foreach(Teacher t in teachers)
             {
-                realHours += t.AssignedCmHours + t.AssignedTdHours + t.AssignedTpHours;
+                realHours += t.AssignedCmHours 
+                    + (t.AssignedTdHours * (t.Module.Semester.NbTpGroups / 2 + t.Module.Semester.NbTpGroups % 2) 
+                    + (t.AssignedTpHours * t.Module.Semester.NbTpGroups));
             }
             // Mise à jour des heures réelles
             UserDaoSqlite userDao = new UserDaoSqlite();
-            userDao.UpdateRealHours(teacher.User.Id, realHours); 
+            userDao.UpdateRealHours(userId, realHours); 
         }
     }
 }

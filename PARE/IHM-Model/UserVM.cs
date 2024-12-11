@@ -14,6 +14,32 @@ namespace IHM_Model
     public class UserVM : BaseVM
     {
         private User model;
+        
+        /// <summary>
+        /// Retroune le service du User
+        /// </summary>
+        public int? ServiceHour
+        {
+            get => model.Profil.ServiceHours;
+        }
+
+        /// <summary>
+        /// Récupère les heures réelles
+        /// </summary>
+        public int RealHours
+        {
+            get => model.RealHours;
+        }
+
+        /// <summary>
+        /// Récupère le nom du profil type en chaîne de caractère
+        /// </summary>
+        public String Profile
+        {
+            get => model.Profil.Name; 
+        }
+
+
 
         /// <summary>
         /// Recupère l'utilisateur
@@ -34,7 +60,7 @@ namespace IHM_Model
         /// <summary>
         /// Initialise l'utilisateur
         /// </summary>
-        /// <param name="model"></param>
+        /// <param name="model">utilisateur</param>
         public UserVM (User model)
         {
             this.model = model;

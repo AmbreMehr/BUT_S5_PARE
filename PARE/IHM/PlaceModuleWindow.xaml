@@ -64,9 +64,9 @@
 
         <!-- Boutons -->
         <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center" Margin="10">
-            <Button Style="{StaticResource ButtonText1}" Content="{DynamicResource BtnAnnuler}" Width="100" Margin="5" Foreground="#FFFFFF" Background="#FF3DA79D" Height="25" Click="ClickBtnAnnuler"/>
+            <Button Style="{StaticResource ButtonText1}" Content="{DynamicResource BtnQuit}" Width="100" Margin="5" Foreground="#FFFFFF" Background="#FF3DA79D" Height="25" Click="ClickBtnQuit"/>
 
-            <Button Style="{StaticResource ButtonText1}" Content="{DynamicResource BtnValider}" Width="100" Margin="5" Foreground="#FFFFFF" Background="#FF3DA79D" Height="25" Click="ClickBtnValider"/>
+            <Button Style="{StaticResource ButtonText1}" Content="{DynamicResource BtnSave}" Width="100" Margin="5" Foreground="#FFFFFF" Background="#FF3DA79D" Height="25" Click="ClickBtnSave"/>
         </StackPanel>
     </Grid>
 </UserControl>

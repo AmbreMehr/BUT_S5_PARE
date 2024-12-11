@@ -69,7 +69,7 @@ namespace IHM
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private async void ClickBtnValider(object sender, RoutedEventArgs e)
+        private async void ClickBtnSave(object sender, RoutedEventArgs e)
         {
             try
             {
@@ -81,7 +81,6 @@ namespace IHM
                     MessageBoxImage.Information);
 
                 ValidationCompleted?.Invoke(this, EventArgs.Empty); // Notifie la fin de la validation
-                this.Visibility = Visibility.Collapsed;
             }
             catch (Exception ex)
             {
@@ -107,7 +106,7 @@ namespace IHM
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void ClickBtnAnnuler(object sender, RoutedEventArgs e)
+        private void ClickBtnQuit(object sender, RoutedEventArgs e)
         {
             Canceled?.Invoke(this, EventArgs.Empty);
             this.Visibility = Visibility.Collapsed;
