@@ -15,5 +15,12 @@ namespace Network
         /// </summary>
         /// <returns>Liste de Semester</returns>
         Task<Semester[]> GetAllSemesters();
+
+        /// <summary>
+        /// Async, renvoie le nombre d'heures des étudiants par semaine, sur le semestre donné
+        /// </summary>
+        /// <param name="semester">semestre</param>
+        /// <returns>Dictionnaire semaine -> heures des étudiants</returns>
+        Task<Dictionary<int, float>> GetStudentsHoursPerWeek(Semester semester);
     }
 }
