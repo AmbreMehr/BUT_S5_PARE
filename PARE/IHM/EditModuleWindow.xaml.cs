@@ -407,7 +407,6 @@ namespace IHM
         /// <summary>
         /// Permet de mettre en avant les heures programmes si elles sont dépassées ou pas atteintes
         /// </summary>
-        /// <param name="teachersVM">liste des enseignants (vue modèle)</param>
         /// <param name="moduleVM">module concerné (vue modèle)</param>
         /// <param name="module">composant contenant le module</param>
         private void AvertHour(ModuleVM moduleVM, StackPanel module)
@@ -462,7 +461,7 @@ namespace IHM
         /// <summary>
         /// Permet d'affiche une pop up pour l'affichage des exceptions
         /// </summary>
-        /// <param name="ex"></param>
+        /// <param name="ex">exception levée</param>
         private void GestionException(Exception ex)
         {
             var exception = ex;
