@@ -111,17 +111,6 @@ namespace IHM_Model
         {
             foreach (ModuleVM moduleVM in models)
             {
-                // Vérification des règles métier
-               if (moduleVM.WeekBegin < 2 || moduleVM.WeekEnd > 14)
-                {
-                    throw new ExceptionWeekBeginAndWeekEndSemesterEven(Ressource.StringRes.SemesterEven);
-                }
-
-                /*if (moduleVM.WeekEnd > 14 ||moduleVM.WeekEnd > 53)
-                {
-                    throw new ExceptionWeekEnd(Ressource.StringRes.WeekEnd);
-                }*/
-
                 if (moduleVM.WeekBegin > moduleVM.WeekEnd)
                 {
                     throw new ExceptionWeekBeginAfterWeekEnd(Ressource.StringRes.WeekBeginAfterWeekEnd);

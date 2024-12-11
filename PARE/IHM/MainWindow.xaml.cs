@@ -55,52 +55,76 @@ namespace IHM
 
                 int decalage = 5;
 
-
                 foreach (ModuleVM moduleVM in modulesCopy)
                 {
-                    // Valider les indices de colonnes calculés
-                    if (moduleVM.WeekBegin < 2 ||moduleVM.WeekEnd > 14 || moduleVM.WeekBegin > moduleVM.WeekEnd)
+
+                    if (!VerificationPlacementModule(moduleVM, semestersVM.SelectedSemester.Name))
                     {
                         MessageBox.Show(
                             $"Le module '{moduleVM.Name}' a des indices de colonne invalides : Début={moduleVM.WeekBegin}, Fin={moduleVM.WeekEnd}.",
                             "Erreur de placement",
                             MessageBoxButton.OK,
                             MessageBoxImage.Warning);
-                        continue; // Ignore ce module et passe au suivant
+                        continue;
                     }
-
-
-                    // Créé un rectangle et texte pour le module
-                    Border moduleRectangle = new Border
-                    {
-                        Background = new SolidColorBrush(Colors.LightBlue),
-                        BorderBrush = new SolidColorBrush(Colors.Black),
-                        BorderThickness = new Thickness(1),
-                        CornerRadius = new CornerRadius(5),
-                        Height = 40,
-                        Margin = new Thickness(35, decalage, 35, 0),
-                        VerticalAlignment = VerticalAlignment.Top
-                    };
-
-                    TextBlock textBlock = new TextBlock
-                    {
-                        Text = moduleVM.Name,
-                        HorizontalAlignment = HorizontalAlignment.Center,
-                        VerticalAlignment = VerticalAlignment.Center,
-                        FontSize = 16,
-                        FontFamily = new FontFamily("OpenSauceOne")
-                    };
-
-                    moduleRectangle.Child = textBlock;
-
-                    Grid.SetColumn(moduleRectangle, moduleVM.WeekBegin - 1);
-                    Grid.SetColumnSpan(moduleRectangle, moduleVM.WeekEnd  - moduleVM.WeekBegin + 1);
-                    Grid.SetRow(moduleRectangle, 1);
-
-                    gridModules.Children.Add(moduleRectangle);
+                    AddModuleToGrid(moduleVM, semestersVM.SelectedSemester.Name, decalage);
                     decalage += 60;
                 }
             }
+        }
+
+        /// <summary>
+        /// Valide les indices de placement du module en fonction du semestre
+        /// </summary>
+        private bool VerificationPlacementModule(ModuleVM module, string semesterName)
+        {
+            return semesterName switch
+            {
+                "Semestre 1" or "Semestre 3" or "Semestre 5" => module.WeekBegin > 35 && module.WeekEnd < 49 && module.WeekBegin <= module.WeekEnd,
+                "Semestre 2" or "Semestre 4" or "Semestre 6" => module.WeekBegin > 1 && module.WeekEnd < 15 && module.WeekBegin <= module.WeekEnd,
+                _ => false
+            };
+        }
+
+        /// <summary>
+        /// Ajoute un module au grid avec les propriétés appropriées
+        /// </summary>
+        private void AddModuleToGrid(ModuleVM module, string semesterName, int decalage)
+        {
+            var moduleRectangle = new Border
+            {
+                Background = new SolidColorBrush(Colors.LightBlue),
+                BorderBrush = new SolidColorBrush(Colors.Black),
+                BorderThickness = new Thickness(1),
+                CornerRadius = new CornerRadius(5),
+                Height = 40,
+                Margin = new Thickness(35, decalage, 35, 0),
+                VerticalAlignment = VerticalAlignment.Top
+            };
+
+            var textBlock = new TextBlock
+            {
+                Text = module.Name,
+                HorizontalAlignment = HorizontalAlignment.Center,
+                VerticalAlignment = VerticalAlignment.Center,
+                FontSize = 16,
+                FontFamily = new FontFamily("OpenSauceOne")
+            };
+
+            moduleRectangle.Child = textBlock;
+
+            int columnOffset = semesterName switch
+            {
+                "Semestre 1" or "Semestre 3" or "Semestre 5" => 35,
+                "Semestre 2" or "Semestre 4" or "Semestre 6" => 1,
+                _ => 0
+            };
+
+            Grid.SetColumn(moduleRectangle, module.WeekBegin - columnOffset);
+            Grid.SetColumnSpan(moduleRectangle, module.WeekEnd - module.WeekBegin + 1);
+            Grid.SetRow(moduleRectangle, 1);
+
+            gridModules.Children.Add(moduleRectangle);
         }
 
 
@@ -221,21 +245,20 @@ namespace IHM
             BtnPlacerModules.Visibility = IsVisible ? Visibility.Visible : Visibility.Collapsed;
         }
 
+        /// <summary>
+        /// Met à jour la grid de l'IHM pour le placement des modules
+        /// </summary>
+        /// <param name="semestreActuel"></param>
         private void UpdateWeekSemester(SemesterVM semestreActuel)
         {
-            labelSemaine1.Content = semestreActuel.WeekBegin.ToString();
-            labelSemaine2.Content = (semestreActuel.WeekBegin+1).ToString();
-            labelSemaine3.Content = (semestreActuel.WeekBegin+2).ToString();
-            labelSemaine4.Content = (semestreActuel.WeekBegin+3).ToString();
-            labelSemaine5.Content = (semestreActuel.WeekBegin+4).ToString();
-            labelSemaine6.Content = (semestreActuel.WeekBegin+5).ToString();
-            labelSemaine7.Content = (semestreActuel.WeekBegin+6).ToString();
-            labelSemaine8.Content = (semestreActuel.WeekBegin+7).ToString();
-            labelSemaine9.Content = (semestreActuel.WeekBegin+8).ToString();
-            labelSemaine10.Content = (semestreActuel.WeekBegin+9).ToString();
-            labelSemaine11.Content = (semestreActuel.WeekBegin+10).ToString();
-            labelSemaine12.Content = (semestreActuel.WeekBegin+11).ToString();
-            labelSemaine13.Content = (semestreActuel.WeekBegin+12).ToString();
+            for (int i = 0; i < 13; i++)
+            {
+                var label = (Label)FindName($"labelSemaine{i + 1}");
+                if (label != null)
+                {
+                    label.Content = (semestreActuel.WeekBegin + i).ToString();
+                }
+            }
         }
     }
 }
