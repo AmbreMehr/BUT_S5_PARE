@@ -75,14 +75,20 @@ namespace Storage_Tests
         public void TestDeleteVerifRealHours()
         {
             // Création du teacher avant de tester la suppression
-            Teacher teacher = CreateTeacher();
-
-
+            Teacher teacher = CreateTeacher(); // création du teacher côté "client"
             TeacherDaoSqlite teacherDaoSqlite = new TeacherDaoSqlite();
-            teacherDaoSqlite.Create(teacher);
+            teacherDaoSqlite.Create(teacher); // création du teacher côté bdd
+
+            // Récupération de l'id de l'utilisateur
             int userId = teacher.User.Id;
+
+            Teacher teacherInBDD = teacherDaoSqlite.ListForUser(userId).Last(); // récupération du teacher que l'on vient de créé pour avoir le bon id
+
+
+            // Récupération de toutes les lignes enseignants pour cet utilisateur
             Teacher[] teachers = teacherDaoSqlite.ListForUser(userId);
 
+            // Vérification des heures assignées avant la suppression
             int assignedTpHoursTotalBeforeDelete = 0;
             int assignedTdHoursTotalBeforeDelete = 0;
             int assignedCmHoursTotalBeforeDelete = 0;
@@ -94,9 +100,12 @@ namespace Storage_Tests
             }
 
             // Suppression du teacher
-            teacherDaoSqlite.Delete(teacher);
+            teacherDaoSqlite.Delete(teacherInBDD); // fonctionne pas à cause du teacher.Id qui est mis au pif
+
+            // Récupération de toutes les lignes enseignants pour cet utilisateur après suppression
             Teacher[] teachersAfter = teacherDaoSqlite.ListForUser(userId);
 
+            // Vérification des heures assignés avant la suppression
             int assignedTpHoursTotalAfterDelete = 0;
             int assignedTdHoursTotalAfterDelete = 0;
             int assignedCmHoursTotalAfterDelete = 0;
