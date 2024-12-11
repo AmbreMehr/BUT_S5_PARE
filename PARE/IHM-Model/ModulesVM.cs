@@ -3,6 +3,7 @@ using Model;
 using Network;
 using System;
 using System.Collections.ObjectModel;
+using System.ComponentModel.DataAnnotations;
 using System.Reflection;
 using System.Threading.Tasks;
 using Module = Model.Module;
@@ -109,28 +110,66 @@ namespace IHM_Model
         /// <author>Lucas PRUNIER</author>
         public async Task UpdateModules()
         {
-            foreach (ModuleVM moduleVM in models)
+            foreach (var moduleVM in models)
             {
-                if (moduleVM.WeekBegin > moduleVM.WeekEnd)
-                {
-                    throw new ExceptionWeekBeginAfterWeekEnd(Ressource.StringRes.WeekBeginAfterWeekEnd);
-                }
-
-                if (moduleVM.WeekBegin == moduleVM.WeekEnd)
-                {
-                    throw new ExceptionSameWeekBeginEnd(Ressource.StringRes.SameWeekBeginEnd);
-                }
                 try
                 {
+                    ValidateModule(moduleVM);
                     await moduleVM.UpdateModule();
                 }
-
-                catch (Exception ex)
+                catch (Exception ex) when (ex is ValidationException || ex is ApplicationException)
                 {
-                    // Gérer les erreurs
+                    // Logique centralisée pour la gestion des exceptions
                     throw new ApplicationException(Ressource.StringRes.ErrorMAJModule, ex);
                 }
             }
         }
+
+        /// <summary>
+        /// Valide les données d'un module.
+        /// </summary>
+        /// <param name="moduleVM">Le module à valider.</param>
+        /// <exception cref="ValidationException">Lancée si les données ne sont pas valides.</exception>
+        private void ValidateModule(ModuleVM moduleVM)
+        {
+            string semesterName = moduleVM.Model.Semester.Name;
+            int weekBegin = moduleVM.WeekBegin;
+            int weekEnd = moduleVM.WeekEnd;
+
+            if (weekBegin > weekEnd)
+            {
+                throw new ExceptionWeekBeginAfterWeekEnd(Ressource.StringRes.WeekBeginAfterWeekEnd);
+            }
+
+            if (weekBegin == weekEnd)
+            {
+                throw new ExceptionSameWeekBeginEnd(Ressource.StringRes.SameWeekBeginEnd);
+            }
+
+            switch (semesterName)
+            {
+                case "Semestre 1":
+                case "Semestre 3":
+                case "Semestre 5":
+                    if (weekBegin < 36 || weekEnd > 48)
+                    {
+                        throw new ExceptionWeekEnd(Ressource.StringRes.WeekEnd);
+                    }
+                    break;
+
+                case "Semestre 2":
+                case "Semestre 4":
+                case "Semestre 6":
+                    if (weekBegin < 2 || weekEnd > 14)
+                    {
+                        throw new ExceptionWeekBeginAndWeekEndSemesterEven(Ressource.StringRes.SemesterEven);
+                    }
+                    break;
+
+                default:
+                    throw new ValidationException($"Semestre inconnu : {semesterName}");
+            }
+        }
+
     }
 }
