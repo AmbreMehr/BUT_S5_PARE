@@ -333,6 +333,7 @@ namespace IHM
             {
                 await teacherVM.DeleteTeacher();
             }
+            this.teachersVM.Teachers.Remove(teacherVM);
 
         }
 
@@ -394,6 +395,7 @@ namespace IHM
                 MessageBox.Show((string)System.Windows.Application.Current.FindResource("MessageModif"), 
                         (string)System.Windows.Application.Current.FindResource("Confirmation"), 
                         MessageBoxButton.OK, MessageBoxImage.Information);
+                GetModulesBySemester(); // mise à jour de la fenêtre
             }
             catch (Exception ex)
             {
