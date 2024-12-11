@@ -24,6 +24,10 @@ namespace Network
                     {
                         semesters = await response.Content.ReadFromJsonAsync(typeof(IEnumerable<Semester>)) as IEnumerable<Semester>;
                     }
+                    else
+                    {
+                        throw new Exception($"API error: {response.StatusCode} - {response.ReasonPhrase}");
+                    }
                 }
                 catch (Exception ex) 
                 {

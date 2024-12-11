@@ -34,6 +34,8 @@ namespace IHM
             this.modulesVM = new ModulesVM();
             MainViewModel mainViewModel = new MainViewModel(this.modulesVM, this.semestersVM);
 
+            this.semestersVM.ErrorOccurred += HandleErrorOccurred;
+
             DataContext = mainViewModel;
         }
 
@@ -241,6 +243,21 @@ namespace IHM
                     label.Content = (semestreActuel.WeekBegin + i).ToString();
                 }
             }
+        }
+
+        /// <summary>
+        /// Message Box apparaissant quand l'API ne se lance pas correctement 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="errorMessage"></param>
+        private void HandleErrorOccurred(object sender, string errorMessage)
+        {
+            MessageBox.Show(
+                errorMessage,
+                "Error",
+                MessageBoxButton.OK,
+                MessageBoxImage.Error
+            );
         }
     }
 }
