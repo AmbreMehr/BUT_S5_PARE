@@ -1,3 +1,4 @@
 *.vpp.*
 .vscode
 /BDD/LoopingImage.jpg
+/PARE/Network/networkConfig.json

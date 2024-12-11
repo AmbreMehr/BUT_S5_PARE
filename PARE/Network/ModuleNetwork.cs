@@ -11,11 +11,9 @@ namespace Network
     public class ModuleNetwork : IModuleNetwork
     {
         /// <summary>
-        /// Récuppère tout les Modules depuis l'API
+        /// Récupère tout les Modules depuis l'API
         /// </summary>
-        /// <param name="module"></param>
-        /// <returns></returns>
-        /// <exception cref="Exception"></exception>
+        /// <returns>Tableau de Module</returns>
         /// <author>AmbreMehr</author>
         public async Task<Module[]> GetAllModules()
         {
@@ -27,17 +25,18 @@ namespace Network
                 if (response.IsSuccessStatusCode)
                 {
                     modules = await response.Content.ReadFromJsonAsync(typeof(IEnumerable<Module>)) as IEnumerable<Module>;
+                    if (modules == null) 
+                        modules = new List<Module>();
                 }
             }
-            return (Module[])(modules != null ? modules.ToArray() : Enumerable.Empty<Module>());
+            return modules.ToArray();
         }
 
         /// <summary>
         /// Obtient les différents modules en fonction des semestres depuis l'API
         /// </summary>
-        /// <param name="module"></param>
-        /// <returns></returns>
-        /// <exception cref="Exception"></exception>
+        /// <param name="semester">Numéro du semestre</param>
+        /// <returns>Tableau de Module</returns>
         /// <author>AmbreMehr</author>
         public async Task<Module[]> GetModuleBySemester(int semester)
         {
@@ -49,17 +48,18 @@ namespace Network
                 if (response.IsSuccessStatusCode)
                 {
                     modules = await response.Content.ReadFromJsonAsync(typeof(IEnumerable<Module>)) as IEnumerable<Module>;
+                    if (modules == null)
+                        modules = new List<Module>();
                 }
             }
-            return (Module[])(modules != null ? modules.ToArray() : Enumerable.Empty<Module>());
+            return modules.ToArray();
         }
 
         /// <summary>
         /// Met à jour les modules qui ont été modifiés dans l'API
         /// </summary>
-        /// <param name="module"></param>
-        /// <returns></returns>
-        /// <exception cref="Exception"></exception>
+        /// <param name="module">Module à mettre à jour</param>
+        /// <exception cref="Exception">Erreur de mise à jour</exception>
         public async Task UpdateModule(Module module)
         {
             using (HttpClient? client = NetworkConfiguration.Instance.HttpClient)
@@ -70,7 +70,7 @@ namespace Network
                 {
                     // En cas d'erreur, lever une exception ou gérer l'erreur
                     string error = await response.Content.ReadAsStringAsync();
-                    throw new Exception($"Erreur lors de la mise à jour du module : {response.StatusCode}, Détails : {error}");
+                    throw new Exception($"{Ressource.StringRes.ModuleUpdateError} : ({response.StatusCode}), {error}");
                 }
             }
         }

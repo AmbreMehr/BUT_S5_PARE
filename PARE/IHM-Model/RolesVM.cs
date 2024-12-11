@@ -19,9 +19,9 @@ namespace IHM_Model
         /// <summary>
         /// Récupère la liste des rôlesVM
         /// </summary>
-        public List<RoleVM> Roles
+        public IEnumerable<RoleVM> Roles
         {     
-            get { return models; }
+            get { return models.AsReadOnly(); }
         }
 
         /// <summary>

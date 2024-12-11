@@ -51,7 +51,7 @@ namespace IHM
                 await this.modulesVM.GetModuleBySemester(semestersVM.SelectedSemester);
 
                 // Crée une copie immuable des modules pour éviter des modifications pendant l'itération
-                var modulesCopy = modulesVM.Modules.ToList();
+                IEnumerable<ModuleVM> modulesCopy = modulesVM.ModulesROnly;
 
                 int decalage = 5;
 
@@ -61,8 +61,8 @@ namespace IHM
                     if (moduleVM.WeekBegin > semestersVM.SelectedSemester.WeekBegin && moduleVM.WeekEnd < semestersVM.SelectedSemester.WeekBegin && moduleVM.WeekBegin <= moduleVM.WeekEnd)
                     {
                         MessageBox.Show(
-                            $"Le module '{moduleVM.Name}' a des indices de colonne invalides : Début={moduleVM.WeekBegin}, Fin={moduleVM.WeekEnd}.",
-                            "Erreur de placement",
+                            $"{moduleVM.Name} : " + (string)System.Windows.Application.Current.FindResource("MessageTitleModulePlacementInvalide"),
+                            (string)System.Windows.Application.Current.FindResource("MessageTitleModulePlacementInvalide"),
                             MessageBoxButton.OK,
                             MessageBoxImage.Warning);
                         continue;
@@ -161,7 +161,9 @@ namespace IHM
         /// <param name="e"></param>
         private void BilanAlertWindow(object sender, RoutedEventArgs e)
         {
-
+            BilanDesAlertesWindow bilan = new BilanDesAlertesWindow();
+            bilan.Show();
+            this.Close();
         }
 
         /// <summary>

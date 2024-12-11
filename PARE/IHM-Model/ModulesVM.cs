@@ -20,10 +20,9 @@ namespace IHM_Model
         private ObservableCollection<ModuleVM> models;
         private ModuleVM? selectedModule;
         private IModuleNetwork moduleNetwork;
-        private SemesterVM semester;
 
         /// <summary>
-        /// Get et set du tableau de modules
+        /// Renvoie le tableau de modules
         /// </summary>
         /// <author> Clotilde MALO </author>
         public ObservableCollection<ModuleVM> Modules
@@ -31,8 +30,13 @@ namespace IHM_Model
             get => models;
         }
 
+        public ReadOnlyCollection<ModuleVM> ModulesROnly
+        {
+            get => models.AsReadOnly();
+        }
+
         /// <summary>
-        /// Get et set du module sélectionné
+        /// Renvoie et remplace le module sélectionné
         /// </summary>
         /// <author> Clotilde MALO </author>
         public ModuleVM? SelectedModule
@@ -108,6 +112,11 @@ namespace IHM_Model
         /// Met à jour les modules dans le backend en validant les données.
         /// </summary>
         /// <returns>Une tâche asynchrone.</returns>
+        /// <exception cref="ExceptionWeekBegin">La première semaine du module est hors des limites du semestre</exception>
+        /// <exception cref="ExceptionWeekEnd">La dernière semaine du module est hors des limites du semestre</exception>
+        /// <exception cref="ExceptionWeekBeginAfterWeekEnd">La première semaine du module est après la dernière semaine du module</exception>
+        /// <exception cref="ExceptionSameWeekBeginEnd">Le module commence et se termine la même semaine</exception>
+        /// <exception cref="ApplicationException">Erreur lors de la mise à jour du module</exception>
         /// <author>Lucas PRUNIER</author>
         public async Task UpdateModules()
         {

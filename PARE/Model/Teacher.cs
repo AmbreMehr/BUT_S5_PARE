@@ -21,17 +21,17 @@ namespace Model
         private int id;
 
         /// <summary>
-        /// Get et set de l'utilisateur qui est enseignant 
+        /// Renvoie et remplace de l'utilisateur qui est enseignant 
         /// </summary>
         public User User { get => user; set => user = value; }
 
         /// <summary>
-        /// Get et set du module enseigné
+        /// Renvoie et remplace du module enseigné
         /// </summary>
         public Module Module { get => module; set => module = value; }
 
         /// <summary>
-        /// Get et set de l'id de l'enseignant
+        /// Renvoie et remplace de l'id de l'enseignant
         /// </summary>
         public int Id
         {
@@ -43,7 +43,7 @@ namespace Model
         }
 
         /// <summary>
-        /// Get et set du nbre heure TD assigné à ce prof
+        /// Renvoie et remplace du nombre heure TD assigné à ce prof
         /// </summary>
         public int AssignedTdHours { get => assignedTdHours;
             set 
@@ -53,7 +53,7 @@ namespace Model
         }
 
         /// <summary>
-        /// Get et set du nbre heure TP assigné à ce prof
+        /// Renvoie et remplace du nbre heure TP assigné à ce prof
         /// </summary>
         public int AssignedTpHours { get => assignedTpHours;
             set
@@ -63,7 +63,7 @@ namespace Model
         }
 
         /// <summary>
-        /// Get et set du nbre heure CM assigné à ce prof
+        /// Renvoie et remplace du nbre heure CM assigné à ce prof
         /// </summary>
         public int AssignedCmHours { get => assignedCmHours; set
             {
