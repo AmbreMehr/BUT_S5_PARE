@@ -95,15 +95,47 @@ namespace IHM
 
                     Grid.SetColumn(moduleRectangle, gridColumnBegin);
                     Grid.SetColumnSpan(moduleRectangle, gridColumnEnd - gridColumnBegin + 1);
-                    Grid.SetRow(moduleRectangle, 1);
+                    Grid.SetRow(moduleRectangle, 2);
 
                     gridModules.Children.Add(moduleRectangle);
                     decalage += 60;
                 }
+                ShowStudentHours();
             }
         }
 
+        private async void ShowStudentHours()
+        {
+            if (semestersVM.SelectedSemester != null)
+            {
+                float acceptableStudentsHours = 35;
+                gridModules.Children.OfType<Rectangle>().ToList().ForEach(child => gridModules.Children.Remove(child));
+                Border placeHolder = new Border
+                {
+                    BorderBrush = new SolidColorBrush(Colors.Black),
+                    BorderThickness = new Thickness(1)
+                };
+                Grid.SetRow(placeHolder, 0);
+                Grid.SetColumn(placeHolder, 1);
+                Grid.SetColumnSpan(placeHolder, 13);
+                gridModules.Children.Add(placeHolder);
 
+                Dictionary<int, float> hoursPerWeek = await semestersVM.SelectedSemester.GetHoursPerWeek();
+                foreach (int week in hoursPerWeek.Keys)
+                {
+                    Rectangle jauge = new Rectangle
+                    {
+                        Fill = new SolidColorBrush(Colors.Black),
+                        Margin = new Thickness(20, 0, 20, 0),
+                        Height = hoursPerWeek[week] / acceptableStudentsHours * gridModules.RowDefinitions.First().Height.Value,
+                        VerticalAlignment = VerticalAlignment.Bottom
+                    };
+                    Grid.SetRow(jauge, 0);
+                    Grid.SetColumn(jauge, week - 36 + 1);
+                    gridModules.Children.Add(jauge);
+                }
+            }
+        }
 
         private void OpenParametresPage(object sender, RoutedEventArgs e)
         {

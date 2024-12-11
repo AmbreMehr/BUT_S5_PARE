@@ -97,7 +97,7 @@
         </Button>
 
         <!-- Contenu de la page -->
-        <Grid Grid.Column="1" Grid.Row="1" Cursor="Hand">
+        <Grid Grid.Column="1" Grid.Row="1">
             <Grid.Background>
                 <ImageBrush/>
             </Grid.Background>
@@ -137,51 +137,55 @@
                     </Grid.ColumnDefinitions>
 
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="70"/>
+                        <RowDefinition Height="50"/>
+                        <!-- Charge étudiante -->
+                        <RowDefinition Height="50"/>
                         <!-- Entête du calendrier -->
                         <RowDefinition Height="*"/>
                         <!-- Lignes du calendrier -->
                     </Grid.RowDefinitions>
+                    
+                    <!-- placeholder charge étudiante -->
 
                     <!-- colonnes du calendrier -->
-                    <Label Grid.Column="1" Grid.Row="0" Content="36" HorizontalAlignment="Center" VerticalAlignment="Top" FontFamily="{StaticResource OpenSauceOne}" FontSize="30"/>
-                    <Line Grid.Column="1" Grid.Row="1" Style="{StaticResource DashedLineStyle}" />
+                    <Label Grid.Column="1" Grid.Row="1" Content="36" HorizontalAlignment="Center" VerticalAlignment="Top" FontFamily="{StaticResource OpenSauceOne}" FontSize="30"/>
+                    <Line Grid.Column="1" Grid.Row="2" Style="{StaticResource DashedLineStyle}" />
 
-                    <Label Grid.Column="2" Grid.Row="0" Content="37" HorizontalAlignment="Center" VerticalAlignment="Top" FontFamily="{StaticResource OpenSauceOne}" FontSize="30"/>
-                    <Line Grid.Column="2" Grid.Row="1" Style="{StaticResource DashedLineStyle}"/>
+                    <Label Grid.Column="2" Grid.Row="1" Content="37" HorizontalAlignment="Center" VerticalAlignment="Top" FontFamily="{StaticResource OpenSauceOne}" FontSize="30"/>
+                    <Line Grid.Column="2" Grid.Row="2" Style="{StaticResource DashedLineStyle}"/>
 
-                    <Label Grid.Column="3" Grid.Row="0" Content="38" HorizontalAlignment="Center" VerticalAlignment="Top" FontFamily="{StaticResource OpenSauceOne}" FontSize="30"/>
-                    <Line Grid.Column="3" Grid.Row="1" Style="{StaticResource DashedLineStyle}" />
+                    <Label Grid.Column="3" Grid.Row="1" Content="38" HorizontalAlignment="Center" VerticalAlignment="Top" FontFamily="{StaticResource OpenSauceOne}" FontSize="30"/>
+                    <Line Grid.Column="3" Grid.Row="2" Style="{StaticResource DashedLineStyle}" />
 
-                    <Label Grid.Column="4" Grid.Row="0" Content="39" HorizontalAlignment="Center" VerticalAlignment="Top" FontFamily="{StaticResource OpenSauceOne}" FontSize="30"/>
-                    <Line Grid.Column="4" Grid.Row="1" Style="{StaticResource DashedLineStyle}" />
+                    <Label Grid.Column="4" Grid.Row="1" Content="39" HorizontalAlignment="Center" VerticalAlignment="Top" FontFamily="{StaticResource OpenSauceOne}" FontSize="30"/>
+                    <Line Grid.Column="4" Grid.Row="2" Style="{StaticResource DashedLineStyle}" />
 
-                    <Label Grid.Column="5" Grid.Row="0" Content="40" HorizontalAlignment="Center" VerticalAlignment="Top" FontFamily="{StaticResource OpenSauceOne}" FontSize="30"/>
-                    <Line Grid.Column="5" Grid.Row="1" Style="{StaticResource DashedLineStyle}" />
+                    <Label Grid.Column="5" Grid.Row="1" Content="40" HorizontalAlignment="Center" VerticalAlignment="Top" FontFamily="{StaticResource OpenSauceOne}" FontSize="30"/>
+                    <Line Grid.Column="5" Grid.Row="2" Style="{StaticResource DashedLineStyle}" />
 
-                    <Label Grid.Column="6" Grid.Row="0" Content="41" HorizontalAlignment="Center" VerticalAlignment="Top" FontFamily="{StaticResource OpenSauceOne}" FontSize="30"/>
-                    <Line Grid.Column="6" Grid.Row="1" Style="{StaticResource DashedLineStyle}"/>
+                    <Label Grid.Column="6" Grid.Row="1" Content="41" HorizontalAlignment="Center" VerticalAlignment="Top" FontFamily="{StaticResource OpenSauceOne}" FontSize="30"/>
+                    <Line Grid.Column="6" Grid.Row="2" Style="{StaticResource DashedLineStyle}"/>
 
-                    <Label Grid.Column="7" Grid.Row="0" Content="42" HorizontalAlignment="Center" VerticalAlignment="Top" FontFamily="{StaticResource OpenSauceOne}" FontSize="30"/>
-                    <Line Grid.Column="7" Grid.Row="1" Style="{StaticResource DashedLineStyle}" />
+                    <Label Grid.Column="7" Grid.Row="1" Content="42" HorizontalAlignment="Center" VerticalAlignment="Top" FontFamily="{StaticResource OpenSauceOne}" FontSize="30"/>
+                    <Line Grid.Column="7" Grid.Row="2" Style="{StaticResource DashedLineStyle}" />
 
-                    <Label Grid.Column="8" Grid.Row="0" Content="43" HorizontalAlignment="Center" VerticalAlignment="Top" FontFamily="{StaticResource OpenSauceOne}" FontSize="30"/>
-                    <Line Grid.Column="8" Grid.Row="1" Style="{StaticResource DashedLineStyle}" />
+                    <Label Grid.Column="8" Grid.Row="1" Content="43" HorizontalAlignment="Center" VerticalAlignment="Top" FontFamily="{StaticResource OpenSauceOne}" FontSize="30"/>
+                    <Line Grid.Column="8" Grid.Row="2" Style="{StaticResource DashedLineStyle}" />
 
-                    <Label Grid.Column="9" Grid.Row="0" Content="44" HorizontalAlignment="Center" VerticalAlignment="Top" FontFamily="{StaticResource OpenSauceOne}" FontSize="30"/>
-                    <Line Grid.Column="9" Grid.Row="1" Style="{StaticResource DashedLineStyle}"/>
+                    <Label Grid.Column="9" Grid.Row="1" Content="44" HorizontalAlignment="Center" VerticalAlignment="Top" FontFamily="{StaticResource OpenSauceOne}" FontSize="30"/>
+                    <Line Grid.Column="9" Grid.Row="2" Style="{StaticResource DashedLineStyle}"/>
 
-                    <Label Grid.Column="10" Grid.Row="0" Content="45" HorizontalAlignment="Center" VerticalAlignment="Top" FontFamily="{StaticResource OpenSauceOne}" FontSize="30"/>
-                    <Line Grid.Column="10" Grid.Row="1" Style="{StaticResource DashedLineStyle}"/>
+                    <Label Grid.Column="10" Grid.Row="1" Content="45" HorizontalAlignment="Center" VerticalAlignment="Top" FontFamily="{StaticResource OpenSauceOne}" FontSize="30"/>
+                    <Line Grid.Column="10" Grid.Row="2" Style="{StaticResource DashedLineStyle}"/>
 
-                    <Label Grid.Column="11" Grid.Row="0" Content="46" HorizontalAlignment="Center" VerticalAlignment="Top" FontFamily="{StaticResource OpenSauceOne}" FontSize="30"/>
-                    <Line Grid.Column="11" Grid.Row="1" Style="{StaticResource DashedLineStyle}" />
+                    <Label Grid.Column="11" Grid.Row="1" Content="46" HorizontalAlignment="Center" VerticalAlignment="Top" FontFamily="{StaticResource OpenSauceOne}" FontSize="30"/>
+                    <Line Grid.Column="11" Grid.Row="2" Style="{StaticResource DashedLineStyle}" />
 
-                    <Label Grid.Column="12" Grid.Row="0" Content="47" HorizontalAlignment="Center" VerticalAlignment="Top" FontFamily="{StaticResource OpenSauceOne}" FontSize="30"/>
-                    <Line Grid.Column="12" Grid.Row="1" Style="{StaticResource DashedLineStyle}"/>
+                    <Label Grid.Column="12" Grid.Row="1" Content="47" HorizontalAlignment="Center" VerticalAlignment="Top" FontFamily="{StaticResource OpenSauceOne}" FontSize="30"/>
+                    <Line Grid.Column="12" Grid.Row="2" Style="{StaticResource DashedLineStyle}"/>
 
-                    <Label Grid.Column="13" Grid.Row="0" Content="48" HorizontalAlignment="Center" VerticalAlignment="Top" FontFamily="{StaticResource OpenSauceOne}" FontSize="30"/>
-                    <Line Grid.Column="13" Grid.Row="1" Style="{StaticResource DashedLineStyle}"/>
+                    <Label Grid.Column="13" Grid.Row="1" Content="48" HorizontalAlignment="Center" VerticalAlignment="Top" FontFamily="{StaticResource OpenSauceOne}" FontSize="30"/>
+                    <Line Grid.Column="13" Grid.Row="2" Style="{StaticResource DashedLineStyle}"/>
 
                 </Grid>
             </ScrollViewer>
