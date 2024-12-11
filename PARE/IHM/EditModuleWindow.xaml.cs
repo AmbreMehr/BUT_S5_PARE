@@ -66,6 +66,7 @@ namespace IHM
             if (semestersVM.SelectedSemester != null)
             {
                 modulesPanel.Children.Clear();
+                teachersVM.Teachers.Clear();
                 await this.modulesVM.GetModuleBySemester(semestersVM.SelectedSemester);
                 foreach (ModuleVM moduleVM in modulesVM.Modules)
                 {
@@ -146,7 +147,7 @@ namespace IHM
                 Margin = new Thickness(5)
             };
 
-            headerStack.Children.Add(new TextBlock { Text = (string)System.Windows.Application.Current.FindResource("TD"), Width = 50, FontWeight = FontWeights.Bold });
+            headerStack.Children.Add(new TextBlock { Text = (string)System.Windows.Application.Current.FindResource("TD"), Margin = new Thickness(100,0,0,0), Width = 50, FontWeight = FontWeights.Bold });
             headerStack.Children.Add(new TextBlock { Text = (string)System.Windows.Application.Current.FindResource("TP"), Width = 50, FontWeight = FontWeights.Bold });
             headerStack.Children.Add(new TextBlock { Text = (string)System.Windows.Application.Current.FindResource("CM"), Width = 50, FontWeight = FontWeights.Bold });
 
@@ -167,11 +168,11 @@ namespace IHM
                 Margin = new Thickness(5)
             };
 
-            TextBlock programBlock = new TextBlock { Text = (string)System.Windows.Application.Current.FindResource("ProgramModule"), Width = 120, FontWeight = FontWeights.Bold };
+            TextBlock programBlock = new TextBlock { Text = (string)System.Windows.Application.Current.FindResource("ProgramModule"), Width = 100, FontWeight = FontWeights.Bold };
 
-            TextBlock tdBlock = new TextBlock { Tag = "TdHours", Text = moduleVM.HoursTd.ToString(), Width = 120, FontWeight = FontWeights.Bold };
-            TextBlock tpBlock = new TextBlock { Tag = "TpHours", Text = moduleVM.HoursTp.ToString(), Width = 120, FontWeight = FontWeights.Bold };
-            TextBlock cmBlock = new TextBlock { Tag = "CmHours", Text = moduleVM.HoursCM.ToString(), Width = 120, FontWeight = FontWeights.Bold };
+            TextBlock tdBlock = new TextBlock { Tag = "TdHours", Text = moduleVM.HoursTd.ToString(), Width = 50, FontWeight = FontWeights.Bold };
+            TextBlock tpBlock = new TextBlock { Tag = "TpHours", Text = moduleVM.HoursTp.ToString(), Width = 50, FontWeight = FontWeights.Bold };
+            TextBlock cmBlock = new TextBlock { Tag = "CmHours", Text = moduleVM.HoursCM.ToString(), Width = 50, FontWeight = FontWeights.Bold };
 
             programStack.Children.Add(programBlock);
             programStack.Children.Add(tdBlock);
@@ -212,7 +213,7 @@ namespace IHM
             };
 
             // Création de la liste déroulante + binding
-            ComboBox teacherComboBox = new ComboBox { Width = 120, Margin = new Thickness(5) };
+            ComboBox teacherComboBox = new ComboBox { Width = 220, Margin = new Thickness(5)};
 
             teacherComboBox.ItemsSource = usersVM.Users;
             teacherComboBox.DisplayMemberPath = "Fullname";
@@ -227,9 +228,9 @@ namespace IHM
             teacherComboBox.SetBinding(ComboBox.SelectedItemProperty, bindingSelected);
 
             // Création des champs avec les heures (TD, TP, CM) + binding
-            TextBox tdBox = new TextBox { Width = 50, Margin = new Thickness(5)};
-            TextBox tpBox = new TextBox { Width = 50, Margin = new Thickness(5)};
-            TextBox cmBox = new TextBox { Width = 50, Margin = new Thickness(5)};
+            TextBox tdBox = new TextBox { Width = 50, Margin = new Thickness(5), TextAlignment=TextAlignment.Center };
+            TextBox tpBox = new TextBox { Width = 50, Margin = new Thickness(5), TextAlignment = TextAlignment.Center };
+            TextBox cmBox = new TextBox { Width = 50, Margin = new Thickness(5), TextAlignment = TextAlignment.Center };
 
 
             Binding bindingTd = new Binding("AssignedTdHours")
@@ -298,7 +299,7 @@ namespace IHM
             Button deleteButton = new Button
             {
                 Content = (string)System.Windows.Application.Current.FindResource("SupprimerEnseignant"),
-                Width = 200,
+                Width = 180,
                 Margin = new Thickness(5)
             };
             // Ajout du bouton à la ligne
@@ -333,6 +334,7 @@ namespace IHM
             {
                 await teacherVM.DeleteTeacher();
             }
+            this.teachersVM.Teachers.Remove(teacherVM);
 
         }
 
@@ -389,11 +391,13 @@ namespace IHM
                     else
                     {
                         await teacherVM.CreateTeacher();
+                        teacherVM.IsInStorage = true;
                     }
                 }
                 MessageBox.Show((string)System.Windows.Application.Current.FindResource("MessageModif"), 
                         (string)System.Windows.Application.Current.FindResource("Confirmation"), 
                         MessageBoxButton.OK, MessageBoxImage.Information);
+                GetModulesBySemester(); 
             }
             catch (Exception ex)
             {
@@ -405,7 +409,6 @@ namespace IHM
         /// <summary>
         /// Permet de mettre en avant les heures programmes si elles sont dépassées ou pas atteintes
         /// </summary>
-        /// <param name="teachersVM">liste des enseignants (vue modèle)</param>
         /// <param name="moduleVM">module concerné (vue modèle)</param>
         /// <param name="module">composant contenant le module</param>
         private void AvertHour(ModuleVM moduleVM, StackPanel module)
@@ -460,7 +463,7 @@ namespace IHM
         /// <summary>
         /// Permet d'affiche une pop up pour l'affichage des exceptions
         /// </summary>
-        /// <param name="ex"></param>
+        /// <param name="ex">exception levée</param>
         private void GestionException(Exception ex)
         {
             var exception = ex;

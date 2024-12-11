@@ -32,15 +32,8 @@ namespace API.Controllers
         public IActionResult UpdateTeacher(Teacher teacher)
         {
             IActionResult result = BadRequest();
-            try
-            {
-                this.TeacherService.UpdateTeacher(teacher);
-                result = Ok();
-            }
-            catch
-            {
-                result = NotFound();
-            }
+            this.TeacherService.UpdateTeacher(teacher);
+            result = Ok();
             return result;
 
         }
@@ -54,15 +47,8 @@ namespace API.Controllers
         public IActionResult DeleteTeacher(Teacher teacher) 
         {
             IActionResult result = BadRequest();
-            try
-            {
-                this.TeacherService.DeleteTeacher(teacher);
-                result = Ok();
-            }
-            catch
-            {
-                result = NotFound();
-            }
+            this.TeacherService.DeleteTeacher(teacher);
+            result = Ok();
             return result;
         }
 
@@ -75,15 +61,8 @@ namespace API.Controllers
         public IActionResult CreateTeacher(Teacher teacher)
         {
             IActionResult result = BadRequest();
-            try
-            {
-                this.TeacherService.CreateTeacher(teacher);
-                result = Ok();
-            }
-            catch
-            {
-                result = NotFound();
-            }
+            this.TeacherService.CreateTeacher(teacher);
+            result = Ok();
             return result;
         }
     }

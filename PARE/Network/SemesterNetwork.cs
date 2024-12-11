@@ -36,5 +36,22 @@ namespace Network
             }
             return semesters.ToArray();
         }
+
+        public async Task<Dictionary<int, float>> GetStudentsHoursPerWeek(Semester semester)
+        {
+            Dictionary<int, float> hoursByWeek = new Dictionary<int, float>();
+            using (var client = NetworkConfiguration.Instance.HttpClient)
+            {
+                string query = NetworkConfiguration.Instance.ApiUrl + "api/semester/GetStudentsHoursPerWeek?semester=" + semester.Id;
+                HttpResponseMessage response = await client.GetAsync(query);
+                if (response.IsSuccessStatusCode)
+                {
+                    hoursByWeek = await response.Content.ReadFromJsonAsync(typeof(Dictionary<int, float>)) as Dictionary<int, float>;
+                    if (hoursByWeek == null)
+                        hoursByWeek = new Dictionary<int, float>();
+                }
+            }
+            return hoursByWeek;
+        }
     }
 }

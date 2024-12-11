@@ -66,7 +66,7 @@ namespace IHM_Model
                 Semester[] semesters = await semesterNetwork.GetAllSemesters();
                 foreach (Semester semester in semesters)
                 {
-                    models.Add(new SemesterVM(semester));
+                    models.Add(new SemesterVM(semester, this.semesterNetwork));
                 }
                 // initialisation du 1e element en selected
                 if (semesters != null && models.Count() > 0)

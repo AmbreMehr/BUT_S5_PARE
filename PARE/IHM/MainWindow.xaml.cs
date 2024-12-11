@@ -104,11 +104,60 @@ namespace IHM
 
             Grid.SetColumn(moduleRectangle, module.WeekBegin - module.Model.Semester.SemesterWeekBegin +1);
             Grid.SetColumnSpan(moduleRectangle, module.WeekEnd - module.WeekBegin + 1);
-            Grid.SetRow(moduleRectangle, 1);
+            Grid.SetRow(moduleRectangle, 2);
 
             gridModules.Children.Add(moduleRectangle);
+            ShowStudentHours();
         }
 
+        /// <summary>
+        /// Affiche la charge des étudiants 
+        /// </summary>
+        private async void ShowStudentHours()
+        {
+            SemesterVM? semester = semestersVM.SelectedSemester;
+            if (semester != null)
+            {
+                float acceptableStudentsHoursMin = 30;
+                float acceptableStudentsHoursMax = 35;
+                double rectangleMaxHeight = gridModules.RowDefinitions.First().Height.Value;
+                gridModules.Children.OfType<Rectangle>().ToList().ForEach(child => gridModules.Children.Remove(child));
+                Border placeHolder = new Border
+                {
+                    BorderBrush = new SolidColorBrush(Colors.Black),
+                    BorderThickness = new Thickness(1)
+                };
+                Grid.SetRow(placeHolder, 0);
+                Grid.SetColumn(placeHolder, 1);
+                Grid.SetColumnSpan(placeHolder, semester.NbWeek);
+                gridModules.Children.Add(placeHolder);
+
+                Dictionary<int, float> hoursPerWeek = await semester.GetHoursPerWeek();
+                foreach (int week in hoursPerWeek.Keys)
+                {
+                    float hours = hoursPerWeek[week];
+                    Rectangle jauge = new Rectangle
+                    {
+                        Fill = new SolidColorBrush(Colors.Black),
+                        Margin = new Thickness(20, 0, 20, placeHolder.BorderThickness.Bottom),
+                        Height = hoursPerWeek[week] / acceptableStudentsHoursMax * rectangleMaxHeight,
+                        VerticalAlignment = VerticalAlignment.Bottom
+                    };
+                    if (hours > acceptableStudentsHoursMax)
+                    {
+                        jauge.Fill = (SolidColorBrush)System.Windows.Application.Current.FindResource("StudentHoursOver");
+                        jauge.Height = rectangleMaxHeight;
+                    }
+                    else if (hours < acceptableStudentsHoursMin)
+                    {
+                        jauge.Fill = (SolidColorBrush)System.Windows.Application.Current.FindResource("StudentHoursUnder");
+                    }
+                    Grid.SetRow(jauge, 0);
+                    Grid.SetColumn(jauge, week - semester.WeekBegin + 1);
+                    gridModules.Children.Add(jauge);
+                }
+            }
+        }
 
         /// <summary>
         /// Ouvre la page des paramètres
