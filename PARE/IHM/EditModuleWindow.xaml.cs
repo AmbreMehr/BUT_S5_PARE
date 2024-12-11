@@ -213,7 +213,7 @@ namespace IHM
             };
 
             // Création de la liste déroulante + binding
-            ComboBox teacherComboBox = new ComboBox { Width = 100, Margin = new Thickness(5) };
+            ComboBox teacherComboBox = new ComboBox { Width = 220, Margin = new Thickness(5)};
 
             teacherComboBox.ItemsSource = usersVM.Users;
             teacherComboBox.DisplayMemberPath = "Fullname";
@@ -228,9 +228,9 @@ namespace IHM
             teacherComboBox.SetBinding(ComboBox.SelectedItemProperty, bindingSelected);
 
             // Création des champs avec les heures (TD, TP, CM) + binding
-            TextBox tdBox = new TextBox { Width = 50, Margin = new Thickness(5)};
-            TextBox tpBox = new TextBox { Width = 50, Margin = new Thickness(5)};
-            TextBox cmBox = new TextBox { Width = 50, Margin = new Thickness(5)};
+            TextBox tdBox = new TextBox { Width = 50, Margin = new Thickness(5), TextAlignment=TextAlignment.Center };
+            TextBox tpBox = new TextBox { Width = 50, Margin = new Thickness(5), TextAlignment = TextAlignment.Center };
+            TextBox cmBox = new TextBox { Width = 50, Margin = new Thickness(5), TextAlignment = TextAlignment.Center };
 
 
             Binding bindingTd = new Binding("AssignedTdHours")
@@ -299,7 +299,7 @@ namespace IHM
             Button deleteButton = new Button
             {
                 Content = (string)System.Windows.Application.Current.FindResource("SupprimerEnseignant"),
-                Width = 200,
+                Width = 180,
                 Margin = new Thickness(5)
             };
             // Ajout du bouton à la ligne
