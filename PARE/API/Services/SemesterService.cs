@@ -11,6 +11,9 @@ namespace API.Services
     {
         private ISemesterDao semesterDao;
 
+        /// <summary>
+        /// Constructeur de la classe, initialise ses dépendances aux DAO
+        /// </summary>
         public SemesterService ()
         {
             this.semesterDao = new SemesterDaoSqlite();

@@ -1,12 +1,15 @@
-﻿using IHM_Model.Exceptions;
-using Model;
-using System.Reflection.Metadata.Ecma335;
+﻿using Model;
+using Network;
 
 namespace IHM_Model
 {
+    /// <summary>
+    /// Classe VueModèle pour un Semester
+    /// </summary>
     public class SemesterVM : BaseVM
     {
         private Semester model;
+        private ISemesterNetwork network;
 
         /// <summary>
         /// Récupère le semestre
