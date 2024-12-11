@@ -4,6 +4,7 @@ using Network;
 using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel.DataAnnotations;
+using System.Data;
 using System.Reflection;
 using System.Threading.Tasks;
 using Module = Model.Module;
@@ -110,7 +111,7 @@ namespace IHM_Model
         /// <author>Lucas PRUNIER</author>
         public async Task UpdateModules()
         {
-            foreach (var moduleVM in models)
+            foreach (ModuleVM moduleVM in models)
             {
                 try
                 {
@@ -132,7 +133,6 @@ namespace IHM_Model
         /// <exception cref="ValidationException">Lancée si les données ne sont pas valides.</exception>
         private void ValidateModule(ModuleVM moduleVM)
         {
-            string semesterName = moduleVM.Model.Semester.Name;
             int weekBegin = moduleVM.WeekBegin;
             int weekEnd = moduleVM.WeekEnd;
 
@@ -146,30 +146,10 @@ namespace IHM_Model
                 throw new ExceptionSameWeekBeginEnd(Ressource.StringRes.SameWeekBeginEnd);
             }
 
-            switch (semesterName)
+            if (weekBegin < moduleVM.Model.Semester.SemesterWeekBegin || weekEnd > moduleVM.Model.Semester.SemesterWeekEnd)
             {
-                case "Semestre 1":
-                case "Semestre 3":
-                case "Semestre 5":
-                    if (weekBegin < 36 || weekEnd > 48)
-                    {
-                        throw new ExceptionWeekEnd(Ressource.StringRes.WeekEnd);
-                    }
-                    break;
-
-                case "Semestre 2":
-                case "Semestre 4":
-                case "Semestre 6":
-                    if (weekBegin < 2 || weekEnd > 14)
-                    {
-                        throw new ExceptionWeekBeginAndWeekEndSemesterEven(Ressource.StringRes.SemesterEven);
-                    }
-                    break;
-
-                default:
-                    throw new ValidationException($"Semestre inconnu : {semesterName}");
+                throw new ExceptionWeekBeginAndWeekEndSemesterEven(Ressource.StringRes.SemesterEven);
             }
         }
-
     }
 }

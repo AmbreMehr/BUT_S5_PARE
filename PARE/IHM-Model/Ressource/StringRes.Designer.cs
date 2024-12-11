@@ -124,20 +124,11 @@ namespace IHM_Model.Ressource {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à the begin week should be between 2 ans 14.
+        ///   Recherche une chaîne localisée semblable à The begin or end week is incorrect.
         /// </summary>
         internal static string SemesterEven {
             get {
                 return ResourceManager.GetString("SemesterEven", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Recherche une chaîne localisée semblable à The begin week should be between 35 and 53.
-        /// </summary>
-        internal static string WeekBegin {
-            get {
-                return ResourceManager.GetString("WeekBegin", resourceCulture);
             }
         }
         
@@ -147,15 +138,6 @@ namespace IHM_Model.Ressource {
         internal static string WeekBeginAfterWeekEnd {
             get {
                 return ResourceManager.GetString("WeekBeginAfterWeekEnd", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Recherche une chaîne localisée semblable à The end week should be between 35 and 53.
-        /// </summary>
-        internal static string WeekEnd {
-            get {
-                return ResourceManager.GetString("WeekEnd", resourceCulture);
             }
         }
     }

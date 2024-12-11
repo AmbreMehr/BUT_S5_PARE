@@ -58,7 +58,7 @@ namespace IHM
                 foreach (ModuleVM moduleVM in modulesCopy)
                 {
 
-                    if (!VerificationPlacementModule(moduleVM, semestersVM.SelectedSemester.Name))
+                    if (moduleVM.WeekBegin > semestersVM.SelectedSemester.WeekBegin && moduleVM.WeekEnd < semestersVM.SelectedSemester.WeekBegin && moduleVM.WeekBegin <= moduleVM.WeekEnd)
                     {
                         MessageBox.Show(
                             $"Le module '{moduleVM.Name}' a des indices de colonne invalides : Début={moduleVM.WeekBegin}, Fin={moduleVM.WeekEnd}.",
@@ -71,19 +71,6 @@ namespace IHM
                     decalage += 60;
                 }
             }
-        }
-
-        /// <summary>
-        /// Valide les indices de placement du module en fonction du semestre
-        /// </summary>
-        private bool VerificationPlacementModule(ModuleVM module, string semesterName)
-        {
-            return semesterName switch
-            {
-                "Semestre 1" or "Semestre 3" or "Semestre 5" => module.WeekBegin > 35 && module.WeekEnd < 49 && module.WeekBegin <= module.WeekEnd,
-                "Semestre 2" or "Semestre 4" or "Semestre 6" => module.WeekBegin > 1 && module.WeekEnd < 15 && module.WeekBegin <= module.WeekEnd,
-                _ => false
-            };
         }
 
         /// <summary>
@@ -113,14 +100,7 @@ namespace IHM
 
             moduleRectangle.Child = textBlock;
 
-            int columnOffset = semesterName switch
-            {
-                "Semestre 1" or "Semestre 3" or "Semestre 5" => 35,
-                "Semestre 2" or "Semestre 4" or "Semestre 6" => 1,
-                _ => 0
-            };
-
-            Grid.SetColumn(moduleRectangle, module.WeekBegin - columnOffset);
+            Grid.SetColumn(moduleRectangle, module.WeekBegin - module.Model.Semester.SemesterWeekBegin +1);
             Grid.SetColumnSpan(moduleRectangle, module.WeekEnd - module.WeekBegin + 1);
             Grid.SetRow(moduleRectangle, 1);
 
@@ -251,9 +231,9 @@ namespace IHM
         /// <param name="semestreActuel"></param>
         private void UpdateWeekSemester(SemesterVM semestreActuel)
         {
-            for (int i = 0; i < 13; i++)
+            for (int i = 0; i < (semestreActuel.NbWeek); i++)
             {
-                var label = (Label)FindName($"labelSemaine{i + 1}");
+                Label label = (Label)FindName($"labelSemaine{i + 1}");
                 if (label != null)
                 {
                     label.Content = (semestreActuel.WeekBegin + i).ToString();

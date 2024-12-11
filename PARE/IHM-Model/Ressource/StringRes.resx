@@ -123,14 +123,8 @@
   <data name="HourProgram" xml:space="preserve">
     <value>The hours assigned to the teacher must be less than or equal to the program hours.</value>
   </data>
-  <data name="WeekBegin" xml:space="preserve">
-    <value>The begin week should be between 35 and 53</value>
-  </data>
   <data name="WeekBeginAfterWeekEnd" xml:space="preserve">
     <value>The begin week cannot be longer than the end week</value>
-  </data>
-  <data name="WeekEnd" xml:space="preserve">
-    <value>The end week should be between 35 and 53</value>
   </data>
   <data name="SameWeekBeginEnd" xml:space="preserve">
     <value>The start week cannot be equal than the end week</value>
@@ -148,6 +142,6 @@
     <value>Error during the add of the teacher</value>
   </data>
   <data name="SemesterEven" xml:space="preserve">
-    <value>the begin week should be between 2 ans 14</value>
+    <value>The begin or end week is incorrect</value>
   </data>
 </root>

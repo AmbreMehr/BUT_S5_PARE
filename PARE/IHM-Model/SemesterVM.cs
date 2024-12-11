@@ -33,6 +33,14 @@ namespace IHM_Model
         }
 
         /// <summary>
+        /// Calcule le nombre de semaines dans un semestre en fonction de la semaine de début et de fin
+        /// </summary>
+        public int NbWeek
+        {
+            get => WeekEnd - WeekBegin +1;
+        }
+
+        /// <summary>
         /// Récupère le nom du semestre
         /// </summary>
         public string Name
