@@ -44,6 +44,8 @@ namespace IHM
         {
             if (semestersVM.SelectedSemester != null)
             {
+                UpdateWeekSemester(semestersVM.SelectedSemester);
+
                 // Suppression des éléments qui ne sont pas ceux de base
                 gridModules.Children.OfType<Border>().ToList().ForEach(child => gridModules.Children.Remove(child));
                 await this.modulesVM.GetModuleBySemester(semestersVM.SelectedSemester);
@@ -55,52 +57,54 @@ namespace IHM
 
                 foreach (ModuleVM moduleVM in modulesCopy)
                 {
-                    // Prend en compte n° de colonnes pour les semaines
-                    int gridColumnBegin = moduleVM.WeekBegin - 35;
-                    int gridColumnEnd = moduleVM.WeekEnd - 35;
 
-                    // Valider les indices de colonnes calculés
-                    if (gridColumnBegin < 0 || gridColumnEnd < 0 || gridColumnBegin > gridColumnEnd)
+                    if (moduleVM.WeekBegin > semestersVM.SelectedSemester.WeekBegin && moduleVM.WeekEnd < semestersVM.SelectedSemester.WeekBegin && moduleVM.WeekBegin <= moduleVM.WeekEnd)
                     {
                         MessageBox.Show(
                             $"{moduleVM.Name} : " + (string)System.Windows.Application.Current.FindResource("MessageTitleModulePlacementInvalide"),
                             (string)System.Windows.Application.Current.FindResource("MessageTitleModulePlacementInvalide"),
                             MessageBoxButton.OK,
                             MessageBoxImage.Warning);
-                        continue; // Ignore ce module et passe au suivant
+                        continue;
                     }
-
-                    // Créé un rectangle et texte pour le module
-                    Border moduleRectangle = new Border
-                    {
-                        Background = new SolidColorBrush(Colors.LightBlue),
-                        BorderBrush = new SolidColorBrush(Colors.Black),
-                        BorderThickness = new Thickness(1),
-                        CornerRadius = new CornerRadius(5),
-                        Height = 40,
-                        Margin = new Thickness(35, decalage, 35, 0),
-                        VerticalAlignment = VerticalAlignment.Top
-                    };
-
-                    TextBlock textBlock = new TextBlock
-                    {
-                        Text = moduleVM.Name,
-                        HorizontalAlignment = HorizontalAlignment.Center,
-                        VerticalAlignment = VerticalAlignment.Center,
-                        FontSize = 16,
-                        FontFamily = new FontFamily("OpenSauceOne")
-                    };
-
-                    moduleRectangle.Child = textBlock;
-
-                    Grid.SetColumn(moduleRectangle, gridColumnBegin);
-                    Grid.SetColumnSpan(moduleRectangle, gridColumnEnd - gridColumnBegin + 1);
-                    Grid.SetRow(moduleRectangle, 1);
-
-                    gridModules.Children.Add(moduleRectangle);
+                    AddModuleToGrid(moduleVM, semestersVM.SelectedSemester.Name, decalage);
                     decalage += 60;
                 }
             }
+        }
+
+        /// <summary>
+        /// Ajoute un module au grid avec les propriétés appropriées
+        /// </summary>
+        private void AddModuleToGrid(ModuleVM module, string semesterName, int decalage)
+        {
+            var moduleRectangle = new Border
+            {
+                Background = new SolidColorBrush(Colors.LightBlue),
+                BorderBrush = new SolidColorBrush(Colors.Black),
+                BorderThickness = new Thickness(1),
+                CornerRadius = new CornerRadius(5),
+                Height = 40,
+                Margin = new Thickness(35, decalage, 35, 0),
+                VerticalAlignment = VerticalAlignment.Top
+            };
+
+            var textBlock = new TextBlock
+            {
+                Text = module.Name,
+                HorizontalAlignment = HorizontalAlignment.Center,
+                VerticalAlignment = VerticalAlignment.Center,
+                FontSize = 16,
+                FontFamily = new FontFamily("OpenSauceOne")
+            };
+
+            moduleRectangle.Child = textBlock;
+
+            Grid.SetColumn(moduleRectangle, module.WeekBegin - module.Model.Semester.SemesterWeekBegin +1);
+            Grid.SetColumnSpan(moduleRectangle, module.WeekEnd - module.WeekBegin + 1);
+            Grid.SetRow(moduleRectangle, 1);
+
+            gridModules.Children.Add(moduleRectangle);
         }
 
 
@@ -223,5 +227,20 @@ namespace IHM
             BtnPlacerModules.Visibility = IsVisible ? Visibility.Visible : Visibility.Collapsed;
         }
 
+        /// <summary>
+        /// Met à jour la grid de l'IHM pour le placement des modules
+        /// </summary>
+        /// <param name="semestreActuel"></param>
+        private void UpdateWeekSemester(SemesterVM semestreActuel)
+        {
+            for (int i = 0; i < (semestreActuel.NbWeek); i++)
+            {
+                Label label = (Label)FindName($"labelSemaine{i + 1}");
+                if (label != null)
+                {
+                    label.Content = (semestreActuel.WeekBegin + i).ToString();
+                }
+            }
+        }
     }
 }
