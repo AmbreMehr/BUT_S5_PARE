@@ -66,6 +66,7 @@ namespace IHM
             if (semestersVM.SelectedSemester != null)
             {
                 modulesPanel.Children.Clear();
+                teachersVM.Teachers.Clear();
                 await this.modulesVM.GetModuleBySemester(semestersVM.SelectedSemester);
                 foreach (ModuleVM moduleVM in modulesVM.Modules)
                 {
@@ -390,12 +391,13 @@ namespace IHM
                     else
                     {
                         await teacherVM.CreateTeacher();
+                        teacherVM.IsInStorage = true;
                     }
                 }
                 MessageBox.Show((string)System.Windows.Application.Current.FindResource("MessageModif"), 
                         (string)System.Windows.Application.Current.FindResource("Confirmation"), 
                         MessageBoxButton.OK, MessageBoxImage.Information);
-                GetModulesBySemester(); // mise à jour de la fenêtre
+                GetModulesBySemester(); 
             }
             catch (Exception ex)
             {
