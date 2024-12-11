@@ -17,10 +17,17 @@ namespace Network
             using (var client = NetworkConfiguration.Instance.HttpClient)
             {
                 string query = NetworkConfiguration.Instance.ApiUrl + "api/semester/GetAll";
-                HttpResponseMessage response = await client.GetAsync(query);
-                if (response.IsSuccessStatusCode)
+                try
                 {
-                    semesters = await response.Content.ReadFromJsonAsync(typeof(IEnumerable<Semester>)) as IEnumerable<Semester>;
+                    HttpResponseMessage response = await client.GetAsync(query);
+                    if (response.IsSuccessStatusCode)
+                    {
+                        semesters = await response.Content.ReadFromJsonAsync(typeof(IEnumerable<Semester>)) as IEnumerable<Semester>;
+                    }
+                }
+                catch (Exception ex) 
+                {
+                    throw new Exception("The API did not start correctly or is inaccessible.", ex);
                 }
             }
             return semesters.ToArray();
