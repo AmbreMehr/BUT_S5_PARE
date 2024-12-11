@@ -94,6 +94,7 @@ namespace IHM
             var textBlock = new TextBlock
             {
                 Text = module.Name,
+                ToolTip = module.Name,
                 HorizontalAlignment = HorizontalAlignment.Center,
                 VerticalAlignment = VerticalAlignment.Center,
                 FontSize = 16,
