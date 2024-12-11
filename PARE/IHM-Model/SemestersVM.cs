@@ -18,6 +18,10 @@ namespace IHM_Model
         private ObservableCollection<SemesterVM> models;
         private ISemesterNetwork semesterNetwork;
         private SemesterVM? selectedSemester;
+
+        /// <summary>
+        /// Evenement quand une erreur se produit
+        /// </summary>
         public event EventHandler<string> ErrorOccurred;
 
         /// <summary>
