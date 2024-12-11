@@ -117,7 +117,7 @@ namespace IHM
                 };
                 Grid.SetRow(placeHolder, 0);
                 Grid.SetColumn(placeHolder, 1);
-                Grid.SetColumnSpan(placeHolder, 13);
+                Grid.SetColumnSpan(placeHolder, 13); // remplacer plus tard 13 par SelectedSemester.NbWeeks
                 gridModules.Children.Add(placeHolder);
 
                 Dictionary<int, float> hoursPerWeek = await semestersVM.SelectedSemester.GetHoursPerWeek();
@@ -131,7 +131,7 @@ namespace IHM
                         VerticalAlignment = VerticalAlignment.Bottom
                     };
                     Grid.SetRow(jauge, 0);
-                    Grid.SetColumn(jauge, week - 36 + 1);
+                    Grid.SetColumn(jauge, week - 36 + 1); // remplacer plus tard 36 par SelectedSemester.WeekBegin
                     gridModules.Children.Add(jauge);
                 }
             }
