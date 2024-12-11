@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:IHM"
         mc:Ignorable="d"
-        Title="Bilan des alertes" 
+        Title="{DynamicResource TitreFenetreBilanAlerte}" 
         Height="1000" Width="1500"
         ResizeMode="NoResize"
         WindowStartupLocation="CenterScreen"

@@ -8,7 +8,7 @@
         WindowStartupLocation="CenterScreen"
         ResizeMode="NoResize"
         Height="650" Width="1200"
-        Title="{DynamicResource TitreParam}">
+        Title="{DynamicResource TitreFenetreSettings}">
 
     <Window.Background>
         <SolidColorBrush Color="{DynamicResource BackgroundColor}"/>

@@ -7,7 +7,7 @@
         ResizeMode="NoResize"
         WindowStartupLocation="CenterScreen"
         mc:Ignorable="d"
-        Title="{DynamicResource TitreFenetreConnexion}"
+        Title="{DynamicResource TitreFenetreLogin}"
         Height="650" Width="1200">
 
 

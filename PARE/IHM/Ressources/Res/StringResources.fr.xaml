@@ -76,6 +76,14 @@
     <system:String x:Key="Service">Service</system:String>
     <system:String x:Key="NbHeuresReel">Nombre d'heures réelles</system:String>
     <system:String x:Key="Enseignant">Enseignants</system:String>
-
+    
+    <!-- Titre des fenêtres -->
+    <system:String x:Key="TitreFenetreEditionModule">PARE - Edition des modules</system:String>
+    <system:String x:Key="TitreFenetreBilanAlerte">PARE - Bilan des alertes</system:String>
+    <system:String x:Key="TitreFenetreLogin">PARE - Connexion</system:String>
+    <system:String x:Key="TitreFenetreMain">PARE - Répartition des modules</system:String>
+    <system:String x:Key="TitreFenetreModuleSupervisors">PARE - Responsables de ressources</system:String>
+    <system:String x:Key="TitreFenetreSettings">PARE - Paramètres</system:String>
+    <system:String x:Key="TitreFenetreLoading">PARE - Chargement</system:String>
 
 </ResourceDictionary>
