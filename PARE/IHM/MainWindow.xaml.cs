@@ -108,12 +108,17 @@ namespace IHM
             ShowStudentHours();
         }
 
+        /// <summary>
+        /// Affiche la charge des étudiants 
+        /// </summary>
         private async void ShowStudentHours()
         {
             SemesterVM? semester = semestersVM.SelectedSemester;
             if (semester != null)
             {
-                float acceptableStudentsHours = 35;
+                float acceptableStudentsHoursMin = 30;
+                float acceptableStudentsHoursMax = 35;
+                double rectangleMaxHeight = gridModules.RowDefinitions.First().Height.Value;
                 gridModules.Children.OfType<Rectangle>().ToList().ForEach(child => gridModules.Children.Remove(child));
                 Border placeHolder = new Border
                 {
@@ -128,13 +133,23 @@ namespace IHM
                 Dictionary<int, float> hoursPerWeek = await semester.GetHoursPerWeek();
                 foreach (int week in hoursPerWeek.Keys)
                 {
+                    float hours = hoursPerWeek[week];
                     Rectangle jauge = new Rectangle
                     {
                         Fill = new SolidColorBrush(Colors.Black),
-                        Margin = new Thickness(20, 0, 20, 0),
-                        Height = hoursPerWeek[week] / acceptableStudentsHours * gridModules.RowDefinitions.First().Height.Value,
+                        Margin = new Thickness(20, 0, 20, placeHolder.BorderThickness.Bottom),
+                        Height = hoursPerWeek[week] / acceptableStudentsHoursMax * rectangleMaxHeight,
                         VerticalAlignment = VerticalAlignment.Bottom
                     };
+                    if (hours > acceptableStudentsHoursMax)
+                    {
+                        jauge.Fill = (SolidColorBrush)System.Windows.Application.Current.FindResource("StudentHoursOver");
+                        jauge.Height = rectangleMaxHeight;
+                    }
+                    else if (hours < acceptableStudentsHoursMin)
+                    {
+                        jauge.Fill = (SolidColorBrush)System.Windows.Application.Current.FindResource("StudentHoursUnder");
+                    }
                     Grid.SetRow(jauge, 0);
                     Grid.SetColumn(jauge, week - semester.WeekBegin + 1);
                     gridModules.Children.Add(jauge);
