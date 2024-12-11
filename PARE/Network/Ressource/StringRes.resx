@@ -120,4 +120,7 @@
   <data name="ModuleUpdateError" xml:space="preserve">
     <value>Error while updating the module</value>
   </data>
+  <data name="APIError" xml:space="preserve">
+    <value>The API did not start correctly or is inaccessible.</value>
+  </data>
 </root>

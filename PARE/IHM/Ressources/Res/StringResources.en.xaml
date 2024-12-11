@@ -57,6 +57,7 @@
     <system:String x:Key="ErreurDeMiseAJour">Update error</system:String>
     <system:String x:Key="ErreurInnatendue">An unexpected error has occurred</system:String>
 
+
     <!--  Edition des Modules  -->
     <system:String x:Key="TitreEditionModules">Module Edition</system:String>
     <system:String x:Key="ProgramModule">Program</system:String>

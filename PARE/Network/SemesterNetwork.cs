@@ -17,10 +17,21 @@ namespace Network
             using (var client = NetworkConfiguration.Instance.HttpClient)
             {
                 string query = NetworkConfiguration.Instance.ApiUrl + "api/semester/GetAll";
-                HttpResponseMessage response = await client.GetAsync(query);
-                if (response.IsSuccessStatusCode)
+                try
                 {
-                    semesters = await response.Content.ReadFromJsonAsync(typeof(IEnumerable<Semester>)) as IEnumerable<Semester>;
+                    HttpResponseMessage response = await client.GetAsync(query);
+                    if (response.IsSuccessStatusCode)
+                    {
+                        semesters = await response.Content.ReadFromJsonAsync(typeof(IEnumerable<Semester>)) as IEnumerable<Semester>;
+                    }
+                    else
+                    {
+                        throw new Exception($"API error: {response.StatusCode} - {response.ReasonPhrase}");
+                    }
+                }
+                catch (Exception ex) 
+                {
+                    throw new Exception(Ressource.StringRes.APIError, ex);
                 }
             }
             return semesters.ToArray();
