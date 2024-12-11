@@ -32,7 +32,7 @@ namespace IHM_Model
         }
 
         /// <summary>
-        /// Récupère le nom du profiltype en string
+        /// Récupère le nom du profil type en chaîne de caractère
         /// </summary>
         public String Profile
         {
@@ -60,7 +60,7 @@ namespace IHM_Model
         /// <summary>
         /// Initialise l'utilisateur
         /// </summary>
-        /// <param name="model"></param>
+        /// <param name="model">utilisateur</param>
         public UserVM (User model)
         {
             this.model = model;

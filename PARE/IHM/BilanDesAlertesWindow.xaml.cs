@@ -22,6 +22,10 @@ namespace IHM
     public partial class BilanDesAlertesWindow : Window
     {
         private UsersVM usersVM;
+
+        /// <summary>
+        /// Constructeur de la fenêtre de bilan des alertes
+        /// </summary>
         public BilanDesAlertesWindow()
         {
             this.usersVM = new UsersVM();
@@ -30,10 +34,9 @@ namespace IHM
         }
 
         /// <summary>
-        /// Affiche toutes les informations dans le tableau 
+        /// Affiche toutes les informations sur les enseignants dans le tableau 
         /// </summary>
-        /// <returns></returns>
-        private async Task DisplayAllTeachers()
+        private async void DisplayAllTeachers()
         {
             List<UserVM> professors = await usersVM.GetAllProfessors();
             int iRow = 0;
@@ -95,8 +98,10 @@ namespace IHM
         /// <summary>
         /// Méthode permettant la simplification de la création de cellules dans le tableau
         /// </summary>
-        /// <param name="block"></param>
-        /// <param name="content"></param>
+        /// <param name="block">textblock de la cellule (juste créé)</param>
+        /// <param name="content"> contenu de la cellule</param>
+        /// <param name="border"> bordure de la cellule</param>
+        /// <param name="professor">userVM avec un rôle enseignant</param>
         private void CreationCelluleTableau(TextBlock block, string content, UserVM professor, Border border)
         {
             block.Text = content;
@@ -110,7 +115,7 @@ namespace IHM
         /// <summary>
         /// Méthode créant une bordure pour chaque élément du tableau
         /// </summary>
-        /// <returns></returns>
+        /// <returns>bordure créé</returns>
         private Border NewBorder()
         {
             return new Border
@@ -123,8 +128,8 @@ namespace IHM
         /// <summary>
         /// Méthode permettant de colorier les cellules en fonction du nombre d'heures réelles du professeur
         /// </summary>
-        /// <param name="professor"></param>
-        /// <returns></returns>
+        /// <param name="professor">userVM avec un rôle enseignant</param>
+        /// <returns>couleur lié aux heures assignées au prof comparé aux heures de service</returns>
         private SolidColorBrush ColorierCellules(UserVM professor)
         {
             SolidColorBrush couleur = (SolidColorBrush)System.Windows.Application.Current.FindResource("RealHoursEqualService");
