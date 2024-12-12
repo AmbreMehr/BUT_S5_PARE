@@ -76,6 +76,12 @@
     <system:String x:Key="Service">Service</system:String>
     <system:String x:Key="NbHeuresReel">Nombre d'heures réelles</system:String>
     <system:String x:Key="Enseignant">Enseignants</system:String>
+    <system:String x:Key="Etudiant">Etudiants</system:String>
+
+    <system:String x:Key="LesEtudiantsDu">Les étudiants du </system:String>
+    <system:String x:Key="OntPlusDe"> ont plus de </system:String>
+    <system:String x:Key="OntMoinsDe"> ont moins de </system:String>
+    <system:String x:Key="ALaSemaine"> à la semaine </system:String>
 
 
 </ResourceDictionary>
