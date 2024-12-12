@@ -195,16 +195,6 @@ namespace IHM
         }
 
         /// <summary>
-        /// Ouvrira la page Attribution profil type
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void AttributionProfilTypeWindow(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        /// <summary>
         /// Ouvrira la page Bilan des alertes
         /// </summary>
         /// <param name="sender"></param>

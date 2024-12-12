@@ -64,9 +64,7 @@
                 HorizontalAlignment="Left" Margin="350,0,0,0"
                 Style="{StaticResource ButtonText1}"
                 Content="{DynamicResource BtnAttributionProfilType}" 
-                Grid.Row="2" Grid.Column="1" 
-                Click="AttributionProfilTypeWindow">
-
+                Grid.Row="2" Grid.Column="1">
         </Button>
 
         <Button x:Name="BtnBilanAlertes" 
