@@ -1,4 +1,4 @@
-﻿<ResourceDictionary
+<ResourceDictionary
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:system="clr-namespace:System;assembly=netstandard">
@@ -28,11 +28,11 @@
     <system:String x:Key="MessageTitleModulePlacementInvalide">Placement error</system:String>
 
     <!--  Connexion  -->
-    <system:String x:Key="TitreFenetreConnexion">Connection</system:String>
+    <system:String x:Key="TitreFenetreConnexion">Login</system:String>
     <system:String x:Key="TitreConnexion">Type your login informations</system:String>
     <system:String x:Key="LabelLogin">Login :</system:String>
     <system:String x:Key="LabelPassword">Password :</system:String>
-    <system:String x:Key="BtnLogin">Log in</system:String>
+    <system:String x:Key="BtnLogin">Login</system:String>
 
     <!--  Parametre  -->
     <system:String x:Key="TitreParam">Settings</system:String>
@@ -66,7 +66,7 @@
     <system:String x:Key="TD">TD</system:String>
     <system:String x:Key="TP">TP</system:String>
     <system:String x:Key="CM">CM</system:String>
-    <system:String x:Key="infoChangmtSemestre">Warning : when you change semester you must save your changes before clicking on "Submit".</system:String>
+    <system:String x:Key="infoChangmtSemestre">Warning : when you change semester you must save your changes before clicking on "Save".</system:String>
 
     <!--Bilan des Alertes-->
     <system:String x:Key="TitleBilanDesAlertes">Warning Alerts</system:String>
@@ -75,6 +75,20 @@
     <system:String x:Key="Service">Service</system:String>
     <system:String x:Key="NbHeuresReel">Real number of hours</system:String>
     <system:String x:Key="Enseignant">Teachers</system:String>
+    <system:String x:Key="Etudiant">Students</system:String>
+    <system:String x:Key="LesEtudiantsDu">Students of </system:String>
+    <system:String x:Key="OntPlusDe"> have less than </system:String>
+    <system:String x:Key="OntMoinsDe">have more than</system:String>
+    <system:String x:Key="ALaSemaine"> at week </system:String>
+
+    <!-- Titre des fenêtres -->
+    <system:String x:Key="TitreFenetreEditionModule">PARE - Module Edition</system:String>
+    <system:String x:Key="TitreFenetreBilanAlerte">PARE - Warning Alerts</system:String>
+    <system:String x:Key="TitreFenetreLogin">PARE - Login</system:String>
+    <system:String x:Key="TitreFenetreMain">PARE - Distribution of modules</system:String>
+    <system:String x:Key="TitreFenetreModuleSupervisors">PARE - Module supervisors</system:String>
+    <system:String x:Key="TitreFenetreSettings">PARE - Settings</system:String>
+    <system:String x:Key="TitreFenetreLoading">PARE - Loading</system:String>
 
 
 </ResourceDictionary>

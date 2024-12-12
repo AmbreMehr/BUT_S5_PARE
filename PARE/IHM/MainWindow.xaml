@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:IHM" 
         xmlns:theme="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Luna"
         mc:Ignorable="d"
-        Title="{DynamicResource TitreMainWindow}" 
+        Title="{DynamicResource TitreFenetreMain}" 
         Height="1000" Width="1500"
         ResizeMode="NoResize"
         WindowStartupLocation="CenterScreen"
@@ -64,9 +64,7 @@
                 HorizontalAlignment="Left" Margin="350,0,0,0"
                 Style="{StaticResource ButtonText1}"
                 Content="{DynamicResource BtnAttributionProfilType}" 
-                Grid.Row="2" Grid.Column="1" 
-                Click="AttributionProfilTypeWindow">
-
+                Grid.Row="2" Grid.Column="1">
         </Button>
 
         <Button x:Name="BtnBilanAlertes" 
@@ -115,7 +113,15 @@
                       SelectedItem="{Binding SelectedSemester}"
                       DisplayMemberPath="Name" SelectionChanged="changedSelection"
                       HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
-            
+
+            <Label Grid.Row="0" x:Name="infoSemester"
+                   Content="{DynamicResource infoChangmtSemestre}"
+                   HorizontalAlignment="Center"
+                   VerticalAlignment="Center"
+                   Visibility="Collapsed"
+                   Margin="0,0,400,0"
+                   Height="30"/>
+
             <ScrollViewer Grid.Row="1" Grid.Column="1" VerticalScrollBarVisibility="Auto">
                 <Grid Grid.Row="1" Grid.Column="1" DataContext="{Binding ModulesVM}" x:Name="gridModules">
                     <Grid.ColumnDefinitions>

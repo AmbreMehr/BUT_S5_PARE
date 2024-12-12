@@ -485,8 +485,6 @@ namespace IHM
         /// <param name="e"></param>
         private void BackHome(object sender, RoutedEventArgs e)
         {
-            MainWindow mainWindow = new MainWindow();
-            mainWindow.Show();
             this.Close();
         }
 

@@ -30,7 +30,7 @@
                 <!-- Modèle des éléments -->
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
-                        <Border BorderBrush="Gray" BorderThickness="1" Margin="1" Padding="10" Width="300" Height="175">
+                        <Border BorderBrush="Gray" BorderThickness="1" Margin="1" Padding="10" Width="Auto" MinWidth="300" Height="175">
                             <StackPanel>
                                 <!-- Nom du module -->
                                 <TextBlock Text="{Binding Name}" FontSize="16" FontWeight="Bold" HorizontalAlignment="Center" Margin="5" />

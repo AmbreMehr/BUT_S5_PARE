@@ -170,6 +170,7 @@ namespace Storage
             cmd.Parameters.AddWithValue("@realHours", realHours);
             cmd.Parameters.AddWithValue("@idUser", idUser);
             cmd.ExecuteNonQuery();
+            db.Connection.Close();
         }
     }
 }
