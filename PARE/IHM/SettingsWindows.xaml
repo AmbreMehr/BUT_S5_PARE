@@ -51,7 +51,7 @@
 
         <!--Bouton pour annuler -->
         <Button Content="{DynamicResource BtnQuit}" 
-                Click="Cancel" 
+                Click="ValiderParam" 
                 Grid.Column="0" Grid.Row="2" 
                 Style="{StaticResource ButtonTextLanguage}">
         </Button>

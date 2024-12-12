@@ -36,19 +36,6 @@ namespace IHM
             //on sauvegarde les paramètres
             JsonSerializerParametre jsonSave = new JsonSerializerParametre();
             jsonSave.Save();
-
-            this.Close();
-        }
-
-        /// <summary>
-        /// Annule le choix réalisé plus tôt et renvoie sur l'écran principal
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void Cancel(object sender, RoutedEventArgs e)
-        {
-            Parametre.Instance.Langue = langueinitiale;
-
             this.Close();
         }
 
