@@ -1,7 +1,9 @@
 ﻿using IHM_Model;
+using Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Reflection.Metadata;
 using System.Text;
 using System.Threading.Tasks;
@@ -26,11 +28,12 @@ namespace IHM
         /// <summary>
         /// Constructeur de la fenêtre de bilan des alertes
         /// </summary>
-        public BilanDesAlertesWindow()
+        public BilanDesAlertesWindow(SemestersVM semesters)
         {
             this.usersVM = new UsersVM();
             InitializeComponent();
             DisplayAllTeachers();
+            DisplayStudentAlerts(semesters);
         }
 
         /// <summary>
@@ -111,7 +114,6 @@ namespace IHM
             border.Background = ColorierCellules(professor);
         }
 
-
         /// <summary>
         /// Méthode créant une bordure pour chaque élément du tableau
         /// </summary>
@@ -138,6 +140,49 @@ namespace IHM
             else if (professor.RealHours < professor.ServiceHour)
                 couleur = (SolidColorBrush)System.Windows.Application.Current.FindResource("RealHoursUnderService");
                 return couleur;
+        }
+
+        /// <summary>
+        /// Méthode affichant les semaines où les étudiant ont trop d'heures / pas assez d'heures
+        /// </summary>
+        private async void DisplayStudentAlerts(SemestersVM s)
+        {
+            foreach (SemesterVM semesterVM in s.Semesters)
+            {
+                //Récupère le nombre d'heure de cours par semaine pour les étudiants
+                Dictionary<int, float> hoursPerWeek = await semesterVM.GetHoursPerWeek();
+                foreach (int week in hoursPerWeek.Keys)
+                {
+                    //Si le nombre d'heures est inférieur au nombre d'heures minimum défini, un texte apparait en orange
+                    if (hoursPerWeek[week] < SemesterVM.MinimumHoursPerWeek)
+                    {
+                        TextBlock notEnougthHours = new TextBlock
+                        {
+                            Text = (string)System.Windows.Application.Current.FindResource("LesEtudiantsDu") + " " + semesterVM.Name + " " + (string)System.Windows.Application.Current.FindResource("OntMoinsDe") + " " + SemesterVM.MinimumHoursPerWeek.ToString() + "h" + " " + (string)System.Windows.Application.Current.FindResource("ALaSemaine") + " " + week.ToString(),
+                            FontSize = 16,
+                            Foreground = (SolidColorBrush)System.Windows.Application.Current.FindResource("StudentHoursUnder"),
+                            FontWeight = FontWeights.Bold,
+                            Margin = new Thickness(0, 0, 0, 5),
+                            HorizontalAlignment = HorizontalAlignment.Left
+                        };
+                        studentAlerts.Children.Add(notEnougthHours);
+                    }
+                    //Si le nombre d'heures est supérieur au nombre d'heures maximum défini, un texte apparait en rouge
+                    if (hoursPerWeek[week] > SemesterVM.MaximumHoursPerWeek)
+                    {
+                        TextBlock tooManyHours = new TextBlock
+                        {
+                            Text = (string)System.Windows.Application.Current.FindResource("LesEtudiantsDu") + " " + semesterVM.Name + " " + (string)System.Windows.Application.Current.FindResource("OntPlusDe") + " " + SemesterVM.MaximumHoursPerWeek.ToString() + "h" + " " + (string)System.Windows.Application.Current.FindResource("ALaSemaine") + " " + week.ToString(),
+                            FontSize = 16,
+                            Foreground = (SolidColorBrush)System.Windows.Application.Current.FindResource("StudentHoursOver"),
+                            FontWeight = FontWeights.Bold,
+                            Margin = new Thickness(0, 0, 0, 5),
+                            HorizontalAlignment = HorizontalAlignment.Left,
+                        };
+                        studentAlerts.Children.Add(tooManyHours);
+                    }
+                }
+            }
         }
 
         /// <summary>
