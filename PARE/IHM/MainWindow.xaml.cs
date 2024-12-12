@@ -169,7 +169,6 @@ namespace IHM
         {
             SettingsWindows settingsWindows = new SettingsWindows();
             settingsWindows.ShowDialog();
-            this.Close();
         }
 
         /// <summary>
@@ -193,7 +192,6 @@ namespace IHM
         {
             ModuleSupervisorsWindow moduleSupervisorsWindow = new ModuleSupervisorsWindow(semestersVM);
             moduleSupervisorsWindow.Show();
-            this.Close();
         }
 
         /// <summary>
@@ -215,7 +213,6 @@ namespace IHM
         {
             BilanDesAlertesWindow bilan = new BilanDesAlertesWindow();
             bilan.Show();
-            this.Close();
         }
 
         /// <summary>
@@ -253,7 +250,6 @@ namespace IHM
         private void EditModuleWindow(object sender, RoutedEventArgs e)
         {
             new EditModuleWindow(semestersVM).Show();
-            this.Close();
         }
 
         /// <summary>
