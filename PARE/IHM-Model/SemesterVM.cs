@@ -20,6 +20,22 @@ namespace IHM_Model
         }
 
         /// <summary>
+        /// Défini le nombre d'heure minimum que les étudiant travaillent par semaine
+        /// </summary>
+        public static int MinimumHoursPerWeek
+        {
+            get => 30;
+        }
+
+        /// <summary>
+        /// Défini le nombre d'heure maximum que les étudiant travaillent par semaine
+        /// </summary>
+        public static int MaximumHoursPerWeek
+        {
+            get => 35;
+        }
+
+        /// <summary>
         /// Récupère la semaine de début
         /// </summary>
         public int WeekBegin

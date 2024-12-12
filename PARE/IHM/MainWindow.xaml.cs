@@ -213,7 +213,7 @@ namespace IHM
         /// <param name="e"></param>
         private void BilanAlertWindow(object sender, RoutedEventArgs e)
         {
-            BilanDesAlertesWindow bilan = new BilanDesAlertesWindow();
+            BilanDesAlertesWindow bilan = new BilanDesAlertesWindow(semestersVM);
             bilan.Show();
             this.Close();
         }
