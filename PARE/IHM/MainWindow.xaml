@@ -117,7 +117,7 @@
                       HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
             
             <ScrollViewer Grid.Row="1" Grid.Column="1" VerticalScrollBarVisibility="Auto">
-                <Grid Grid.Row="1" Grid.Column="1" DataContext="{Binding ModulesVM}" x:Name="gridModules">
+                <Grid Grid.Row="1" Grid.Column="1" x:Name="gridModules">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="*"/>

@@ -9,7 +9,6 @@
         <Setter Property="X1" Value="7"/>
         <Setter Property="Y1" Value="10"/>
         <Setter Property="X2" Value="7"/>
-        <Setter Property="Y2" Value="600"/>
         <Setter Property="HorizontalAlignment" Value="Center"/>
     </Style>
     

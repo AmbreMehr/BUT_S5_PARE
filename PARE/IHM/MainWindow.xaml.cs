@@ -50,14 +50,12 @@ namespace IHM
                 UpdateWeekSemester(semestersVM.SelectedSemester);
 
                 // Suppression des éléments qui ne sont pas ceux de base
-                gridModules.Children.OfType<Border>().ToList().ForEach(child => gridModules.Children.Remove(child));
+                DeleteTypeFromGrid<Border>();
                 await this.modulesVM.GetModuleBySemester(semestersVM.SelectedSemester);
 
                 // Crée une copie immuable des modules pour éviter des modifications pendant l'itération
                 IEnumerable<ModuleVM> modulesCopy = modulesVM.ModulesROnly;
-
                 InitializeSemesterColumns();
-
                 int decalage = 5;
 
                 foreach (ModuleVM moduleVM in modulesCopy)
@@ -75,6 +73,12 @@ namespace IHM
                     AddModuleToGrid(moduleVM, semestersVM.SelectedSemester.Name, decalage);
                     decalage += 60;
                 }
+
+                ShowStudentHours();
+                gridModules.Children.OfType<Line>().ToList().ForEach(line =>
+                {
+                    line.Y2 = Math.Max(line.Y2, decalage);
+                });
             }
         }
 
@@ -111,7 +115,6 @@ namespace IHM
             Grid.SetRow(moduleRectangle, 2);
 
             gridModules.Children.Add(moduleRectangle);
-            ShowStudentHours();
         }
 
         /// <summary>
@@ -125,7 +128,7 @@ namespace IHM
                 float acceptableStudentsHoursMin = 30;
                 float acceptableStudentsHoursMax = 35;
                 double rectangleMaxHeight = gridModules.RowDefinitions.First().Height.Value;
-                gridModules.Children.OfType<Rectangle>().ToList().ForEach(child => gridModules.Children.Remove(child));
+                DeleteTypeFromGrid<Rectangle>();
                 Border placeHolder = new Border
                 {
                     BorderBrush = new SolidColorBrush(Colors.Black),
@@ -163,6 +166,9 @@ namespace IHM
             }
         }
 
+        /// <summary>
+        /// Créer les colonnes pour afficher les semaines du semestre
+        /// </summary>
         private void InitializeSemesterColumns()
         {
             SemesterVM? semester = semestersVM.SelectedSemester;
@@ -173,7 +179,7 @@ namespace IHM
                 DeleteTypeFromGrid<Label>();
                 var defaultColCreator = () => { return new ColumnDefinition(); };
                 var lineCreator = () => { return new Line { Style = this.FindResource("DashedLineStyle") as Style }; };
-                var labelCreator = () => { return new Label { }; };
+                var labelCreator = () => { return new Label { HorizontalAlignment = HorizontalAlignment.Center, VerticalAlignment = VerticalAlignment.Top, FontFamily = this.FindResource("OpenSauceOne") as FontFamily, FontSize = 30 }; };
                 gridModules.ColumnDefinitions.Clear();
                 gridModules.ColumnDefinitions.Add(defaultColCreator());
                 gridModules.ColumnDefinitions.Add(defaultColCreator());
@@ -181,14 +187,23 @@ namespace IHM
                 {
                     gridModules.ColumnDefinitions.Add(defaultColCreator());
                     Line line = lineCreator();
+                    line.Y2 = gridModules.RowDefinitions.Last().ActualHeight;
                     Grid.SetRow(line, 2);
                     Grid.SetColumn(line, i - semester.WeekBegin + 1);
                     gridModules.Children.Add(line);
-
+                    Label label = labelCreator();
+                    label.Content = i;
+                    Grid.SetRow(label, 1);
+                    Grid.SetColumn(label, i - semester.WeekBegin + 1);
+                    gridModules.Children.Add(label);
                 }
             }
         }
 
+        /// <summary>
+        /// Supprime les éléments d'un type particulier de l'IHM
+        /// </summary>
+        /// <typeparam name="T">UIElement à supprimer</typeparam>
         private void DeleteTypeFromGrid<T>()
         {
             gridModules.Children.OfType<T>().ToList().ForEach(child => gridModules.Children.Remove(child as UIElement));
