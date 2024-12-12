@@ -1,15 +1,16 @@
-using Model;
+ï»¿using Model;
 using Storage;
 
 namespace Storage_Tests
 {
     /// <summary>
-    /// Tests pour la classe TeacherDAO : vérification des heures réelles
+    /// Tests pour la classe TeacherDAO : verification des heures reelles
+    /// <author>Clotilde MALO</author>
     /// </summary>
     public class TeacherDAOTest
     {
         /// <summary>
-        /// Test pour vérifier qu'à l'update les heures réelles de l'utilisateur sont bien mises à jour
+        /// Test pour verifier qu'a l'update les heures reelles de l'utilisateur sont bien mises a jour
         /// </summary>
         [Fact]
         public void TestUpdateVerifRealHours()
@@ -40,13 +41,13 @@ namespace Storage_Tests
 
 
         /// <summary>
-        /// Tests pour vérifier qu'à la création les heures réelles de l'utilisateur sont bien mises à jour
+        /// Tests pour verifier qu'a la creation les heures reelles de l'utilisateur sont bien mises a jour
         /// </summary>
         [Fact]
         public void TestCreateVerifRealHours()
         {
             Teacher teacher = CreateTeacher();
-            
+
 
             TeacherDaoSqlite teacherDaoSqlite = new TeacherDaoSqlite();
             teacherDaoSqlite.Create(teacher);
@@ -59,8 +60,8 @@ namespace Storage_Tests
             foreach (Teacher t in teachers)
             {
                 assignedCmHoursTotal += t.AssignedCmHours;
-                assignedTdHoursTotal += t.AssignedTdHours * (t.Module.Semester.NbTpGroups / 2 + t.Module.Semester.NbTpGroups % 2); 
-                assignedTpHoursTotal += t.AssignedTpHours * t.Module.Semester.NbTpGroups; 
+                assignedTdHoursTotal += t.AssignedTdHours * (t.Module.Semester.NbTpGroups / 2 + t.Module.Semester.NbTpGroups % 2);
+                assignedTpHoursTotal += t.AssignedTpHours * t.Module.Semester.NbTpGroups;
             }
 
             Assert.Equal((assignedCmHoursTotal + assignedTdHoursTotal + assignedTpHoursTotal), teachers[0].User.RealHours);
@@ -69,26 +70,26 @@ namespace Storage_Tests
         }
 
         /// <summary>
-        /// Test de vérification des heures réelles après suppression
+        /// Test de verification des heures reelles apres suppression
         /// </summary>
         [Fact]
         public void TestDeleteVerifRealHours()
         {
-            // Création du teacher avant de tester la suppression
-            Teacher teacher = CreateTeacher(); // création du teacher côté "client"
+            // Creation du teacher avant de tester la suppression
+            Teacher teacher = CreateTeacher(); // creation du teacher cote "client"
             TeacherDaoSqlite teacherDaoSqlite = new TeacherDaoSqlite();
-            teacherDaoSqlite.Create(teacher); // création du teacher côté bdd
+            teacherDaoSqlite.Create(teacher); // creation du teacher cote bdd
 
-            // Récupération de l'id de l'utilisateur
+            // Recuperation de l'id de l'utilisateur
             int userId = teacher.User.Id;
 
-            Teacher teacherInBDD = teacherDaoSqlite.ListForUser(userId).Last(); // récupération du teacher que l'on vient de créé pour avoir le bon id
+            Teacher teacherInBDD = teacherDaoSqlite.ListForUser(userId).Last(); // recuperation du teacher que l'on vient de crï¿½ï¿½ pour avoir le bon id
 
 
-            // Récupération de toutes les lignes enseignants pour cet utilisateur
+            // Recuperation de toutes les lignes enseignants pour cet utilisateur
             Teacher[] teachers = teacherDaoSqlite.ListForUser(userId);
 
-            // Vérification des heures assignées avant la suppression
+            // Verification des heures assignï¿½es avant la suppression
             int assignedTpHoursTotalBeforeDelete = 0;
             int assignedTdHoursTotalBeforeDelete = 0;
             int assignedCmHoursTotalBeforeDelete = 0;
@@ -100,12 +101,12 @@ namespace Storage_Tests
             }
 
             // Suppression du teacher
-            teacherDaoSqlite.Delete(teacherInBDD); // fonctionne pas à cause du teacher.Id qui est mis au pif
+            teacherDaoSqlite.Delete(teacherInBDD);
 
-            // Récupération de toutes les lignes enseignants pour cet utilisateur après suppression
+            // Recuperation de toutes les lignes enseignants pour cet utilisateur apres suppression
             Teacher[] teachersAfter = teacherDaoSqlite.ListForUser(userId);
 
-            // Vérification des heures assignés avant la suppression
+            // Verification des heures assignes avant la suppression
             int assignedTpHoursTotalAfterDelete = 0;
             int assignedTdHoursTotalAfterDelete = 0;
             int assignedCmHoursTotalAfterDelete = 0;
@@ -116,7 +117,7 @@ namespace Storage_Tests
                 assignedCmHoursTotalAfterDelete += t.AssignedTpHours * t.Module.Semester.NbTpGroups;
             }
 
-            Assert.NotEqual((assignedCmHoursTotalAfterDelete + assignedTpHoursTotalAfterDelete + assignedTdHoursTotalAfterDelete), 
+            Assert.NotEqual((assignedCmHoursTotalAfterDelete + assignedTpHoursTotalAfterDelete + assignedTdHoursTotalAfterDelete),
                             (assignedTdHoursTotalBeforeDelete + assignedCmHoursTotalBeforeDelete + assignedTpHoursTotalBeforeDelete));
 
 
@@ -124,7 +125,7 @@ namespace Storage_Tests
         }
 
         /// <summary>
-        /// Création d'un enseignant pour les tests
+        /// Creation d'un enseignant pour les tests
         /// </summary>
         /// <returns>enseignant de test</returns>
         private Teacher CreateTeacher()
