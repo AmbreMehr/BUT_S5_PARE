@@ -220,7 +220,6 @@ namespace IHM
         {
             SettingsWindows settingsWindows = new SettingsWindows();
             settingsWindows.ShowDialog();
-            this.Close();
         }
 
         /// <summary>
@@ -244,17 +243,6 @@ namespace IHM
         {
             ModuleSupervisorsWindow moduleSupervisorsWindow = new ModuleSupervisorsWindow(semestersVM);
             moduleSupervisorsWindow.Show();
-            this.Close();
-        }
-
-        /// <summary>
-        /// Ouvrira la page Attribution profil type
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void AttributionProfilTypeWindow(object sender, RoutedEventArgs e)
-        {
-
         }
 
         /// <summary>
@@ -264,7 +252,7 @@ namespace IHM
         /// <param name="e"></param>
         private void BilanAlertWindow(object sender, RoutedEventArgs e)
         {
-            BilanDesAlertesWindow bilan = new BilanDesAlertesWindow();
+            BilanDesAlertesWindow bilan = new BilanDesAlertesWindow(semestersVM);
             bilan.Show();
             this.Close();
         }
@@ -316,7 +304,6 @@ namespace IHM
         private void PlacerModuleWindow(object sender, RoutedEventArgs e)
         {
             PlaceModuleWindow placeModuleWindow = new PlaceModuleWindow(semestersVM, modulesVM);
-
             ToggleBottomButtonsVisibility(false);
 
 
@@ -345,6 +332,7 @@ namespace IHM
             BtnBilanAlertes.Visibility = IsVisible ? Visibility.Visible : Visibility.Collapsed;
             BtnEditerModules.Visibility = IsVisible ? Visibility.Visible : Visibility.Collapsed;
             BtnPlacerModules.Visibility = IsVisible ? Visibility.Visible : Visibility.Collapsed;
+            infoSemester.Visibility = IsVisible ? Visibility.Collapsed : Visibility.Visible;
         }
 
         /// <summary>

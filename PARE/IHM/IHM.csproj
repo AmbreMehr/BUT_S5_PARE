@@ -6,6 +6,7 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <UseWPF>true</UseWPF>
+    <ApplicationIcon>Ressources\Img\Pare.ico</ApplicationIcon>
   </PropertyGroup>
 
   <ItemGroup>
@@ -34,6 +35,10 @@
     <None Remove="Ressources\Picto\logout.png" />
     <None Remove="Ressources\Picto\right.png" />
     <None Remove="Ressources\Picto\settings.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Ressources\Img\Pare.ico" />
   </ItemGroup>
 
   <ItemGroup>

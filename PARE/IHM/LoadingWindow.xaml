@@ -8,7 +8,7 @@
         WindowStyle="None"
         WindowStartupLocation="CenterScreen"
         mc:Ignorable="d"
-        Title="LoadingWindow" Height="500" Width="700">
+        Title="{DynamicResource TitreFenetreLoading}" Height="500" Width="700">
 
     <Window.Background>
         <SolidColorBrush Color="White" />

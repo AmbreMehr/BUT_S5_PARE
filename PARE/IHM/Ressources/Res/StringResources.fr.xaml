@@ -58,7 +58,7 @@
     <system:String x:Key="TD">TD</system:String>
     <system:String x:Key="TP">TP</system:String>
     <system:String x:Key="CM">CM</system:String>
-    <system:String x:Key="infoChangmtSemestre">Attention : quand vous changez de semestre il faut enregistrer vos modifications avant en cliquant sur "Valider".</system:String>
+    <system:String x:Key="infoChangmtSemestre">Attention : quand vous changez de semestre il faut enregistrer vos modifications avant en cliquant sur "Enregistrer".</system:String>
 
     <!--  MessagesBox  -->
     <system:String x:Key="Erreur">Erreur</system:String>
@@ -76,6 +76,20 @@
     <system:String x:Key="Service">Service</system:String>
     <system:String x:Key="NbHeuresReel">Nombre d'heures réelles</system:String>
     <system:String x:Key="Enseignant">Enseignants</system:String>
+    <system:String x:Key="Etudiant">Etudiants</system:String>
+    <system:String x:Key="LesEtudiantsDu">Les étudiants du </system:String>
+    <system:String x:Key="OntPlusDe"> ont plus de </system:String>
+    <system:String x:Key="OntMoinsDe"> ont moins de </system:String>
+    <system:String x:Key="ALaSemaine"> à la semaine </system:String>
+
+    <!-- Titre des fenêtres -->
+    <system:String x:Key="TitreFenetreEditionModule">PARE - Edition des modules</system:String>
+    <system:String x:Key="TitreFenetreBilanAlerte">PARE - Bilan des alertes</system:String>
+    <system:String x:Key="TitreFenetreLogin">PARE - Connexion</system:String>
+    <system:String x:Key="TitreFenetreMain">PARE - Répartition des modules</system:String>
+    <system:String x:Key="TitreFenetreModuleSupervisors">PARE - Responsables de ressources</system:String>
+    <system:String x:Key="TitreFenetreSettings">PARE - Paramètres</system:String>
+    <system:String x:Key="TitreFenetreLoading">PARE - Chargement</system:String>
 
 
 </ResourceDictionary>
