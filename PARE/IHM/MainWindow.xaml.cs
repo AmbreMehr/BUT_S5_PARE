@@ -39,6 +39,7 @@ namespace IHM
             DataContext = mainViewModel;
         }
 
+        #region Création IHM
         /// <summary>
         /// Récupération des modules par semestre sélectionné
         /// </summary>
@@ -54,6 +55,8 @@ namespace IHM
 
                 // Crée une copie immuable des modules pour éviter des modifications pendant l'itération
                 IEnumerable<ModuleVM> modulesCopy = modulesVM.ModulesROnly;
+
+                InitializeSemesterColumns();
 
                 int decalage = 5;
 
@@ -103,7 +106,7 @@ namespace IHM
 
             moduleRectangle.Child = textBlock;
 
-            Grid.SetColumn(moduleRectangle, module.WeekBegin - module.Model.Semester.SemesterWeekBegin +1);
+            Grid.SetColumn(moduleRectangle, module.WeekBegin - module.Model.Semester.SemesterWeekBegin + 1);
             Grid.SetColumnSpan(moduleRectangle, module.WeekEnd - module.WeekBegin + 1);
             Grid.SetRow(moduleRectangle, 2);
 
@@ -160,6 +163,39 @@ namespace IHM
             }
         }
 
+        private void InitializeSemesterColumns()
+        {
+            SemesterVM? semester = semestersVM.SelectedSemester;
+            if (semester != null)
+            {
+                // Suppression de l'existant
+                DeleteTypeFromGrid<Line>();
+                DeleteTypeFromGrid<Label>();
+                var defaultColCreator = () => { return new ColumnDefinition(); };
+                var lineCreator = () => { return new Line { Style = this.FindResource("DashedLineStyle") as Style }; };
+                var labelCreator = () => { return new Label { }; };
+                gridModules.ColumnDefinitions.Clear();
+                gridModules.ColumnDefinitions.Add(defaultColCreator());
+                gridModules.ColumnDefinitions.Add(defaultColCreator());
+                for (int i = semester.WeekBegin; i <= semester.WeekEnd; i++)
+                {
+                    gridModules.ColumnDefinitions.Add(defaultColCreator());
+                    Line line = lineCreator();
+                    Grid.SetRow(line, 2);
+                    Grid.SetColumn(line, i - semester.WeekBegin + 1);
+                    gridModules.Children.Add(line);
+
+                }
+            }
+        }
+
+        private void DeleteTypeFromGrid<T>()
+        {
+            gridModules.Children.OfType<T>().ToList().ForEach(child => gridModules.Children.Remove(child as UIElement));
+        }
+        #endregion Création IHM
+
+        #region Logique IHM
         /// <summary>
         /// Ouvre la page des paramètres
         /// </summary>
@@ -219,6 +255,45 @@ namespace IHM
         }
 
         /// <summary>
+        /// Evenement pour ouvrir la fenêtre d'édition de module
+        /// </summary>
+        /// <author>Clotilde MALO</author>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void EditModuleWindow(object sender, RoutedEventArgs e)
+        {
+            new EditModuleWindow(semestersVM).Show();
+            this.Close();
+        }
+
+        /// <summary>
+        /// Evenement quand la selection change : appel GetModuleBySemester
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void changedSelection(object sender, SelectionChangedEventArgs e)
+        {
+            GetModulesBySemester();
+        }
+
+        /// <summary>
+        /// Message Box apparaissant quand l'API ne se lance pas correctement 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="errorMessage"></param>
+        private void HandleErrorOccurred(object sender, string errorMessage)
+        {
+            MessageBox.Show(
+                errorMessage,
+                (string)System.Windows.Application.Current.FindResource("Erreur"),
+                MessageBoxButton.OK,
+                MessageBoxImage.Error
+            );
+        }
+        #endregion Logique IHM
+
+        #region Placement Modules
+        /// <summary>
         /// Affiche le component qui permet de placer / modifier temporellement les modules
         /// </summary>
         /// <param name="sender"></param>
@@ -239,31 +314,9 @@ namespace IHM
             };
             placeModuleWindow.Canceled += (s, args) =>
             {
-                grid.Children.Remove(placeModuleWindow); 
-                ToggleBottomButtonsVisibility(true); 
+                grid.Children.Remove(placeModuleWindow);
+                ToggleBottomButtonsVisibility(true);
             };
-        }
-
-        /// <summary>
-        /// Evenement pour ouvrir la fenêtre d'édition de module
-        /// </summary>
-        /// <author>Clotilde MALO</author>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void EditModuleWindow(object sender, RoutedEventArgs e)
-        {
-            new EditModuleWindow(semestersVM).Show();
-            this.Close();
-        }
-
-        /// <summary>
-        /// Evenement quand la selection change : appel GetModuleBySemester
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void changedSelection(object sender, SelectionChangedEventArgs e)
-        {
-            GetModulesBySemester();
         }
 
         /// <summary>
@@ -294,20 +347,6 @@ namespace IHM
                 }
             }
         }
-
-        /// <summary>
-        /// Message Box apparaissant quand l'API ne se lance pas correctement 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="errorMessage"></param>
-        private void HandleErrorOccurred(object sender, string errorMessage)
-        {
-            MessageBox.Show(
-                errorMessage,
-                (string)System.Windows.Application.Current.FindResource("Erreur"),
-                MessageBoxButton.OK,
-                MessageBoxImage.Error
-            );
-        }
+        #endregion Placement Modules
     }
 }
