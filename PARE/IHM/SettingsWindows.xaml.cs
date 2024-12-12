@@ -37,8 +37,6 @@ namespace IHM
             JsonSerializerParametre jsonSave = new JsonSerializerParametre();
             jsonSave.Save();
 
-            MainWindow mainWindow = new MainWindow();
-            mainWindow.Show();
             this.Close();
         }
 
@@ -51,8 +49,6 @@ namespace IHM
         {
             Parametre.Instance.Langue = langueinitiale;
 
-            MainWindow mainWindow = new MainWindow();
-            mainWindow.Show();
             this.Close();
         }
 
