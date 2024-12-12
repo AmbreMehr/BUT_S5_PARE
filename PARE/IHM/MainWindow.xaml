@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:IHM" 
         xmlns:theme="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Luna"
         mc:Ignorable="d"
-        Title="{DynamicResource TitreMainWindow}" 
+        Title="{DynamicResource TitreFenetreMain}" 
         Height="1000" Width="1500"
         ResizeMode="NoResize"
         WindowStartupLocation="CenterScreen"

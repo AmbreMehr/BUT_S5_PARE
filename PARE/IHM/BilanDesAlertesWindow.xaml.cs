@@ -192,8 +192,6 @@ namespace IHM
         /// <param name="e"></param>
         private void RetourMainWindow(object sender, RoutedEventArgs e)
         {
-            MainWindow main = new MainWindow();
-            main.Show();
             this.Close();
         }
     }
