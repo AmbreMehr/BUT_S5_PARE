@@ -20,6 +20,11 @@ namespace IHM_Model
         private SemesterVM? selectedSemester;
 
         /// <summary>
+        /// Evenement quand une erreur se produit
+        /// </summary>
+        public event EventHandler<string> ErrorOccurred;
+
+        /// <summary>
         /// Get du tableau de semestres
         /// </summary>
         public ObservableCollection<SemesterVM> Semesters
@@ -56,15 +61,22 @@ namespace IHM_Model
         /// </summary>
         private async void LoadSemesters()
         {
-            Semester[] semesters = await semesterNetwork.GetAllSemesters();
-            foreach (Semester semester in semesters)
+            try
             {
-                models.Add(new SemesterVM(semester));
+                Semester[] semesters = await semesterNetwork.GetAllSemesters();
+                foreach (Semester semester in semesters)
+                {
+                    models.Add(new SemesterVM(semester, this.semesterNetwork));
+                }
+                // initialisation du 1e element en selected
+                if (semesters != null && models.Count() > 0)
+                {
+                    SelectedSemester = models.First();
+                }
             }
-            // initialisation du 1e element en selected
-            if (semesters != null && models.Count() > 0)
+            catch (Exception ex)
             {
-                SelectedSemester = models.First();
+                ErrorOccurred?.Invoke(this, ex.Message);
             }
         }
     }
