@@ -115,7 +115,15 @@
                       SelectedItem="{Binding SelectedSemester}"
                       DisplayMemberPath="Name" SelectionChanged="changedSelection"
                       HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
-            
+
+            <Label Grid.Row="0" x:Name="infoSemester"
+                   Content="{DynamicResource infoChangmtSemestre}"
+                   HorizontalAlignment="Center"
+                   VerticalAlignment="Center"
+                   Visibility="Collapsed"
+                   Margin="0,0,400,0"
+                   Height="30"/>
+
             <ScrollViewer Grid.Row="1" Grid.Column="1" VerticalScrollBarVisibility="Auto">
                 <Grid Grid.Row="1" Grid.Column="1" DataContext="{Binding ModulesVM}" x:Name="gridModules">
                     <Grid.ColumnDefinitions>
