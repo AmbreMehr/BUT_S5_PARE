@@ -27,18 +27,25 @@ namespace IHM
         }
 
         /// <summary>
-        /// Valide le choix séléctionné et applique le changement sur l'application
+        /// Au clic sur quitter sauvegarde et ferme l'application
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void ValiderParam(object sender, RoutedEventArgs e)
+        private void Quit(object sender, RoutedEventArgs e)
         {
-            //on sauvegarde les paramètres
-            JsonSerializerParametre jsonSave = new JsonSerializerParametre();
-            jsonSave.Save();
+            Save();
             this.Close();
+
         }
 
+        /// <summary>
+        /// Sauvegarde les données de langue
+        /// </summary>
+        private void Save()
+        {
+            JsonSerializerParametre jsonSave = new JsonSerializerParametre();
+            jsonSave.Save();
+        }
 
         /// <summary>
         /// Sélectionne la langue Française
@@ -58,6 +65,16 @@ namespace IHM
         private void SelectionnerLangueEN(object sender, RoutedEventArgs e)
         {
             Parametre.Instance.Langue = LANGUE.ANGLAIS;
+        }
+
+        /// <summary>
+        /// A la fermeture de la fenêtre, sauvegarde et ferme l'application
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            Save();
         }
     }
 }

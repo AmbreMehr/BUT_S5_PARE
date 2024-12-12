@@ -8,6 +8,7 @@
         WindowStartupLocation="CenterScreen"
         ResizeMode="NoResize"
         Height="650" Width="1200"
+        Closing="Window_Closing"
         Title="{DynamicResource TitreFenetreSettings}">
 
     <Window.Background>
@@ -51,7 +52,7 @@
 
         <!--Bouton pour annuler -->
         <Button Content="{DynamicResource BtnQuit}" 
-                Click="ValiderParam" 
+                Click="Quit" 
                 Grid.Column="0" Grid.Row="2" 
                 Style="{StaticResource ButtonTextLanguage}">
         </Button>
