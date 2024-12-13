@@ -8,6 +8,9 @@ namespace IHM_ModelTests
     {
         SemesterNetwork semesterNetwork;
 
+        /// <summary>
+        /// Teste le constructeur
+        /// </summary>
         [Fact]
         public void TestConstructor()
         {
@@ -18,6 +21,9 @@ namespace IHM_ModelTests
             Assert.Equal(semester, vm.Model);
         }
 
+        /// <summary>
+        /// Teste la création d'un nom
+        /// </summary>
         [Fact]
         public void TestName()
         {
@@ -29,6 +35,9 @@ namespace IHM_ModelTests
             Assert.Equal("Semester 1", name);
         }
 
+        /// <summary>
+        /// Teste la relation Model ViewModel
+        /// </summary>
         [Fact]
         public void TestLinkModelViewModel()
         {

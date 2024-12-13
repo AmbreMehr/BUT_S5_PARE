@@ -5,6 +5,9 @@ namespace IHM_ModelTests
 {
     public class RoleVMTests
     {
+        /// <summary>
+        /// Teste la création d'un nom
+        /// </summary>
         [Fact]
         public void TestName()
         {
@@ -16,6 +19,9 @@ namespace IHM_ModelTests
             Assert.Equal("Administrator", name);
         }
 
+        /// <summary>
+        /// Teste la relation model ViewModel
+        /// </summary>
         [Fact]
         public void TestLikeModelViewModel()
         {

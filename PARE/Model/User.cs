@@ -147,6 +147,11 @@ namespace Model
             return this.firstName + " " + this.lastName;
         }
 
+        /// <summary>
+        /// Méthode Equals
+        /// </summary>
+        /// <param name="obj"></param>
+        /// <returns></returns>
         public override bool Equals(object? obj)
         {
             return obj is User user &&
@@ -154,7 +159,11 @@ namespace Model
                    firstName == user.firstName &&
                    lastName == user.lastName;
         }
-
+        
+        /// <summary>
+        /// Méthode GetHashCode
+        /// </summary>
+        /// <returns></returns>
         public override int GetHashCode()
         {
             return HashCode.Combine(id, firstName, lastName);
