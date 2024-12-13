@@ -9,6 +9,10 @@ using System.Threading.Tasks;
 
 namespace Network
 {
+    /// <summary>
+    /// Configuration pour toutes les requêtes à l'API
+    /// Comprends la politique de sécurité et l'URL
+    /// </summary>
     /// <author>AmbreMehr</author>
     internal class NetworkConfiguration
     {
@@ -46,6 +50,9 @@ namespace Network
             return new HttpClient(handler);
         }
 
+        /// <summary>
+        /// Renvoie la seule et unique configuration réseau (singleton)
+        /// </summary>
         public static NetworkConfiguration Instance
         {
             get
@@ -55,6 +62,9 @@ namespace Network
             }
         }
         
+        /// <summary>
+        /// Renvoie un client HTTP
+        /// </summary>
         public HttpClient HttpClient 
         {  
             get 
@@ -63,6 +73,9 @@ namespace Network
             } 
         }
 
+        /// <summary>
+        /// Renvoie l'URL de l'API
+        /// </summary>
         public string ApiUrl { get => this.parameters.ApiUrl; }
     }
 }

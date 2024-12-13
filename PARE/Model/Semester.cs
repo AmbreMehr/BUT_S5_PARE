@@ -20,29 +20,29 @@ namespace Model
 
 
         /// <summary>
-        /// Get et set de l'id du semestre
+        /// Récupère et remplace l'id du semestre
         /// </summary>
         public int Id { get => id; set => id = value; }
 
         /// <summary>
-        /// Get et set du nom du semestre (équivalent à une promotion)
+        /// Récupère et remplace le nom du semestre (équivalent à une promotion)
         /// </summary>
         public string Name { get => name; set => name = value; }
 
         /// <summary>
-        /// Get et set du numéro de la semaine de début du semestre
+        /// Récupère et remplace le numéro de la semaine de début du semestre
         /// </summary>
         public int SemesterWeekBegin { get => semesterWeekBegin; set => semesterWeekBegin = value; }
 
         /// <summary>
-        /// Get et set du numéro de la semaine de fin du semestre
+        /// Récupère et remplace le numéro de la semaine de fin du semestre
         /// </summary>
         public int SemesterWeekEnd { get => semesterWeekEnd; set => semesterWeekEnd = value; }
 
         /// <summary>
-        /// Get et set du nbre de groupe de TP par semestre
-        /// <exception> Un nombre de groupe de TP ne peut pas être négatif </exception>
+        /// Récupère et remplace le nombre de groupe de TP par semestre
         /// </summary>
+        /// <exception> Un nombre de groupe de TP ne peut pas être négatif </exception>
         public int NbTpGroups { get => nbTpGroups; 
             set
             {

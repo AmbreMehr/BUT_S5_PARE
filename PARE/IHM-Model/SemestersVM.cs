@@ -20,12 +20,12 @@ namespace IHM_Model
         private SemesterVM? selectedSemester;
 
         /// <summary>
-        /// Evenement quand une erreur se produit
+        /// Evennement quand une erreur se produit
         /// </summary>
         public event EventHandler<string> ErrorOccurred;
 
         /// <summary>
-        /// Get du tableau de semestres
+        /// Récupère le tableau de semestres
         /// </summary>
         public ObservableCollection<SemesterVM> Semesters
         {
@@ -33,7 +33,7 @@ namespace IHM_Model
         }
 
         /// <summary>
-        /// Get et set du semestre sélectionné
+        /// Récupère et remplace le semestre sélectionné
         /// </summary>
         public SemesterVM? SelectedSemester
         {

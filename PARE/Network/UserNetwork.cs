@@ -9,6 +9,9 @@ using System.Threading.Tasks;
 
 namespace Network
 {
+    /// <summary>
+    /// Implémentation du réseau pour gérer les utilisateurs
+    /// </summary>
     public class UserNetwork : IUserNetwork
     {
         public async Task<User[]> GetUsersByRole(Roles role)

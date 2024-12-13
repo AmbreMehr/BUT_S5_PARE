@@ -33,8 +33,6 @@ namespace IHM
         /// <summary>
         /// Affiche la fenêtre de bienvenue quelque seconde puis renvoi vers la fenetre de promo
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         /// <author>Lucas</author>
         private async void MainWindow_Loaded(object sender, RoutedEventArgs e)
         {

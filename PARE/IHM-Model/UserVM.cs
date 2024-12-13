@@ -16,7 +16,7 @@ namespace IHM_Model
         private User model;
         
         /// <summary>
-        /// Retroune le service du User
+        /// Retourne le service du User
         /// </summary>
         public int? ServiceHour
         {

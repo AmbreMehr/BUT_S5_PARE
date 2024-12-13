@@ -77,5 +77,14 @@ namespace Network.Ressource {
                 return ResourceManager.GetString("ModuleUpdateError", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à There is no configuration in {0}. \nPlease complete the configuration file..
+        /// </summary>
+        internal static string NetworkParameterNotFound {
+            get {
+                return ResourceManager.GetString("NetworkParameterNotFound", resourceCulture);
+            }
+        }
     }
 }

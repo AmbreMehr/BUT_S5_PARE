@@ -43,6 +43,7 @@ namespace IHM
         /// <summary>
         /// Async, Récupère la liste des modules pour le semestre et met à jour l'IHM
         /// </summary>
+        /// <author>AmbreMehr</author>
         private async Task GetModulesBySemester()
         {
             if (context.SemestersVM.SelectedSemester != null) 

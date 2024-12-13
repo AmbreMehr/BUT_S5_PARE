@@ -5,6 +5,9 @@ using Storage.InterfaceDAO;
 
 namespace API.Services
 {
+    /// <summary>
+    /// Service qui s'occupe de la logique pour les utilisateurs
+    /// </summary>
     public class UserService
     {
         private IUserDao userDao;

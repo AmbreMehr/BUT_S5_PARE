@@ -22,7 +22,7 @@ namespace IHM_Model
         private IModuleNetwork moduleNetwork;
 
         /// <summary>
-        /// Renvoie le tableau de modules
+        /// Renvoie la liste de modules
         /// </summary>
         /// <author> Clotilde MALO </author>
         public ObservableCollection<ModuleVM> Modules
@@ -30,6 +30,10 @@ namespace IHM_Model
             get => models;
         }
 
+        /// <summary>
+        /// Renvoie le tableau de modules en read-only
+        /// </summary>
+        /// <author>AmbreMehr</author>
         public ReadOnlyCollection<ModuleVM> ModulesROnly
         {
             get => models.AsReadOnly();
@@ -67,7 +71,6 @@ namespace IHM_Model
         /// <author>Stéphane BASSET</author>
         public int GetHourByWeek(int week)
         {
-
             int totalHours = 0;
             // A faire: Implémenter la logique ici en fonction de l'organisation des modules et des heures
             return totalHours;
