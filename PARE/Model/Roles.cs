@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace Model
 {
+    /// <summary>
+    /// Classe ennumétation des différents rôles
+    /// </summary>
     public enum Roles
     {
         Admin = 1, 

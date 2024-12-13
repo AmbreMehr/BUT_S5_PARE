@@ -35,7 +35,6 @@ namespace IHM_Model
         /// </summary>
         /// <param name="modulesVM">modules view model</param>
         /// <param name="semesterVM">semestre view model</param>
-
         public MainViewModel(ModulesVM modulesVM, SemestersVM semesterVM)
         {
             this.modulesVM = modulesVM;

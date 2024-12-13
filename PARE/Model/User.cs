@@ -147,6 +147,11 @@ namespace Model
             return this.firstName + " " + this.lastName;
         }
 
+        /// <summary>
+        /// Compare cet objet à un autre User
+        /// </summary>
+        /// <param name="obj">Objet à comparer</param>
+        /// <returns>booléen</returns>
         public override bool Equals(object? obj)
         {
             return obj is User user &&
@@ -155,6 +160,10 @@ namespace Model
                    lastName == user.lastName;
         }
 
+        /// <summary>
+        /// Obtiens le Hash de l'objet User
+        /// </summary>
+        /// <returns>numéro unique de l'objet</returns>
         public override int GetHashCode()
         {
             return HashCode.Combine(id, firstName, lastName);

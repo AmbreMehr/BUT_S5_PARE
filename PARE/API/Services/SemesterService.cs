@@ -36,12 +36,19 @@ namespace API.Services
         /// </summary>
         /// <param name="semesterId">semestre pour lequel calculer</param>
         /// <returns>dictionnaire semaine -> heures des étudiants</returns>
+        /// <author>AmbreMehr</author>
         public Dictionary<int, float> GetHoursPerWeekBySemester(int semesterId)
         {
             Module[] modules = this.moduleDao.GetAllBySemester(semesterId);
             return ComputeHoursPerWeek(modules);
         }
 
+        /// <summary>
+        /// Renvoie le calcul du nombre d'heures que les étudiants feront par semaine
+        /// </summary>
+        /// <param name="modules">Tableau de Module</param>
+        /// <returns>dictionnaire semaine -> heures des étudiants</returns>
+        /// <author>AmbreMehr</author>
         private Dictionary<int, float> ComputeHoursPerWeek(Module[] modules)
         {
             Dictionary<int, float> hoursByWeek = new Dictionary<int, float>();

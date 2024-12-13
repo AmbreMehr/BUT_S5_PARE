@@ -254,7 +254,6 @@ namespace IHM
         {
             BilanDesAlertesWindow bilan = new BilanDesAlertesWindow(semestersVM);
             bilan.Show();
-            this.Close();
         }
 
         /// <summary>
@@ -266,7 +265,6 @@ namespace IHM
         private void EditModuleWindow(object sender, RoutedEventArgs e)
         {
             new EditModuleWindow(semestersVM).Show();
-            this.Close();
         }
 
         /// <summary>
