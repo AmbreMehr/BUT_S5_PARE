@@ -29,8 +29,6 @@ namespace IHM
         /// <summary>
         /// Au clic sur quitter sauvegarde et ferme l'application
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void Quit(object sender, RoutedEventArgs e)
         {
             Save();
@@ -50,8 +48,6 @@ namespace IHM
         /// <summary>
         /// Sélectionne la langue Française
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void SelectionnerLangueFR(object sender, RoutedEventArgs e)
         {
             Parametre.Instance.Langue = LANGUE.FRANCAIS;
@@ -60,8 +56,6 @@ namespace IHM
         /// <summary>
         /// Séléctionne la langue Anglaise
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void SelectionnerLangueEN(object sender, RoutedEventArgs e)
         {
             Parametre.Instance.Langue = LANGUE.ANGLAIS;
@@ -70,8 +64,6 @@ namespace IHM
         /// <summary>
         /// A la fermeture de la fenêtre, sauvegarde et ferme l'application
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             Save();

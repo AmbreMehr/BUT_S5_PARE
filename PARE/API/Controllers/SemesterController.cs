@@ -5,6 +5,9 @@ using System.Diagnostics;
 
 namespace API.Controllers
 {
+    /// <summary>
+    /// Contrôleur pour les semestres
+    /// </summary>
     [Route("api/semester")]
     [ApiController]
     public class SemesterController : MyControllerBase

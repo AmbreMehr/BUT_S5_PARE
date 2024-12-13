@@ -5,7 +5,7 @@ using Storage.InterfaceDAO;
 namespace API.Services
 {
     /// <summary>
-    /// Classe logique de l'API pour les objets Semester
+    /// Service qui s'occupe de la logique pour les semestres
     /// </summary>
     public class SemesterService
     {

@@ -123,4 +123,7 @@
   <data name="APIError" xml:space="preserve">
     <value>L'API n'a pas démarré correctement ou est inaccessible.</value>
   </data>
+  <data name="NetworkParameterNotFound" xml:space="preserve">
+    <value>Il n'y a pas de configuration dans  {0}. \nVeuillez compléter le fichier de configuration réseau.</value>
+  </data>
 </root>

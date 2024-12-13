@@ -32,7 +32,7 @@ namespace IHM_Model
         }
 
         /// <summary>
-        /// Récupère le moduleVM associé à l'enseignant
+        /// Récupère et remplace le moduleVM associé à l'enseignant
         /// </summary>
         public ModuleVM Module
         {
@@ -61,7 +61,7 @@ namespace IHM_Model
         }
 
         /// <summary>
-        /// Get et set qui indique si le teacherVM est dans la BDD
+        /// Récupère et change la valeur de IsInStorage qui indique si le teacherVM est dans la BDD
         /// </summary>
         public bool IsInStorage
         {
@@ -70,7 +70,7 @@ namespace IHM_Model
         }
 
         /// <summary>
-        /// Récupère les heures de TD assigné à l'enseignant
+        /// Récupère et remplace les heures de TD assigné à l'enseignant
         /// </summary>
         public int AssignedTdHours
         {
@@ -87,7 +87,7 @@ namespace IHM_Model
         }
 
         /// <summary>
-        /// Récupère les heures de TP assigné à l'enseignant
+        /// Récupère et remplace les heures de TP assigné à l'enseignant
         /// </summary>
         public int AssignedTpHours
         {
@@ -104,7 +104,7 @@ namespace IHM_Model
         }
 
         /// <summary>
-        /// Récupère les heures de CM assigné à l'enseignant
+        /// Récupère et remplace les heures de CM assigné à l'enseignant
         /// </summary>
         public int AssignedCmHours
         {
@@ -163,7 +163,6 @@ namespace IHM_Model
         public async Task DeleteTeacher()
         {
             await teacherNetwork.DeleteTeacher(model);
-
         }
 
         /// <summary>
@@ -203,12 +202,11 @@ namespace IHM_Model
         /// <summary>
         /// Initialise la classe en lui passant un enseignant (teacher)
         /// </summary>
-        /// <param name="model"></param>
+        /// <param name="model">modèle Teacher</param>
         public TeacherVM(Teacher model)
         {
             this.model = model;
             this.teacherNetwork = new TeacherNetwork();
-
         }
 
         /// <summary>

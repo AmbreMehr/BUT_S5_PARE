@@ -8,6 +8,9 @@ using System.Threading.Tasks;
 
 namespace Network
 {
+    /// <summary>
+    /// Implémentation du réseau pour gérer les modules
+    /// </summary>
     public class ModuleNetwork : IModuleNetwork
     {
         /// <summary>

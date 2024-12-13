@@ -47,8 +47,6 @@ namespace IHM
         {
             if (semestersVM.SelectedSemester != null)
             {
-                UpdateWeekSemester(semestersVM.SelectedSemester);
-
                 // Suppression des éléments qui ne sont pas ceux de base
                 DeleteTypeFromGrid<Border>();
                 await this.modulesVM.GetModuleBySemester(semestersVM.SelectedSemester);
@@ -214,8 +212,6 @@ namespace IHM
         /// <summary>
         /// Ouvre la page des paramètres
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void OpenParametresPage(object sender, RoutedEventArgs e)
         {
             SettingsWindows settingsWindows = new SettingsWindows();
@@ -225,8 +221,6 @@ namespace IHM
         /// <summary>
         /// Permet de se déconnecter de l'application et ramène sur la page de login
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void LogOut(object sender, RoutedEventArgs e)
         {
             LoginWindow loginWindow = new LoginWindow();
@@ -237,8 +231,6 @@ namespace IHM
         /// <summary>
         /// Ouvre la page Attribution des modules
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void AttributionModuleWindow(object sender, RoutedEventArgs e)
         {
             ModuleSupervisorsWindow moduleSupervisorsWindow = new ModuleSupervisorsWindow(semestersVM);
@@ -246,10 +238,8 @@ namespace IHM
         }
 
         /// <summary>
-        /// Ouvrira la page Bilan des alertes
+        /// Ouvre la page Bilan des alertes
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void BilanAlertWindow(object sender, RoutedEventArgs e)
         {
             BilanDesAlertesWindow bilan = new BilanDesAlertesWindow(semestersVM);
@@ -260,8 +250,6 @@ namespace IHM
         /// Evenement pour ouvrir la fenêtre d'édition de module
         /// </summary>
         /// <author>Clotilde MALO</author>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void EditModuleWindow(object sender, RoutedEventArgs e)
         {
             new EditModuleWindow(semestersVM).Show();
@@ -270,8 +258,6 @@ namespace IHM
         /// <summary>
         /// Evenement quand la selection change : appel GetModuleBySemester
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void changedSelection(object sender, SelectionChangedEventArgs e)
         {
             GetModulesBySemester();
@@ -280,8 +266,7 @@ namespace IHM
         /// <summary>
         /// Message Box apparaissant quand l'API ne se lance pas correctement 
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="errorMessage"></param>
+        /// <param name="errorMessage">Message d'erreur à afficher</param>
         private void HandleErrorOccurred(object sender, string errorMessage)
         {
             MessageBox.Show(
@@ -297,13 +282,10 @@ namespace IHM
         /// <summary>
         /// Affiche le component qui permet de placer / modifier temporellement les modules
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void PlacerModuleWindow(object sender, RoutedEventArgs e)
         {
             PlaceModuleWindow placeModuleWindow = new PlaceModuleWindow(semestersVM, modulesVM);
             ToggleBottomButtonsVisibility(false);
-
 
             Grid.SetRow(placeModuleWindow, 2);
             grid.Children.Add(placeModuleWindow);
@@ -331,22 +313,6 @@ namespace IHM
             BtnEditerModules.Visibility = IsVisible ? Visibility.Visible : Visibility.Collapsed;
             BtnPlacerModules.Visibility = IsVisible ? Visibility.Visible : Visibility.Collapsed;
             infoSemester.Visibility = IsVisible ? Visibility.Collapsed : Visibility.Visible;
-        }
-
-        /// <summary>
-        /// Met à jour la grid de l'IHM pour le placement des modules
-        /// </summary>
-        /// <param name="semestreActuel"></param>
-        private void UpdateWeekSemester(SemesterVM semestreActuel)
-        {
-            for (int i = 0; i < (semestreActuel.NbWeek); i++)
-            {
-                Label label = (Label)FindName($"labelSemaine{i + 1}");
-                if (label != null)
-                {
-                    label.Content = (semestreActuel.WeekBegin + i).ToString();
-                }
-            }
         }
         #endregion Placement Modules
     }

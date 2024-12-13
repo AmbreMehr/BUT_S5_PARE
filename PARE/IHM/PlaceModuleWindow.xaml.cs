@@ -32,8 +32,8 @@ namespace IHM
         /// <summary>
         /// Constructeur du component, affiche les semestres à placer et met à jour la liste des modules
         /// </summary>
-        /// <param name="semestersVM"></param>
-        /// <param name="modulesVM"></param>
+        /// <param name="semestersVM">SemestersVM</param>
+        /// <param name="modulesVM">ModulesVM</param>
         public PlaceModuleWindow(SemestersVM semestersVM, ModulesVM modulesVM)
         {
             InitializeComponent();
@@ -43,15 +43,14 @@ namespace IHM
             
             
             DataContext = new MainViewModel(this.modulesVM, this.semestersVM);
-
-            Task task = UpdateModulesList();
+            
+            UpdateModulesList();
         }
 
         /// <summary>
         /// Méthode permettant de mettre à jour les différents modules dans l'affichage
         /// </summary>
-        /// <returns></returns>
-        private async Task UpdateModulesList()
+        private async void UpdateModulesList()
         {
             SemesterVM? selectedSemester = semestersVM.SelectedSemester;
             if (selectedSemester != null)
@@ -64,11 +63,10 @@ namespace IHM
                 MessageBox.Show((string)System.Windows.Application.Current.FindResource("SelectionSemestre"), (string)System.Windows.Application.Current.FindResource("Erreur"), MessageBoxButton.OK, MessageBoxImage.Warning);
             }
         }
+
         /// <summary>
         /// Logique du bouton Valider
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private async void ClickBtnSave(object sender, RoutedEventArgs e)
         {
             try
@@ -104,8 +102,6 @@ namespace IHM
         /// <summary>
         /// Logique du bouton Annuler
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void ClickBtnQuit(object sender, RoutedEventArgs e)
         {
             Canceled?.Invoke(this, EventArgs.Empty);

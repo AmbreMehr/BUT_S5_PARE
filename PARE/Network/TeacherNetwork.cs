@@ -8,6 +8,9 @@ using System.Threading.Tasks;
 
 namespace Network
 {
+    /// <summary>
+    /// Implémentation du réseau pour gérer les enseignants
+    /// </summary>
     public class TeacherNetwork : ITeacherNetwork
     {
         public async Task CreateTeacher(Teacher teacher)

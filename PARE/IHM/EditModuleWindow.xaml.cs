@@ -21,8 +21,8 @@ namespace IHM
 {
     /// <summary>
     /// Logique d'interaction pour EditModuleWindow.xaml
-    /// <author>Clotilde MALO</author>
     /// </summary>
+    /// <author>Clotilde MALO</author>
     public partial class EditModuleWindow : Window
     {
         private SemestersVM semestersVM;

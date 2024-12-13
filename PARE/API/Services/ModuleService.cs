@@ -5,10 +5,16 @@ using Storage.InterfaceDAO;
 
 namespace API.Services
 {
+    /// <summary>
+    /// Service qui s'occupe de la logique pour les module
+    /// </summary>
     public class ModuleService
     {
         private IModuleDao moduleDao;
 
+        /// <summary>
+        /// Constructeur qui initialise les dépendances aux DAO.
+        /// </summary>
         public ModuleService()
         {
             this.moduleDao = new ModuleDaoSqlite();

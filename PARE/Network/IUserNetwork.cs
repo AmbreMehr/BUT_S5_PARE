@@ -7,7 +7,9 @@ using System.Threading.Tasks;
 
 namespace Network
 {
-    /// <author>AmbreMehr</author>
+    /// <summary>
+    /// Interface de réseau pour gérer les utilisateurs
+    /// </summary>
     public interface IUserNetwork
     {
         /// <summary>

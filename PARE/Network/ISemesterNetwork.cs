@@ -7,7 +7,9 @@ using System.Threading.Tasks;
 
 namespace Network
 {
-    /// <author>AmbreMehr</author>
+    /// <summary>
+    /// Interface de réseau pour gérer les semestres
+    /// </summary>
     public interface ISemesterNetwork
     {
         /// <summary>

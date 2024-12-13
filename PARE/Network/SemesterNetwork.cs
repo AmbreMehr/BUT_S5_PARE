@@ -8,8 +8,13 @@ using System.Threading.Tasks;
 
 namespace Network
 {
+    /// <summary>
+    /// Implémentation du réseau pour gérer les semestres
+    /// </summary>
+    /// <author>AmbreMehr</author>
     public class SemesterNetwork : ISemesterNetwork
     {
+
         /// <author>AmbreMehr</author>
         public async Task<Semester[]> GetAllSemesters()
         {
@@ -37,6 +42,7 @@ namespace Network
             return semesters.ToArray();
         }
 
+        /// <author>AmbreMehr</author>
         public async Task<Dictionary<int, float>> GetStudentsHoursPerWeek(Semester semester)
         {
             Dictionary<int, float> hoursByWeek = new Dictionary<int, float>();

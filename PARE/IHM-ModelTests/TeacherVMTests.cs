@@ -17,7 +17,6 @@ namespace IHM_ModelTests
         /// <summary>
         /// Test de la méthode `UpdateTeacher` de la classe `TeacherVM`
         /// </summary>
-        /// <returns></returns>
         [Fact]
         public async Task TestUpdateTeacherVM()
         {
@@ -65,7 +64,6 @@ namespace IHM_ModelTests
         /// <summary>
         /// Test de la méthode `CreateTeacher` de la classe `TeacherVM`
         /// </summary>
-        /// <returns></returns>
         [Fact]
         public async Task TestCreateTeacherVMAsync()
         {
@@ -111,7 +109,6 @@ namespace IHM_ModelTests
         /// <summary>
         /// Test de la méthode `DeleteTeacher` de la classe `TeacherVM`
         /// </summary>
-        /// <returns></returns>
         [Fact]
         public async Task TestDeleteTeacherVMAsync()
         {
@@ -130,7 +127,7 @@ namespace IHM_ModelTests
         /// <summary>
         /// Création d'un enseignant, module et user
         /// </summary>
-        /// <returns></returns>
+        /// <returns>Teacher</returns>
         private Teacher CreateTeacher()
         {
             Teacher teacher = new Teacher();

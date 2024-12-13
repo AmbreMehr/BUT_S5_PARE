@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 
 namespace Network
 {
+    /// <summary>
+    /// Format du stockage des paramètres de l'API
+    /// </summary>
     /// <author>AmbreMehr</author>
     public class NetworkParameters
     {
