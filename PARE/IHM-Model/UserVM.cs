@@ -66,12 +66,21 @@ namespace IHM_Model
             this.model = model;
         }
 
+        /// <summary>
+        /// Méthode Equals
+        /// </summary>
+        /// <param name="obj"></param>
+        /// <returns></returns>
         public override bool Equals(object? obj)
         {
             return obj is UserVM vM &&
                    EqualityComparer<User>.Default.Equals(model, vM.model);
         }
 
+        /// <summary>
+        /// Méthode GetHashCode
+        /// </summary>
+        /// <returns></returns>
         public override int GetHashCode()
         {
             return HashCode.Combine(model);

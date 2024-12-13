@@ -42,6 +42,11 @@ namespace API.Services
             return ComputeHoursPerWeek(modules);
         }
 
+        /// <summary>
+        /// Renvoie le calcul du nombre d'heures que les étudiants feront par semaine
+        /// </summary>
+        /// <param name="modules"></param>
+        /// <returns></returns>
         private Dictionary<int, float> ComputeHoursPerWeek(Module[] modules)
         {
             Dictionary<int, float> hoursByWeek = new Dictionary<int, float>();

@@ -141,7 +141,6 @@ namespace IHM_Model
             model = new Module();
             moduleNetwork = new ModuleNetwork();
             this.teachersInCharge = new List<TeacherVM>();
-
         }
     }
 }

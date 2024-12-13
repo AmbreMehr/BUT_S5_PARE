@@ -94,6 +94,10 @@ namespace IHM
             }
         }
 
+        /// <summary>
+        /// Méthode pour créer une nouvelle bordure
+        /// </summary>
+        /// <returns></returns>
         private Border NewBorder()
         {
             return new Border
@@ -103,21 +107,39 @@ namespace IHM
             };
         }
 
+        /// <summary>
+        /// Logique du bouton Quitter, revoie sur la mainWindow
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ClickQuitButton(object sender, RoutedEventArgs e)
         {
             BackToMainWindow();
         }
 
+        /// <summary>
+        /// Ferme la fenêtre actuelle
+        /// </summary>
         private void BackToMainWindow()
         {
             this.Close();
         }
 
+        /// <summary>
+        /// Appelle la méthode GetModulesBySemester() quand le semestre selectionné est changé
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private async void SemesterSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             await GetModulesBySemester();
         }
 
+        /// <summary>
+        /// Logique du bouton valider
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private async void ClickSubmitButton(object sender, RoutedEventArgs e)
         {
             try
@@ -140,6 +162,9 @@ namespace IHM
             }
         }
 
+        /// <summary>
+        /// Instantiation du ModuleSupervisorsContext
+        /// </summary>
         public struct ModuleSupervisorsContext
         {
             public SemestersVM SemestersVM { get; set; }
