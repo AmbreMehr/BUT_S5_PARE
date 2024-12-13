@@ -34,7 +34,7 @@ namespace IHM_Model
         /// <summary>
         /// Récupère le nom du profil type en chaîne de caractère
         /// </summary>
-        public String Profile
+        public String? Profile
         {
             get => model.Profil.Name; 
         }
@@ -67,10 +67,10 @@ namespace IHM_Model
         }
 
         /// <summary>
-        /// Méthode Equals
+        /// Compare cet objet à un autre UserVM
         /// </summary>
-        /// <param name="obj"></param>
-        /// <returns></returns>
+        /// <param name="obj">Objet à comparer</param>
+        /// <returns>booléen</returns>
         public override bool Equals(object? obj)
         {
             return obj is UserVM vM &&
@@ -78,9 +78,9 @@ namespace IHM_Model
         }
 
         /// <summary>
-        /// Méthode GetHashCode
+        /// Obtiens le Hash de l'objet UserVM
         /// </summary>
-        /// <returns></returns>
+        /// <returns>numéro unique de l'objet</returns>
         public override int GetHashCode()
         {
             return HashCode.Combine(model);
