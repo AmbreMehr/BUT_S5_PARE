@@ -160,7 +160,7 @@ namespace IHM_Model
         /// <summary>
         /// Suprime un teacher.
         /// </summary>
-        public async void DeleteTeacher()
+        public async Task DeleteTeacher()
         {
             await teacherNetwork.DeleteTeacher(model);
         }

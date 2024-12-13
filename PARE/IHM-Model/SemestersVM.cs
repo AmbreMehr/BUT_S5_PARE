@@ -20,7 +20,7 @@ namespace IHM_Model
         private SemesterVM? selectedSemester;
 
         /// <summary>
-        /// Evennement quand une erreur se produit
+        /// Evenement quand une erreur se produit
         /// </summary>
         public event EventHandler<string> ErrorOccurred;
 
