@@ -26,6 +26,7 @@
     <system:String x:Key="BtnEditerModules">Editer les modules</system:String>
     <system:String x:Key="MessageContentModulePlacementInvalide">Ce module est mal positionné.</system:String>
     <system:String x:Key="MessageTitleModulePlacementInvalide">Erreur de placement</system:String>
+    <system:String x:Key="TitreChargeEtu" xml:space="preserve">Charge &#xA;étudiante</system:String>
 
 
     <!--  Connexion  -->

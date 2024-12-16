@@ -123,6 +123,12 @@ namespace IHM
             SemesterVM? semester = semestersVM.SelectedSemester;
             if (semester != null)
             {
+                TextBlock titleStudentHours = new TextBlock();
+                titleStudentHours.Text = (string)System.Windows.Application.Current.FindResource("TitreChargeEtu");
+                titleStudentHours.Style = (Style)System.Windows.Application.Current.FindResource("SecondTitle");
+                gridModules.Children.Add(titleStudentHours);
+
+
                 float acceptableStudentsHoursMin = 30;
                 float acceptableStudentsHoursMax = 35;
                 double rectangleMaxHeight = gridModules.RowDefinitions.First().Height.Value;

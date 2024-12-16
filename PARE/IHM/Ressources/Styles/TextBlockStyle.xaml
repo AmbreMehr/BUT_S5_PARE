@@ -12,4 +12,15 @@
         <Setter Property="TextAlignment" Value="Center"/>
     </Style>
 
+    <!--SecondTitle-->
+    <Style x:Key="SecondTitle" TargetType="TextBlock">
+        <Setter Property="FontFamily" Value="{DynamicResource OpenSauceOne}"/>
+        <Setter Property="HorizontalAlignment" Value="Center"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="FontSize" Value="18"/>
+        <Setter Property="FontWeight" Value="Bold"/>
+        <Setter Property="Foreground" Value="{DynamicResource TitleColor}"/>
+        <Setter Property="TextAlignment" Value="Center"/>
+    </Style>
+
 </ResourceDictionary>

@@ -26,6 +26,8 @@
     <system:String x:Key="BtnEditerModules">Edit modules</system:String>
     <system:String x:Key="MessageContentModulePlacementInvalide">This module is wrongly placed.</system:String>
     <system:String x:Key="MessageTitleModulePlacementInvalide">Placement error</system:String>
+    <system:String x:Key="TitreChargeEtu" xml:space="preserve">Student &#xA;load</system:String>
+
 
     <!--  Connexion  -->
     <system:String x:Key="TitreFenetreConnexion">Login</system:String>
