@@ -137,6 +137,12 @@
                         <RowDefinition Height="*"/>
                         <!-- Lignes du calendrier -->
                     </Grid.RowDefinitions>
+
+
+                    <TextBlock Grid.Row="0" Grid.Column="0"
+                               Text="{DynamicResource TitreChargeEtu}" 
+                               Style="{DynamicResource SecondTitle}"/>
+
                 </Grid>
             </ScrollViewer>
         </Grid>
