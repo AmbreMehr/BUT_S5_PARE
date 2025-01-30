@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -20,8 +21,8 @@ namespace IHM
 {
     /// <summary>
     /// Logique d'interaction pour EditModuleWindow.xaml
-    /// <author>Clotilde MALO</author>
     /// </summary>
+    /// <author>Clotilde MALO</author>
     public partial class EditModuleWindow : Window
     {
         private SemestersVM semestersVM;
@@ -45,6 +46,7 @@ namespace IHM
             InitializeComponent();
             InitializeAllProfessors();
             InitializeSemesterBox(this.semestersVM);
+ 
         }
 
         /// <summary>
@@ -64,17 +66,21 @@ namespace IHM
             if (semestersVM.SelectedSemester != null)
             {
                 modulesPanel.Children.Clear();
+                teachersVM.Teachers.Clear();
                 await this.modulesVM.GetModuleBySemester(semestersVM.SelectedSemester);
                 foreach (ModuleVM moduleVM in modulesVM.Modules)
                 {
-                    AddModule(moduleVM);
+                    StackPanel module = AddModule(moduleVM);
                     List<TeacherVM> TeachersVM = await this.teachersVMQuery.GetTeachersByModule(moduleVM);
                     foreach (TeacherVM teacherVM in TeachersVM)
                     {
 
                         this.teachersVM.Teachers.Add(teacherVM);
-                        AddTeacherRow(modulesPanel, teacherVM);
+                        AddTeacherRow(moduleVM, module, teacherVM);
                     }
+                    // A la création permet d'initialiser les couleurs des heures
+                    AvertHour(moduleVM, module);
+
                 }
             } 
         }
@@ -97,7 +103,8 @@ namespace IHM
         /// <author>Clotilde MALO</author>
         /// </summary>
         /// <param name="moduleName">nom du module</param>
-        private void AddModule(ModuleVM moduleVM)
+        /// <returns> panneau dédié au module qui vient d'être ajouté</returns>
+        private StackPanel AddModule(ModuleVM moduleVM)
         {
             StackPanel module = new StackPanel { Margin = new Thickness(0, 10, 0, 10) };
 
@@ -122,6 +129,8 @@ namespace IHM
 
             modulesPanel.Children.Add(module);
 
+            return module;
+
         }
 
         /// <summary>
@@ -138,7 +147,7 @@ namespace IHM
                 Margin = new Thickness(5)
             };
 
-            headerStack.Children.Add(new TextBlock { Text = (string)System.Windows.Application.Current.FindResource("TD"), Width = 50, FontWeight = FontWeights.Bold });
+            headerStack.Children.Add(new TextBlock { Text = (string)System.Windows.Application.Current.FindResource("TD"), Margin = new Thickness(100,0,0,0), Width = 50, FontWeight = FontWeights.Bold });
             headerStack.Children.Add(new TextBlock { Text = (string)System.Windows.Application.Current.FindResource("TP"), Width = 50, FontWeight = FontWeights.Bold });
             headerStack.Children.Add(new TextBlock { Text = (string)System.Windows.Application.Current.FindResource("CM"), Width = 50, FontWeight = FontWeights.Bold });
 
@@ -159,11 +168,11 @@ namespace IHM
                 Margin = new Thickness(5)
             };
 
-            TextBlock programBlock = new TextBlock { Text = (string)System.Windows.Application.Current.FindResource("ProgramModule"), Width = 120, FontWeight = FontWeights.Bold };
+            TextBlock programBlock = new TextBlock { Text = (string)System.Windows.Application.Current.FindResource("ProgramModule"), Width = 100, FontWeight = FontWeights.Bold };
 
-            TextBlock tdBlock = new TextBlock { Text = moduleVM.HoursTd.ToString(), Width = 120, FontWeight = FontWeights.Bold };
-            TextBlock tpBlock = new TextBlock { Text = moduleVM.HoursTp.ToString(), Width = 120, FontWeight = FontWeights.Bold };
-            TextBlock cmBlock = new TextBlock { Text = moduleVM.HoursCM.ToString(), Width = 120, FontWeight = FontWeights.Bold };
+            TextBlock tdBlock = new TextBlock { Tag = "TdHours", Text = moduleVM.HoursTd.ToString(), Width = 50, FontWeight = FontWeights.Bold };
+            TextBlock tpBlock = new TextBlock { Tag = "TpHours", Text = moduleVM.HoursTp.ToString(), Width = 50, FontWeight = FontWeights.Bold };
+            TextBlock cmBlock = new TextBlock { Tag = "CmHours", Text = moduleVM.HoursCM.ToString(), Width = 50, FontWeight = FontWeights.Bold };
 
             programStack.Children.Add(programBlock);
             programStack.Children.Add(tdBlock);
@@ -179,9 +188,10 @@ namespace IHM
         /// Ajoute une ligne d'enseignant/heure
         /// <author>Clotilde MALO</author>
         /// </summary>
+        /// <param name="moduleVM"> module vue modèle sur lequel on ajoute l'enseignant</param>
         /// <param name="moduleStack">panneau de module</param>
         /// <param name="teacherVM">teacher à ajouter => peut être null si on ajoute une ligne vide</param>
-        private void AddTeacherRow(StackPanel moduleStack, TeacherVM teacherVM)
+        private void AddTeacherRow(ModuleVM moduleVM, StackPanel moduleStack, TeacherVM teacherVM)
         {
             // Création de la ligne
             StackPanel rowStack = new StackPanel
@@ -191,8 +201,19 @@ namespace IHM
                 Margin = new Thickness(5)
             };
 
+            // Abonnement à l'événement PropertyChanged
+            teacherVM.PropertyChanged += (s, e) =>
+            {
+                if (e.PropertyName == nameof(TeacherVM.AssignedTdHours) ||
+                    e.PropertyName == nameof(TeacherVM.AssignedTpHours) ||
+                    e.PropertyName == nameof(TeacherVM.AssignedCmHours))
+                {
+                    AvertHour(moduleVM, moduleStack);
+                }
+            };
+
             // Création de la liste déroulante + binding
-            ComboBox teacherComboBox = new ComboBox { Width = 120, Margin = new Thickness(5) };
+            ComboBox teacherComboBox = new ComboBox { Width = 220, Margin = new Thickness(5)};
 
             teacherComboBox.ItemsSource = usersVM.Users;
             teacherComboBox.DisplayMemberPath = "Fullname";
@@ -207,9 +228,9 @@ namespace IHM
             teacherComboBox.SetBinding(ComboBox.SelectedItemProperty, bindingSelected);
 
             // Création des champs avec les heures (TD, TP, CM) + binding
-            TextBox tdBox = new TextBox { Width = 50, Margin = new Thickness(5) };
-            TextBox tpBox = new TextBox { Width = 50, Margin = new Thickness(5) };
-            TextBox cmBox = new TextBox { Width = 50, Margin = new Thickness(5) };
+            TextBox tdBox = new TextBox { Width = 50, Margin = new Thickness(5), TextAlignment=TextAlignment.Center };
+            TextBox tpBox = new TextBox { Width = 50, Margin = new Thickness(5), TextAlignment = TextAlignment.Center };
+            TextBox cmBox = new TextBox { Width = 50, Margin = new Thickness(5), TextAlignment = TextAlignment.Center };
 
 
             Binding bindingTd = new Binding("AssignedTdHours")
@@ -217,6 +238,7 @@ namespace IHM
                 Source = teacherVM,
                 Mode = BindingMode.TwoWay,
                 UpdateSourceTrigger = UpdateSourceTrigger.PropertyChanged
+
             };
             tdBox.SetBinding(TextBox.TextProperty, bindingTd);
 
@@ -252,11 +274,16 @@ namespace IHM
             rowStack.Children.Add(cmBox);
 
             // Appel de la méthode pour ajouter le bouton de suppression
-            DeleteTeacherButton(rowStack, moduleStack, teacherVM);
+            DeleteTeacherButton(rowStack, moduleStack, teacherVM, moduleVM);
 
             // Ajout de la ligne au panneau de module
             moduleStack.Children.Add(rowStack);
+
+            // Ajout du prof dans la liste des profs qui interviennent dans le module
+            moduleVM.TeachersInCharge.Add(teacherVM);
         }
+
+
 
 
 
@@ -266,13 +293,13 @@ namespace IHM
         /// </summary>
         /// <param name="row">ligne à supprimer</param>
         /// <param name="module">panneau de module</param>
-        private void DeleteTeacherButton(StackPanel row, StackPanel module, TeacherVM teacherVM)
+        private void DeleteTeacherButton(StackPanel row, StackPanel module, TeacherVM teacherVM, ModuleVM moduleVM)
         {
             // Création du bouton
             Button deleteButton = new Button
             {
                 Content = (string)System.Windows.Application.Current.FindResource("SupprimerEnseignant"),
-                Width = 200,
+                Width = 180,
                 Margin = new Thickness(5)
             };
             // Ajout du bouton à la ligne
@@ -290,6 +317,8 @@ namespace IHM
                     if (teacherVM.IsInStorage)
                     {
                         DeleteTeacherButton(teacherVM);
+                        // Suppression du prof dans la liste des profs qui interviennent dans le module
+                        moduleVM.TeachersInCharge.Remove(teacherVM);
                     }
                 }
             };
@@ -305,6 +334,7 @@ namespace IHM
             {
                 await teacherVM.DeleteTeacher();
             }
+            this.teachersVM.Teachers.Remove(teacherVM);
 
         }
 
@@ -335,7 +365,7 @@ namespace IHM
                 TeacherVM teacherVM = new TeacherVM();
                 this.teachersVM.Teachers.Add(teacherVM);
                 teacherVM.Module = moduleVM;
-                AddTeacherRow(teacherContainer, teacherVM);
+                AddTeacherRow(moduleVM, module, teacherVM);
             };
 
         }
@@ -361,14 +391,13 @@ namespace IHM
                     else
                     {
                         await teacherVM.CreateTeacher();
+                        teacherVM.IsInStorage = true;
                     }
-
-
                 }
                 MessageBox.Show((string)System.Windows.Application.Current.FindResource("MessageModif"), 
                         (string)System.Windows.Application.Current.FindResource("Confirmation"), 
                         MessageBoxButton.OK, MessageBoxImage.Information);
-                BackHome(sender, e);
+                GetModulesBySemester(); 
             }
             catch (Exception ex)
             {
@@ -378,9 +407,63 @@ namespace IHM
         }
 
         /// <summary>
+        /// Permet de mettre en avant les heures programmes si elles sont dépassées ou pas atteintes
+        /// </summary>
+        /// <param name="moduleVM">module concerné (vue modèle)</param>
+        /// <param name="module">composant contenant le module</param>
+        private void AvertHour(ModuleVM moduleVM, StackPanel module)
+        {
+            // Calcul des heures qui ont été assignés pour chaque module
+            int hoursTp = 0;
+            int hoursTd = 0;
+            int hoursCm = 0;
+
+            foreach (TeacherVM teacherVM in moduleVM.TeachersInCharge)
+            {
+                hoursTp += teacherVM.AssignedTpHours;
+                hoursTd += teacherVM.AssignedTdHours;
+                hoursCm += teacherVM.AssignedCmHours;
+            }
+
+            UpdateHourStatus(module,hoursTp, "TpHours");
+            UpdateHourStatus(module, hoursTd, "TdHours");
+            UpdateHourStatus(module, hoursCm, "CmHours");
+
+
+        }
+
+        /// <summary>
+        /// Met à jour le statut des heures (rouge si non atteintes, vert si atteintes)
+        /// </summary>
+        /// <param name="module">panneau de modules</param>
+        /// <param name="assignedHours">heures totales assignés</param>
+        /// <param name="tag">tag des textes à mettre à jour</param>
+        private void UpdateHourStatus(StackPanel module, int assignedHours, string tag)
+        {
+            var programStack = (string)System.Windows.Application.Current.FindResource("ProgramModule");
+            var hoursTarget = module.Children.OfType<StackPanel>()
+                .SelectMany(stackP => stackP.Children.OfType<TextBlock>())
+                .FirstOrDefault(tb => tb.Tag?.ToString() == tag);
+
+            if (hoursTarget != null)
+            {
+                if (assignedHours == int.Parse(hoursTarget.Text))
+                 {
+                    hoursTarget.Foreground = (SolidColorBrush)System.Windows.Application.Current.FindResource("HourGood");
+
+                 }
+                else
+                {
+                    hoursTarget.Foreground = (SolidColorBrush)System.Windows.Application.Current.FindResource("HourNotGood");
+
+                }
+            }
+        }
+
+        /// <summary>
         /// Permet d'affiche une pop up pour l'affichage des exceptions
         /// </summary>
-        /// <param name="ex"></param>
+        /// <param name="ex">exception levée</param>
         private void GestionException(Exception ex)
         {
             var exception = ex;
@@ -402,8 +485,6 @@ namespace IHM
         /// <param name="e"></param>
         private void BackHome(object sender, RoutedEventArgs e)
         {
-            MainWindow mainWindow = new MainWindow();
-            mainWindow.Show();
             this.Close();
         }
 

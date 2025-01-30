@@ -123,14 +123,8 @@
   <data name="HourProgram" xml:space="preserve">
     <value>Les heures assignés à l'enseignant doivent être inférieures ou égales aux heures du programme.</value>
   </data>
-  <data name="WeekBegin" xml:space="preserve">
-    <value>La semaine de début doit être comprise entre 35 et 53</value>
-  </data>
   <data name="WeekBeginAfterWeekEnd" xml:space="preserve">
     <value>La semaine de début ne peut pas être supérieure à la semaine de fin</value>
-  </data>
-  <data name="WeekEnd" xml:space="preserve">
-    <value>La semaine de fin doit être comprise entre 35 et 53</value>
   </data>
   <data name="SameWeekBeginEnd" xml:space="preserve">
     <value>La semaine de début ne peut pas être égale à la semaine de fin</value>
@@ -146,5 +140,8 @@
   </data>
   <data name="ErrorTeacher" xml:space="preserve">
     <value>Erreur lors de l'ajout de l'enseignant</value>
+  </data>
+  <data name="SemesterEven" xml:space="preserve">
+    <value>La semaine de début ou de fin est incorrect</value>
   </data>
 </root>

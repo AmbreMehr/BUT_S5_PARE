@@ -3,6 +3,8 @@ using Model;
 using Network;
 using System;
 using System.Collections.ObjectModel;
+using System.ComponentModel.DataAnnotations;
+using System.Data;
 using System.Reflection;
 using System.Threading.Tasks;
 using Module = Model.Module;
@@ -20,7 +22,7 @@ namespace IHM_Model
         private IModuleNetwork moduleNetwork;
 
         /// <summary>
-        /// Get et set du tableau de modules
+        /// Renvoie la liste de modules
         /// </summary>
         /// <author> Clotilde MALO </author>
         public ObservableCollection<ModuleVM> Modules
@@ -29,7 +31,16 @@ namespace IHM_Model
         }
 
         /// <summary>
-        /// Get et set du module sélectionné
+        /// Renvoie le tableau de modules en read-only
+        /// </summary>
+        /// <author>AmbreMehr</author>
+        public ReadOnlyCollection<ModuleVM> ModulesROnly
+        {
+            get => models.AsReadOnly();
+        }
+
+        /// <summary>
+        /// Renvoie et remplace le module sélectionné
         /// </summary>
         /// <author> Clotilde MALO </author>
         public ModuleVM? SelectedModule
@@ -60,7 +71,6 @@ namespace IHM_Model
         /// <author>Stéphane BASSET</author>
         public int GetHourByWeek(int week)
         {
-
             int totalHours = 0;
             // A faire: Implémenter la logique ici en fonction de l'organisation des modules et des heures
             return totalHours;
@@ -105,41 +115,52 @@ namespace IHM_Model
         /// Met à jour les modules dans le backend en validant les données.
         /// </summary>
         /// <returns>Une tâche asynchrone.</returns>
+        /// <exception cref="ExceptionWeekBegin">La première semaine du module est hors des limites du semestre</exception>
+        /// <exception cref="ExceptionWeekEnd">La dernière semaine du module est hors des limites du semestre</exception>
+        /// <exception cref="ExceptionWeekBeginAfterWeekEnd">La première semaine du module est après la dernière semaine du module</exception>
+        /// <exception cref="ExceptionSameWeekBeginEnd">Le module commence et se termine la même semaine</exception>
+        /// <exception cref="ApplicationException">Erreur lors de la mise à jour du module</exception>
         /// <author>Lucas PRUNIER</author>
         public async Task UpdateModules()
         {
             foreach (ModuleVM moduleVM in models)
             {
-                // Vérification des règles métier
-                if (moduleVM.WeekBegin < 35 || moduleVM.WeekBegin > 53)
-                {
-                    throw new ExceptionWeekBegin(Ressource.StringRes.WeekBegin);
-                }
-
-                if (moduleVM.WeekEnd < 35 || moduleVM.WeekEnd > 53)
-                {
-                    throw new ExceptionWeekEnd(Ressource.StringRes.WeekEnd);
-                }
-
-                if (moduleVM.WeekBegin > moduleVM.WeekEnd)
-                {
-                    throw new ExceptionWeekBeginAfterWeekEnd(Ressource.StringRes.WeekBeginAfterWeekEnd);
-                }
-
-                if (moduleVM.WeekBegin == moduleVM.WeekEnd)
-                {
-                    throw new ExceptionSameWeekBeginEnd(Ressource.StringRes.SameWeekBeginEnd);
-                }
                 try
                 {
+                    ValidateModule(moduleVM);
                     await moduleVM.UpdateModule();
                 }
-
-                catch (Exception ex)
+                catch (Exception ex) when (ex is ValidationException || ex is ApplicationException)
                 {
-                    // Gérer les erreurs
+                    // Logique centralisée pour la gestion des exceptions
                     throw new ApplicationException(Ressource.StringRes.ErrorMAJModule, ex);
                 }
+            }
+        }
+
+        /// <summary>
+        /// Valide les données d'un module.
+        /// </summary>
+        /// <param name="moduleVM">Le module à valider.</param>
+        /// <exception cref="ValidationException">Lancée si les données ne sont pas valides.</exception>
+        private void ValidateModule(ModuleVM moduleVM)
+        {
+            int weekBegin = moduleVM.WeekBegin;
+            int weekEnd = moduleVM.WeekEnd;
+
+            if (weekBegin > weekEnd)
+            {
+                throw new ExceptionWeekBeginAfterWeekEnd(Ressource.StringRes.WeekBeginAfterWeekEnd);
+            }
+
+            if (weekBegin == weekEnd)
+            {
+                throw new ExceptionSameWeekBeginEnd(Ressource.StringRes.SameWeekBeginEnd);
+            }
+
+            if (weekBegin < moduleVM.Model.Semester.SemesterWeekBegin || weekEnd > moduleVM.Model.Semester.SemesterWeekEnd)
+            {
+                throw new ExceptionWeekBeginAndWeekEndSemesterEven(Ressource.StringRes.SemesterEven);
             }
         }
     }

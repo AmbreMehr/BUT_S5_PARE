@@ -26,33 +26,47 @@ namespace IHM
             langueinitiale = Parametre.Instance.Langue;
         }
 
-        private void ValiderParam(object sender, RoutedEventArgs e)
+        /// <summary>
+        /// Au clic sur quitter sauvegarde et ferme l'application
+        /// </summary>
+        private void Quit(object sender, RoutedEventArgs e)
         {
-            //on sauvegarde les paramètres
+            Save();
+            this.Close();
+
+        }
+
+        /// <summary>
+        /// Sauvegarde les données de langue
+        /// </summary>
+        private void Save()
+        {
             JsonSerializerParametre jsonSave = new JsonSerializerParametre();
             jsonSave.Save();
-
-            MainWindow mainWindow = new MainWindow();
-            mainWindow.Show();
-            this.Close();
-        }
-        private void Cancel(object sender, RoutedEventArgs e)
-        {
-            Parametre.Instance.Langue = langueinitiale;
-
-            MainWindow mainWindow = new MainWindow();
-            mainWindow.Show();
-            this.Close();
         }
 
+        /// <summary>
+        /// Sélectionne la langue Française
+        /// </summary>
         private void SelectionnerLangueFR(object sender, RoutedEventArgs e)
         {
             Parametre.Instance.Langue = LANGUE.FRANCAIS;
         }
 
+        /// <summary>
+        /// Séléctionne la langue Anglaise
+        /// </summary>
         private void SelectionnerLangueEN(object sender, RoutedEventArgs e)
         {
             Parametre.Instance.Langue = LANGUE.ANGLAIS;
+        }
+
+        /// <summary>
+        /// A la fermeture de la fenêtre, sauvegarde et ferme l'application
+        /// </summary>
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            Save();
         }
     }
 }

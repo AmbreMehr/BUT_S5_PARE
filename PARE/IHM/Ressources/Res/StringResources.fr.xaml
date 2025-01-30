@@ -10,18 +10,23 @@
     <system:String x:Key="BtnValider">Valider</system:String>
     <system:String x:Key="BtnAnnuler">Annuler</system:String>
     <system:String x:Key="BtnModifier">Modifier</system:String>
+    <system:String x:Key="BtnSave">Enregistrer</system:String>
+    <system:String x:Key="BtnQuit">Quitter</system:String>
     <system:String x:Key="MessageModif">Les modifications ont bien été enregistrées</system:String>
     <system:String x:Key="Confirmation">Confirmation</system:String>
     <system:String x:Key="Retour">Retour</system:String>
     <system:String x:Key="MessageSuppr">Voulez-vous vraiment supprimer cet élément ?</system:String>
 
-    <!--MainWindow-->
+    <!--  MainWindow  -->
     <system:String x:Key="TitreMainWindow">Répartition des modules</system:String>
     <system:String x:Key="BtnAttributionModule">Attribution module</system:String>
     <system:String x:Key="BtnAttributionProfilType">Attribution profil type</system:String>
     <system:String x:Key="BtnBilanAlertes">Bilan des alertes</system:String>
     <system:String x:Key="BtnPlacerModules">Placer les modules</system:String>
     <system:String x:Key="BtnEditerModules">Editer les modules</system:String>
+    <system:String x:Key="MessageContentModulePlacementInvalide">Ce module est mal positionné.</system:String>
+    <system:String x:Key="MessageTitleModulePlacementInvalide">Erreur de placement</system:String>
+    <system:String x:Key="TitreChargeEtu" xml:space="preserve">Charge &#xA;étudiante</system:String>
 
 
     <!--  Connexion  -->
@@ -45,8 +50,8 @@
     <system:String x:Key="WeekBegin">Semaine de début</system:String>
     <system:String x:Key="WeekEnd">Semaine de fin</system:String>
 
-    
-    <!--Edition des Modules-->
+
+    <!--  Edition des Modules  -->
     <system:String x:Key="TitreEditionModules">Edition des modules</system:String>
     <system:String x:Key="ProgramModule">Au programme</system:String>
     <system:String x:Key="AjoutEnseignant">Ajouter un enseignant</system:String>
@@ -54,9 +59,9 @@
     <system:String x:Key="TD">TD</system:String>
     <system:String x:Key="TP">TP</system:String>
     <system:String x:Key="CM">CM</system:String>
-    <system:String x:Key="infoChangmtSemestre">Attention : quand vous changez de semestre il faut enregistrer vos modifications avant en cliquant sur "Valider".</system:String>
-    
-    <!--MessagesBox-->
+    <system:String x:Key="infoChangmtSemestre">Attention : quand vous changez de semestre il faut enregistrer vos modifications avant en cliquant sur "Enregistrer".</system:String>
+
+    <!--  MessagesBox  -->
     <system:String x:Key="Erreur">Erreur</system:String>
     <system:String x:Key="Succes">Succès</system:String>
     <system:String x:Key="SelectionSemestre">Veuillez sélectionner un semestre avant de placer les modules</system:String>
@@ -64,5 +69,28 @@
     <system:String x:Key="ErreurDeValidation">Erreur de validation</system:String>
     <system:String x:Key="ErreurDeMiseAJour">Erreur lors de la mise à jour</system:String>
     <system:String x:Key="ErreurInnatendue">Une erreur inattendue s'est produite</system:String>
+
+    <!--Bilan des Alertes-->
+    <system:String x:Key="TitleBilanDesAlertes">Bilan des alertes</system:String>
+    <system:String x:Key="NomdeEnseignant">Nom de l'enseignant</system:String>
+    <system:String x:Key="ProfilType">Profil Type</system:String>
+    <system:String x:Key="Service">Service</system:String>
+    <system:String x:Key="NbHeuresReel">Nombre d'heures réelles</system:String>
+    <system:String x:Key="Enseignant">Enseignants</system:String>
+    <system:String x:Key="Etudiant">Etudiants</system:String>
+    <system:String x:Key="LesEtudiantsDu">Les étudiants du </system:String>
+    <system:String x:Key="OntPlusDe"> ont plus de </system:String>
+    <system:String x:Key="OntMoinsDe"> ont moins de </system:String>
+    <system:String x:Key="ALaSemaine"> à la semaine </system:String>
+
+    <!-- Titre des fenêtres -->
+    <system:String x:Key="TitreFenetreEditionModule">PARE - Edition des modules</system:String>
+    <system:String x:Key="TitreFenetreBilanAlerte">PARE - Bilan des alertes</system:String>
+    <system:String x:Key="TitreFenetreLogin">PARE - Connexion</system:String>
+    <system:String x:Key="TitreFenetreMain">PARE - Répartition des modules</system:String>
+    <system:String x:Key="TitreFenetreModuleSupervisors">PARE - Responsables de ressources</system:String>
+    <system:String x:Key="TitreFenetreSettings">PARE - Paramètres</system:String>
+    <system:String x:Key="TitreFenetreLoading">PARE - Chargement</system:String>
+
 
 </ResourceDictionary>

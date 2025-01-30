@@ -3,6 +3,7 @@ using Model;
 using Network;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Reflection;
 using System.Text;
@@ -14,7 +15,7 @@ namespace IHM_Model
    /// La classe `TeachersVM` gère les teacher dans l'application PARE.
    /// </summary>
    /// <author>Stéphane BASSET</author>
-    public class TeacherVM : BaseVM
+    public class TeacherVM : BaseVM, INotifyPropertyChanged
     {
         private Teacher model;
 
@@ -31,7 +32,7 @@ namespace IHM_Model
         }
 
         /// <summary>
-        /// Récupère le moduleVM associé à l'enseignant
+        /// Récupère et remplace le moduleVM associé à l'enseignant
         /// </summary>
         public ModuleVM Module
         {
@@ -60,7 +61,7 @@ namespace IHM_Model
         }
 
         /// <summary>
-        /// Get et set qui indique si le teacherVM est dans la BDD
+        /// Récupère et change la valeur de IsInStorage qui indique si le teacherVM est dans la BDD
         /// </summary>
         public bool IsInStorage
         {
@@ -69,7 +70,7 @@ namespace IHM_Model
         }
 
         /// <summary>
-        /// Récupère les heures de TD assigné à l'enseignant
+        /// Récupère et remplace les heures de TD assigné à l'enseignant
         /// </summary>
         public int AssignedTdHours
         {
@@ -80,12 +81,13 @@ namespace IHM_Model
                 {
                     model.AssignedTdHours = value;
                     NotifyChange();
+                    OnPropertyChanged(nameof(AssignedTdHours));
                 }
             }
         }
 
         /// <summary>
-        /// Récupère les heures de TP assigné à l'enseignant
+        /// Récupère et remplace les heures de TP assigné à l'enseignant
         /// </summary>
         public int AssignedTpHours
         {
@@ -96,12 +98,13 @@ namespace IHM_Model
                 {
                     model.AssignedTpHours = value;
                     NotifyChange();
+                    OnPropertyChanged(nameof(AssignedTpHours));
                 }
             }
         }
 
         /// <summary>
-        /// Récupère les heures de CM assigné à l'enseignant
+        /// Récupère et remplace les heures de CM assigné à l'enseignant
         /// </summary>
         public int AssignedCmHours
         {
@@ -112,6 +115,7 @@ namespace IHM_Model
                 {
                     model.AssignedCmHours = value;
                     NotifyChange();
+                    OnPropertyChanged(nameof(AssignedCmHours));
                 }
             }
         }
@@ -119,6 +123,9 @@ namespace IHM_Model
         /// <summary>
         /// Met à jour un teacher.
         /// </summary>
+        /// <exception cref="ExceptionHourProgram">L'enseignant a plus d'heures à faire qu'il y en a dans le module</exception>
+        /// <exception cref="ExceptionHourNegative">Un nombre d'heures est négatif</exception>
+        /// <exception cref="Exception">Erreur lors de la mise à jour</exception>
         public async Task UpdateTeacher()
         {
             try
@@ -156,12 +163,14 @@ namespace IHM_Model
         public async Task DeleteTeacher()
         {
             await teacherNetwork.DeleteTeacher(model);
-
         }
 
         /// <summary>
         /// Créer un teacher.
         /// </summary>
+        /// <exception cref="ExceptionHourProgram">L'enseignant a plus d'heures à faire qu'il y en a dans le module</exception>
+        /// <exception cref="ExceptionHourNegative">Un nombre d'heures est négatif</exception>
+        /// <exception cref="Exception">Erreur lors de l'ajout</exception>
         public async Task CreateTeacher()
         {
             // Verif règles métier
@@ -193,12 +202,11 @@ namespace IHM_Model
         /// <summary>
         /// Initialise la classe en lui passant un enseignant (teacher)
         /// </summary>
-        /// <param name="model"></param>
+        /// <param name="model">modèle Teacher</param>
         public TeacherVM(Teacher model)
         {
             this.model = model;
             this.teacherNetwork = new TeacherNetwork();
-
         }
 
         /// <summary>
@@ -208,6 +216,21 @@ namespace IHM_Model
         {
             this.model = new Teacher();
             this.teacherNetwork = new TeacherNetwork();
+        }
+
+
+        /// <summary>
+        /// Permet de notifier les changements de propriétés
+        /// </summary>
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        /// <summary>
+        /// Notifie les changements de propriétés
+        /// </summary>
+        /// <param name="propertyName">nom de la propriété</param>
+        protected virtual void OnPropertyChanged(string propertyName)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 }

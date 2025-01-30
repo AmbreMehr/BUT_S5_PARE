@@ -44,6 +44,8 @@ namespace Storage
                                ", nameSemester" +
                                ", numberGroupTp" +
                                ", m.supervisor" +
+                               ", SemesterWeekBegin" +
+                               ", SemesterWeekEnd" +
                                " FROM Modules AS m" +
                                " LEFT JOIN Semester AS s ON m.idSemester = s.idSemester;";
             using (var reader = cmd.ExecuteReader())
@@ -61,9 +63,6 @@ namespace Storage
         public void Update(Module module)
         {
             List<Module> modules = new List<Module>();
-
-            Console.WriteLine($"Updating Module: {module.Id}, {module.WeekBegin}, {module.WeekEnd}");
-
 
             db.Connection.Open();
             var cmd = db.Connection.CreateCommand();
@@ -86,7 +85,7 @@ namespace Storage
             // Vérification si aucune ligne n'a été mise à jour
             if (rowsAffected == 0)
             {
-                throw new InvalidOperationException($"No module found with id {module.Id}");
+                throw new InvalidOperationException($"{Ressource.StringRes.ModuleIdNotFound} {module.Id}");
             }
 
         }
@@ -108,6 +107,8 @@ namespace Storage
                                ", nameSemester" +
                                ", numberGroupTp" +
                                ", m.supervisor" +
+                               ", SemesterWeekBegin" +
+                               ", SemesterWeekEnd" +
                                " FROM Modules AS m" +
                                " LEFT JOIN Semester AS s ON m.idSemester = s.idSemester" +
                                " WHERE m.idSemester = @semesterId;";

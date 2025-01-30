@@ -6,7 +6,7 @@ using Storage.InterfaceDAO;
 namespace API.Services
 {
     /// <summary>
-    /// Classe qui gère les services enseignants
+    /// Service qui s'occupe de la logique pour les enseignants
     /// </summary>
     public class TeacherService
     {

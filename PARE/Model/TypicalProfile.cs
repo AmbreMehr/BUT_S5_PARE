@@ -17,18 +17,18 @@ namespace Model
         private int? serviceHours;
 
         /// <summary>
-        /// Get et set de l'id du profil type
+        /// Récupère et remplace l'id du profil type
         /// </summary>
         public int? Id { get => id; set => id = value; }
 
         /// <summary>
-        /// Get et set du nom du profil type
+        /// Récupère et remplace le nom du profil type
         /// </summary>
         public string? Name { get => name; set => name = value; }
 
         /// <summary>
-        /// Get et set du nombre d'heures de service du profil type = heures prévus
-        /// <exception> Les heures de services ne peuvent pas être négatifs</exception>
+        /// Récupère et remplace le nombre d'heures de service du profil type = heures prévus
+        /// <exception>Les heures de services ne peuvent pas être négatifs</exception>
         /// </summary>
         public int? ServiceHours { get => serviceHours;
             set

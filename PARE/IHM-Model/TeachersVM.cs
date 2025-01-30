@@ -21,7 +21,6 @@ namespace IHM_Model
         private ITeacherNetwork teacherNetwork;
         private UserVM? selectedTeacher;
 
-
         /// <summary>
         /// Recupère la liste des teachers VM
         /// </summary>
@@ -31,7 +30,7 @@ namespace IHM_Model
         }
 
         /// <summary>
-        /// Get et set de l'enseignant sélectionné
+        /// Récupère et remplace l'enseignant sélectionné
         /// </summary>
         public UserVM? SelectedTeacher
         {

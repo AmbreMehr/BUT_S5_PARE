@@ -49,7 +49,7 @@ namespace NetworkTests
 
             foreach (var module in modules)
             {
-                Assert.True(module.WeekBegin >= 35 && module.WeekEnd <= 53,
+                Assert.True(module.WeekBegin >= module.Semester.SemesterWeekBegin && module.WeekEnd <= module.Semester.SemesterWeekEnd,
                     "Les semaines doivent être entre 35 et 53");
                 Assert.False(string.IsNullOrEmpty(module.Name), "Le nom du module ne doit pas être vide");
             }

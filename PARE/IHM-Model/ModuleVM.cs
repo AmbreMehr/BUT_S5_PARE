@@ -17,9 +17,27 @@ namespace IHM_Model
     {
         private Module model;
         private IModuleNetwork moduleNetwork;
+        private List<TeacherVM> teachersInCharge;
 
         /// <summary>
-        /// Get et set pour le nom du module
+        /// Récupère et remplace la liste des professeurs intervenant sur le module
+        /// </summary>
+        public List<TeacherVM> TeachersInCharge
+        {
+            get => teachersInCharge;
+            set
+            {
+                if (teachersInCharge != value)
+                {
+                    teachersInCharge = value;
+                    NotifyChange();
+                }
+            }
+        }
+
+
+        /// <summary>
+        /// Récupère et remplace le nom du module
         /// </summary>
         public string Name
         {
@@ -35,7 +53,7 @@ namespace IHM_Model
         }
 
         /// <summary>
-        /// Get et set pour la semaine de commencement d'un module
+        /// Récupère et remplace la semaine de commencement d'un module
         /// </summary>
         public int WeekBegin
         {
@@ -44,7 +62,7 @@ namespace IHM_Model
         }
 
         /// <summary>
-        /// Get et set pour la semaine de fin d'un module
+        /// Récupère et remplace la semaine de fin d'un module
         /// </summary>
         public int WeekEnd
         {
@@ -53,7 +71,7 @@ namespace IHM_Model
         }
 
         /// <summary>
-        /// Get et set pour le nombre d'heures de TD du module
+        /// Récupère et remplace le nombre d'heures de TD du module
         /// </summary>
         public int HoursTd
         {
@@ -62,7 +80,7 @@ namespace IHM_Model
         }
 
         /// <summary>
-        /// Get et set pour le nombre d'heures de TP du module
+        /// Récupère et remplace le nombre d'heures de TP du module
         /// </summary>
         public int HoursTp
         {
@@ -71,7 +89,7 @@ namespace IHM_Model
         }
 
         /// <summary>
-        /// Get et set pour le nombre d'heures de CM du module
+        /// Récupère et remplace le nombre d'heures de CM du module
         /// </summary>
         public int HoursCM
         {
@@ -80,7 +98,7 @@ namespace IHM_Model
         }
 
         /// <summary>
-        /// Get et set pour le responsable du module
+        /// Récupère et remplace le responsable du module
         /// </summary>
         public UserVM Supervisor
         {
@@ -89,7 +107,7 @@ namespace IHM_Model
         }
 
         /// <summary>
-        /// Get pour le model du VM, utile aux autres VM
+        /// Récupère le model du VM, utile aux autres VM
         /// </summary>
         public Module Model
         {
@@ -112,6 +130,7 @@ namespace IHM_Model
         {
             this.model = module;
             this.moduleNetwork = new ModuleNetwork();
+            this.teachersInCharge = new List<TeacherVM>();
         }
 
         /// <summary>
@@ -121,6 +140,7 @@ namespace IHM_Model
         {
             model = new Module();
             moduleNetwork = new ModuleNetwork();
+            this.teachersInCharge = new List<TeacherVM>();
         }
     }
 }

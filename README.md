@@ -10,7 +10,7 @@ PARE : Programme d'Aide à la Répartition des Enseignements
 - Positionnement des ressources sur le planning 
 - Visualisation d'alerte : 
   - Enseignants : alerte si 2x plus d'heures que prévues ; alerte si moins d'heures que prévues
-  - Etudiants : alerte orange à 30h/semaine, alerte rouge à 35h/semaine
+  - Etudiants : alerte orange à moins de 30h/semaine, alerte rouge à 35h/semaine
 - Assignation d'une ressource à un enseignant -> devient responsable de la ressource
 - Autorisation de visualisation différentes selon les rôles attribués
 - Ajout d'un enseignant sur une ressource (avec ses heures assignés)
@@ -22,6 +22,15 @@ PARE : Programme d'Aide à la Répartition des Enseignements
 - Positionnement des ressources sur le planning
 - Assignation d'une ressource à un enseignant -> devient responsable de la ressource
 - Ajout d'un enseignant sur une ressource (avec ses heures assignés) + suppression et mise à jour
+
+##  Fonctionnalités implémentés au sprint 3 (release)
+- Visualisation de la charge étudiante par semaine
+- Bilan des alertes : visualisation de la charge des enseignants (heures réelles) par rapport à leurs heures totales assignées + alertes pour les étudiants ayant plus de 35h/semaine ou moins de 30h/semaine.
+- Ajustements des fonctionnalités de la beta :
+  - Modification des textes de bouton de la plupart des fenêtres "Quitter" "Sauvegarder" et modification de la redirection, sauvegarder reste sur la fenêtre actuelle et quitter ferme sans enregistrer
+  - Modification des boutons de paramètres : avant 2 boutons, maintenant plus que le bouton "Quitter" les modifications sont automatiquement sauvegardé
+  - Prise en compte du changement de semaine selon le semestre (+ les semaines sont ajoutés dynamiquement côté IHM)
+  - Sur l'édition de module (assignation d'un module à un/des enseignant(s)) : ajout d'une indication pour savoir si toutes les heures au programme ont été attribué (couleur sur les heures au programme)
 
 ## Technologies utilisés
 Le client est fait en C# et WPF. 
@@ -39,3 +48,8 @@ Lien vers le Client : https://nextcloud.noctabou.win/index.php/s/xpgB3iijmpHiYG5
 ## Version beta - déployé
 Lien vers le Serveur : https://10.128.207.64:8081/ 
 Lien vers le Client : https://nextcloud.noctabou.win/index.php/s/WGXZRByJRqDL962 
+
+
+## Version release - déployé 
+Lien vers le Serveur : https://10.128.207.64:8081/ 
+Lien vers le Client : https://github.com/dept-info-iut-dijon/S5A_C2_BPM/releases/download/v1.0.0-release/PARE-Client.zip

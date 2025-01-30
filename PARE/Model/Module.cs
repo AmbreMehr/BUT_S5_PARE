@@ -8,8 +8,8 @@ namespace Model
 {
     /// <summary>
     /// Classe qui représente la ressource (=module) 
-    /// <author>Clotilde MALO</author>
     /// </summary>
+    /// <author>Clotilde MALO</author>
     public class Module
     {
         private Semester semester;
@@ -23,28 +23,28 @@ namespace Model
         private int weekEnd;
 
         /// <summary>
-        /// Get et set du semestre dans lequel le module intervient
+        /// Récupère et remplace le semestre dans lequel le module intervient
         /// </summary>
         public Semester Semester { get => semester; set => semester = value; }
 
         /// <summary>
-        /// Get et set de l'utilisateur qui est le superviseur du module
+        /// Récupère et remplace l'utilisateur qui est le superviseur du module
         /// </summary>
         public User Supervisor { get => supervisor; set => supervisor = value; }
 
         /// <summary>
-        /// Get et set de l'id du module
+        /// Récupère et remplace l'id du module
         /// </summary>
         public int Id { get => id; set => id = value; }
 
         /// <summary>
-        /// Get et set du nom du module
+        /// Récupère et remplace le nom du module
         /// </summary>
         public string Name { get => name; set => name = value; }
 
 
         /// <summary>
-        /// Get et set du nbre d'heures de TD
+        /// Récupère et remplace le nombre d'heures de TD
         /// </summary>
         public int HoursTd
         {
@@ -63,7 +63,7 @@ namespace Model
             }
         }
         /// <summary>
-        /// Get et set du nbre d'heures de TP
+        /// Récupère et remplace le nombre d'heures de TP
         /// </summary>
         public int HoursTp
         {
@@ -82,7 +82,7 @@ namespace Model
         }
 
         /// <summary>
-        /// Get et set du nbre d'heures de CM
+        /// Récupère et remplace le nombre d'heures de CM
         /// </summary>
         public int HoursCM
         {
@@ -100,7 +100,7 @@ namespace Model
             }
         }
         /// <summary>
-        /// Get et set de la semaine de début
+        /// Récupère et remplace la semaine de début
         /// </summary>
         public int WeekBegin {
             get => weekBegin;
@@ -111,7 +111,7 @@ namespace Model
         }
 
         /// <summary>
-        /// Get et set de la semaine de fin
+        /// Récupère et remplace la semaine de fin
         /// </summary>
         public int WeekEnd
         {

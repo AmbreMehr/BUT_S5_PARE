@@ -43,6 +43,7 @@ namespace IHM
         /// <summary>
         /// Async, Récupère la liste des modules pour le semestre et met à jour l'IHM
         /// </summary>
+        /// <author>AmbreMehr</author>
         private async Task GetModulesBySemester()
         {
             if (context.SemestersVM.SelectedSemester != null) 
@@ -94,6 +95,10 @@ namespace IHM
             }
         }
 
+        /// <summary>
+        /// Méthode pour créer une nouvelle bordure
+        /// </summary>
+        /// <returns>Border</returns>
         private Border NewBorder()
         {
             return new Border
@@ -103,23 +108,33 @@ namespace IHM
             };
         }
 
-        private void ClickCancelButton(object sender, RoutedEventArgs e)
+        /// <summary>
+        /// Logique du bouton Quitter, revoie sur la mainWindow
+        /// </summary>
+        private void ClickQuitButton(object sender, RoutedEventArgs e)
         {
             BackToMainWindow();
         }
 
+        /// <summary>
+        /// Ferme la fenêtre actuelle
+        /// </summary>
         private void BackToMainWindow()
         {
-            MainWindow mainWindow = new MainWindow();
-            mainWindow.Show();
             this.Close();
         }
 
+        /// <summary>
+        /// Appelle la méthode GetModulesBySemester() quand le semestre selectionné est changé
+        /// </summary>
         private async void SemesterSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             await GetModulesBySemester();
         }
 
+        /// <summary>
+        /// Logique du bouton valider
+        /// </summary>
         private async void ClickSubmitButton(object sender, RoutedEventArgs e)
         {
             try
@@ -130,7 +145,6 @@ namespace IHM
                     (string)System.Windows.Application.Current.FindResource("Succes"),
                     MessageBoxButton.OK,
                     MessageBoxImage.Information);
-                BackToMainWindow();
             }
             catch (Exception ex)
             {
@@ -143,6 +157,9 @@ namespace IHM
             }
         }
 
+        /// <summary>
+        /// Instantiation du ModuleSupervisorsContext
+        /// </summary>
         public struct ModuleSupervisorsContext
         {
             public SemestersVM SemestersVM { get; set; }

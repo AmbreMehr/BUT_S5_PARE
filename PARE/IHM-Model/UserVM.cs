@@ -14,6 +14,32 @@ namespace IHM_Model
     public class UserVM : BaseVM
     {
         private User model;
+        
+        /// <summary>
+        /// Retourne le service du User
+        /// </summary>
+        public int? ServiceHour
+        {
+            get => model.Profil.ServiceHours;
+        }
+
+        /// <summary>
+        /// Récupère les heures réelles
+        /// </summary>
+        public int RealHours
+        {
+            get => model.RealHours;
+        }
+
+        /// <summary>
+        /// Récupère le nom du profil type en chaîne de caractère
+        /// </summary>
+        public String? Profile
+        {
+            get => model.Profil.Name; 
+        }
+
+
 
         /// <summary>
         /// Recupère l'utilisateur
@@ -34,18 +60,27 @@ namespace IHM_Model
         /// <summary>
         /// Initialise l'utilisateur
         /// </summary>
-        /// <param name="model"></param>
+        /// <param name="model">utilisateur</param>
         public UserVM (User model)
         {
             this.model = model;
         }
 
+        /// <summary>
+        /// Compare cet objet à un autre UserVM
+        /// </summary>
+        /// <param name="obj">Objet à comparer</param>
+        /// <returns>booléen</returns>
         public override bool Equals(object? obj)
         {
             return obj is UserVM vM &&
                    EqualityComparer<User>.Default.Equals(model, vM.model);
         }
 
+        /// <summary>
+        /// Obtiens le Hash de l'objet UserVM
+        /// </summary>
+        /// <returns>numéro unique de l'objet</returns>
         public override int GetHashCode()
         {
             return HashCode.Combine(model);

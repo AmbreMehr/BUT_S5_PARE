@@ -5,6 +5,7 @@ using Storage.InterfaceDAO;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -133,11 +134,6 @@ namespace Storage
             return user;
         }
 
-        public void Update(User user)
-        {
-            throw new NotImplementedException();
-        }
-
         public User[] ListAllByRole(int roleId)
         {
             db.Connection.Open();
@@ -162,6 +158,19 @@ namespace Storage
                 users.Add(Read(userId));
             }
             return users.ToArray();
+        }
+
+        public void UpdateRealHours(int idUser, int realHours)
+        {
+            db.Connection.Open();
+            var cmd = db.Connection.CreateCommand();
+            cmd.CommandText = "UPDATE Users" +
+                                " SET realHours = @realHours" +
+                                " WHERE  idUser = @idUser;";
+            cmd.Parameters.AddWithValue("@realHours", realHours);
+            cmd.Parameters.AddWithValue("@idUser", idUser);
+            cmd.ExecuteNonQuery();
+            db.Connection.Close();
         }
     }
 }

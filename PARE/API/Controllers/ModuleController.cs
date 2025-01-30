@@ -18,17 +18,8 @@ namespace API.Controllers
         [HttpPut("UpdateModule", Name = "UpdateModule")]
         public IActionResult UpdateModule(Module module)
         {
-            IActionResult result = BadRequest();
-            try
-            {
-                this.ModuleService.UpdateModule(module);
-                result = Ok("Le module a été mis à jour avec succès.");
-            }
-            catch (Exception ex)
-            {
-                result = NotFound(ex.Message);
-            }
-            return result;
+            this.ModuleService.UpdateModule(module);
+            return Ok();
         }
 
         /// <summary>

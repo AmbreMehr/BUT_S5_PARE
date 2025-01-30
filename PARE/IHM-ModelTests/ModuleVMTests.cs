@@ -5,6 +5,9 @@ namespace IHM_ModelTests
 {
     public class ModuleVMTests
     {
+        /// <summary>
+        /// Teste le Get et le Set de ModulesVM
+        /// </summary>
         [Fact]
         public void TestGetSet()
         {
@@ -17,6 +20,9 @@ namespace IHM_ModelTests
             Assert.Equal("New Name", module.Name);
         }
 
+        /// <summary>
+        /// Teste le Notify Change
+        /// </summary>
         [Fact]
         public void TestNotifyChange()
         {
@@ -37,6 +43,9 @@ namespace IHM_ModelTests
             Assert.True(eventTriggered);
         }
 
+        /// <summary>
+        /// Teste un constructeur vide
+        /// </summary>
         [Fact]
         public void TestEmptyConstrutor()
         {
@@ -46,6 +55,9 @@ namespace IHM_ModelTests
             Assert.IsType<Module>(vm.Model);
         }
 
+        /// <summary>
+        /// Teste un constructeur avec un module en paramètre
+        /// </summary>
         [Fact]
         public void TestConstrutorWithModule()
         {

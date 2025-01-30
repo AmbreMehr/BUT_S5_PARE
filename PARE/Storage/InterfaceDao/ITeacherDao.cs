@@ -45,5 +45,12 @@ namespace Storage.InterfaceDAO
         /// </summary>
         /// <param name="teacher">enseignant à ajouter au module</param>
         public void Create(Teacher teacher);
+
+        /// <summary>
+        /// Récupère toutes les assignation d'enseignant (cours) pour un utilisateur
+        /// </summary>
+        /// <param name="idUser">id de l'utilisateur - doit avoir le rôle enseignant</param>
+        /// <returns></returns>
+        public Teacher[] ListForUser(int idUser);
     }
 }

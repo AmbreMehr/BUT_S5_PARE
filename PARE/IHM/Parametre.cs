@@ -8,6 +8,9 @@ using System.Threading.Tasks;
 
 namespace IHM
 {
+    /// <summary>
+    /// Singleton qui stocke les paramètres
+    /// </summary>
     public class Parametre : Observable
     {
         #region Singleton

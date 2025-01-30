@@ -20,24 +20,24 @@ namespace Model
         private int realHours;
 
         /// <summary>
-        /// get et set de l'id utilisateur
+        /// Récupère et remplace l'id utilisateur
         /// </summary>
         public int Id { get => id; set => id = value; }
 
         /// <summary>
-        /// get et set du prénom utilisateur
+        /// Récupère et remplace le prénom utilisateur
         /// </summary>
         public string FirstName { get => firstName; set => firstName = value; }
 
         /// <summary>
-        /// get et set du nom utilisateur
+        /// Récupère et remplace le nom utilisateur
         /// </summary>
         public string LastName { get => lastName; set => lastName = value; }
 
         /// <summary>
-        /// get et set des heures réelles travaillées par l'utilisateur
-        /// <exception> Si les heures sont négatives relève une exception </exception>
+        /// Récupère et remplace les heures réelles travaillées par l'utilisateur
         /// </summary>
+        /// <exception> Si les heures sont négatives relève une exception </exception>
         public int RealHours { 
             get => realHours;
             set
@@ -51,14 +51,15 @@ namespace Model
                     realHours = value;
                 }
             }
-            }
+        }
+
         /// <summary>
-        /// Get et set d profil type de l'utilisateur
+        /// Récupère et remplace le profil type de l'utilisateur
         /// </summary>
         public TypicalProfile Profil { get => profil; set => profil = value; }
 
         /// <summary>
-        /// Get et set des rôle de l'utilisateur
+        /// Récupère et remplace les rôle de l'utilisateur
         /// </summary>
         public List<Role> Roles 
         { 
@@ -141,12 +142,17 @@ namespace Model
         /// <summary>
         /// Renvoi l'utilisateur sous forme de chaine de caractères
         /// </summary>
-        /// <returns>prénom, nom</returns>
+        /// <returns>prénom nom</returns>
         public string ToString()
         {
             return this.firstName + " " + this.lastName;
         }
 
+        /// <summary>
+        /// Compare cet objet à un autre User
+        /// </summary>
+        /// <param name="obj">Objet à comparer</param>
+        /// <returns>booléen</returns>
         public override bool Equals(object? obj)
         {
             return obj is User user &&
@@ -155,6 +161,10 @@ namespace Model
                    lastName == user.lastName;
         }
 
+        /// <summary>
+        /// Obtiens le Hash de l'objet User
+        /// </summary>
+        /// <returns>numéro unique de l'objet</returns>
         public override int GetHashCode()
         {
             return HashCode.Combine(id, firstName, lastName);

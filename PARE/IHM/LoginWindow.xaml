@@ -7,7 +7,7 @@
         ResizeMode="NoResize"
         WindowStartupLocation="CenterScreen"
         mc:Ignorable="d"
-        Title="{DynamicResource TitreFenetreConnexion}"
+        Title="{DynamicResource TitreFenetreLogin}"
         Height="650" Width="1200">
 
 
@@ -66,7 +66,7 @@
 
         <!--Bouton pour annuler-->
         <Button Style="{StaticResource ButtonTextLogin}" 
-                Content="{DynamicResource BtnAnnuler}" 
+                Content="{DynamicResource BtnQuit}" 
                 Click="CloseLoginWindow" 
                 Grid.Column="1" Grid.Row="4">
 

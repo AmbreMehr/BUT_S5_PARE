@@ -9,6 +9,9 @@ using System.Threading.Tasks;
 
 namespace Network
 {
+    /// <summary>
+    /// Implémentation du réseau pour gérer les utilisateurs
+    /// </summary>
     public class UserNetwork : IUserNetwork
     {
         public async Task<User[]> GetUsersByRole(Roles role)
@@ -21,9 +24,11 @@ namespace Network
                 if (response.IsSuccessStatusCode)
                 {
                     users = await response.Content.ReadFromJsonAsync(typeof(IEnumerable<User>)) as IEnumerable<User>;
+                    if (users == null) 
+                        users = new List<User>();
                 }
             }
-            return (User[])(users != null ? users.ToArray() : new User[0]);
+            return users.ToArray();
         }
     }
 }

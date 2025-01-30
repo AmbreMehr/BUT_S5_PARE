@@ -7,7 +7,9 @@ using System.Threading.Tasks;
 
 namespace Network
 {
-    /// <author>AmbreMehr</author>
+    /// <summary>
+    /// Interface de réseau pour gérer les enseignants
+    /// </summary>
     public interface ITeacherNetwork
     {
         /// <summary>

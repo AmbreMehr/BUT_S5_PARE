@@ -15,21 +15,34 @@ namespace Model
         private int id;
         private string name;
         private int nbTpGroups;
+        private int semesterWeekBegin;
+        private int semesterWeekEnd;
+
 
         /// <summary>
-        /// Get et set de l'id du semestre
+        /// Récupère et remplace l'id du semestre
         /// </summary>
         public int Id { get => id; set => id = value; }
 
         /// <summary>
-        /// Get et set du nom du semestre (équivalent à une promotion)
+        /// Récupère et remplace le nom du semestre (équivalent à une promotion)
         /// </summary>
         public string Name { get => name; set => name = value; }
 
         /// <summary>
-        /// Get et set du nbre de groupe de TP par semestre
-        /// <exception> Un nombre de groupe de TP ne peut pas être négatif </exception>
+        /// Récupère et remplace le numéro de la semaine de début du semestre
         /// </summary>
+        public int SemesterWeekBegin { get => semesterWeekBegin; set => semesterWeekBegin = value; }
+
+        /// <summary>
+        /// Récupère et remplace le numéro de la semaine de fin du semestre
+        /// </summary>
+        public int SemesterWeekEnd { get => semesterWeekEnd; set => semesterWeekEnd = value; }
+
+        /// <summary>
+        /// Récupère et remplace le nombre de groupe de TP par semestre
+        /// </summary>
+        /// <exception> Un nombre de groupe de TP ne peut pas être négatif </exception>
         public int NbTpGroups { get => nbTpGroups; 
             set
             {
@@ -43,15 +56,22 @@ namespace Model
                 }
             }
         }
+
+
+
         /// <summary>
         /// Constructeur de semestre avec tous les paramètres
         /// </summary>
         /// <param name="name">nom du semestre</param>
         /// <param name="nbTpGroups">nbre de groupe de TP</param>
-        public Semester(string name, int nbTpGroups)
+        /// <param name="SemesterWeekBegin">numéro de début de semestre</param>
+        /// <param name="SemesterWeekEnd">numéro de fin de semestre</param>
+        public Semester(string name, int nbTpGroups, int semesterWeekBegin, int semesterWeekEnd)
         {
             this.name = name;
             this.nbTpGroups = nbTpGroups;
+            this.semesterWeekBegin = semesterWeekBegin;
+            this.semesterWeekEnd = semesterWeekEnd;
         }
 
         /// <summary>
