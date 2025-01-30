@@ -40,16 +40,3 @@ Un SDK 8.0 est utilisé.
 Les packages installés sont :
 - Microsoft.Data.Sqlite
 - Microsoft.EntityFrameworkCore.Sqlite
-
-## Version alpha - déployé
-Lien vers le Serveur : https://10.128.207.64:8081/ 
-Lien vers le Client : https://nextcloud.noctabou.win/index.php/s/xpgB3iijmpHiYG5 
-
-## Version beta - déployé
-Lien vers le Serveur : https://10.128.207.64:8081/ 
-Lien vers le Client : https://nextcloud.noctabou.win/index.php/s/WGXZRByJRqDL962 
-
-
-## Version release - déployé 
-Lien vers le Serveur : https://10.128.207.64:8081/ 
-Lien vers le Client : https://github.com/dept-info-iut-dijon/S5A_C2_BPM/releases/download/v1.0.0-release/PARE-Client.zip
